@@ -79,102 +79,6 @@
       
       <article class="li">
   <header>
-    <div class="date">Thu, Sep 22, 2016</div>
-    <div class="title"><a href="http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/">slf4j配合log4j来给你的应用打log</a></div>
-  </header>
-  <div class="body"><p>需要添加的dependencies</p>
-
-<pre><code class="language-xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-    &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
-    &lt;version&gt;1.7.21&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
-    &lt;version&gt;1.7.21&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;log4j&lt;/groupId&gt;
-    &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-    &lt;version&gt;1.2.17&lt;/version&gt;
-&lt;/dependency&gt;
-
-</code></pre>
-
-<p>后面两个依赖并不是必需的，只需要第一个即可
-这时候会发现无穷无尽的warn</p>
-
-<pre><code>log4j:WARN No appenders could be found for logger (HelloWorld).
-log4j:WARN Please initialize the log4j system properly.
-log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
-</code></pre>
-
-<p>但可惜的是即使看了这篇FAQ，也还是不知道是怎么回事</p>
-
-<p>最简单的办法是需要在main里面新建一个目录<code>resources</code>，新建文件log4j.properties，写入</p>
-
-<pre><code>log4j.rootLogger=TRACE, file, stdout
-
-
-log4j.appender.stdout=org.apache.log4j.ConsoleAppender
-log4j.appender.stdout.Target=System.out
-log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-log4j.appender.stdout.layout.ConversionPattern=%d{yyyy-MM-dd'T'HH:mm:ss.SSS} %-5p [%c] - %m%n
-
-
-log4j.appender.file=org.apache.log4j.RollingFileAppender
-log4j.appender.file.File=./log/javavillage.log
-log4j.appender.file.MaxFileSize=10000KB
-log4j.appender.file.MaxBackupIndex=10
-log4j.appender.file.layout=org.apache.log4j.PatternLayout
-log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p:: %m%n
-</code></pre>
-
-<p>todo 需要研究一下<code>log4j.appender.file.File</code>的根目录是哪里，看起来好像是classpath，但写一个点就会变成当前目录（项目根目录）
-再重新编译，happy coding</p>
-</div>
-
-  
-</article>
-<hr>
-
-      
-      <article class="li">
-  <header>
-    <div class="date">Thu, Sep 22, 2016</div>
-    <div class="title"><a href="http://unixera.com/java/create-and-run-java-application-with-maven/">使用maven创建和运行Java应用</a></div>
-  </header>
-  <div class="body"><ol>
-<li>创建应用</li>
-</ol>
-
-<p><code>mvn archetype:generate</code>根据提示如果默认一路点下来会生成一个简单应用的骨架
-如果需要生成webapp类型的就不是831了，而是类似这样<code>mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false -DgroupId=com.unixera.webapp -DartifactId=spring-example</code></p>
-
-<ol>
-<li>打包应用</li>
-</ol>
-
-<p>一般需要把应用和它的依赖打到同一个包里面，所以就需要配置jar-with-dependencies
-然后配置一下execute single</p>
-
-<ol>
-<li>执行应用</li>
-</ol>
-
-<p><code>java -cp $CLASSPATH -jar /path/to/jar-with-dependencies.jar</code></p>
-
-<p>mvn生成的还需要在pom.xml中配置主class</p>
-</div>
-
-  
-</article>
-<hr>
-
-      
-      <article class="li">
-  <header>
     <div class="date">Sat, Sep 3, 2016</div>
     <div class="title"><a href="http://unixera.com/linux/deepin-linux-experience/">DeepinLinux体验报告</a></div>
   </header>
@@ -301,6 +205,38 @@ log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p::
 <hr>
 
       
+      <article class="li">
+  <header>
+    <div class="date">Mon, Apr 4, 2016</div>
+    <div class="title"><a href="http://unixera.com/php/internals/introduction/">PHP扩展实战——背景介绍</a></div>
+  </header>
+  <div class="body">这段时间其实在看C语言，但看来看去也不知道学了这些知识用在哪里。作为一名PHP程序员，想要进阶，当然得懂PHP的运行原理。那么，编写扩展就成</div>
+
+  
+  <footer>
+    <a href="http://unixera.com/php/internals/introduction/" class="btn btn-default">Read More…</a>
+  </footer>
+  
+</article>
+<hr>
+
+      
+      <article class="li">
+  <header>
+    <div class="date">Fri, Apr 1, 2016</div>
+    <div class="title"><a href="http://unixera.com/php/log-bench/">seaslog 和 error_log性能大比拼</a></div>
+  </header>
+  <div class="body">今天花了点时间测试了开源项目seaslog和PHP内置的error_log的性能。本文不涉及该扩展的安装和使用，如果对其不了解，可移步官网。 项目的描述有语法问题&rdquo;A effective &hellip;&ldquo;，我提醒了原作者，然而并没有被理会。。。 测试环境 项目 属性 CPU Intel&reg; Xeon&reg; CPU E5520 @ 2.27GHz 8核 内存 48G PHP 7.0.1 Nginx 1.2.7 测试代码 &lt;?php error_log(&quot;I am testing performance of error_log&quot; . PHP_EOL, 3, __DIR__ . '/error_log.log'); SeasLog::debug(&quot;I am testing performance of seaslog&quot;); 结果数据 每种方式测试5次，请求次数1000次，并发量分别是1, 10, 100, 1000。分别记录每次测试的QPS。 1. error_log 并发量 1 2 3 4 5 1 2430 2579 2685 2484 2622 10 7303 7844 5892 11739 9002 100 11763 6107 6921 9258 11999 1000 324 891 324 889 883 2.</div>
+
+  
+  <footer>
+    <a href="http://unixera.com/php/log-bench/" class="btn btn-default">Read More…</a>
+  </footer>
+  
+</article>
+<hr>
+
+      
       
 <nav>
   <ul class="pager">
@@ -329,10 +265,6 @@ log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p::
     </div>
     <div class="list-group">
       
-      <a href="http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/" class="list-group-item">slf4j配合log4j来给你的应用打log</a>
-      
-      <a href="http://unixera.com/java/create-and-run-java-application-with-maven/" class="list-group-item">使用maven创建和运行Java应用</a>
-      
       <a href="http://unixera.com/linux/deepin-linux-experience/" class="list-group-item">DeepinLinux体验报告</a>
       
       <a href="http://unixera.com/java/mvn-tutorial-for-novice/" class="list-group-item">给Java新手看的mvn指南</a>
@@ -348,6 +280,10 @@ log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p::
       <a href="http://unixera.com/php/internals/schedules/" class="list-group-item">PHP扩展实战——目标和计划</a>
       
       <a href="http://unixera.com/php/php-generator-and-iterator/" class="list-group-item">使用PHP生成器和迭代器</a>
+      
+      <a href="http://unixera.com/php/internals/introduction/" class="list-group-item">PHP扩展实战——背景介绍</a>
+      
+      <a href="http://unixera.com/php/log-bench/" class="list-group-item">seaslog 和 error_log性能大比拼</a>
       
     </div>
   </div>
@@ -373,11 +309,11 @@ log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p::
       
       <a href="http://unixera.com/categories/git" class="list-group-item">git</a>
       
-      <a href="http://unixera.com/categories/java" class="list-group-item">java</a>
-      
       <a href="http://unixera.com/categories/python" class="list-group-item">python</a>
       
       <a href="http://unixera.com/categories/ios" class="list-group-item">ios</a>
+      
+      <a href="http://unixera.com/categories/mysql" class="list-group-item">mysql</a>
       
     </div>
   </div>
@@ -402,11 +338,11 @@ log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p::
       
       <a href="http://unixera.com/tags/git" class="list-group-item">git</a>
       
-      <a href="http://unixera.com/tags/java" class="list-group-item">java</a>
-      
       <a href="http://unixera.com/tags/bootstrap" class="list-group-item">bootstrap</a>
       
       <a href="http://unixera.com/tags/ios" class="list-group-item">ios</a>
+      
+      <a href="http://unixera.com/tags/jquery" class="list-group-item">jquery</a>
       
     </div>
   </div>
@@ -431,11 +367,11 @@ log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p::
       
       <a href="http://unixera.com/topics/ios" class="list-group-item">ios</a>
       
-      <a href="http://unixera.com/topics/java" class="list-group-item">java</a>
-      
       <a href="http://unixera.com/topics/mysql" class="list-group-item">mysql</a>
       
       <a href="http://unixera.com/topics/symfony" class="list-group-item">symfony</a>
+      
+      <a href="http://unixera.com/topics/vim" class="list-group-item">vim</a>
       
     </div>
   </div>
