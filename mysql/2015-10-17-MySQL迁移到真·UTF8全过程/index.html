@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.16" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <link rel="stylesheet" href="http://unixera.com/css/styles.css">
+    <link rel="stylesheet" href="http://unixera.com/css/custom.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://unixera.com//index.xml">
+
+    
+    <title>MySQL迁移到真·UTF8全过程 - Me &amp; Web</title>
+    <meta property='og:title' content="MySQL迁移到真·UTF8全过程 - Me &amp; Web">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://unixera.com/mysql/2015-10-17-MySQL%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9F%C2%B7UTF8%E5%85%A8%E8%BF%87%E7%A8%8B/">
+    
+    
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://unixera.com/">Me &amp; Web</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="http://unixera.com/">Home</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/categories/">Categories</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/tags/">Tags</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/about/">About</a></li>
+              
+              
+            </ul>
+            
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="site">
+      <div class="container">
+
+
+
+<div class="single">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+                <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://unixera.com/"/>
+                <meta itemprop="dateModified" content="2015-10-17T01:06:29&#43;00:00">
+                <meta itemprop="headline" content="MySQL迁移到真·UTF8全过程">
+                <meta itemprop="description" content="为什么要做？ 写这篇总结的起因是我觉得应该深入的学习一下PHP了，结果找到了PHP最佳实践中文版，其中关于PHP和UTF8一节引起了我的兴趣。">
+                <meta itemprop="url" content="http://unixera.com/mysql/2015-10-17-MySQL%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9F%C2%B7UTF8%E5%85%A8%E8%BF%87%E7%A8%8B/">
+                <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="http://unixera.com/images/default.jpg" />
+                    <meta itemprop="width" content="800">
+                    <meta itemprop="height" content="800">
+                </div>
+                <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                        <meta itemprop="url" content="http://unixera.com/images/logo.jpg">
+                        <meta itemprop="width" content="100">
+                        <meta itemprop="height" content="100">
+                    </div>
+                    <meta itemprop="name" content="Me &amp; Web">
+                </div>
+                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <meta itemprop="name" content="">
+                </div>
+
+                <header class="article-header">
+                    <time itemprop="datePublished" pubdate="pubdate" datetime="2015-10-17T01:06:29&#43;00:00">Sat, Oct 17, 2015</time>
+                    <h1 class="article-title">MySQL迁移到真·UTF8全过程</h1>
+                </header>
+
+                <div class="article-body" itemprop="articleBody">
+                    
+
+<h1 id="为什么要做">为什么要做？</h1>
+
+<p>写这篇总结的起因是我觉得应该深入的学习一下PHP了，结果找到了<a href="http://phpbestpractices.justjavac.com">PHP最佳实践中文版</a>，其中关于PHP和UTF8一节引起了我的兴趣。我之前还一直以为我们的数据库用的是完整的UTF8，看完之后我惊呆了。</p>
+
+<p>原来我们的以为的utf8并不是真正意义上的UTF-8，或者说不是完整的，因为它只包含了<a href="https://mariadb.com/kb/en/mariadb/unicode/">不大于3个8位字节组成的字符</a>，而4个字节组成的字符则未能包含，如𝌆、💩等常用字符。</p>
+
+<p>随着现在网络用语的发达，越来越多的表情符号层出不穷，真是为这种符号的存储发愁啊，所以保险起见，以后接触到的项目中，如果我的意见可以被接受，那么我将遵守这个规则——使用utf8mb4而不是utf8。</p>
+
+<p>那如果已经使用了utf8了，怎么更新呢？下面是操作步骤。</p>
+
+<h2 id="备份">备份</h2>
+
+<p>对数据库的修改操作毕竟是危险的，如果你的数据很重要，最好还是备份一下数据库。</p>
+
+<h2 id="升级mysql服务器">升级MySQL服务器</h2>
+
+<p>utf8mb4是从MySQL5.5.3版本引入的（对应相同版本的MariaDB)，因此如果想使用utf8mb4，至少应升级到5.5.3版本。</p>
+
+<h2 id="修改数据库-数据表和列">修改数据库、数据表和列</h2>
+
+<pre><code class="language-sql"># 每个数据库
+ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+# 每张数据表
+ALTER TABLE table_name CONVERT TO CHARACTER SET utf8 COLLATE utf8mb4_unicode_ci;
+# 每列数据
+ALTER TABLE table_name CHANGE column_name column_name VARCHAR(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+</code></pre>
+
+<blockquote>
+<p>注意，不要直接复制粘贴上面的代码，根据实际的数据进行操作。</p>
+</blockquote>
+
+<h2 id="检查列和索引键的长度">检查列和索引键的长度</h2>
+
+<p>这一步很不容易想到，当我们从utf8更新到utf8mb4时，字节的长度并没有发生变化，但字符长度却变化了。
+<code>TINYTEXT</code>类型可以容纳255个字节，在utf8编码时，可以包含255/3=85个unicode字符，而在utf8mb4时，只可以包含255/4=63.75=63个字符。因此，当这个字段的长度有可能超过63个字符时，就需要把<code>TINYTEXT</code>修改成<code>TEXT</code>从而容纳更多的字符。</p>
+
+<h2 id="修改连接-客户端-服务端字符集">修改连接、客户端、服务端字符集</h2>
+
+<p>这一步就是修改my.conf（在不同的操作系统中有不同的命名）。</p>
+
+<pre><code class="language-ini">[client]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-client-handshake = FALSE
+character-set-server = utf8mb4
+collation-server = utf8mb4-unicode-ci
+</code></pre>
+
+<p>这时就可以查看更新的结果了
+<img src="http://7xn2pe.com1.z0.glb.clouddn.com/b_Screen%20Shot%202015-10-17%20at%201.43.38%20AM.png" alt="更新结果" /></p>
+
+<h2 id="修复和优化所有表">修复和优化所有表</h2>
+
+<pre><code class="language-sql">PREPARE TABLE table_name;
+OPTIMIZE TABLE table_name;
+</code></pre>
+
+<p>如果不执行这两步可能出现数据无法更新的情况。好在用一条指令就能修复和优化所有数据库</p>
+
+<pre><code>mysqlcheck -uroot -p --auto-repaire --optimize --all-databases
+</code></pre>
+
+<p>这会弹出密码输入提示，然后对所有数据库执行修复和优化操作。</p>
+
+                </div>
+
+
+                <aside>
+                    <div class="section"><a href="http://unixera.com/tags/mysql/" class="tag">MySQL</a> </div>
+
+                    <div class="section share">
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2funixera.com%2fmysql%2f2015-10-17-MySQL%25E8%25BF%2581%25E7%25A7%25BB%25E5%2588%25B0%25E7%259C%259F%25C2%25B7UTF8%25E5%2585%25A8%25E8%25BF%2587%25E7%25A8%258B%2f&title=MySQL%e8%bf%81%e7%a7%bb%e5%88%b0%e7%9c%9f%c2%b7UTF8%e5%85%a8%e8%bf%87%e7%a8%8b" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                    </div>
+
+                    
+                    
+                    <div class="section">
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                            (function() {
+                                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                var disqus_shortname = 'unixera';
+                                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                        <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                    </div>
+                    
+                    
+                </aside>
+
+            </article>
+
+        </div>
+        <div class="col-md-4">
+            
+<aside class="site">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">LatestPosts</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/" class="list-group-item">slf4j配合log4j来给你的应用打log</a>
+      
+      <a href="http://unixera.com/java/create-and-run-java-application-with-maven/" class="list-group-item">使用maven创建和运行Java应用</a>
+      
+      <a href="http://unixera.com/linux/deepin-linux-experience/" class="list-group-item">DeepinLinux体验报告</a>
+      
+      <a href="http://unixera.com/java/mvn-tutorial-for-novice/" class="list-group-item">给Java新手看的mvn指南</a>
+      
+      <a href="http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/" class="list-group-item">使用ssh-config提升你的生产力</a>
+      
+      <a href="http://unixera.com/miscs/talk-about-transgene-foods/" class="list-group-item">谈谈转基因食物</a>
+      
+      <a href="http://unixera.com/php/internals/create-skeleton-of-extension/" class="list-group-item">PHP扩展实战——扩展的骨架</a>
+      
+      <a href="http://unixera.com/php/internals/class-prototype-in-php/" class="list-group-item">PHP扩展实战——用PHP实现类的原型</a>
+      
+      <a href="http://unixera.com/php/internals/schedules/" class="list-group-item">PHP扩展实战——目标和计划</a>
+      
+      <a href="http://unixera.com/php/php-generator-and-iterator/" class="list-group-item">使用PHP生成器和迭代器</a>
+      
+    </div>
+  </div>
+
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">category</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/categories/javascript" class="list-group-item">javascript</a>
+      
+      <a href="http://unixera.com/categories/php" class="list-group-item">php</a>
+      
+      <a href="http://unixera.com/categories/miscs" class="list-group-item">miscs</a>
+      
+      <a href="http://unixera.com/categories/mac" class="list-group-item">mac</a>
+      
+      <a href="http://unixera.com/categories/linux" class="list-group-item">linux</a>
+      
+      <a href="http://unixera.com/categories/blog" class="list-group-item">blog</a>
+      
+      <a href="http://unixera.com/categories/git" class="list-group-item">git</a>
+      
+      <a href="http://unixera.com/categories/java" class="list-group-item">java</a>
+      
+      <a href="http://unixera.com/categories/python" class="list-group-item">python</a>
+      
+      <a href="http://unixera.com/categories/ios" class="list-group-item">ios</a>
+      
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">tag</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/tags/miscs" class="list-group-item">miscs</a>
+      
+      <a href="http://unixera.com/tags/php" class="list-group-item">php</a>
+      
+      <a href="http://unixera.com/tags/mac" class="list-group-item">mac</a>
+      
+      <a href="http://unixera.com/tags/javascript" class="list-group-item">javascript</a>
+      
+      <a href="http://unixera.com/tags/linux" class="list-group-item">linux</a>
+      
+      <a href="http://unixera.com/tags/%E6%89%A9%E5%B1%95" class="list-group-item">扩展</a>
+      
+      <a href="http://unixera.com/tags/git" class="list-group-item">git</a>
+      
+      <a href="http://unixera.com/tags/java" class="list-group-item">java</a>
+      
+      <a href="http://unixera.com/tags/bootstrap" class="list-group-item">bootstrap</a>
+      
+      <a href="http://unixera.com/tags/ios" class="list-group-item">ios</a>
+      
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">topic</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/topics/php" class="list-group-item">php</a>
+      
+      <a href="http://unixera.com/topics/javascript" class="list-group-item">javascript</a>
+      
+      <a href="http://unixera.com/topics/linux" class="list-group-item">linux</a>
+      
+      <a href="http://unixera.com/topics/mac" class="list-group-item">mac</a>
+      
+      <a href="http://unixera.com/topics/git" class="list-group-item">git</a>
+      
+      <a href="http://unixera.com/topics/python" class="list-group-item">python</a>
+      
+      <a href="http://unixera.com/topics/ios" class="list-group-item">ios</a>
+      
+      <a href="http://unixera.com/topics/java" class="list-group-item">java</a>
+      
+      <a href="http://unixera.com/topics/mysql" class="list-group-item">mysql</a>
+      
+      <a href="http://unixera.com/topics/symfony" class="list-group-item">symfony</a>
+      
+    </div>
+  </div>
+  
+
+</aside>
+
+
+        </div>
+    </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site">
+      <div class="container">
+        <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/dim0627/hugo_theme_beg" target="_blank" rel="nofollow">beg</a> designed by <a href="http://yet.unresolved.xyz" target="_blank" rel="nofollow">Daisuke Tsuji</a></p>
+      </div>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+

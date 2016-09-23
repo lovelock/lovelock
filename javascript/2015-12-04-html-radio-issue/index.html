@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.16" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <link rel="stylesheet" href="http://unixera.com/css/styles.css">
+    <link rel="stylesheet" href="http://unixera.com/css/custom.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://unixera.com//index.xml">
+
+    
+    <title>HTML中的input[type=radio]的一个小发现 - Me &amp; Web</title>
+    <meta property='og:title' content="HTML中的input[type=radio]的一个小发现 - Me &amp; Web">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://unixera.com/javascript/2015-12-04-html-radio-issue/">
+    
+    
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://unixera.com/">Me &amp; Web</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="http://unixera.com/">Home</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/categories/">Categories</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/tags/">Tags</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/about/">About</a></li>
+              
+              
+            </ul>
+            
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="site">
+      <div class="container">
+
+
+
+<div class="single">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+                <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://unixera.com/"/>
+                <meta itemprop="dateModified" content="2015-12-04T23:12:52&#43;00:00">
+                <meta itemprop="headline" content="HTML中的input[type=radio]的一个小发现">
+                <meta itemprop="description" content="昨天在写一个表单时，一个无意的错误让我发现了HTML radio类型的input的一个特性。 在一个表单&lt;form&gt;&lt;/for">
+                <meta itemprop="url" content="http://unixera.com/javascript/2015-12-04-html-radio-issue/">
+                <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="http://unixera.com/images/default.jpg" />
+                    <meta itemprop="width" content="800">
+                    <meta itemprop="height" content="800">
+                </div>
+                <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                        <meta itemprop="url" content="http://unixera.com/images/logo.jpg">
+                        <meta itemprop="width" content="100">
+                        <meta itemprop="height" content="100">
+                    </div>
+                    <meta itemprop="name" content="Me &amp; Web">
+                </div>
+                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <meta itemprop="name" content="">
+                </div>
+
+                <header class="article-header">
+                    <time itemprop="datePublished" pubdate="pubdate" datetime="2015-12-04T23:12:52&#43;00:00">Fri, Dec 4, 2015</time>
+                    <h1 class="article-title">HTML中的input[type=radio]的一个小发现</h1>
+                </header>
+
+                <div class="article-body" itemprop="articleBody">
+                    <p>昨天在写一个表单时，一个无意的错误让我发现了HTML radio类型的input的一个特性。</p>
+
+<p>在一个表单<code>&lt;form&gt;&lt;/form&gt;</code> 中，相同name的input[type=radio]只有最后一个才会正常的渲染checked。</p>
+
+<p>也就是说，如果一个表格中有很多条目，这时每一列都会有相同的name，这时你会发现及时每个条目的input[type=radio]都有正确的checked属性，但并不能看到它被选中——只有最后一行正常。</p>
+
+<p>起初我还以为这是个bug，仔细一想，其实这是更合理的方式。</p>
+
+<p>因为，在一个表单中，每个不同的name就是一个参数，如果同一个name的参数出现了多次，服务端也会以最后一个为准。如此看来，这样的实现反倒会让开发者在参数输入就发现问题。</p>
+
+                </div>
+
+
+                <aside>
+                    <div class="section"><a href="http://unixera.com/tags/html/" class="tag">HTML</a> <a href="http://unixera.com/tags/tags/" class="tag">tags</a> </div>
+
+                    <div class="section share">
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2funixera.com%2fjavascript%2f2015-12-04-html-radio-issue%2f&title=HTML%e4%b8%ad%e7%9a%84input%5btype%3dradio%5d%e7%9a%84%e4%b8%80%e4%b8%aa%e5%b0%8f%e5%8f%91%e7%8e%b0" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                    </div>
+
+                    
+                    
+                    <div class="section">
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                            (function() {
+                                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                var disqus_shortname = 'unixera';
+                                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                        <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                    </div>
+                    
+                    
+                </aside>
+
+            </article>
+
+        </div>
+        <div class="col-md-4">
+            
+<aside class="site">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">LatestPosts</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/" class="list-group-item">slf4j配合log4j来给你的应用打log</a>
+      
+      <a href="http://unixera.com/java/create-and-run-java-application-with-maven/" class="list-group-item">使用maven创建和运行Java应用</a>
+      
+      <a href="http://unixera.com/linux/deepin-linux-experience/" class="list-group-item">DeepinLinux体验报告</a>
+      
+      <a href="http://unixera.com/java/mvn-tutorial-for-novice/" class="list-group-item">给Java新手看的mvn指南</a>
+      
+      <a href="http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/" class="list-group-item">使用ssh-config提升你的生产力</a>
+      
+      <a href="http://unixera.com/miscs/talk-about-transgene-foods/" class="list-group-item">谈谈转基因食物</a>
+      
+      <a href="http://unixera.com/php/internals/create-skeleton-of-extension/" class="list-group-item">PHP扩展实战——扩展的骨架</a>
+      
+      <a href="http://unixera.com/php/internals/class-prototype-in-php/" class="list-group-item">PHP扩展实战——用PHP实现类的原型</a>
+      
+      <a href="http://unixera.com/php/internals/schedules/" class="list-group-item">PHP扩展实战——目标和计划</a>
+      
+      <a href="http://unixera.com/php/php-generator-and-iterator/" class="list-group-item">使用PHP生成器和迭代器</a>
+      
+    </div>
+  </div>
+
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">category</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/categories/javascript" class="list-group-item">javascript</a>
+      
+      <a href="http://unixera.com/categories/php" class="list-group-item">php</a>
+      
+      <a href="http://unixera.com/categories/miscs" class="list-group-item">miscs</a>
+      
+      <a href="http://unixera.com/categories/mac" class="list-group-item">mac</a>
+      
+      <a href="http://unixera.com/categories/linux" class="list-group-item">linux</a>
+      
+      <a href="http://unixera.com/categories/blog" class="list-group-item">blog</a>
+      
+      <a href="http://unixera.com/categories/git" class="list-group-item">git</a>
+      
+      <a href="http://unixera.com/categories/java" class="list-group-item">java</a>
+      
+      <a href="http://unixera.com/categories/python" class="list-group-item">python</a>
+      
+      <a href="http://unixera.com/categories/ios" class="list-group-item">ios</a>
+      
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">tag</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/tags/miscs" class="list-group-item">miscs</a>
+      
+      <a href="http://unixera.com/tags/php" class="list-group-item">php</a>
+      
+      <a href="http://unixera.com/tags/mac" class="list-group-item">mac</a>
+      
+      <a href="http://unixera.com/tags/javascript" class="list-group-item">javascript</a>
+      
+      <a href="http://unixera.com/tags/linux" class="list-group-item">linux</a>
+      
+      <a href="http://unixera.com/tags/%E6%89%A9%E5%B1%95" class="list-group-item">扩展</a>
+      
+      <a href="http://unixera.com/tags/git" class="list-group-item">git</a>
+      
+      <a href="http://unixera.com/tags/java" class="list-group-item">java</a>
+      
+      <a href="http://unixera.com/tags/bootstrap" class="list-group-item">bootstrap</a>
+      
+      <a href="http://unixera.com/tags/ios" class="list-group-item">ios</a>
+      
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">topic</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/topics/php" class="list-group-item">php</a>
+      
+      <a href="http://unixera.com/topics/javascript" class="list-group-item">javascript</a>
+      
+      <a href="http://unixera.com/topics/linux" class="list-group-item">linux</a>
+      
+      <a href="http://unixera.com/topics/mac" class="list-group-item">mac</a>
+      
+      <a href="http://unixera.com/topics/git" class="list-group-item">git</a>
+      
+      <a href="http://unixera.com/topics/python" class="list-group-item">python</a>
+      
+      <a href="http://unixera.com/topics/ios" class="list-group-item">ios</a>
+      
+      <a href="http://unixera.com/topics/java" class="list-group-item">java</a>
+      
+      <a href="http://unixera.com/topics/mysql" class="list-group-item">mysql</a>
+      
+      <a href="http://unixera.com/topics/symfony" class="list-group-item">symfony</a>
+      
+    </div>
+  </div>
+  
+
+</aside>
+
+
+        </div>
+    </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site">
+      <div class="container">
+        <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/dim0627/hugo_theme_beg" target="_blank" rel="nofollow">beg</a> designed by <a href="http://yet.unresolved.xyz" target="_blank" rel="nofollow">Daisuke Tsuji</a></p>
+      </div>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+

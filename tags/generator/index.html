@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.16" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <link rel="stylesheet" href="http://unixera.com/css/styles.css">
+    <link rel="stylesheet" href="http://unixera.com/css/custom.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://unixera.com//index.xml">
+
+    
+    <title>Generator - Me &amp; Web</title>
+    <meta property='og:title' content="Generator - Me &amp; Web">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://unixera.com/tags/generator/">
+    
+    
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://unixera.com/">Me &amp; Web</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="http://unixera.com/">Home</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/categories/">Categories</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/tags/">Tags</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/about/">About</a></li>
+              
+              
+            </ul>
+            
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="site">
+      <div class="container">
+
+
+<div class="list">
+
+  <div class="row">
+    <div class="col-md-8">
+      <header class="page-title">Generator</header>
+
+      
+      <article class="li">
+  <header>
+    <div class="date">Tue, Apr 5, 2016</div>
+    <div class="title"><a href="http://unixera.com/php/php-generator-and-iterator/">使用PHP生成器和迭代器</a></div>
+  </header>
+  <div class="body">从开始写PHP就知道迭代器这个东西，当时师傅告诉我用的挺少的，需要的时候再看也不晚，于是就没有放在意上。但他还说这其实也是区分高手和菜鸟的一个标志，那我还是研究一下好了：） PHP程序员都知道我们最经常用的可能就是foreach这个大杀器了。得益于我们万能的数组，所以这个大杀器在多数场合都是可以直接用的，只要输入元素是数组类型即可——事实上并不是如此，foreach能遍历数组并不是因为它是数组，而是因为数组implements了Iterator接口。说白了就是只要告诉foreach遍历的规则，它就可以执行遍历，而和是否数组无关。 Iterator 解析 Iterator接口定义了5个方法，如果一个类要实现Iterator接口，当然就要实现这一套方法了。Iterator的原型如下 Interface Iterator { abstract public function current() : mixed; abstract public function key() : scalar; abstract public function next() : void; abstract public function rewind() : void; abstract public function valid() : boolean; } 我在方法后面按照PHP7的新语法加了个返回值类型，其实这样写是不对的，但可以表明意思啦：） 详细说一下这几个方法要做的事情。 current() 返回当前位置的值。 key() 返回当前位置的键。 next() 当前位置的键加1。 rewind() 键回到第一个位置。 valid() 返回当前的键是否是有意义的。如是否是false/NULL等。 实例 还是来具体写个例子理解一下吧。通常写这种例子的作者都会举一个类，它的一个属性是个数组，然后实现Iterator的5个方法，来让这个类可以使用foreach，这个例子没意思，因为数组本身就带current、key这些方法。让我来举一个pdo_mysql从数据库中取数据的例子吧。 从数据库取出一一个数组，数组中的元素是User类的实例，我们需要Users类的方法，它又要有一些方法。所以，就产生了这样的用法了。这个例子可能有些牵强，但起码描述了一个使用场景，比单纯的迭代一个类的类型为数组的属性要有意义。 代码地址 Generator 只有真正理解了Iterator才能再来谈Generator。 还是举例来说，前面已经说了一个比较复杂的例子，这里为了说明二者的区别，举个简单的例子。 假定有一个日志文件，1000000行吧，很大了？或许吧。现在我们要遍历这个文件，找到我们需要的东西。如果使用Iterator，可能需要这样 &lt;?php class LinesIterator implements Iterator { private $_fp; private $_currentLine; private</div>
+
+  
+  <footer>
+    <a href="http://unixera.com/php/php-generator-and-iterator/" class="btn btn-default">Read More…</a>
+  </footer>
+  
+</article>
+<hr>
+
+      
+      
+
+
+    </div>
+    <div class="col-md-4">
+      
+<aside class="site">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">LatestPosts</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/" class="list-group-item">slf4j配合log4j来给你的应用打log</a>
+      
+      <a href="http://unixera.com/java/create-and-run-java-application-with-maven/" class="list-group-item">使用maven创建和运行Java应用</a>
+      
+      <a href="http://unixera.com/linux/deepin-linux-experience/" class="list-group-item">DeepinLinux体验报告</a>
+      
+      <a href="http://unixera.com/java/mvn-tutorial-for-novice/" class="list-group-item">给Java新手看的mvn指南</a>
+      
+      <a href="http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/" class="list-group-item">使用ssh-config提升你的生产力</a>
+      
+      <a href="http://unixera.com/miscs/talk-about-transgene-foods/" class="list-group-item">谈谈转基因食物</a>
+      
+      <a href="http://unixera.com/php/internals/create-skeleton-of-extension/" class="list-group-item">PHP扩展实战——扩展的骨架</a>
+      
+      <a href="http://unixera.com/php/internals/class-prototype-in-php/" class="list-group-item">PHP扩展实战——用PHP实现类的原型</a>
+      
+      <a href="http://unixera.com/php/internals/schedules/" class="list-group-item">PHP扩展实战——目标和计划</a>
+      
+      <a href="http://unixera.com/php/php-generator-and-iterator/" class="list-group-item">使用PHP生成器和迭代器</a>
+      
+    </div>
+  </div>
+
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">category</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/categories/javascript" class="list-group-item">javascript</a>
+      
+      <a href="http://unixera.com/categories/php" class="list-group-item">php</a>
+      
+      <a href="http://unixera.com/categories/miscs" class="list-group-item">miscs</a>
+      
+      <a href="http://unixera.com/categories/mac" class="list-group-item">mac</a>
+      
+      <a href="http://unixera.com/categories/linux" class="list-group-item">linux</a>
+      
+      <a href="http://unixera.com/categories/blog" class="list-group-item">blog</a>
+      
+      <a href="http://unixera.com/categories/git" class="list-group-item">git</a>
+      
+      <a href="http://unixera.com/categories/java" class="list-group-item">java</a>
+      
+      <a href="http://unixera.com/categories/python" class="list-group-item">python</a>
+      
+      <a href="http://unixera.com/categories/ios" class="list-group-item">ios</a>
+      
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">tag</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/tags/miscs" class="list-group-item">miscs</a>
+      
+      <a href="http://unixera.com/tags/php" class="list-group-item">php</a>
+      
+      <a href="http://unixera.com/tags/mac" class="list-group-item">mac</a>
+      
+      <a href="http://unixera.com/tags/javascript" class="list-group-item">javascript</a>
+      
+      <a href="http://unixera.com/tags/linux" class="list-group-item">linux</a>
+      
+      <a href="http://unixera.com/tags/%E6%89%A9%E5%B1%95" class="list-group-item">扩展</a>
+      
+      <a href="http://unixera.com/tags/git" class="list-group-item">git</a>
+      
+      <a href="http://unixera.com/tags/java" class="list-group-item">java</a>
+      
+      <a href="http://unixera.com/tags/bootstrap" class="list-group-item">bootstrap</a>
+      
+      <a href="http://unixera.com/tags/ios" class="list-group-item">ios</a>
+      
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">topic</h2>
+    </div>
+    <div class="list-group">
+      
+      <a href="http://unixera.com/topics/php" class="list-group-item">php</a>
+      
+      <a href="http://unixera.com/topics/javascript" class="list-group-item">javascript</a>
+      
+      <a href="http://unixera.com/topics/linux" class="list-group-item">linux</a>
+      
+      <a href="http://unixera.com/topics/mac" class="list-group-item">mac</a>
+      
+      <a href="http://unixera.com/topics/git" class="list-group-item">git</a>
+      
+      <a href="http://unixera.com/topics/python" class="list-group-item">python</a>
+      
+      <a href="http://unixera.com/topics/ios" class="list-group-item">ios</a>
+      
+      <a href="http://unixera.com/topics/java" class="list-group-item">java</a>
+      
+      <a href="http://unixera.com/topics/mysql" class="list-group-item">mysql</a>
+      
+      <a href="http://unixera.com/topics/symfony" class="list-group-item">symfony</a>
+      
+    </div>
+  </div>
+  
+
+</aside>
+
+
+    </div>
+  </div>
+
+</div>
+      </div>
+    </div>
+
+    <footer class="site">
+      <div class="container">
+        <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/dim0627/hugo_theme_beg" target="_blank" rel="nofollow">beg</a> designed by <a href="http://yet.unresolved.xyz" target="_blank" rel="nofollow">Daisuke Tsuji</a></p>
+      </div>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+
