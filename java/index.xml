@@ -9,8 +9,165 @@
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Sun, 28 Aug 2016 14:29:16 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 22 Sep 2016 14:15:41 +0800</lastBuildDate>
     <atom:link href="http://unixera.com/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>使用maven创建和运行Java应用</title>
+      <link>http://unixera.com/java/create-and-run-java-application-with-maven/</link>
+      <pubDate>Thu, 22 Sep 2016 14:15:41 +0800</pubDate>
+      <author>frostwong@gmail.com (Frost Wong)</author>
+      <guid>http://unixera.com/java/create-and-run-java-application-with-maven/</guid>
+      <description>
+
+&lt;p&gt;最近这段时间在研究Storm，虽然不是研究源码而是研究使用，也让我这个自认为会写Java HelloWorld的菜鸟感到了深深的无力感。尤其是打开一本书，上面第一行代码就执行报错时我的心情可想而知了。&lt;/p&gt;
+
+&lt;h3 id=&#34;1-创建应用&#34;&gt;1. 创建应用&lt;/h3&gt;
+
+&lt;p&gt;因为我最近的使用场景是创建一个普通项目（区别于Web项目），所以直接用&lt;code&gt;mvn archetype:generate&lt;/code&gt;根据提示如果默认一路点下来会生成一个简单应用的骨架。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注意：如果你在哪里看到&lt;code&gt;mvn archetype:create&lt;/code&gt;这样的写法，而在你的机器上执行出错，不用怀疑，因为你看到的资料太老了，而你用的是新版的maven，按我的写法没有错。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://ww1.sinaimg.cn/large/006y8lVajw1f840c2rryxj31ey100n83.jpg&#34; alt=&#34;创建应用的过程&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果需要生成webapp类型应用，比如一个基于SpringFramework的应用就不是831了，而是类似这样&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp\
+                        -DinteractiveMode=false \
+                        -DgroupId=com.unixera.webapp \
+                        -DartifactId=spring-example
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体再到里面怎么写应用这里就不展开了，如果有时间的话会有相关的文章单独来介绍。&lt;/p&gt;
+
+&lt;h3 id=&#34;2-打包应用&#34;&gt;2. 打包应用&lt;/h3&gt;
+
+&lt;p&gt;经过上面的&lt;code&gt;mvn archetype:generate&lt;/code&gt;命令之后，创建的目录类似这样
+&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f84hsklj4oj30g003ejrn.jpg&#34; alt=&#34;根目录结构&#34; /&gt;
+如果再往深了看，是这样的
+&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f84huul3ihj30jq0j8ab7.jpg&#34; alt=&#34;树状结构&#34; /&gt;
+其中最需要注意的就是&lt;code&gt;pom.xml&lt;/code&gt;这个文件，关于maven的简单使用可以参考我之前写的&lt;a href=&#34;http://unixera.com/java/mvn-tutorial-for-novice/&#34;&gt;给Java新手看的mvn指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;写完了应用当然是希望执行它，我们知道Java程序是需要编译成字节码之后才能执行的，当你学Java的HelloWorld时一般是告诉你&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;javac HelloWorld.java
+java HelloWorld
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这没有问题，但问题是当我们用maven管理一个项目时当然就不能这么去操作了，就像写C代码时直接用gcc编译和写Makefile使用make来管理项目是一样的道理。&lt;/p&gt;
+
+&lt;h4 id=&#34;普通的jar包&#34;&gt;普通的jar包&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;mvn compile&lt;/code&gt;&lt;br /&gt;
+这时可以尝试在根目录里执行&lt;code&gt;mvn compile&lt;/code&gt;看看结果。
+&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f84hzh3knjj31bk0l6dmm.jpg&#34; alt=&#34;&#34; /&gt;
+这相当于执行&lt;code&gt;javac&lt;/code&gt;，只不过根据mvn的默认配置，它把编译生成的class文件放在了指定的位置，那它究竟生成了哪些文件呢？
+&lt;img src=&#34;http://ww1.sinaimg.cn/large/006y8lVajw1f84i209hshj30xu0x241u.jpg&#34; alt=&#34;&#34; /&gt;
+可以看到，它并没有生成我们希望的&lt;strong&gt;可以发布的jar包&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mvn package&lt;/code&gt;&lt;br /&gt;
+我们知道，其实jar包的本质就是zip，是把项目执行需要的资源全部打包（此处不准确，后面会谈）在一起发布的方式。而&lt;code&gt;mvn package&lt;/code&gt;执行的就是打包的过程。
+&lt;img src=&#34;http://ww1.sinaimg.cn/large/006y8lVajw1f84i6llp9cj31di194k5p.jpg&#34; alt=&#34;&#34; /&gt;
+这里的输出结果也验证了之前的文章中提到的说法。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;compile test package install&lt;/code&gt;是一套流程，执行后面的命令时会重复执行前面的命令&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;再来看&lt;code&gt;mvn package&lt;/code&gt;生成了哪些文件（只看target目录即可）
+&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f84ibl3z03j30qm0xw78g.jpg&#34; alt=&#34;&#34; /&gt;
+重点关注红线标注的jar包，这是我们需要的。
+&lt;img src=&#34;http://ww4.sinaimg.cn/large/006y8lVajw1f84iezqgjrj313c0h0jvy.jpg&#34; alt=&#34;&#34; /&gt;
+这就是jar包中的所有东西。你可能知道执行一个jar包需要的命令时&lt;code&gt;java -jar xxxx.jar&lt;/code&gt;，然并卵，这时执行这个是会出错的。解决方法后面会说。
+&lt;img src=&#34;http://ww4.sinaimg.cn/large/006y8lVajw1f84iggkm9nj30vi02at9g.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;使用mvn生成main-class&#34;&gt;使用mvn生成Main-Class&lt;/h4&gt;
+
+&lt;p&gt;下面来解释一下为什么简单的打包并不能生成可以直接执行的jar包。
+首先需要了解一点Manifest的知识&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/deployment/jar/manifestindex.html&#34;&gt;2&lt;/a&gt;。简单来说，就是一个jar包需要Manifest文件中包含指定的内容才可以执行。那我们根据前面的经验，用&lt;code&gt;mvn package&lt;/code&gt;生成的jar包中是包含&lt;code&gt;META-INF/MANIFEST.MF&lt;/code&gt;的，实际上jar包运行需要的就是这个所谓的Manifest文件。
+打开它看一下
+&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f88hw52bhvj30kg06caax.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;根据Java SE官方文档&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/deployment/jar/appman.html&#34;&gt;3&lt;/a&gt;, 一个Manifest文件中至少需要包含&lt;code&gt;Main-Class&lt;/code&gt;字段才可以使之使用&lt;code&gt;java -jar&lt;/code&gt;命令执行。&lt;/p&gt;
+
+&lt;p&gt;那我们来试着修改一下
+1. 把jar包解压：
+&lt;img src=&#34;http://ww2.sinaimg.cn/large/006y8lVagw1f88i2b79rzj30zq0d00wv.jpg&#34; alt=&#34;&#34; /&gt;
+2. 修改&lt;code&gt;META-INF/MANIFEST.MF&lt;/code&gt;文件，改成
+&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f88i3lfb2fj30pc08c0u5.jpg&#34; alt=&#34;&#34; /&gt;
+（其中红框中的部分根据自己的实际报名填写）
+3. 重新打包
+&lt;img src=&#34;http://ww4.sinaimg.cn/large/006y8lVajw1f88id79j1pj311a0cejv9.jpg&#34; alt=&#34;&#34; /&gt;
+4. 再来执行一下
+&lt;img src=&#34;http://ww4.sinaimg.cn/large/006y8lVajw1f88ig6mioaj30ew020q32.jpg&#34; alt=&#34;&#34; /&gt;
+没错，成功了。&lt;/p&gt;
+
+&lt;p&gt;所以我们知道了直接生成的jar包不能执行是因为Manifest中缺少了指定Main-Class的指令。那么既然我们使用了mvn，依赖了pom.xml，那mvn当然是能帮我们直接解决这个问题的，不然要自己每次解压、修改再压缩得累死了。&lt;/p&gt;
+
+&lt;p&gt;根据Maven官方文档&lt;a href=&#34;https://maven.apache.org/shared/maven-archiver/examples/classpath.html#Make&#34;&gt;4&lt;/a&gt;, 在&lt;code&gt;pom.xml&lt;/code&gt;中添加plugin配置即可&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;dependencies&amp;gt;
+...
+&amp;lt;/dependencies&amp;gt;
+
+&amp;lt;build&amp;gt;
+  &amp;lt;plugins&amp;gt;
+      &amp;lt;plugin&amp;gt;
+      &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;
+      &amp;lt;artifactId&amp;gt;maven-jar-plugin&amp;lt;/artifactId&amp;gt;
+      &amp;lt;version&amp;gt;2.6&amp;lt;/version&amp;gt;
+      &amp;lt;configuration&amp;gt;
+        &amp;lt;archive&amp;gt;
+          &amp;lt;manifest&amp;gt;
+            &amp;lt;mainClass&amp;gt;com.unixera.mvn.App&amp;lt;/mainClass&amp;gt;
+          &amp;lt;/manifest&amp;gt;
+        &amp;lt;/archive&amp;gt;
+      &amp;lt;/configuration&amp;gt;
+    &amp;lt;/plugin&amp;gt;
+  &amp;lt;/plugins&amp;gt;
+&amp;lt;/build&amp;gt;
+
+&amp;lt;/project&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再执行&lt;code&gt;mvn package&lt;/code&gt;生成的jar包的Manifest中就会带有Main-Class的信息了。&lt;/p&gt;
+
+&lt;h4 id=&#34;jar-with-dependencies&#34;&gt;jar-with-dependencies&lt;/h4&gt;
+
+&lt;p&gt;现在我们终于有了一个可以正常工作的类了，不妨给它添加一个依赖吧。比如我在另外一篇文章中提到的slf4j&lt;a href=&#34;http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/&#34;&gt;5&lt;/a&gt;。具体做法可以参考该文章。这里只谈打包的问题。现在我们的pom.xml主体部分应该是这样的：
+&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f88leultmzj30tm10k43x.jpg&#34; alt=&#34;&#34; /&gt;
+我在App.java中添加了slf4j的用例。按照之前的做法，仍然
+&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f88lgk9cxxj31cs1787fv.jpg&#34; alt=&#34;&#34; /&gt;
+&lt;img src=&#34;http://ww4.sinaimg.cn/large/006y8lVajw1f88lgxno8yj311u090jv3.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;怎么回事？明明已经引入了需要的包了，为什么会找不到类呢？
+问题还是出在jar包的打包方式上。
+有PHP使用经验并且用过Composer的同学可能知道，Composer管理依赖的方式非常简单，就是把你的项目需要的代码下载到你项目的目录中，然后通过Composer的Autoload功能把它们加载到使用它们的地方。
+但Java不是这样，或者说mvn不是这样。
+首先，mvn把所有的依赖的包都放在了用户的根目录下，默认是&lt;code&gt;$HOME/.m2/repository&lt;/code&gt;，在这个目录下可以看到各个vendor的各种版本的包。但是在目前我们配置的这种模式下，打成的jar包并不会包含这些东西，而且在执行jar包时，也不会去相应的目录去查找需要的包。
+&lt;strong&gt;其实就是动态加载&lt;/strong&gt;。和写C时用到的.so文件是一个道理。如果希望我们的程序能到处能运行的话，最好把它的依赖都打成.a文件，然后和项目代码打成一个完整的包，所有依赖的类库都在同一个包里就不存在这种问题了。
+所以需要引入一个新的打包方式&lt;code&gt;jar-with-dependencies&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;根据mvn文档[6]，需要引入一个新的过程——Assembly。所以需要新的插件，在pom.xml中添加
+&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f88lybcex8j30xm0ditb1.jpg&#34; alt=&#34;&#34; /&gt;
+再重新执行上面的过程，可以运行了。&lt;/p&gt;
+
+&lt;h3 id=&#34;3-执行应用&#34;&gt;3. 执行应用&lt;/h3&gt;
+
+&lt;p&gt;执行应用就很简单了，直接从java -help就可以获取很多信息，就不展开说了。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java -cp $CLASSPATH -jar /path/to/jar-with-dependencies.jar&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;本文旨在引导读者一步一步创建可执行的jar包，包括工程骨架的创建，依赖管理，打包方式，重点谈了下打包方式对生成的jar包功能的影响。引用了不少官方文档，本文只是简略的描述了一下整个过程，更详细的配置可以追随我引用的文档继续研究。&lt;/p&gt;
+
+&lt;p&gt;可能有读者会问为什么我用截图而不是代码块的方式来演示，其实我是怕你们偷懒哈哈哈。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>给Java新手看的mvn指南</title>
