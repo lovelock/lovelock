@@ -9,8 +9,93 @@
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 22 Sep 2016 14:15:41 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 22 Sep 2016 14:16:06 +0800</lastBuildDate>
     <atom:link href="http://unixera.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>slf4j配合log4j来给你的应用打log</title>
+      <link>http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/</link>
+      <pubDate>Thu, 22 Sep 2016 14:16:06 +0800</pubDate>
+      <author>frostwong@gmail.com (Frost Wong)</author>
+      <guid>http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/</guid>
+      <description>&lt;p&gt;最近刚开始接触Java，被折腾的很难受。因为PHP随便找个环境都能执行，只需要把代码传上去就OK，而Java还需要编译、打包，用mvn执行命令，本来不多的功能就高出一下上百兆的包，然后传到服务器上。后来在运维同学的配合下整了一套只需要我把代码提交到Git仓库，系统自动打包并上传到需要执行的机器上的工作流，虽然比之前好了很多，但还是没有PHP开发的过程流畅。
+说了这么多，是因为Java调试起来不容易，或者说成本高。所以就需要尽量在提交代码之前打尽可能多的日志，帮助后面查找问题。找了一圈，发现最通用的Java日志库是slf4j(Simple Logging Facade for Java)。
+这名字都不喜欢，什么破玩意儿。而且这玩意儿其实自己并不记录日志，而只是一个日志的Facade，也就是说它是用来&lt;strong&gt;为其他真正执行记日志功能的类库提供一个标准接口&lt;/strong&gt;的。我也没有兴趣去研究它的代码，想想也是各种设计模式用的6到飞起了。
+下面是记录一下怎么用最简单的方式把它添加到自己的项目中，以log4j为例。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;需要添加的dependencies&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;slf4j-log4j12&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;1.7.21&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;后面两个依赖并不是必需的，只需要第一个即可。
+2. 在需要记日志的类中添加这样的一些代码片段&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package com.unixera.mvn;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    private static Logger LOG = LoggerFactory.getLogger(App.class);
+    public static void main( String[] args )
+    {
+        LOG.info(&amp;quot;this is a log&amp;quot;);
+        LOG.debug(&amp;quot;This is a log with some information {}&amp;quot;, args.toString());
+        System.out.println( &amp;quot;Hello World!&amp;quot; );
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行一下，这时候会发现下面的警告信息。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;log4j:WARN No appenders could be found for logger (HelloWorld).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;虽然把我引导去了一篇FAQ，但看完我还是不知道是怎么回事。关于这个问题的答案一搜一大把，这也说明看了FAQ仍然不明白的人远远不止我一个。
+首先要知道这里appender的意思。它其实就是上面说到的真正执行记录日志工作的类库，在这里就是log4j。那它指出的问题就是log4j需要一个初始化配置，而我们并没有给它指定初始化配置。所以这个appender就不知道该怎们工作。
+其实这也很容易理解，毕竟要记日志，你不告诉它日志级别、记录日志的路径和格式，它怎么能帮你决定这些事情呢？&lt;/p&gt;
+
+&lt;p&gt;『小声说两句，其实这也是我写Java的时候感受最深最痛苦的事情，Java太过于讲究设计模式了，把任务的职责分的太细，导致本来很小的一件事都要绕来绕去引入很多东西，虽然这保证了大量菜鸟写起来不容易出错，但也导致了开发效率的降低和开发者的心情问题。』&lt;/p&gt;
+
+&lt;p&gt;最简单的办法是需要在main里面新建一个目录&lt;code&gt;resources&lt;/code&gt;，新建文件log4j.properties，写入&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;log4j.rootLogger=TRACE, file, stdout
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target=System.out
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d{yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS} %-5p [%c] - %m%n
+
+
+log4j.appender.file=org.apache.log4j.RollingFileAppender
+log4j.appender.file.File=./log/javavillage.log
+log4j.appender.file.MaxFileSize=10000KB
+log4j.appender.file.MaxBackupIndex=10
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p:: %m%n
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这段配置文件做了以下几件事：
+1. 第一行设置了日志级别TRACE，意思是记录TRACE和高于TRACE级别的所有日志，因为TRACE是最低的，所以这里设置的是所有日志都会记录。什么意思呢？log4j有这几个日志级别：TRACE,DEBUG,INFO,WARN,ERROR,FATAL，这几个级别从左到右依次升高。也越来越不详细。也就是说，如果设置了日志级别是INFO，那么&lt;code&gt;LOG.trace()&lt;/code&gt;和&lt;code&gt;LOG.debug()&lt;/code&gt;这种语句会被忽略，而后面四中是会正常执行的。
+2. 日志输出的位置，这里设置的是文件和标准输出
+3. 分别设置了两种输出位置的一些属性，比如输出到标准输出应该是什么样的格式，用什么标准来做文本替换，用什么样的时间格式等等；至于输出到文件的情况就比较复杂了，因为还牵涉到文件的路径，文件大小上限等。具体这个项需要怎么配置我也没有详细的研究，以后如果需要再用到Java并且有需求再说吧。毕竟我不太喜欢Java。需要的可以参考这里&lt;a href=&#34;https://www.tutorialspoint.com/log4j/log4j_logging_files.htm&#34;&gt;1&lt;/a&gt;。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>使用maven创建和运行Java应用</title>
@@ -1757,78 +1842,6 @@ git config --global alias.d difftool
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;即可。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>使用Git钩子自动部署代码</title>
-      <link>http://unixera.com/git/git-deploy-hook/</link>
-      <pubDate>Sun, 21 Feb 2016 15:37:20 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/git/git-deploy-hook/</guid>
-      <description>
-
-&lt;p&gt;前几天在&lt;a href=&#34;https://bandwagonhost.com/&#34;&gt;搬瓦工&lt;/a&gt;上买了个年费19.99刀的VPS，想着用来做一些研究，毕竟在公网上，做什么事情都更方便点。虽然机器的性能尚可，就是网络稍慢。不过好在发现速度慢时可以切换一下机房，数据也没有损失，一分钟即可搞定，这点简直是搬瓦工的杀手锏。&lt;/p&gt;
-
-&lt;p&gt;其实是前几天我去一家公司面试，面试官跟我提到他们之前用过Laravel，发现性能像屎一样，一般框架的性能影响可以忽略不计，性能消耗可能都在数据库IO上，但Laravel不一样，性能真的消耗在了框架上。。。。这就让我萌生了一个念头，自己测试一下到底我们敬爱的鸟哥写的Yaf，和我喜欢的Symfony及其精简版Silex还有号称为艺术家而生的框架Laravel及其精简版Lumen的性能。&lt;/p&gt;
-
-&lt;p&gt;环境部署我就不说了，直接上配置说明&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://7xn2pe.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-02-21%20%E4%B8%8B%E5%8D%883.49.05.png&#34; alt=&#34;操作系统版本&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://7xn2pe.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-02-21%20%E4%B8%8B%E5%8D%883.47.48.png&#34; alt=&#34;PHP版本&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://7xn2pe.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-02-21%20%E4%B8%8B%E5%8D%883.48.04.png&#34; alt=&#34;PHP模块&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;git自动部署&#34;&gt;Git自动部署&lt;/h2&gt;
-
-&lt;p&gt;由于网络连接比较慢，在服务器上直接写代码是很浪费时间的，那我就想在本地写了代码，push到远端服务器之后，给git配上一个钩子，让它自己把最新的代码覆盖到Web目录。&lt;/p&gt;
-
-&lt;p&gt;对，就是钩子。&lt;/p&gt;
-
-&lt;p&gt;第一次对钩子的作用有概念还是Yaf的Plugin中的钩子，&lt;del&gt;说白了就是回调函数&lt;/del&gt;。你可以指定在某个事件发生前或者发生后做某件事。&lt;/p&gt;
-
-&lt;p&gt;那根据需求，这个钩子应该在&lt;code&gt;/var/www/project&lt;/code&gt;中执行&lt;code&gt;git checkout -f&lt;/code&gt;命令。那总不能要cd到Web目录去执行吧，所以得先设置两个变量&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;1. 要部署到的目录，在这里是`/var/www/project`
-2. git的remote地址
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下面是具体的操作步骤。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;在服务器设置git server&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;useradd -m -d /var/git git -s /usr/bin/git-shell
-cd /var/git
-mkdir project.git
-cd project.git
-git init --bare
-cd hooks
-echo &#39;git --work-tree=/var/www/project --git-dir=/var/git/project.git checkout -f&#39; &amp;gt; post-receive
-chmod +x post-receive
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;clone 代码库到本地，开始工作&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone git@remoteserver:/var/git/project.git
-cd project.git
-touch a.test
-git add .
-git commit -m &#39;test git hook&#39;
-git push origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;在服务器检查Web目录&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd /var/www/project
-ls -l
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;这个过程需要注意&lt;strong&gt;用户git需要有Web目录的写权限&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;基础搭好了，就可以继续了。&lt;/p&gt;
 </description>
     </item>
     
