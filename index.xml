@@ -9,8 +9,556 @@
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 22 Sep 2016 14:16:06 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 12 Oct 2016 23:36:09 +0800</lastBuildDate>
     <atom:link href="http://unixera.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>zookeeper simple practice</title>
+      <link>http://unixera.com/bigdata/zookeeper-simple-practice/</link>
+      <pubDate>Wed, 12 Oct 2016 23:36:09 +0800</pubDate>
+      <author>frostwong@gmail.com (Frost Wong)</author>
+      <guid>http://unixera.com/bigdata/zookeeper-simple-practice/</guid>
+      <description>
+
+&lt;h2 id=&#34;什么是分布式应用&#34;&gt;&lt;strong&gt;什么是分布式应用&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;分布式应用运行在其上的一组系统被称为『集群』(cluster)，运行在集群中的每个机器被称为『节点』(node)。&lt;/p&gt;
+
+&lt;h3 id=&#34;分布式应用的优点&#34;&gt;&lt;strong&gt;分布式应用的优点&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;可靠性&lt;/strong&gt; 单机或少量机器的故障不会导致整个系统不可用。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可扩展性&lt;/strong&gt; 不用停机只需要做很少的配置就可以根据需求通过增加机器来提升系统的性能。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;透明性&lt;/strong&gt;  隐藏了系统的复杂性，对外值暴露单一的入口/应用。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;分布式应用需要解决的难点&#34;&gt;&lt;strong&gt;分布式应用需要解决的难点&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;竞争条件&lt;/strong&gt; 两个或多个机器都尝试去执行同一个任务，而该任务在任意时刻都应该只被一台机器执行。比如，共享的资源在某一时刻应该只能被一台机器修改。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死锁&lt;/strong&gt; 两个或多个操作无限期的相互等待对方完成。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不一致性&lt;/strong&gt; 数据的部分错误。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;zookeeper简介&#34;&gt;&lt;strong&gt;ZooKeeper简介&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;ZooKeeper是一个&lt;strong&gt;分布式的&lt;/strong&gt;、用来管理大量主机的&lt;strong&gt;协调服务&lt;/strong&gt;。
+在分布式环境中协调和管理一个服务是很复杂的工作，而ZooKeeper用简单的架构和API解决了这个问题，它用&lt;code&gt;fail-safe synchronization&lt;/code&gt;机制解决了竞争和死锁的问题, 用&lt;code&gt;atomicity(原子性)&lt;/code&gt;解决了数据的一致性问题。它屏蔽了分布式环境中的复杂性，让开发人员可以专注于核心应用功能的开发，而不用去关心分布式环境的太多细节。&lt;/p&gt;
+
+&lt;h3 id=&#34;zookeeper提供的服务&#34;&gt;&lt;strong&gt;ZooKeeper提供的服务&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;名字服务 在一个集群内根据name找到主机，类似DNS服务&lt;/li&gt;
+&lt;li&gt;配置管理 集中管理某个节点的最新配置&lt;/li&gt;
+&lt;li&gt;集群管理 管理一个集群中某一节点的加入和离开&lt;/li&gt;
+&lt;li&gt;主节点选举 协调一个集群选举中一个新的主节点&lt;/li&gt;
+&lt;li&gt;加锁和同步服务 在数据被修改时给其加锁，这种机制可以帮助你在连接到其他如HBase的分布式服务时实现自动错误恢复&lt;/li&gt;
+&lt;li&gt;存放高可用数据 可以保证在一个或多个节点出故障时保证数据的可用性&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;zookeeper的优点&#34;&gt;&lt;strong&gt;ZooKeeper的优点&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;简单的分布式协调过程&lt;/li&gt;
+&lt;li&gt;同步 服务器进程间的互斥和协作&lt;/li&gt;
+&lt;li&gt;有序的消息&lt;/li&gt;
+&lt;li&gt;序列化 用指定的规则编码数据。保证你的应用一致的运行。这种方式可以用在MapReduce中来协调对来执行线程&lt;/li&gt;
+&lt;li&gt;可靠性&lt;/li&gt;
+&lt;li&gt;原子性 数据传输要么成功要么失败，不存在中间状态&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;zookeeper的架构&#34;&gt;&lt;strong&gt;ZooKeeper的架构&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8mN6jw1f7alv0grqej30fw04zdgg.jpg&#34; alt=&#34;ZooKeeper架构图&#34; /&gt;&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;概念&lt;/th&gt;
+&lt;th&gt;职责和作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Client&lt;/td&gt;
+&lt;td&gt;Client定时向Server发送消息通知Server该Client是alive众泰，同时Server会返回Response给Client，如果Client发送Message后没有收到Response，则会自动重定向到其他Server&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Server&lt;/td&gt;
+&lt;td&gt;ZooKeeper集群中的一个节点，提供给Clients所有的服务&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Ensemble&lt;/td&gt;
+&lt;td&gt;一个可以提供ZooKeeper服务的集群，如果要达到高可用性，至少需要三个节点&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Leader&lt;/td&gt;
+&lt;td&gt;节点故障时执行自动恢复的节点，启动时选举出的&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Follower&lt;/td&gt;
+&lt;td&gt;根据Leader的指示执行任务&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;层级的命名空间&#34;&gt;&lt;strong&gt;层级的命名空间&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://ww4.sinaimg.cn/large/006y8mN6jw1f7ayltmo57j30go0ce0t8.jpg&#34; alt=&#34;ZooKeeper的层级的命名空间&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;层级结构中的每个节点叫做znode, 每个znode维护一个&lt;code&gt;stat&lt;/code&gt;结构。这个&lt;code&gt;stat&lt;/code&gt;仅仅提供一个znode的元信息，其中包括版本号(Version number)、行为控制列表(Action Control List, ACL)、时间戳(Timestamp)、数据长度(Data Lenght)。&lt;/p&gt;
+
+&lt;h3 id=&#34;znode的类型&#34;&gt;znode的类型&lt;/h3&gt;
+
+&lt;p&gt;znode分为三种类型：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;永久型 永久型节点当客户端断开连接之后仍然存在，默认情况下创建的节点都是永久型节点&lt;/li&gt;
+&lt;li&gt;临时型 只有client保持alive时才存在的节点叫临时节点，当client从ZooKeeper集群断开时，节点被自动删除。所以临时节点不允许有子节点。如果一个临时节点被删除了，下一个合适的节点会填充它的位置。临时节点在Leader的选取中起到重要作用。&lt;/li&gt;
+&lt;li&gt;顺序型 序列型节点可以是永久的也可以是临时的。当一个znode被创建为顺序型时，ZooKeeper在它原来的name后面加上十位的十进制数字。如果两个顺序型节点是并发创建的，ZooKeeper会保证两个节点的name不同。顺序型节点在锁和同步中起到重要作用。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;会话-sessions&#34;&gt;会话（Sessions）&lt;/h3&gt;
+
+&lt;p&gt;一个会话中的请求是按照FIFO的顺序执行的。当一个client连接上一个server，一个会话就创建成功了并且会生成一个session id给client。&lt;br /&gt;
+client会按一个时间间隔给server发送heartbeat来保证session的有效性。如果在一个session的生命周期内没有收到client的heartbeat，它就会认为这个client已经死掉了。&lt;br /&gt;
+Session超时通常用ms表示。当一个session不管由于什么原因结束时，在session中创建的临时节点都会被删除掉。&lt;/p&gt;
+
+&lt;h3 id=&#34;手表-看门人-watches&#34;&gt;手表（看门人？）Watches&lt;/h3&gt;
+
+&lt;p&gt;Watches是用来保证client能在znode上的数据发生变化时收到通知的一种简单机制。client在读取znode的数据时可以设置一个watches给一个特定的znode，当这个znode上的数据或者它的子节点发生变化时都会触发watches给client发送通知。&lt;br /&gt;
+watches只会被触发一次，如果client还需要通知，那就需要另外一次的读取操作了。当一个client和server之间的会话过期时，它们之间的连接就断开了，同时watches也会被移除。&lt;/p&gt;
+
+&lt;h3 id=&#34;工作流程&#34;&gt;工作流程&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;client读取数据 client发送一个&lt;strong&gt;读取请求&lt;/strong&gt;给ZooKeeper的一个节点，该节点根据请求中的path信息读取&lt;strong&gt;自己数据库中的数据&lt;/strong&gt;返回znode的信息给client。所以读取操作在ZooKeeper集群中是很快的。&lt;/li&gt;
+&lt;li&gt;client写数据 如果收到请求的是Follower，它会先把请求转发给Leader，由Leader再发送写请求给Followers。只有&lt;strong&gt;大多数节点&lt;/strong&gt;正确响应时，写请求才会成功并且返回正确的返回码给client。否则写请求就会失败。这个严格的&lt;strong&gt;大多数节点&lt;/strong&gt;被称为&lt;strong&gt;Quorum（法定人数)&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;zookeeper中的节点&#34;&gt;ZooKeeper中的节点&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;当只有一个节点时，没有大多数&lt;/li&gt;
+&lt;li&gt;只有两个节点，一个出故障时，也没有大多数&lt;/li&gt;
+&lt;li&gt;当有三个节点，有一个出了故障，那2个就是大多数&lt;/li&gt;
+&lt;li&gt;当有四个节点，2个出故障了，那也是没有大多数的&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;所以，ZooKeeper集群的中节点的数量不要太多，不然写的性能会有下降。同时节点的数量是3/5/7这种基数，而不要是偶数。&lt;/p&gt;
+
+&lt;h3 id=&#34;小结&#34;&gt;小结&lt;/h3&gt;
+
+&lt;p&gt;看了上面的这么一大套理论，可能还是对ZooKeeper做的事情云里雾里，因为它做的事情太抽象了，好像实际它什么都没做，但又发现好像每个组件比如Kafka/Storm都要和ZooKeeper配合才能用。到底为什么呢？&lt;/p&gt;
+
+&lt;p&gt;上面讲过，ZooKeeper其实是一个配置分发服务，也就是具体的应用如Kafka和Storm都是&lt;strong&gt;无状态&lt;/strong&gt;的，它本身为了保持&lt;strong&gt;容错&lt;/strong&gt;的特性，而容错很重要的一项特性就是应用Down掉之后重启还要能从之前结束时的地方继续。既然是无状态，其实是&lt;strong&gt;自己不存储状态&lt;/strong&gt;，那要实现的这个特性肯定是&lt;strong&gt;需要知道&lt;/strong&gt;应用Down掉之前的状态的，那么好，我就把状态存在ZooKeeper里。&lt;/p&gt;
+
+&lt;p&gt;举个生动的例子，假设有一个很长的（水）槽，Kafka会每秒把一个玻璃球放在槽里，这样的结果就是最先放进去的玻璃球在最前面。而Storm就是&lt;strong&gt;计数工&lt;/strong&gt;，（注意&lt;strong&gt;不是搬运工&lt;/strong&gt;，因为它数了之后并不会真实的改变玻璃球的位置）极端一点这个游戏是在一个战场上，Storm随时会死掉，它怎么保证它的后来者来到之后马上知道它之前数到哪个位置了？自己当然是不可靠的，因为它死掉之后这个信息就丢失了，所以它&lt;strong&gt;每数一个&lt;/strong&gt;就朝ZooKeeper大喊一声（发送写请求）告诉它数到哪个位置了，而Storm又是个健忘症（无状态），刚数完的自己就忘了，更不用说后面来的人了，那么当它把位置信息告诉ZooKeeper之后其实它和自己的后来者就没有区别了，因为不管是谁，在计数之前都需要先去ZooKeeper读取一下前面数到的位置。这样的好处就是每个Storm随时都可以死掉，只要能有新的应用随时可以起来即可。那么存到了ZooKeeper就万无一失了么？考虑前面ZooKeeper处理写请求的特点，它是把相同的信息在集群中所有的机器上都写了一份，即使其中的一台或几台宕掉了，除非在这几台重启之前仅剩的一台也宕掉了，服务是不受影响的。如果全宕掉了，那真的没办法了，你把整个机房的电源拔掉，肯定会丢数据的。&lt;/p&gt;
+
+&lt;p&gt;也可以理解为把状态和应用做的解耦。&lt;/p&gt;
+
+&lt;p&gt;那么问题来了，为什么是在战场上？为什么好好的一个应用会无缘无故的Down掉呢？这就要从分布式应用的特点说起了。我们知道以前的所谓大型机、小型机都是很大很昂贵的特殊机器，是区别于普通的硬件的，包括CPU、内存、硬盘都是特制的，所以一台机器上百万甚至千万的都很常见，这种机器宕机的几率很小，但如果宕机的话影响也会相当严重。所以可以说这些机器的费用里其实也包含了保险费，因为机器宕机导致的损失，供应商是要负责任的。&lt;/p&gt;
+
+&lt;p&gt;但现在不同了，现在是用大量普通（廉价）的机器组成集群来替代之前特殊的机器，既然是普通，那出错的几率当然就更高了，这也就是为什么Storm在设计之初就表示&lt;strong&gt;无状态&lt;/strong&gt;了。&lt;/p&gt;
+
+&lt;h3 id=&#34;安装和配置&#34;&gt;安装和配置&lt;/h3&gt;
+
+&lt;h4 id=&#34;安装&#34;&gt;安装&lt;/h4&gt;
+
+&lt;p&gt;大数据的这套东西安装起来都是很简单，因为都是编译好的包，直接解压之后就可以以默认配置执行了。不过ZooKeeper有点特殊，因为它需要读取的配置文件是&lt;code&gt;conf/zoo.cfg&lt;/code&gt;，而默认的发行包里面是有个&lt;code&gt;conf/zoo_sample.cfg&lt;/code&gt;，不过好在只需要重命名一下即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost zookeeper-3.4.8]# cp conf/zoo_sample.cfg conf/zoo.cfg
+[root@localhost zookeeper-3.4.8]# bin/zkServer.sh start
+ZooKeeper JMX enabled by default
+Using config: /root/packages/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+[root@localhost zookeeper-3.4.8]# bin/zkServer.sh status
+Mode: standalone
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注意这里的Mode，表示单点模式，区别于集群模式&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;配置&#34;&gt;配置&lt;/h4&gt;
+
+&lt;p&gt;前面只讲了基础配置，这样的配置是没法跑集群环境的，下面先从默认配置出发，一步一步搭建一个集群环境。
+先贴默认配置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/tmp/zookeeper
+clientPort=2181
+#maxClientCnxns=60
+#autopurge.snapRetainCount=3
+#autopurge.purgeInterval=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;tickTime&lt;/code&gt;： ZooKeeper服务器或客户端与服务器之间维持心跳的时间间隔，也就是每个tickTime就会发送一条心跳&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dataDir&lt;/code&gt; 顾名思义就是ZooKeeper保存数据的目录&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;clientPort&lt;/code&gt; ZooKeeper对外提供服务的端口，即客户端通过该端口与ZooKeeper通信&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;initLimit&lt;/code&gt; ZooKeeper集群中的Leader忍受Follower多少个心跳间隔不发送心跳。从这里的默认配置推算，10个心跳间隔，每个心跳间隔2秒钟，也就是当Leader经过2*10秒还收不到Follower的信条时就认为这个Follower已经挂了&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;syncLimit&lt;/code&gt; Leader和Follower之间发送消息时，请求和应答的时间长度，默认5，及10秒&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;从上面的描述就可以看到，从第4条开始就是集群需要的配置了，然而仅仅在每个机器上这样配置并不能变成一个集群，还需要一个重要的配置，形如&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;server.1=c1:2888:3888
+server.2=c2:2888:3888
+server.3=c3:2888:3888
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中的&lt;code&gt;server.n&lt;/code&gt;中的n表示节点的编号，那么问题来了，编号从哪里定义呢？我觉得这个设计其实不太好，当然我也想不到更好的方式来解决这个问题了。我们还需要在&lt;code&gt;dataDir&lt;/code&gt;中写入一个名为&lt;code&gt;myid&lt;/code&gt;的文件，其中填写当前机器的编号，操作如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /path/to/dataDir
+echo 1 &amp;gt; myid
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;c1的位置是节点机器的hostname或者IP地址，这样写当然还是不行的，因为它们并不知道c1是什么鬼，所以还需要修改&lt;code&gt;/etc/hosts&lt;/code&gt;，并没有什么黑科技。以我当前的本地集群为例，在该文件中添加&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;192.168.1.111 c1
+192.168.1.110 c2
+192.168.1.112 c3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2888是默认的Follower与Leader交换信息的端口，3888是用于选举Leader的端口，当Leader挂了，当然需要选举一个新的Leader来继续它未竟的事业了。&lt;/p&gt;
+
+&lt;h4 id=&#34;启动集群&#34;&gt;启动集群&lt;/h4&gt;
+
+&lt;p&gt;这时可以在三台机器上同时执行&lt;code&gt;bin/zkServer.sh start&lt;/code&gt;了。如果看到和前面一样的结果（注意把刚才已经启动的服务先关掉，执行&lt;code&gt;bin/zkServer.sh stop&lt;/code&gt;），恭喜你成功了一半了。
+这时再执行&lt;code&gt;bin/zkServer.sh status&lt;/code&gt;你会惊奇的发现其中一台会显示&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost zookeeper-3.4.8]# bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/packages/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: leader
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另外两台显示&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost zookeeper-3.4.8]# bin/zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /root/packages/zookeeper-3.4.8/bin/../conf/zoo.cfg
+Mode: follower
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为了证明Leader节点是自动选举的，可以把Leader手动关掉，再分别看看另外两台的&lt;code&gt;status&lt;/code&gt;。是不是一个变成了Leader了？&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;几天前写这篇文章时没有问题，但今天继续编写Kafka部分时，因为之前重启过这几台虚拟机，IP变了，重启所有虚拟机之后发现虽然已经在本地启动了ZooKeeper服务，但执行&lt;code&gt;zkServer.sh status&lt;/code&gt;时总是提示没有运行，而如果你再执行&lt;code&gt;start&lt;/code&gt;指令，它又会提示说进程已经在运行了。根据&lt;a href=&#34;http://stackoverflow.com/questions/29909191/zookeeper-it-is-probably-not-running&#34;&gt;StackOverFlow的答案&lt;/a&gt;，把&lt;code&gt;/root/packages/zookeeper-3.4.8/bin&lt;/code&gt;添加至&lt;code&gt;$PATH&lt;/code&gt;中即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ vim /etc/profile.d/zookeeper.sh
+export ZK_HOME=/root/packages/zookeeper-3.4.8
+export PATH=$PATH:$ZK_HOME/bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之后执行&lt;code&gt;source /etc/profile.d/zookeeper.sh&lt;/code&gt;即可直接在系统的任何地方执行&lt;code&gt;zkServer.sh start&lt;/code&gt;了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;通过动态的选举Leader节点，就解决了&lt;strong&gt;主从系统的单点故障问题&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h3 id=&#34;api&#34;&gt;API&lt;/h3&gt;
+
+&lt;p&gt;（略)&lt;/p&gt;
+
+&lt;h3 id=&#34;java-binding&#34;&gt;Java Binding&lt;/h3&gt;
+
+&lt;p&gt;（略)&lt;/p&gt;
+
+&lt;h3 id=&#34;scala-binding&#34;&gt;Scala Binding&lt;/h3&gt;
+
+&lt;p&gt;（略)&lt;/p&gt;
+
+&lt;p&gt;本文并未覆盖ZooKeeper的API，因为作为写应用程序的我们来说，这对我们并不重要，我们并不直接和ZooKeeper的API打交道。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;本文大量参考了&lt;a href=&#34;https://www.tutorialspoint.com//zookeeper/index.htm&#34;&gt;https://www.tutorialspoint.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>在本地单机部署Hadoop/Storm运行环境</title>
+      <link>http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/</link>
+      <pubDate>Mon, 10 Oct 2016 17:53:14 +0800</pubDate>
+      <author>frostwong@gmail.com (Frost Wong)</author>
+      <guid>http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/</guid>
+      <description>
+
+&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;由于要在小组内做一个关于Storm的分享，涉及到我负责开发的大数据项目，本着开放的原则，把我做的准备工作记录下来，提前发给可能参会的同事。&lt;br /&gt;
+要演示的项目目前为止用到了Apache的多个项目，包括Kafka, Storm, Hadoop(HDFS, Hive), ZooKeeper等，项目刚刚起步，很多基础设施还不完善，比如现在是在本地开发完成之后直接部署到线上环境的，这次演示可不能直接在线上环境做了，故而在本地的台式机上部署了一下&lt;strong&gt;伪集群&lt;/strong&gt;，用来作为演示和以后开发测试用的环境。&lt;/p&gt;
+
+&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;以下工作全部基于Ubuntu 16.04。用其他的发行版或版本理论上应该都是可行的，可能有些命令需要微调。&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;所有需要执行的命令前面都有一个&lt;code&gt;$&lt;/code&gt;，表示的是Bash的命令提示符。&lt;/li&gt;
+&lt;li&gt;下载安装包时我使用了速度相对较快的国内镜像，如果你对此有任何异议，可以自行去中心镜像站点下载。&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;默认情况下文中提到的所有如StormUI等控制后台访问的路径都是localhost，如果你需要从Linux主机外部访问，需要iptables放行相应的端口。在本文中，用的Web端口有三个，具体如下表：&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;服务描述&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;端口号&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Storm UI&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8080&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Hadoop UI&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;50070&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Hadoop Applications&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8088&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;以Ubuntu为例，需要执行以下命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo ufw allow 8080/tcp
+$ sudo ufw allow 50070/tcp
+$ sudo ufw allow 8088/tcp
+$ sudo ufw reload
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;CentOS/RHEL 7.0以下可能需要直接操作iptables，7.0以上可以使用&lt;code&gt;firewall-cmd&lt;/code&gt;进行类似的操作。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;1-创建独立的用户并赋予合适的权限&#34;&gt;1. 创建独立的用户并赋予合适的权限&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo useradd hadoop
+$ sudo passwd hadoop
+$ sudo chsh hadoop
+$ sudo mkdir /home/hadoop
+$ sudo chown -R hadoop:hadoop /opt/apache
+$ sudo chown -R hadoop:hadoop /home/hadoop
+$ su - hadoop
+$ ssh-keygen
+$ cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+$ chmod 0600 ~/.ssh/authorized_keys
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;FAQ：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;为什么需要chsh并且手动为用户创建家目录？&lt;br /&gt;
+不知道为什么在 Ubuntu 环境中执行&lt;code&gt;useradd&lt;/code&gt;命令之后并不会给新建的用户创建家目录和设置shell，可能是为了安全吧，要稍微麻烦一些。&lt;/li&gt;
+&lt;li&gt;为什么不给新用户赋予root权限？&lt;br /&gt;
+这里是测试环境倒还好，如果你需要搭建生产环境，记住千万不要给hadoop用户赋予root权限，它需要哪些目录的权限就单独赋予即可，它需要运行的端口都是1024以上的，都不需要root权限。如果需要，执行&lt;code&gt;sudo gpasswd -a hadoop sudo&lt;/code&gt;即可。&lt;/li&gt;
+&lt;li&gt;为什么要做一个密钥认证？&lt;br /&gt;
+这是因为在后续的步骤中会有&lt;strong&gt;从本地用户登录本地用户&lt;/strong&gt;的需求，也就是执行了&lt;code&gt;ssh hadoop@localhost&lt;/code&gt;这个命令，如果不做密钥信任，会需要多次输入密码。&lt;/li&gt;
+&lt;li&gt;为什么会有一个&lt;code&gt;/opt/apache&lt;/code&gt;目录？&lt;br /&gt;
+往下看。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;1-下载所需安装包&#34;&gt;1. 下载所需安装包&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;下载Java&lt;br /&gt;
+到&lt;a href=&#34;http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&#34;&gt;Java官网&lt;/a&gt;下载适用于Linux的Java安装包（这里下载了jdk-8u101-linux-x64.tar.gz）。&lt;/li&gt;
+&lt;li&gt;下载maven&lt;br /&gt;
+点击&lt;a href=&#34;http://mirrors.aliyun.com/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip&#34;&gt;阿里云镜像站&lt;/a&gt;下载最新版Maven。&lt;/li&gt;
+&lt;li&gt;下载Apache的Storm Hadoop Kafka ZooKeeper&lt;br /&gt;
+&lt;a href=&#34;http://mirrors.aliyun.com/apache/storm/apache-storm-0.10.2/apache-storm-0.10.2.tar.gz&#34;&gt;点击下载Storm-0.10.2&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://mirrors.aliyun.com/apache/hadoop/core/hadoop-2.6.4/hadoop-2.6.4.tar.gz&#34;&gt;点击下载Hadoop-2.6.4&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://mirrors.aliyun.com/apache/kafka/0.8.2.2/kafka_2.10-0.8.2.2.tgz&#34;&gt;点击下载Kafka_2.10-0.8.2.2&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;http://mirrors.aliyun.com/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz&#34;&gt;点击下载ZooKeeper-3.4.6&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;2-创建所需目录&#34;&gt;2. 创建所需目录&lt;/h3&gt;
+
+&lt;p&gt;把所有和此项目相关的文件都放在统一的位置。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo mkdir -p /opt/apache/{jdk, storm,hadoop,kafka,zookeeper}&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;3-解压所有安装包-将相应的安装包放在对应的位置&#34;&gt;3. 解压所有安装包，将相应的安装包放在对应的位置&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo mv jdk1.8.0_101/* /opt/jdk/.
+$ sudo mv apache-storm-0.10.0/* /opt/apache/storm/.
+$ sudo mv hadoop-2.6.4/* /opt/apache/hadoop/.
+$ sudo mv kafka_2.10-0.8.2.2/* /opt/apache/kafka/.
+$ sudo mv zookeeper-3.4.6/* /opt/apache/zookeeper
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-配置环境变量&#34;&gt;4. 配置环境变量&lt;/h3&gt;
+
+&lt;p&gt;在~/.bashrc中添加下面的片段&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export JAVA_HOME=/opt/jdk
+export APACHE_HOME=/opt/apache
+export STORM_HOME=$APACHE_HOME/storm
+export ZK_HOME=$APACHE_HOME/zookeeper
+export KAFKA_HOME=$APACHE_HOME/kafka
+
+export HADOOP_HOME=$APACHE_HOME/hadoop
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export HADOOP_INSTALL=$HADOOP_HOME
+
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:$STORM_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/sbin
+export PATH=$PATH:$ZK_HOME/bin
+export PATH=$PATH:$KAFKA_HOME/bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之后执行&lt;code&gt;$ source ~/.bashrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;5-安装java&#34;&gt;5. 安装Java&lt;/h4&gt;
+
+&lt;p&gt;Apache的这些东西都是直接放在对的地方就可以运行的，但Java需要稍微的配置一下，因为可能你的机器上已经装了OpenJDK。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo update-alternatives --install /usr/local/bin/java java /opt/jdk/bin/java 10000&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;这时再执行&lt;code&gt;$ java -version&lt;/code&gt;验证一下是否使用的时最新安装的JDK。&lt;/p&gt;
+
+&lt;h2 id=&#34;2-启动服务&#34;&gt;2. 启动服务&lt;/h2&gt;
+
+&lt;h3 id=&#34;1-启动zookeeper&#34;&gt;1. 启动ZooKeeper&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cp $ZK_HOME/conf/zoo_sample.cfg $ZK_HOME/conf/zoo.cfg
+$ zkServer.sh start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-启动storm&#34;&gt;2. 启动Storm&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ storm nimbus
+$ storm supervisor
+$ storm ui
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在可以访问&lt;a href=&#34;http://localhost:8080&#34;&gt;Storm UI&lt;/a&gt;了。&lt;/p&gt;
+
+&lt;h3 id=&#34;3-启动kafka-broker&#34;&gt;3. 启动Kafka Broker&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd $KAFKA_HOME
+$ bin/kafka-server-start.sh -daemon config/server.properties
+$ bin/kafka-topics.sh --list --zookeeper localhost:2181
+$ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 10 --topic storm-demo-topic
+Created topic &amp;quot;storm-demo-topic&amp;quot;.
+$ bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic storm-demo-topic
+Topic:storm-demo-topic  PartitionCount:10       ReplicationFactor:1     Configs:
+        Topic: storm-demo-topic Partition: 0    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 1    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 2    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 3    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 4    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 5    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 6    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 7    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 8    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 9    Leader: 0       Replicas: 0     Isr: 0
+$ kafka-console-producer.sh --broker-list localhost:9092 --topic storm-demo-topic
+$ kafka-console-consumer.sh --zookeeper localhost:2181 --topic storm-demo-topic --from-beginning
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注意前面有些命令仅仅是为了测试kafka broker运行的情况。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;4-启动hadoop-hdfs&#34;&gt;4. 启动Hadoop(HDFS)&lt;/h3&gt;
+
+&lt;h4 id=&#34;1-修改hadoop的配置文件&#34;&gt;1. 修改Hadoop的配置文件&lt;/h4&gt;
+
+&lt;p&gt;在&lt;code&gt;$HADOOP_HOME/etc/hadoop&lt;/code&gt;目录下有5个文件需要修改:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;core-site.xml&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;configuration&amp;gt;
+    &amp;lt;property&amp;gt;
+        &amp;lt;name&amp;gt;fs.default.name&amp;lt;/name&amp;gt;
+        &amp;lt;value&amp;gt;hdfs://localhost:9000&amp;lt;/value&amp;gt;
+    &amp;lt;/property&amp;gt;
+&amp;lt;/configuration&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;hdfs-site.xml&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;configuration&amp;gt;
+
+    &amp;lt;property&amp;gt;
+        &amp;lt;name&amp;gt;dfs.replication&amp;lt;/name&amp;gt;
+        &amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;
+    &amp;lt;/property&amp;gt;
+
+    &amp;lt;property&amp;gt;
+        &amp;lt;name&amp;gt;dfs.name.dir&amp;lt;/name&amp;gt;
+        &amp;lt;value&amp;gt;file:///home/hadoop/hadoopinfra/hdfs/namenode&amp;lt;/value&amp;gt;
+    &amp;lt;/property&amp;gt;
+
+    &amp;lt;property&amp;gt;
+        &amp;lt;name&amp;gt;dfs.data.dir&amp;lt;/name&amp;gt;
+        &amp;lt;value&amp;gt;file:///home/hadoop/hadoopinfra/hdfs/datanode&amp;lt;/value&amp;gt;
+    &amp;lt;/property&amp;gt;
+
+&amp;lt;/configuration&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;yarn-site.xml&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;configuration&amp;gt;
+    &amp;lt;property&amp;gt;
+        &amp;lt;name&amp;gt;yarn.nodemanager.aux-services&amp;lt;/name&amp;gt;
+        &amp;lt;value&amp;gt;mapreduce_shuffle&amp;lt;/value&amp;gt;
+    &amp;lt;/property&amp;gt;
+&amp;lt;/configuration&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;mapred-site.xml&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;configuration&amp;gt;
+    &amp;lt;property&amp;gt;
+        &amp;lt;name&amp;gt;mapreduce.framework.name&amp;lt;/name&amp;gt;
+        &amp;lt;value&amp;gt;yarn&amp;lt;/value&amp;gt;
+    &amp;lt;/property&amp;gt;
+&amp;lt;/configuration&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;hadoop-env.sh&lt;/code&gt;
+把hadoop-env.sh中的${JAVA_HOME}替换成路径,这里是&lt;code&gt;/opt/jdk&lt;/code&gt;，因为貌似会找不到正确的&lt;code&gt;JAVA_HOME&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&#34;2-验证是否安装成功&#34;&gt;2. 验证是否安装成功&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ hadoop namenode -format
+$ start-dfs.sh
+$ start-yarn.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行上面三行语句，观察有没有明显的报错信息。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://localhost:50070&#34;&gt;检查HadoopUI&lt;/a&gt;运行是否正常。&lt;br /&gt;
+&lt;a href=&#34;http://localhost:8088&#34;&gt;检查Hadoop Applications&lt;/a&gt;(我自己取的名字)运行是否正常。&lt;/p&gt;
+
+&lt;p&gt;至此已经搭建了一个可以运行的hadoop环境，可以移步这里查看关于Storm入门分享详情。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>slf4j配合log4j来给你的应用打log</title>
@@ -18,14 +566,14 @@
       <pubDate>Thu, 22 Sep 2016 14:16:06 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
       <guid>http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/</guid>
-      <description>&lt;p&gt;最近刚开始接触Java，被折腾的很难受。因为PHP随便找个环境都能执行，只需要把代码传上去就OK，而Java还需要编译、打包，用mvn执行命令，本来不多的功能就高出一下上百兆的包，然后传到服务器上。后来在运维同学的配合下整了一套只需要我把代码提交到Git仓库，系统自动打包并上传到需要执行的机器上的工作流，虽然比之前好了很多，但还是没有PHP开发的过程流畅。
-说了这么多，是因为Java调试起来不容易，或者说成本高。所以就需要尽量在提交代码之前打尽可能多的日志，帮助后面查找问题。找了一圈，发现最通用的Java日志库是slf4j(Simple Logging Facade for Java)。
+      <description>&lt;p&gt;最近刚开始接触Java，被折腾的很难受。因为PHP随便找个环境都能执行，只需要把代码传上去就OK，而Java还需要编译、打包，用mvn执行命令，本来不多的功能就高出一下上百兆的包，然后传到服务器上。后来在运维同学的配合下整了一套只需要我把代码提交到Git仓库，系统自动打包并上传到需要执行的机器上的工作流，虽然比之前好了很多，但还是没有PHP开发的过程流畅。&lt;/p&gt;
+
+&lt;p&gt;说了这么多，是因为Java调试起来不容易，或者说成本高。所以就需要尽量在提交代码之前打尽可能多的日志，帮助后面查找问题。找了一圈，发现最通用的Java日志库是slf4j(Simple Logging Facade for Java)。
 这名字都不喜欢，什么破玩意儿。而且这玩意儿其实自己并不记录日志，而只是一个日志的Facade，也就是说它是用来&lt;strong&gt;为其他真正执行记日志功能的类库提供一个标准接口&lt;/strong&gt;的。我也没有兴趣去研究它的代码，想想也是各种设计模式用的6到飞起了。
 下面是记录一下怎么用最简单的方式把它添加到自己的项目中，以log4j为例。&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;需要添加的dependencies&lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;&lt;p&gt;需要添加的dependencies&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;dependency&amp;gt;
     &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;
@@ -35,18 +583,15 @@
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;后面两个依赖并不是必需的，只需要第一个即可。
-2. 在需要记日志的类中添加这样的一些代码片段&lt;/p&gt;
+&lt;p&gt;后面两个依赖并不是必需的，只需要第一个即可。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;在需要记日志的类中添加这样的一些代码片段&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package com.unixera.mvn;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     private static Logger LOG = LoggerFactory.getLogger(App.class);
@@ -57,7 +602,8 @@ public class App
         System.out.println( &amp;quot;Hello World!&amp;quot; );
     }
 }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;执行一下，这时候会发现下面的警告信息。&lt;/p&gt;
 
@@ -66,13 +612,13 @@ log4j:WARN Please initialize the log4j system properly.
 log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;虽然把我引导去了一篇FAQ，但看完我还是不知道是怎么回事。关于这个问题的答案一搜一大把，这也说明看了FAQ仍然不明白的人远远不止我一个。
-首先要知道这里appender的意思。它其实就是上面说到的真正执行记录日志工作的类库，在这里就是log4j。那它指出的问题就是log4j需要一个初始化配置，而我们并没有给它指定初始化配置。所以这个appender就不知道该怎们工作。
+&lt;p&gt;虽然把我引导去了一篇FAQ，但看完我还是不知道是怎么回事。关于这个问题的答案一搜一大把，这也说明看了FAQ仍然不明白的人远远不止我一个。&lt;br /&gt;
+首先要知道这里appender的意思。它其实就是上面说到的真正执行记录日志工作的类库，在这里就是log4j。那它指出的问题就是log4j需要一个初始化配置，而我们并没有给它指定初始化配置。所以这个appender就不知道该怎们工作。&lt;br /&gt;
 其实这也很容易理解，毕竟要记日志，你不告诉它日志级别、记录日志的路径和格式，它怎么能帮你决定这些事情呢？&lt;/p&gt;
 
 &lt;p&gt;『小声说两句，其实这也是我写Java的时候感受最深最痛苦的事情，Java太过于讲究设计模式了，把任务的职责分的太细，导致本来很小的一件事都要绕来绕去引入很多东西，虽然这保证了大量菜鸟写起来不容易出错，但也导致了开发效率的降低和开发者的心情问题。』&lt;/p&gt;
 
-&lt;p&gt;最简单的办法是需要在main里面新建一个目录&lt;code&gt;resources&lt;/code&gt;，新建文件log4j.properties，写入&lt;/p&gt;
+&lt;p&gt;言归正传，最简单的办法是需要在main里面新建一个目录&lt;code&gt;resources&lt;/code&gt;，新建文件log4j.properties，写入&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;log4j.rootLogger=TRACE, file, stdout
 
@@ -90,10 +636,13 @@ log4j.appender.file.layout=org.apache.log4j.PatternLayout
 log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p:: %m%n
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这段配置文件做了以下几件事：
-1. 第一行设置了日志级别TRACE，意思是记录TRACE和高于TRACE级别的所有日志，因为TRACE是最低的，所以这里设置的是所有日志都会记录。什么意思呢？log4j有这几个日志级别：TRACE,DEBUG,INFO,WARN,ERROR,FATAL，这几个级别从左到右依次升高。也越来越不详细。也就是说，如果设置了日志级别是INFO，那么&lt;code&gt;LOG.trace()&lt;/code&gt;和&lt;code&gt;LOG.debug()&lt;/code&gt;这种语句会被忽略，而后面四中是会正常执行的。
-2. 日志输出的位置，这里设置的是文件和标准输出
-3. 分别设置了两种输出位置的一些属性，比如输出到标准输出应该是什么样的格式，用什么标准来做文本替换，用什么样的时间格式等等；至于输出到文件的情况就比较复杂了，因为还牵涉到文件的路径，文件大小上限等。具体这个项需要怎么配置我也没有详细的研究，以后如果需要再用到Java并且有需求再说吧。毕竟我不太喜欢Java。需要的可以参考这里&lt;a href=&#34;https://www.tutorialspoint.com/log4j/log4j_logging_files.htm&#34;&gt;1&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;这段配置文件做了以下几件事：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;第一行设置了日志级别TRACE，意思是记录TRACE和高于TRACE级别的所有日志，因为TRACE是最低的，所以这里设置的是所有日志都会记录。什么意思呢？log4j有这几个日志级别：TRACE,DEBUG,INFO,WARN,ERROR,FATAL，这几个级别从左到右依次升高。也越来越不详细。也就是说，如果设置了日志级别是INFO，那么&lt;code&gt;LOG.trace()&lt;/code&gt;和&lt;code&gt;LOG.debug()&lt;/code&gt;这种语句会被忽略，而后面四中是会正常执行的。&lt;/li&gt;
+&lt;li&gt;日志输出的位置，这里设置的是文件和标准输出&lt;/li&gt;
+&lt;li&gt;分别设置了两种输出位置的一些属性，比如输出到标准输出应该是什么样的格式，用什么标准来做文本替换，用什么样的时间格式等等；至于输出到文件的情况就比较复杂了，因为还牵涉到文件的路径，文件大小上限等。具体这个项需要怎么配置我也没有详细的研究，以后如果需要再用到Java并且有需求再说吧。毕竟我不太喜欢Java。需要的可以参考这里&lt;a href=&#34;https://www.tutorialspoint.com/log4j/log4j_logging_files.htm&#34;&gt;1&lt;/a&gt;。&lt;/li&gt;
+&lt;/ol&gt;
 </description>
     </item>
     
@@ -1613,235 +2162,6 @@ function detectFlash() {
 }
 
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>用vimdiff作为svn/git的diff工具</title>
-      <link>http://unixera.com/vim/vimdiff-as-subversion-diff/</link>
-      <pubDate>Mon, 07 Mar 2016 12:06:45 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/vim/vimdiff-as-subversion-diff/</guid>
-      <description>&lt;p&gt;前后两家公司都是用Subversion做版本控制，虽说程序员自己有喜好，但仍然需要遵守公司的规定。我个人是比较偏好直接登录服务器进行开发的，所以得配置好各种好用的命令行工具。比如svn提交之前需要diff一下所做的修改，默认的diff工具简直没用什么卵用。屏幕那么短，上下显示不直观。&lt;/p&gt;
-
-&lt;p&gt;发现gist.github.com一直上不去，干脆就把它集成到我自己维护的&lt;a href=&#34;https://github.com/lovelock/hackvim&#34;&gt;hackvim&lt;/a&gt;里了，这里先加一个svn的配置，稍后回家把git的也加上。&lt;/p&gt;
-
-&lt;p&gt;用法：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;先切换到你想要放hackvim的目录，我喜欢~/Projects&lt;/li&gt;
-&lt;li&gt;git clone &lt;a href=&#34;https://github.com/lovelock/hackvim&#34;&gt;https://github.com/lovelock/hackvim&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;如果你想用我的vim发行版，就看下项目的说明，否则直接拿出来utils/svnvimdiff.sh，放在你希望的位置&lt;/li&gt;
-&lt;li&gt;进入~/.subversion&lt;/li&gt;
-&lt;li&gt;打开config文件，修改&lt;code&gt;diff-cmd = /path/to/svnvimdiff.sh&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;done&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;注意vimdiff.sh文件必须是可执行的。我在提交之前已经加了755，如果出错，请自行检查一下。&lt;/p&gt;
-
-&lt;p&gt;Git默认的也是用系统预装的diff工具，所以还可以给git加个配置&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git config --global diff.tool vimdiff
-git config --global difftool.prompt false
-git config --global alias.d difftool
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;配置完之后，执行&lt;code&gt;git d&lt;/code&gt;就可以呼出&lt;code&gt;vimdiff&lt;/code&gt;了。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Bootstrap插件DataTables实现服务器端分页</title>
-      <link>http://unixera.com/javascript/bootstrap-plugin-datatables/</link>
-      <pubDate>Sun, 28 Feb 2016 21:40:04 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/bootstrap-plugin-datatables/</guid>
-      <description>
-
-&lt;p&gt;我们知道，PHP和MySQL实现分页的基本思路是limit，页面上有个page(第几页）和count(每次取出几个），PHP把它传递给后端MySQL，查询时在条件查询的基础上加上&lt;code&gt;limit {($page - 1) * $count, $count}&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;但是，自己实现PHP分页也是有不少繁琐的问题需要解决的，比如分页要最多显示几个，两头如何处理，样式设计等等，既然有了Bootstrap这个大框架，各种解决方案就层出不穷了。&lt;/p&gt;
-
-&lt;p&gt;废话不多说，今天要讲一下用Bootstrap的插件DataTables做一个带分页的表格。&lt;/p&gt;
-
-&lt;p&gt;DataTables官方文档给的例子是一次把数据取出，然后在前端做分页处理。这样的好处是减少了每次查询都要请求网络，坏处则是如果数据太多，前端肯定就扛不住了。文档也说了，如果数据量在10000以内，可以在前端做分页，100000以上就在服务端做，中间的量就衡量自己的数据和服务器的处理能力做决定了。&lt;/p&gt;
-
-&lt;p&gt;本文的基础是PHP内置Web Server和Bootstrap的模板SB-Admin2。&lt;/p&gt;
-
-&lt;h2 id=&#34;前端处理分页&#34;&gt;前端处理分页&lt;/h2&gt;
-
-&lt;p&gt;最直观的方法就是把所有的数据自己组织好，用foreach组织&lt;code&gt;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;&lt;/code&gt;，再加上一个&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;$(document).ready(function () {
-    $(&#39;#datatable-example&#39;).DataTable({
-        responsive: true
-    });
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这样，插件就会帮你把你想要的效果展示出来了，再加上实时搜索，效果简直不能更赞。&lt;/p&gt;
-
-&lt;p&gt;但这在实际应用中用的应该还是比较少，毕竟稍微上点规模的公司需要处理的内容就不止10000那么少了。&lt;/p&gt;
-
-&lt;h2 id=&#34;后端处理分页&#34;&gt;后端处理分页&lt;/h2&gt;
-
-&lt;p&gt;先要理解几个概念。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;draw 请求的当前次数&lt;/li&gt;
-&lt;li&gt;start 返回结果的开始位置&lt;/li&gt;
-&lt;li&gt;length 返回结果的长度&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;我这里为了简单起见，把数组当做数据源了，根据传入的参数不同，返回数组的不同部分。&lt;/p&gt;
-
-&lt;p&gt;一般来说，返回的数据里需要这些字段&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;draw&amp;quot;: 1,
-  &amp;quot;recordsTotal&amp;quot;: 57,
-  &amp;quot;recordsFiltered&amp;quot;: 57,
-  &amp;quot;data&amp;quot;: [
-    [
-      &amp;quot;Airi&amp;quot;,
-      &amp;quot;Satou&amp;quot;,
-      &amp;quot;Accountant&amp;quot;,
-      &amp;quot;Tokyo&amp;quot;,
-      &amp;quot;28th Nov 08&amp;quot;,
-      &amp;quot;$162,700&amp;quot;
-    ],
-    ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在页面上需要有&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;table class=&amp;quot;table table-striped table-bordered table-hover&amp;quot; id=&amp;quot;datatable-example&amp;quot;&amp;gt;
-    &amp;lt;thead&amp;gt;
-        &amp;lt;tr&amp;gt;
-            &amp;lt;th&amp;gt;Column1&amp;lt;/th&amp;gt;
-            &amp;lt;th&amp;gt;Column2&amp;lt;/th&amp;gt;
-            &amp;lt;th&amp;gt;Column3&amp;lt;/th&amp;gt;
-            &amp;lt;th&amp;gt;Column4&amp;lt;/th&amp;gt;
-            &amp;lt;th&amp;gt;Column5&amp;lt;/th&amp;gt;
-            &amp;lt;th&amp;gt;Column6&amp;lt;/th&amp;gt;
-        &amp;lt;tr&amp;gt;
-    &amp;lt;/thead&amp;gt;
-&amp;lt;/table&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后把&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;$(document).ready(function () {
-    $(&#39;#datatable-example&#39;).DataTable({
-        responsive: true
-    });
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;替换成&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;$(document).ready(function () {
-    $(&#39;#datatable-example&#39;).DataTable({
-        responsive: true,
-        serverSide: true,
-        processing: true,
-        ajax: &amp;quot;ajax.php&amp;quot;
-    });
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;其中，serverSide选项表示使用服务端分页，processing表示加载表格的时候会在表格上覆盖一个『加载中』的类似弹层，而ajax就是数据的来源了。具体代码见。。&lt;/p&gt;
-
-&lt;p&gt;那你可能要说了，我的数据返回的可是正宗的HashTable，我指明是HashTable是因为PHP中数组也是HashTable，指的是Python里的字典。该怎么办呢？&lt;/p&gt;
-
-&lt;p&gt;相应的，如果返回的每列数据是这样的(其实这才是从数据库中取出来的样子)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-      &amp;quot;first_name&amp;quot;: &amp;quot;Jennifer&amp;quot;,
-      &amp;quot;last_name&amp;quot;: &amp;quot;Chang&amp;quot;,
-      &amp;quot;position&amp;quot;: &amp;quot;Regional Director&amp;quot;,
-      &amp;quot;office&amp;quot;: &amp;quot;Singapore&amp;quot;,
-      &amp;quot;start_date&amp;quot;: &amp;quot;14th Nov 10&amp;quot;,
-      &amp;quot;salary&amp;quot;: &amp;quot;$357,650&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;那只需要把&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;$(document).ready(function () {
-    $(&#39;#datatable-example&#39;).DataTable({
-        responsive: true,
-        serverSide: true,
-        processing: true,
-        ajax: &amp;quot;ajax.php&amp;quot;
-    });
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;替换成&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;$(document).ready(function () {
-    $(&#39;#datatable-example&#39;).DataTable({
-        responsive: true,
-        serverSide: true,
-        processing: true,
-        ajax: &amp;quot;ajax.php&amp;quot;,
-        columns: [
-            { &amp;quot;data&amp;quot;: &amp;quot;first_name&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;last_name&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;position&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;office&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;start_date&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;salary&amp;quot; }
-        ]
-    });
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;就可以了。&lt;/p&gt;
-
-&lt;p&gt;这是数据库的最简单的情况，那如果我用了ORM，取出来的就是对象了，这就免不了『嵌套对象』了。不管是Python的数组（PHP中key是数组的）还是字典（PHP中key是字符串的），都是一样的处理方式，都是最直观的表示法，把&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;$(document).ready(function () {
-    $(&#39;#datatable-example&#39;).DataTable({
-        responsive: true,
-        serverSide: true,
-        processing: true,
-        ajax: &amp;quot;ajax.php&amp;quot;,
-        columns: [
-            { &amp;quot;data&amp;quot;: &amp;quot;first_name&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;last_name&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;position&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;office&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;start_date&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;salary&amp;quot; }
-        ]
-    });
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;替换成&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;$(document).ready(function () {
-    $(&#39;#datatable-example&#39;).DataTable({
-        responsive: true,
-        serverSide: true,
-        processing: true,
-        ajax: &amp;quot;ajax.php&amp;quot;,
-        columns: [
-            { &amp;quot;data&amp;quot;: &amp;quot;first_name&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;last_name.other&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;position.2&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;office&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;start_date&amp;quot; },
-            { &amp;quot;data&amp;quot;: &amp;quot;salary&amp;quot; }
-        ]
-    });
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;即可。&lt;/p&gt;
 </description>
     </item>
     

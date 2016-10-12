@@ -5,10 +5,10 @@
     <meta name="generator" content="Hugo 0.16" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans|Marcellus+SC'>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.7.0/styles/github.min.css">
     <link rel="stylesheet" href="http://unixera.com/css/styles.css">
     <link rel="stylesheet" href="http://unixera.com/css/custom.css">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="http://unixera.com//index.xml">
@@ -45,19 +45,19 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://unixera.com/">Home</a></li>
+              <li><a href="http://unixera.com/">首页</a></li>
               
               
               
-              <li><a href="http://unixera.com/about">About</a></li>
+              <li><a href="http://unixera.com/about">关于作者</a></li>
               
               
               
-              <li><a href="http://unixera.com/categories/">Categories</a></li>
+              <li><a href="http://unixera.com/categories/">分类</a></li>
               
               
               
-              <li><a href="http://unixera.com/tags/">Tags</a></li>
+              <li><a href="http://unixera.com/tags/">标签</a></li>
               
               
             </ul>
@@ -99,13 +99,19 @@
                     <meta itemprop="name" content="Me &amp; Web">
                 </div>
                 <div itemprop="author" itemscope itemtype="https://schema.org/Person">
-                    <meta itemprop="name" content="">
+                    <meta itemprop="name" content="Frost Wong">
                 </div>
 
                 <header class="article-header">
                     <time itemprop="datePublished" pubdate="pubdate" datetime="2015-06-08T12:32:44&#43;08:00">Mon, Jun 8, 2015</time>
                     <h1 class="article-title">git取消证书校验</h1>
                 </header>
+
+                
+                    <div class="article-body">
+                        
+                    </div>
+                
 
                 <div class="article-body" itemprop="articleBody">
                     <p>在一些较老版本的Linux服务器上如果用Git的话可能会出现证书错误的问题，这是因为Curl自带的证书版本较老。但好像要更新证书bundle挺麻烦，刚刚看到一个很简单的解决方案，直接取消git的证书校验。</p>
@@ -155,93 +161,166 @@
             
 <aside class="site">
 
-  <div class="panel panel-default">
+  <div class="panel panel-primary">
     <div class="panel-heading">
-      <h2 class="panel-title">LatestPosts</h2>
+      <div class="panel-title">
+        <span class="fa fa-clock-o"></span><h4>最近文章</h4>
+      </div>
+    
     </div>
     <div class="list-group">
       
-      <a href="http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/" class="list-group-item">slf4j配合log4j来给你的应用打log</a>
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/bigdata/zookeeper-simple-practice/" >zookeeper simple practice</a>
+      </div>
       
-      <a href="http://unixera.com/java/create-and-run-java-application-with-maven/" class="list-group-item">使用maven创建和运行Java应用</a>
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/" >在本地单机部署Hadoop/Storm运行环境</a>
+      </div>
       
-      <a href="http://unixera.com/linux/deepin-linux-experience/" class="list-group-item">DeepinLinux 体验报告</a>
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/" >slf4j配合log4j来给你的应用打log</a>
+      </div>
       
-      <a href="http://unixera.com/java/mvn-tutorial-for-novice/" class="list-group-item">给Java新手看的mvn指南</a>
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/create-and-run-java-application-with-maven/" >使用maven创建和运行Java应用</a>
+      </div>
       
-      <a href="http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/" class="list-group-item">使用ssh-config提升你的生产力</a>
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/linux/deepin-linux-experience/" >DeepinLinux 体验报告</a>
+      </div>
       
-      <a href="http://unixera.com/miscs/talk-about-transgene-foods/" class="list-group-item">谈谈转基因食物</a>
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/mvn-tutorial-for-novice/" >给Java新手看的mvn指南</a>
+      </div>
       
-      <a href="http://unixera.com/php/internals/create-skeleton-of-extension/" class="list-group-item">PHP扩展实战——扩展的骨架</a>
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/" >使用ssh-config提升你的生产力</a>
+      </div>
       
-      <a href="http://unixera.com/php/internals/class-prototype-in-php/" class="list-group-item">PHP扩展实战——用PHP实现类的原型</a>
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/miscs/talk-about-transgene-foods/" >谈谈转基因食物</a>
+      </div>
       
-      <a href="http://unixera.com/php/internals/schedules/" class="list-group-item">PHP扩展实战——目标和计划</a>
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/php/internals/create-skeleton-of-extension/" >PHP扩展实战——扩展的骨架</a>
+      </div>
       
-      <a href="http://unixera.com/php/php-generator-and-iterator/" class="list-group-item">使用PHP生成器和迭代器</a>
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/php/internals/class-prototype-in-php/" >PHP扩展实战——用PHP实现类的原型</a>
+      </div>
       
     </div>
   </div>
 
   
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">category</h2>
+    
+      <div class="panel panel-success">
+      <div class="panel-heading">
+        <div class="panel-title">
+        <i class="fa fa-bars" aria-hidden="true"></i><h4>Category</h4>
+        </div>
+      </div>
+      <div class="list-group">
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/javascript">Javascript</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/php">Php</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/miscs">Miscs</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/mac">Mac</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/linux">Linux</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/java">Java</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/blog">Blog</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/git">Git</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/python">Python</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/ios">Ios</a>
+        </div>
+        
+      </div>
     </div>
-    <div class="list-group">
-      
-      <a href="http://unixera.com/categories/javascript" class="list-group-item">javascript</a>
-      
-      <a href="http://unixera.com/categories/php" class="list-group-item">php</a>
-      
-      <a href="http://unixera.com/categories/miscs" class="list-group-item">miscs</a>
-      
-      <a href="http://unixera.com/categories/mac" class="list-group-item">mac</a>
-      
-      <a href="http://unixera.com/categories/linux" class="list-group-item">linux</a>
-      
-      <a href="http://unixera.com/categories/blog" class="list-group-item">blog</a>
-      
-      <a href="http://unixera.com/categories/git" class="list-group-item">git</a>
-      
-      <a href="http://unixera.com/categories/java" class="list-group-item">java</a>
-      
-      <a href="http://unixera.com/categories/python" class="list-group-item">python</a>
-      
-      <a href="http://unixera.com/categories/ios" class="list-group-item">ios</a>
-      
-    </div>
-  </div>
+    
+    
   
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">tag</h2>
+    
+    
+      <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="panel-title">
+        <i class="fa fa-tags" aria-hidden="true"></i></i><h4>Tag</h4>
+        </div>
+      </div>
+      <div class="list-group">
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/miscs">miscs</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/php">php</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/linux">linux</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/mac">mac</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/javascript">javascript</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/java">java</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/%E6%89%A9%E5%B1%95">扩展</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/git">git</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/bootstrap">bootstrap</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/ios">ios</a>
+        </div>
+        
+      </div>
     </div>
-    <div class="list-group">
-      
-      <a href="http://unixera.com/tags/miscs" class="list-group-item">miscs</a>
-      
-      <a href="http://unixera.com/tags/php" class="list-group-item">php</a>
-      
-      <a href="http://unixera.com/tags/linux" class="list-group-item">linux</a>
-      
-      <a href="http://unixera.com/tags/mac" class="list-group-item">mac</a>
-      
-      <a href="http://unixera.com/tags/javascript" class="list-group-item">javascript</a>
-      
-      <a href="http://unixera.com/tags/%E6%89%A9%E5%B1%95" class="list-group-item">扩展</a>
-      
-      <a href="http://unixera.com/tags/git" class="list-group-item">git</a>
-      
-      <a href="http://unixera.com/tags/java" class="list-group-item">java</a>
-      
-      <a href="http://unixera.com/tags/bootstrap" class="list-group-item">bootstrap</a>
-      
-      <a href="http://unixera.com/tags/ios" class="list-group-item">ios</a>
-      
-    </div>
-  </div>
+    
   
 
 </aside>
@@ -258,13 +337,13 @@
     <footer class="site">
       <div class="container">
         <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
-        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/dim0627/hugo_theme_beg" target="_blank" rel="nofollow">beg</a> designed by <a href="http://yet.unresolved.xyz" target="_blank" rel="nofollow">Daisuke Tsuji</a></p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://unixera.com" target="_blank" rel="nofollow">Frost Wong</a></p>
       </div>
     </footer>
 
-    <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     

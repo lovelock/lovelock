@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.16" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.7.0/styles/github.min.css">
+    <link rel="stylesheet" href="http://unixera.com/css/styles.css">
+    <link rel="stylesheet" href="http://unixera.com/css/custom.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://unixera.com//index.xml">
+
+    
+    <title>在本地单机部署Hadoop/Storm运行环境 - Me &amp; Web</title>
+    <meta property='og:title' content="在本地单机部署Hadoop/Storm运行环境 - Me &amp; Web">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/">
+    
+    
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://unixera.com/">Me &amp; Web&nbsp;&nbsp;致力于创作可操作性更好的文章</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="http://unixera.com/">首页</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/about">关于作者</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/categories/">分类</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/tags/">标签</a></li>
+              
+              
+            </ul>
+            
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="site">
+      <div class="container">
+
+
+
+<div class="single">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+                <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://unixera.com/"/>
+                <meta itemprop="dateModified" content="2016-10-10T17:53:14&#43;08:00">
+                <meta itemprop="headline" content="在本地单机部署Hadoop/Storm运行环境">
+                <meta itemprop="description" content="前言 由于要在小组内做一个关于Storm的分享，涉及到我负责开发的大数据项目，本着开放的原则，把我做的准备工作记录下来，提前发给可能参会的同事">
+                <meta itemprop="url" content="http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/">
+                <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="http://unixera.com/images/default.jpg" />
+                    <meta itemprop="width" content="800">
+                    <meta itemprop="height" content="800">
+                </div>
+                <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                        <meta itemprop="url" content="http://unixera.com/images/logo.jpg">
+                        <meta itemprop="width" content="100">
+                        <meta itemprop="height" content="100">
+                    </div>
+                    <meta itemprop="name" content="Me &amp; Web">
+                </div>
+                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <meta itemprop="name" content="Frost Wong">
+                </div>
+
+                <header class="article-header">
+                    <time itemprop="datePublished" pubdate="pubdate" datetime="2016-10-10T17:53:14&#43;08:00">Mon, Oct 10, 2016</time>
+                    <h1 class="article-title">在本地单机部署Hadoop/Storm运行环境</h1>
+                </header>
+
+                
+                    <div class="article-body">
+                        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#前言">前言</a></li>
+<li><a href="#准备工作">准备工作</a>
+<ul>
+<li><a href="#1-创建独立的用户并赋予合适的权限">1. 创建独立的用户并赋予合适的权限</a></li>
+<li><a href="#1-下载所需安装包">1. 下载所需安装包</a></li>
+<li><a href="#2-创建所需目录">2. 创建所需目录</a></li>
+<li><a href="#3-解压所有安装包-将相应的安装包放在对应的位置">3. 解压所有安装包，将相应的安装包放在对应的位置</a></li>
+<li><a href="#4-配置环境变量">4. 配置环境变量</a>
+<ul>
+<li><a href="#5-安装java">5. 安装Java</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#2-启动服务">2. 启动服务</a>
+<ul>
+<li><a href="#1-启动zookeeper">1. 启动ZooKeeper</a></li>
+<li><a href="#2-启动storm">2. 启动Storm</a></li>
+<li><a href="#3-启动kafka-broker">3. 启动Kafka Broker</a></li>
+<li><a href="#4-启动hadoop-hdfs">4. 启动Hadoop(HDFS)</a>
+<ul>
+<li><a href="#1-修改hadoop的配置文件">1. 修改Hadoop的配置文件</a></li>
+<li><a href="#2-验证是否安装成功">2. 验证是否安装成功</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                
+
+                <div class="article-body" itemprop="articleBody">
+                    
+
+<h2 id="前言">前言</h2>
+
+<p>由于要在小组内做一个关于Storm的分享，涉及到我负责开发的大数据项目，本着开放的原则，把我做的准备工作记录下来，提前发给可能参会的同事。<br />
+要演示的项目目前为止用到了Apache的多个项目，包括Kafka, Storm, Hadoop(HDFS, Hive), ZooKeeper等，项目刚刚起步，很多基础设施还不完善，比如现在是在本地开发完成之后直接部署到线上环境的，这次演示可不能直接在线上环境做了，故而在本地的台式机上部署了一下<strong>伪集群</strong>，用来作为演示和以后开发测试用的环境。</p>
+
+<h2 id="准备工作">准备工作</h2>
+
+<p>说明：</p>
+
+<ol>
+<li>以下工作全部基于Ubuntu 16.04。用其他的发行版或版本理论上应该都是可行的，可能有些命令需要微调。<br /></li>
+<li>所有需要执行的命令前面都有一个<code>$</code>，表示的是Bash的命令提示符。</li>
+<li>下载安装包时我使用了速度相对较快的国内镜像，如果你对此有任何异议，可以自行去中心镜像站点下载。</li>
+
+<li><p>默认情况下文中提到的所有如StormUI等控制后台访问的路径都是localhost，如果你需要从Linux主机外部访问，需要iptables放行相应的端口。在本文中，用的Web端口有三个，具体如下表：</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">服务描述</th>
+<th align="right">端口号</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Storm UI</td>
+<td align="right">8080</td>
+</tr>
+
+<tr>
+<td align="left">Hadoop UI</td>
+<td align="right">50070</td>
+</tr>
+
+<tr>
+<td align="left">Hadoop Applications</td>
+<td align="right">8088</td>
+</tr>
+</tbody>
+</table>
+
+<p>以Ubuntu为例，需要执行以下命令</p>
+
+<pre><code class="language-bash">$ sudo ufw allow 8080/tcp
+$ sudo ufw allow 50070/tcp
+$ sudo ufw allow 8088/tcp
+$ sudo ufw reload
+</code></pre>
+
+<p>CentOS/RHEL 7.0以下可能需要直接操作iptables，7.0以上可以使用<code>firewall-cmd</code>进行类似的操作。</p></li>
+</ol>
+
+<h3 id="1-创建独立的用户并赋予合适的权限">1. 创建独立的用户并赋予合适的权限</h3>
+
+<pre><code>$ sudo useradd hadoop
+$ sudo passwd hadoop
+$ sudo chsh hadoop
+$ sudo mkdir /home/hadoop
+$ sudo chown -R hadoop:hadoop /opt/apache
+$ sudo chown -R hadoop:hadoop /home/hadoop
+$ su - hadoop
+$ ssh-keygen
+$ cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+$ chmod 0600 ~/.ssh/authorized_keys
+</code></pre>
+
+<p>FAQ：</p>
+
+<ol>
+<li>为什么需要chsh并且手动为用户创建家目录？<br />
+不知道为什么在 Ubuntu 环境中执行<code>useradd</code>命令之后并不会给新建的用户创建家目录和设置shell，可能是为了安全吧，要稍微麻烦一些。</li>
+<li>为什么不给新用户赋予root权限？<br />
+这里是测试环境倒还好，如果你需要搭建生产环境，记住千万不要给hadoop用户赋予root权限，它需要哪些目录的权限就单独赋予即可，它需要运行的端口都是1024以上的，都不需要root权限。如果需要，执行<code>sudo gpasswd -a hadoop sudo</code>即可。</li>
+<li>为什么要做一个密钥认证？<br />
+这是因为在后续的步骤中会有<strong>从本地用户登录本地用户</strong>的需求，也就是执行了<code>ssh hadoop@localhost</code>这个命令，如果不做密钥信任，会需要多次输入密码。</li>
+<li>为什么会有一个<code>/opt/apache</code>目录？<br />
+往下看。</li>
+</ol>
+
+<h3 id="1-下载所需安装包">1. 下载所需安装包</h3>
+
+<ol>
+<li>下载Java<br />
+到<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Java官网</a>下载适用于Linux的Java安装包（这里下载了jdk-8u101-linux-x64.tar.gz）。</li>
+<li>下载maven<br />
+点击<a href="http://mirrors.aliyun.com/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip">阿里云镜像站</a>下载最新版Maven。</li>
+<li>下载Apache的Storm Hadoop Kafka ZooKeeper<br />
+<a href="http://mirrors.aliyun.com/apache/storm/apache-storm-0.10.2/apache-storm-0.10.2.tar.gz">点击下载Storm-0.10.2</a><br />
+<a href="http://mirrors.aliyun.com/apache/hadoop/core/hadoop-2.6.4/hadoop-2.6.4.tar.gz">点击下载Hadoop-2.6.4</a><br />
+<a href="http://mirrors.aliyun.com/apache/kafka/0.8.2.2/kafka_2.10-0.8.2.2.tgz">点击下载Kafka_2.10-0.8.2.2</a><br />
+<a href="http://mirrors.aliyun.com/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz">点击下载ZooKeeper-3.4.6</a><br /></li>
+</ol>
+
+<h3 id="2-创建所需目录">2. 创建所需目录</h3>
+
+<p>把所有和此项目相关的文件都放在统一的位置。</p>
+
+<p><code>$ sudo mkdir -p /opt/apache/{jdk, storm,hadoop,kafka,zookeeper}</code></p>
+
+<h3 id="3-解压所有安装包-将相应的安装包放在对应的位置">3. 解压所有安装包，将相应的安装包放在对应的位置</h3>
+
+<pre><code>$ sudo mv jdk1.8.0_101/* /opt/jdk/.
+$ sudo mv apache-storm-0.10.0/* /opt/apache/storm/.
+$ sudo mv hadoop-2.6.4/* /opt/apache/hadoop/.
+$ sudo mv kafka_2.10-0.8.2.2/* /opt/apache/kafka/.
+$ sudo mv zookeeper-3.4.6/* /opt/apache/zookeeper
+</code></pre>
+
+<h3 id="4-配置环境变量">4. 配置环境变量</h3>
+
+<p>在~/.bashrc中添加下面的片段</p>
+
+<pre><code class="language-bash">export JAVA_HOME=/opt/jdk
+export APACHE_HOME=/opt/apache
+export STORM_HOME=$APACHE_HOME/storm
+export ZK_HOME=$APACHE_HOME/zookeeper
+export KAFKA_HOME=$APACHE_HOME/kafka
+
+export HADOOP_HOME=$APACHE_HOME/hadoop
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export HADOOP_INSTALL=$HADOOP_HOME
+
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:$STORM_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/sbin
+export PATH=$PATH:$ZK_HOME/bin
+export PATH=$PATH:$KAFKA_HOME/bin
+</code></pre>
+
+<p>之后执行<code>$ source ~/.bashrc</code></p>
+
+<h4 id="5-安装java">5. 安装Java</h4>
+
+<p>Apache的这些东西都是直接放在对的地方就可以运行的，但Java需要稍微的配置一下，因为可能你的机器上已经装了OpenJDK。</p>
+
+<p><code>$ sudo update-alternatives --install /usr/local/bin/java java /opt/jdk/bin/java 10000</code></p>
+
+<p>这时再执行<code>$ java -version</code>验证一下是否使用的时最新安装的JDK。</p>
+
+<h2 id="2-启动服务">2. 启动服务</h2>
+
+<h3 id="1-启动zookeeper">1. 启动ZooKeeper</h3>
+
+<pre><code>$ cp $ZK_HOME/conf/zoo_sample.cfg $ZK_HOME/conf/zoo.cfg
+$ zkServer.sh start
+</code></pre>
+
+<h3 id="2-启动storm">2. 启动Storm</h3>
+
+<pre><code>$ storm nimbus
+$ storm supervisor
+$ storm ui
+</code></pre>
+
+<p>现在可以访问<a href="http://localhost:8080">Storm UI</a>了。</p>
+
+<h3 id="3-启动kafka-broker">3. 启动Kafka Broker</h3>
+
+<pre><code>$ cd $KAFKA_HOME
+$ bin/kafka-server-start.sh -daemon config/server.properties
+$ bin/kafka-topics.sh --list --zookeeper localhost:2181
+$ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 10 --topic storm-demo-topic
+Created topic &quot;storm-demo-topic&quot;.
+$ bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic storm-demo-topic
+Topic:storm-demo-topic  PartitionCount:10       ReplicationFactor:1     Configs:
+        Topic: storm-demo-topic Partition: 0    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 1    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 2    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 3    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 4    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 5    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 6    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 7    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 8    Leader: 0       Replicas: 0     Isr: 0
+        Topic: storm-demo-topic Partition: 9    Leader: 0       Replicas: 0     Isr: 0
+$ kafka-console-producer.sh --broker-list localhost:9092 --topic storm-demo-topic
+$ kafka-console-consumer.sh --zookeeper localhost:2181 --topic storm-demo-topic --from-beginning
+</code></pre>
+
+<blockquote>
+<p>注意前面有些命令仅仅是为了测试kafka broker运行的情况。</p>
+</blockquote>
+
+<h3 id="4-启动hadoop-hdfs">4. 启动Hadoop(HDFS)</h3>
+
+<h4 id="1-修改hadoop的配置文件">1. 修改Hadoop的配置文件</h4>
+
+<p>在<code>$HADOOP_HOME/etc/hadoop</code>目录下有5个文件需要修改:</p>
+
+<ol>
+<li><p><code>core-site.xml</code></p>
+
+<pre><code class="language-xml">&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.default.name&lt;/name&gt;
+        &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre></li>
+
+<li><p><code>hdfs-site.xml</code></p>
+
+<pre><code class="language-xml">&lt;configuration&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;1&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;dfs.name.dir&lt;/name&gt;
+        &lt;value&gt;file:///home/hadoop/hadoopinfra/hdfs/namenode&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;dfs.data.dir&lt;/name&gt;
+        &lt;value&gt;file:///home/hadoop/hadoopinfra/hdfs/datanode&lt;/value&gt;
+    &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre></li>
+
+<li><p><code>yarn-site.xml</code></p>
+
+<pre><code class="language-xml">&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre></li>
+
+<li><p><code>mapred-site.xml</code></p>
+
+<pre><code class="language-xml">&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+        &lt;value&gt;yarn&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre></li>
+
+<li><p><code>hadoop-env.sh</code>
+把hadoop-env.sh中的${JAVA_HOME}替换成路径,这里是<code>/opt/jdk</code>，因为貌似会找不到正确的<code>JAVA_HOME</code></p></li>
+</ol>
+
+<h4 id="2-验证是否安装成功">2. 验证是否安装成功</h4>
+
+<pre><code class="language-bash">$ hadoop namenode -format
+$ start-dfs.sh
+$ start-yarn.sh
+</code></pre>
+
+<p>执行上面三行语句，观察有没有明显的报错信息。</p>
+
+<p><a href="http://localhost:50070">检查HadoopUI</a>运行是否正常。<br />
+<a href="http://localhost:8088">检查Hadoop Applications</a>(我自己取的名字)运行是否正常。</p>
+
+<p>至此已经搭建了一个可以运行的hadoop环境，可以移步这里查看关于Storm入门分享详情。</p>
+
+                </div>
+
+
+                <aside>
+                    <div class="section"><a href="http://unixera.com/tags/storm/" class="tag">Storm</a> <a href="http://unixera.com/tags/kafka/" class="tag">Kafka</a> <a href="http://unixera.com/tags/java/" class="tag">Java</a> </div>
+
+                    <div class="section share">
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2funixera.com%2fjava%2fdeploy-pseudo-distributed-mode-hadoop%2f&title=%e5%9c%a8%e6%9c%ac%e5%9c%b0%e5%8d%95%e6%9c%ba%e9%83%a8%e7%bd%b2Hadoop%2fStorm%e8%bf%90%e8%a1%8c%e7%8e%af%e5%a2%83" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                    </div>
+
+                    
+                    <div class="section">
+                        
+                        <div class="ds-thread" data-thread-key="" data-title="在本地单机部署Hadoop/Storm运行环境" data-url="http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/"></div>
+                        
+
+                        
+                        <script type="text/javascript">
+                            var duoshuoQuery = {short_name:"UnixAgain"};
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                        </script>
+                    </div>
+                    
+                    
+                </aside>
+
+            </article>
+
+        </div>
+        <div class="col-md-4">
+            
+<aside class="site">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <span class="fa fa-clock-o"></span><h4>最近文章</h4>
+      </div>
+    
+    </div>
+    <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/bigdata/zookeeper-simple-practice/" >zookeeper simple practice</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/" >在本地单机部署Hadoop/Storm运行环境</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/" >slf4j配合log4j来给你的应用打log</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/create-and-run-java-application-with-maven/" >使用maven创建和运行Java应用</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/linux/deepin-linux-experience/" >DeepinLinux 体验报告</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/mvn-tutorial-for-novice/" >给Java新手看的mvn指南</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/" >使用ssh-config提升你的生产力</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/miscs/talk-about-transgene-foods/" >谈谈转基因食物</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/php/internals/create-skeleton-of-extension/" >PHP扩展实战——扩展的骨架</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/php/internals/class-prototype-in-php/" >PHP扩展实战——用PHP实现类的原型</a>
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+      <div class="panel panel-success">
+      <div class="panel-heading">
+        <div class="panel-title">
+        <i class="fa fa-bars" aria-hidden="true"></i><h4>Category</h4>
+        </div>
+      </div>
+      <div class="list-group">
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/javascript">Javascript</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/php">Php</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/miscs">Miscs</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/mac">Mac</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/linux">Linux</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/java">Java</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/blog">Blog</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/git">Git</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/python">Python</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/ios">Ios</a>
+        </div>
+        
+      </div>
+    </div>
+    
+    
+  
+    
+    
+      <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="panel-title">
+        <i class="fa fa-tags" aria-hidden="true"></i></i><h4>Tag</h4>
+        </div>
+      </div>
+      <div class="list-group">
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/miscs">miscs</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/php">php</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/linux">linux</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/mac">mac</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/javascript">javascript</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/java">java</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/%E6%89%A9%E5%B1%95">扩展</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/git">git</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/bootstrap">bootstrap</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/ios">ios</a>
+        </div>
+        
+      </div>
+    </div>
+    
+  
+
+</aside>
+
+
+        </div>
+    </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site">
+      <div class="container">
+        <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://unixera.com" target="_blank" rel="nofollow">Frost Wong</a></p>
+      </div>
+    </footer>
+
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+
