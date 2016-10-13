@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.17" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.7.0/styles/github.min.css">
+    <link rel="stylesheet" href="http://unixera.com/css/styles.css">
+    <link rel="stylesheet" href="http://unixera.com/css/custom.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://unixera.com//index.xml">
+
+    
+    <title>Firefox Date.parse()方法行为不一致的兼容方案 - Me &amp; Web</title>
+    <meta property='og:title' content="Firefox Date.parse()方法行为不一致的兼容方案 - Me &amp; Web">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://unixera.com/javascript/Firefox-Date/">
+    <meta name="description" content="Firefox下日期解析行为兼容方案">
+    
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://unixera.com/">Me &amp; Web&nbsp;&nbsp;致力于创作可操作性更好的文章</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="http://unixera.com/">首页</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/about">关于作者</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/categories/">分类</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/tags/">标签</a></li>
+              
+              
+            </ul>
+            
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="site">
+      <div class="container">
+
+
+
+<div class="single">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+                <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://unixera.com/"/>
+                <meta itemprop="dateModified" content="2016-01-25T12:14:35&#43;08:00">
+                <meta itemprop="headline" content="Firefox Date.parse()方法行为不一致的兼容方案">
+                <meta itemprop="description" content="事情是这样的，我有两个输入框，用Wdatepicker自定义了日期格式，格式当然是我们中国人最喜欢的Y-M-d H:i:s，然后需要确定后者（">
+                <meta itemprop="url" content="http://unixera.com/javascript/Firefox-Date/">
+                <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="http://unixera.com/images/default.jpg" />
+                    <meta itemprop="width" content="800">
+                    <meta itemprop="height" content="800">
+                </div>
+                <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                        <meta itemprop="url" content="http://unixera.com/images/logo.jpg">
+                        <meta itemprop="width" content="100">
+                        <meta itemprop="height" content="100">
+                    </div>
+                    <meta itemprop="name" content="Me &amp; Web">
+                </div>
+                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <meta itemprop="name" content="Frost Wong">
+                </div>
+
+                <header class="article-header">
+                    <time itemprop="datePublished" pubdate="pubdate" datetime="2016-01-25T12:14:35&#43;08:00">Mon, Jan 25, 2016</time>
+                    <h1 class="article-title">Firefox Date.parse()方法行为不一致的兼容方案</h1>
+                </header>
+
+                
+                    <div class="article-body">
+                        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#parameters">Parameters</a>
+<ul>
+<li><a href="#datestring">dateString</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                
+
+                <div class="article-body" itemprop="articleBody">
+                    
+
+<p>事情是这样的，我有两个输入框，用Wdatepicker自定义了日期格式，格式当然是我们中国人最喜欢的Y-M-d H:i:s，然后需要确定后者（结束时间）不能小于前者（开始时间）</p>
+
+<pre><code class="language-javascript">// Firefox incompatible
+var start = $(&quot;#start&quot;).val();
+var end = $(&quot;#end&quot;).val();
+retrun Date.parse(end) - Date.parse(start) &gt; 0 ? true : false;
+</code></pre>
+
+<p>Chrome下测试没问题，当时负责的同事就上线了。（因为这个是内部用的，只有两三个同事用，所以规定一下大家都用Chrome没有问题）</p>
+
+<p>后来发现Firefox下不管两个日期怎么填，总会提示不对，跟了一下发现<code>Date.parse(end)</code>和<code>Date.parse(start)</code>里面的两个值都是NaN，但在Chrome里却是正常的Unix时间戳。</p>
+
+<p>这就诡异了，查看了<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/parse">MDN</a>发现了</p>
+
+<blockquote>
+<h3 id="parameters">Parameters</h3>
+
+<h4 id="datestring">dateString</h4>
+
+<p>A string representing an RFC2822 or ISO 8601 date (other formats <strong>may be</strong> used, but results may be <strong>unexpected</strong>).</p>
+
+<p>##ECMAScript 5 ISO-8601 format support</p>
+
+<p>The date time string may be in ISO 8601 format. For example, &ldquo;2011-10-10&rdquo; (just date) or &ldquo;2011-10-10T14:48:00&rdquo; (date and time) can be passed and parsed. The UTC time zone is used to interpret arguments in ISO 8601 format that do not contain time zone information (note that ECMAScript 2015 specifies that date time strings without a time zone are to be treated as local, not UTC).</p>
+</blockquote>
+
+<p>从上面可以看到，Firefox是支持RFC2822 or ISO 8601格式的，但其他格式就呵呵了，或许可以支持，但可能会得到意想不到的结果。</p>
+
+<p>所以，我们可以认为Chrome在标准之外支持了一些非标准的写法，而Firefox却没有。</p>
+
+<p>知道了问题所在，就好解决了。</p>
+
+<p>在比较之前把时间里面的空格替换成&rdquo;T&rdquo;即可。</p>
+
+<pre><code class="language-javascript">// Firefox compatible
+var start = $(&quot;#start&quot;).val();
+var end = $(&quot;#end&quot;).val();
+
+start = start.replace(/ /, 'T');
+end = start.replace(/ /, 'T');
+retrun Date.parse(end) - Date.parse(start) &gt; 0 ? true : false;
+</code></pre>
+
+<p>问题解决。</p>
+
+                </div>
+
+
+                <aside>
+                    <div class="section"><a href="http://unixera.com/tags/javascript/" class="tag">javascript</a> </div>
+
+                    <div class="section share">
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2funixera.com%2fjavascript%2fFirefox-Date%2f&title=Firefox%20Date.parse%28%29%e6%96%b9%e6%b3%95%e8%a1%8c%e4%b8%ba%e4%b8%8d%e4%b8%80%e8%87%b4%e7%9a%84%e5%85%bc%e5%ae%b9%e6%96%b9%e6%a1%88" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                    </div>
+
+                    
+                    <div class="section">
+                        
+                        <div class="ds-thread" data-thread-key="/javascript/Firefox-Date/" data-title="Firefox Date.parse()方法行为不一致的兼容方案" data-url="http://unixera.com/javascript/Firefox-Date/"></div>
+                        
+
+                        
+                        <script type="text/javascript">
+                            var duoshuoQuery = {short_name:"UnixAgain"};
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                        </script>
+                    </div>
+                    
+                    
+                </aside>
+
+            </article>
+
+        </div>
+        <div class="col-md-4">
+            
+<aside class="site">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <span class="fa fa-clock-o"></span><h4>最近文章</h4>
+      </div>
+    
+    </div>
+    <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/virtualization/create-a-virtual-machine-with-vboxmanage/" >使用VboxManage创建虚拟机</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/" >在本地单机部署Hadoop/Storm运行环境</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/" >slf4j配合log4j来给你的应用打log</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/create-and-run-java-application-with-maven/" >使用maven创建和运行Java应用</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/linux/deepin-linux-experience/" >DeepinLinux 体验报告</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/mvn-tutorial-for-novice/" >给Java新手看的mvn指南</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/" >使用ssh-config提升你的生产力</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/miscs/talk-about-transgene-foods/" >谈谈转基因食物</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/php/internals/create-skeleton-of-extension/" >PHP扩展实战——扩展的骨架</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/php/internals/class-prototype-in-php/" >PHP扩展实战——用PHP实现类的原型</a>
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+      <div class="panel panel-success">
+      <div class="panel-heading">
+        <div class="panel-title">
+        <i class="fa fa-bars" aria-hidden="true"></i><h4>Category</h4>
+        </div>
+      </div>
+      <div class="list-group">
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/javascript">Javascript</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/php">Php</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/miscs">Miscs</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/mac">Mac</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/linux">Linux</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/java">Java</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/blog">Blog</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/git">Git</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/python">Python</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/ios">Ios</a>
+        </div>
+        
+      </div>
+    </div>
+    
+    
+  
+    
+    
+      <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="panel-title">
+        <i class="fa fa-tags" aria-hidden="true"></i></i><h4>Tag</h4>
+        </div>
+      </div>
+      <div class="list-group">
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/miscs">miscs</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/linux">linux</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/php">php</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/mac">mac</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/javascript">javascript</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/java">java</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/%E6%89%A9%E5%B1%95">扩展</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/git">git</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/bootstrap">bootstrap</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/ios">ios</a>
+        </div>
+        
+      </div>
+    </div>
+    
+  
+
+</aside>
+
+
+        </div>
+    </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site">
+      <div class="container">
+        <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://unixera.com" target="_blank" rel="nofollow">Frost Wong</a></p>
+      </div>
+    </footer>
+
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+

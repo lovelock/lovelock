@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Javascript on Me &amp; Web</title>
-    <link>http://unixera.com/categories/javascript/</link>
-    <description>Recent content in Javascript on Me &amp; Web</description>
+    <title>Me &amp; Web</title>
+    <link>http://unixera.com/categories/javascript/index.xml</link>
+    <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 30 Mar 2016 16:08:03 +0800</lastBuildDate>
-    <atom:link href="http://unixera.com/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>检测浏览器是否安装了Flash</title>
@@ -240,10 +239,10 @@ function detectFlash() {
     
     <item>
       <title>Firefox Date.parse()方法行为不一致的兼容方案</title>
-      <link>http://unixera.com/javascript/Firefox-Date.parse-exception/</link>
+      <link>http://unixera.com/javascript/Firefox-Date/</link>
       <pubDate>Mon, 25 Jan 2016 12:14:35 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/Firefox-Date.parse-exception/</guid>
+      <guid>http://unixera.com/javascript/Firefox-Date/</guid>
       <description>
 
 &lt;p&gt;事情是这样的，我有两个输入框，用Wdatepicker自定义了日期格式，格式当然是我们中国人最喜欢的Y-M-d H:i:s，然后需要确定后者（结束时间）不能小于前者（开始时间）&lt;/p&gt;

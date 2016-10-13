@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Php框架 on Me &amp; Web</title>
-    <link>http://unixera.com/tags/php%E6%A1%86%E6%9E%B6/</link>
-    <description>Recent content in Php框架 on Me &amp; Web</description>
+    <title>Me &amp; Web</title>
+    <link>http://unixera.com/tags/php%E6%A1%86%E6%9E%B6/index.xml</link>
+    <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Sun, 10 Jan 2016 22:02:07 +0800</lastBuildDate>
-    <atom:link href="http://unixera.com/tags/php%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/php%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Symfony3 In Action——Routing</title>

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Octopress on Me &amp; Web</title>
-    <link>http://unixera.com/tags/octopress/</link>
-    <description>Recent content in Octopress on Me &amp; Web</description>
+    <title>Me &amp; Web</title>
+    <link>http://unixera.com/tags/octopress/index.xml</link>
+    <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 25 Apr 2015 21:35:12 +0800</lastBuildDate>
-    <atom:link href="http://unixera.com/tags/octopress/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/octopress/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>octopress原理浅析</title>
