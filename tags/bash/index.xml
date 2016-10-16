@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bash on Me &amp; Web</title>
+    <link>http://unixera.com/tags/bash/</link>
+    <description>Recent content in Bash on Me &amp; Web</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
+    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
+    <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
+    <lastBuildDate>Fri, 14 Oct 2016 15:40:58 +0800</lastBuildDate>
+    <atom:link href="http://unixera.com/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>用Bash编写漂亮的命令行程序</title>
+      <link>http://unixera.com/linux/handle-with-bash-options/</link>
+      <pubDate>Fri, 14 Oct 2016 15:40:58 +0800</pubDate>
+      <author>frostwong@gmail.com (Frost Wong)</author>
+      <guid>http://unixera.com/linux/handle-with-bash-options/</guid>
+      <description>
+
+&lt;p&gt;我学着写这篇是因为前面写了一个&lt;a href=&#34;http://unixera.com/virtualization/create-a-virtual-machine-with-vboxmanage/&#34;&gt;使用VBoxManage创建虚拟机&lt;/a&gt;，后来我发现这个过程太繁琐，就写了一个脚本，但脚本里面写死太多东西就没有了灵活性，所以就需要支持各种选项和参数。而因为这些命令都是很直观的命令，用Shell脚本就已经很完美的实现了这些功能。&lt;/p&gt;
+
+&lt;p&gt;代码可以在&lt;a href=&#34;https://github.com/lovelock/bash_opts&#34;&gt;这里&lt;/a&gt;下载。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;本文基于&lt;a href=&#34;http://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash&#34;&gt;StackOverFlow&lt;/a&gt;上的这篇答案。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;首先要知道几个内建变量&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;内建变量&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;执行的脚本文件名&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$1/$2&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;这些带数字（&amp;gt;0）的表示执行脚本后面对应的第N个参数&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$#&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;脚本执行时的参数个数&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$@&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;所有参数作为一个类似数组的结构&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$*&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;和&lt;code&gt;$@&lt;/code&gt;对比，前面的是一个数组结构，这个是用空格分开的多个变量&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$-&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当前脚本执行时的附加参数，比如&lt;code&gt;-x&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$_&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;最近的参数（或者当前脚本执行时所在的目录）&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$IFS&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;输入字段分隔符，一般是空格&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$!&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;最近的后台执行的命令，这个很常用，在vim中按Ctrl-z会把vim放在后台，在同样的终端中按&lt;code&gt;%!&lt;/code&gt;就会把他切回到前台&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$$&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当前脚本的pid（进程号）&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;$?&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;脚本执行后的返回值，一般0代表成功，这个0就是我们用C写程序时&lt;code&gt;main&lt;/code&gt;方法中最后的&lt;code&gt;return 0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;使用空格分隔选项和相应的参数&#34;&gt;使用空格分隔选项和相应的参数&lt;/h2&gt;
+
+&lt;p&gt;用法: &lt;code&gt;bash script.sh -e .php --path .&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env bash
+
+while [[ $# -gt 1 ]]
+do
+    KEY=$1
+
+    case $KEY in
+        -e|--extension)
+            EXTENSION=$2
+            shift
+            ;;
+        -s|--search-path)
+            SEARCHPATH=$2
+            shift
+            ;;
+        *)
+            ;;
+    esac
+    shift
+
+
+done
+
+echo FILE_EXTENSION=${EXTENSION}
+echo SEARCH_PATH=${SEARCHPATH}
+echo &amp;quot;Number files in ${SEARCH_PATH} with ${EXTENSION}:&amp;quot; $(ls -1 &amp;quot;${SEARCHPATH}&amp;quot;/*.&amp;quot;${EXTENSION}&amp;quot; | wc -l)
+
+if [[ -n $1 ]]; then
+    echo &amp;quot;Last line of file specified as non-opt/last argument:&amp;quot;
+    tail -1 $1
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;该脚本接收两个参数，可以用&lt;strong&gt;长参数(&amp;ndash;extension)&lt;/strong&gt;也可以用&lt;strong&gt;短参数(-e)&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;示例： &lt;code&gt;$ bash space.sh -e py --search-path .&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;使用等号分隔选项和参数&#34;&gt;使用等号分隔选项和参数&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env bash
+
+for i in $@
+do
+    case $i in
+        -e=*|--extension=*)
+            EXTENSION=&amp;quot;${i#*=}&amp;quot;
+            shift # past argument=value
+            ;;
+        -s=*|--searchpath=*)
+            SEARCHPATH=&amp;quot;${i#*=}&amp;quot;
+            shift # past argument=value
+            ;;
+        *)
+            # unknown option
+            ;;
+    esac
+done
+
+echo &amp;quot;FILE EXTENSION  = ${EXTENSION}&amp;quot;
+echo &amp;quot;SEARCH PATH     = ${SEARCHPATH}&amp;quot;
+echo &amp;quot;Number files in SEARCH PATH with EXTENSION:&amp;quot; $(ls -1 &amp;quot;${SEARCHPATH}&amp;quot;/*.&amp;quot;${EXTENSION}&amp;quot; | wc -l)
+
+if [[ -n $1 ]]; then
+    echo &amp;quot;Last line of file specified as non-opt/last argument:&amp;quot;
+    tail -1 $1
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;该脚本接收两个参数，可以用&lt;strong&gt;长参数(&amp;ndash;extension)&lt;/strong&gt;也可以用&lt;strong&gt;短参数(-e)&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;示例： &lt;code&gt;$ bash space.sh -e=php --search-path=.&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;使用-getops&#34;&gt;使用&lt;code&gt;getops&lt;/code&gt;&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/usr/bin/env bash
+
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+# Initialize our own variables:
+EXTENSION=&amp;quot;&amp;quot;
+VERBOSE=&amp;quot;-1&amp;quot;
+
+while getopts &amp;quot;h?ve:&amp;quot; opt; do
+    case &amp;quot;${opt}&amp;quot; in
+        h|\?)
+            show_help
+            exit 0
+            ;;
+        v)  VERBOSE=&amp;quot;-l&amp;quot;
+            ;;
+        e)  EXTENSION=$OPTARG
+            ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+[ &amp;quot;$1&amp;quot; = &amp;quot;--&amp;quot; ] &amp;amp;&amp;amp; shift
+
+ls ${VERBOSE} *.${EXTENSION}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这种方式只能使用短参数不支持长参数，其中&lt;code&gt;${OPTARG}&lt;/code&gt;表示对应的这条选项的值。&lt;/p&gt;
+
+&lt;p&gt;示例： &lt;code&gt;bash getopts.sh -v -e php&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;关于getopts的更多内容可以使用&lt;code&gt;help getopts&lt;/code&gt;查看。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

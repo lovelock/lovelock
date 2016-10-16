@@ -79,6 +79,49 @@
       
       <article class="li">
   <header>
+    <div class="date">Fri, Jun 19, 2015</div>
+    <div class="title"><a href="http://unixera.com/php/2015-06-19-phpshe-zhi-cookie/">PHP设置cookie</a></div>
+  </header>
+  <div class="body"><p>之前一直没有处理过cookie，刚才小小的看了一下，貌似很简单，大概记一下。</p>
+
+<p>首先，客户端要向服务端发送一个请求，服务端接收到请求之后做一下身份校验什么的，然后就可以给客户端种cookie了。</p>
+
+<pre><code class="language-php">setcookie(&quot;key&quot;, &quot;value&quot;, time()+expire);
+</code></pre>
+
+<p><code>expire</code>是cookie的过期时间，上面的例子用了两部分来说明它，time()获取当前的时间戳，那么<code>expire</code>就是你希望这个cookie在当前时刻之后再存活的时间长短。</p>
+
+<p>那么如何手动删除cookie呢？答案是无法直接删除cookie。但可以设置其过期，这样就间接的把它删除了。那怎样设置过期呢？<code>setcookie</code>的第三个参数设置的小于当前时间就可以了。</p>
+
+<p>那怎么用cookie呢？</p>
+
+<p>当你把cookie种到了客户端的机器上，它会保存在默认的域下，当客户端访问这个域下的资源时，发送的请求中会带着所有的cookie，然后在服务端用超全局变量<code>$_COOKIE['key']</code>就可以直接访问它了。</p>
+
+<p>demo代码如下：</p>
+
+<pre><code class="language-php">&lt;?php
+$username = $_GET['username'];
+$passwd = $_GET['passwd'];
+
+if (/* 身份校验成功 */) {
+    setcookie(&quot;username&quot;, $username, time() + 3600);
+    echo &quot;cookie set&quot;;
+}
+</code></pre>
+
+<pre><code class="language-php">&lt;?php
+$username = $_COOKIE[&quot;username&quot;];
+echo &quot;username: &quot; . $username;
+</code></pre>
+</div>
+
+  
+</article>
+<hr>
+
+      
+      <article class="li">
+  <header>
     <div class="date">Wed, Jun 17, 2015</div>
     <div class="title"><a href="http://unixera.com/php/2015-06-17-phpyan-chi-bang-ding/">PHP延迟绑定</a></div>
   </header>
@@ -272,22 +315,6 @@
 <hr>
 
       
-      <article class="li">
-  <header>
-    <div class="date">Sat, May 2, 2015</div>
-    <div class="title"><a href="http://unixera.com/javascript/2015-05-02-javascriptdai-ma-yue-ding/">JavaScript代码约定</a></div>
-  </header>
-  <div class="body">原文标题：Code Conventions for the JavaScript Programming Language 作者：Douglas Crockford 这是JavaScript编程中的一系列代码约定和规则。灵感来自于Sun的Code Conventions for the Java</div>
-
-  
-  <footer>
-    <a href="http://unixera.com/javascript/2015-05-02-javascriptdai-ma-yue-ding/" class="btn btn-default">Read More…</a>
-  </footer>
-  
-</article>
-<hr>
-
-      
       
 <nav>
   <ul class="pager">
@@ -318,6 +345,10 @@
     
     </div>
     <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/linux/handle-with-bash-options/" >用Bash编写漂亮的命令行程序</a>
+      </div>
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/" >在本地单机部署Hadoop/Storm运行环境</a>
@@ -355,10 +386,6 @@
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/php/internals/class-prototype-in-php/" >PHP扩展实战——用PHP实现类的原型</a>
       </div>
       
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/php/internals/schedules/" >PHP扩展实战——目标和计划</a>
-      </div>
-      
     </div>
   </div>
 
@@ -385,11 +412,11 @@
         </div>
         
         <div class="list-group-item">
-        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/mac">Mac</a>
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/linux">Linux</a>
         </div>
         
         <div class="list-group-item">
-        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/linux">Linux</a>
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/mac">Mac</a>
         </div>
         
         <div class="list-group-item">
