@@ -14,8 +14,8 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="http://unixera.com//index.xml">
 
     
-    <title>zookeeper simple practice - Me &amp; Web</title>
-    <meta property='og:title' content="zookeeper simple practice - Me &amp; Web">
+    <title>ZooKeeper原理简介和简单使用 - Me &amp; Web</title>
+    <meta property='og:title' content="ZooKeeper原理简介和简单使用 - Me &amp; Web">
     <meta property="og:type" content="article">
     
 
@@ -82,7 +82,7 @@
 
                 <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://unixera.com/"/>
                 <meta itemprop="dateModified" content="2016-10-12T23:36:09&#43;08:00">
-                <meta itemprop="headline" content="zookeeper simple practice">
+                <meta itemprop="headline" content="ZooKeeper原理简介和简单使用">
                 <meta itemprop="description" content="什么是分布式应用 分布式应用运行在其上的一组系统被称为『集群』(cluster)，运行在集群中的每个机器被称为『节点』(node)。 分布式应用">
                 <meta itemprop="url" content="http://unixera.com/bigdata/zookeeper-simple-practice/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
@@ -104,7 +104,7 @@
 
                 <header class="article-header">
                     <time itemprop="datePublished" pubdate="pubdate" datetime="2016-10-12T23:36:09&#43;08:00">Wed, Oct 12, 2016</time>
-                    <h1 class="article-title">zookeeper simple practice</h1>
+                    <h1 class="article-title">ZooKeeper原理简介和简单使用</h1>
                 </header>
 
                 
@@ -113,32 +113,37 @@
 <ul>
 <li>
 <ul>
-<li><a href="#什么是分布式应用"><strong>什么是分布式应用</strong></a>
+<li><a href="#什么是分布式应用">什么是分布式应用</a>
 <ul>
-<li><a href="#分布式应用的优点"><strong>分布式应用的优点</strong></a></li>
-<li><a href="#分布式应用需要解决的难点"><strong>分布式应用需要解决的难点</strong></a></li>
+<li><a href="#分布式应用的优点">分布式应用的优点</a></li>
+<li><a href="#分布式应用需要解决的难点">分布式应用需要解决的难点</a></li>
 </ul></li>
-<li><a href="#zookeeper简介"><strong>ZooKeeper简介</strong></a>
+<li><a href="#zookeeper简介">ZooKeeper简介</a>
 <ul>
-<li><a href="#zookeeper提供的服务"><strong>ZooKeeper提供的服务</strong></a></li>
-<li><a href="#zookeeper的优点"><strong>ZooKeeper的优点</strong></a></li>
-<li><a href="#zookeeper的架构"><strong>ZooKeeper的架构</strong></a></li>
-<li><a href="#层级的命名空间"><strong>层级的命名空间</strong></a></li>
+<li><a href="#zookeeper提供的服务">ZooKeeper提供的服务</a></li>
+<li><a href="#zookeeper的优点">ZooKeeper的优点</a></li>
+<li><a href="#zookeeper的架构">ZooKeeper的架构</a></li>
+<li><a href="#层级的命名空间">层级的命名空间</a></li>
 <li><a href="#znode的类型">znode的类型</a></li>
 <li><a href="#会话-sessions">会话（Sessions）</a></li>
-<li><a href="#手表-看门人-watches">手表（看门人？）Watches</a></li>
+<li><a href="#watches">Watches</a></li>
 <li><a href="#工作流程">工作流程</a></li>
-<li><a href="#zookeeper中的节点">ZooKeeper中的节点</a></li>
+<li><a href="#zookeeper中的节点数量">ZooKeeper中的节点数量</a></li>
 <li><a href="#小结">小结</a></li>
+</ul></li>
+<li><a href="#zookeeper的使用">ZooKeeper的使用</a>
+<ul>
 <li><a href="#安装和配置">安装和配置</a>
 <ul>
 <li><a href="#安装">安装</a></li>
 <li><a href="#配置">配置</a></li>
-<li><a href="#启动集群">启动集群</a></li>
 </ul></li>
-<li><a href="#api">API</a></li>
-<li><a href="#java-binding">Java Binding</a></li>
-<li><a href="#scala-binding">Scala Binding</a></li>
+<li><a href="#启动集群">启动集群</a></li>
+<li><a href="#简单使用">简单使用</a>
+<ul>
+<li><a href="#1-ls">1. <code>ls</code></a></li>
+<li><a href="#2-get">2. <code>get</code></a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -149,32 +154,32 @@
                 <div class="article-body" itemprop="articleBody">
                     
 
-<h2 id="什么是分布式应用"><strong>什么是分布式应用</strong></h2>
+<h2 id="什么是分布式应用">什么是分布式应用</h2>
 
 <p>分布式应用运行在其上的一组系统被称为『集群』(cluster)，运行在集群中的每个机器被称为『节点』(node)。</p>
 
-<h3 id="分布式应用的优点"><strong>分布式应用的优点</strong></h3>
+<h3 id="分布式应用的优点">分布式应用的优点</h3>
 
 <ul>
-<li><strong>可靠性</strong> 单机或少量机器的故障不会导致整个系统不可用。</li>
-<li><strong>可扩展性</strong> 不用停机只需要做很少的配置就可以根据需求通过增加机器来提升系统的性能。</li>
-<li><strong>透明性</strong>  隐藏了系统的复杂性，对外值暴露单一的入口/应用。</li>
+<li>可靠性 单机或少量机器的故障不会导致整个系统不可用。</li>
+<li>可扩展性 不用停机只需要做很少的配置就可以根据需求通过增加机器来提升系统的性能。</li>
+<li>透明性 隐藏了系统的复杂性，对外值暴露单一的入口/应用。</li>
 </ul>
 
-<h3 id="分布式应用需要解决的难点"><strong>分布式应用需要解决的难点</strong></h3>
+<h3 id="分布式应用需要解决的难点">分布式应用需要解决的难点</h3>
 
 <ul>
-<li><strong>竞争条件</strong> 两个或多个机器都尝试去执行同一个任务，而该任务在任意时刻都应该只被一台机器执行。比如，共享的资源在某一时刻应该只能被一台机器修改。</li>
-<li><strong>死锁</strong> 两个或多个操作无限期的相互等待对方完成。</li>
-<li><strong>不一致性</strong> 数据的部分错误。</li>
+<li>竞争条件 两个或多个机器都尝试去执行同一个任务，而该任务在任意时刻都应该只被一台机器执行。比如，共享的资源在某一时刻应该只能被一台机器修改。</li>
+<li>死锁 两个或多个操作无限期的相互等待对方完成。</li>
+<li>不一致性 数据的部分错误。</li>
 </ul>
 
-<h2 id="zookeeper简介"><strong>ZooKeeper简介</strong></h2>
+<h2 id="zookeeper简介">ZooKeeper简介</h2>
 
 <p>ZooKeeper是一个<strong>分布式的</strong>、用来管理大量主机的<strong>协调服务</strong>。
 在分布式环境中协调和管理一个服务是很复杂的工作，而ZooKeeper用简单的架构和API解决了这个问题，它用<code>fail-safe synchronization</code>机制解决了竞争和死锁的问题, 用<code>atomicity(原子性)</code>解决了数据的一致性问题。它屏蔽了分布式环境中的复杂性，让开发人员可以专注于核心应用功能的开发，而不用去关心分布式环境的太多细节。</p>
 
-<h3 id="zookeeper提供的服务"><strong>ZooKeeper提供的服务</strong></h3>
+<h3 id="zookeeper提供的服务">ZooKeeper提供的服务</h3>
 
 <ul>
 <li>名字服务 在一个集群内根据name找到主机，类似DNS服务</li>
@@ -185,7 +190,7 @@
 <li>存放高可用数据 可以保证在一个或多个节点出故障时保证数据的可用性</li>
 </ul>
 
-<h3 id="zookeeper的优点"><strong>ZooKeeper的优点</strong></h3>
+<h3 id="zookeeper的优点">ZooKeeper的优点</h3>
 
 <ul>
 <li>简单的分布式协调过程</li>
@@ -196,7 +201,7 @@
 <li>原子性 数据传输要么成功要么失败，不存在中间状态</li>
 </ul>
 
-<h3 id="zookeeper的架构"><strong>ZooKeeper的架构</strong></h3>
+<h3 id="zookeeper的架构">ZooKeeper的架构</h3>
 
 <p><img src="http://ww3.sinaimg.cn/large/006y8mN6jw1f7alv0grqej30fw04zdgg.jpg" alt="ZooKeeper架构图" /></p>
 
@@ -236,11 +241,17 @@
 </tbody>
 </table>
 
-<h3 id="层级的命名空间"><strong>层级的命名空间</strong></h3>
+<h3 id="层级的命名空间">层级的命名空间</h3>
 
 <p><img src="http://ww4.sinaimg.cn/large/006y8mN6jw1f7ayltmo57j30go0ce0t8.jpg" alt="ZooKeeper的层级的命名空间" /></p>
 
 <p>层级结构中的每个节点叫做znode, 每个znode维护一个<code>stat</code>结构。这个<code>stat</code>仅仅提供一个znode的元信息，其中包括版本号(Version number)、行为控制列表(Action Control List, ACL)、时间戳(Timestamp)、数据长度(Data Lenght)。</p>
+
+<p>下面来就实例看一下一个znode有哪些信息。</p>
+
+<p><img src="http://ww4.sinaimg.cn/large/006y8mN6jw1f8r0ho7jkhj31320h6ad1.jpg" alt="" /></p>
+
+<p>这样一看就很明显了吧。</p>
 
 <h3 id="znode的类型">znode的类型</h3>
 
@@ -258,7 +269,7 @@
 client会按一个时间间隔给server发送heartbeat来保证session的有效性。如果在一个session的生命周期内没有收到client的heartbeat，它就会认为这个client已经死掉了。<br />
 Session超时通常用ms表示。当一个session不管由于什么原因结束时，在session中创建的临时节点都会被删除掉。</p>
 
-<h3 id="手表-看门人-watches">手表（看门人？）Watches</h3>
+<h3 id="watches">Watches</h3>
 
 <p>Watches是用来保证client能在znode上的数据发生变化时收到通知的一种简单机制。client在读取znode的数据时可以设置一个watches给一个特定的znode，当这个znode上的数据或者它的子节点发生变化时都会触发watches给client发送通知。<br />
 watches只会被触发一次，如果client还需要通知，那就需要另外一次的读取操作了。当一个client和server之间的会话过期时，它们之间的连接就断开了，同时watches也会被移除。</p>
@@ -270,7 +281,7 @@ watches只会被触发一次，如果client还需要通知，那就需要另外�
 <li>client写数据 如果收到请求的是Follower，它会先把请求转发给Leader，由Leader再发送写请求给Followers。只有<strong>大多数节点</strong>正确响应时，写请求才会成功并且返回正确的返回码给client。否则写请求就会失败。这个严格的<strong>大多数节点</strong>被称为<strong>Quorum（法定人数)</strong>。</li>
 </ul>
 
-<h3 id="zookeeper中的节点">ZooKeeper中的节点</h3>
+<h3 id="zookeeper中的节点数量">ZooKeeper中的节点数量</h3>
 
 <ul>
 <li>当只有一个节点时，没有大多数</li>
@@ -279,7 +290,7 @@ watches只会被触发一次，如果client还需要通知，那就需要另外�
 <li>当有四个节点，2个出故障了，那也是没有大多数的</li>
 </ul>
 
-<p>所以，ZooKeeper集群的中节点的数量不要太多，不然写的性能会有下降。同时节点的数量是3/5/7这种基数，而不要是偶数。</p>
+<p>所以，ZooKeeper集群的中节点的数量不要太多，不然写的性能会有下降。同时节点的数量是3/5/7这种奇数，而不要是偶数。</p>
 
 <h3 id="小结">小结</h3>
 
@@ -293,7 +304,9 @@ watches只会被触发一次，如果client还需要通知，那就需要另外�
 
 <p>那么问题来了，为什么是在战场上？为什么好好的一个应用会无缘无故的Down掉呢？这就要从分布式应用的特点说起了。我们知道以前的所谓大型机、小型机都是很大很昂贵的特殊机器，是区别于普通的硬件的，包括CPU、内存、硬盘都是特制的，所以一台机器上百万甚至千万的都很常见，这种机器宕机的几率很小，但如果宕机的话影响也会相当严重。所以可以说这些机器的费用里其实也包含了保险费，因为机器宕机导致的损失，供应商是要负责任的。</p>
 
-<p>但现在不同了，现在是用大量普通（廉价）的机器组成集群来替代之前特殊的机器，既然是普通，那出错的几率当然就更高了，这也就是为什么Storm在设计之初就表示<strong>无状态</strong>了。</p>
+<p>但现在不同了，现在是用大量普通（廉价）的机器组成集群来替代之前特殊的机器，既然是普通，那出错的几率当然就更高了，这也就是为什么诸如Storm这些系统在设计之初就特别注重<strong>容错</strong>和<strong>无状态</strong>了。</p>
+
+<h2 id="zookeeper的使用">ZooKeeper的使用</h2>
 
 <h3 id="安装和配置">安装和配置</h3>
 
@@ -350,7 +363,7 @@ server.3=c3:2888:3888
 echo 1 &gt; myid
 </code></pre>
 
-<p>c1的位置是节点机器的hostname或者IP地址，这样写当然还是不行的，因为它们并不知道c1是什么鬼，所以还需要修改<code>/etc/hosts</code>，并没有什么黑科技。以我当前的本地集群为例，在该文件中添加</p>
+<p>c1的位置是节点机器的hostname或者IP地址，这样写当然还是不行的，因为它们并不知道c1是什么鬼，所以还需要修改<code>/etc/hosts</code>，以我当前的本地集群为例，在该文件中添加</p>
 
 <pre><code>192.168.1.111 c1
 192.168.1.110 c2
@@ -359,7 +372,7 @@ echo 1 &gt; myid
 
 <p>2888是默认的Follower与Leader交换信息的端口，3888是用于选举Leader的端口，当Leader挂了，当然需要选举一个新的Leader来继续它未竟的事业了。</p>
 
-<h4 id="启动集群">启动集群</h4>
+<h3 id="启动集群">启动集群</h3>
 
 <p>这时可以在三台机器上同时执行<code>bin/zkServer.sh start</code>了。如果看到和前面一样的结果（注意把刚才已经启动的服务先关掉，执行<code>bin/zkServer.sh stop</code>），恭喜你成功了一半了。
 这时再执行<code>bin/zkServer.sh status</code>你会惊奇的发现其中一台会显示</p>
@@ -378,12 +391,12 @@ Using config: /root/packages/zookeeper-3.4.8/bin/../conf/zoo.cfg
 Mode: follower
 </code></pre>
 
-<p>为了证明Leader节点是自动选举的，可以把Leader手动关掉，再分别看看另外两台的<code>status</code>。是不是一个变成了Leader了？</p>
+<p>为了证明Leader节点是自动选举的，可以把Leader手动关掉，再分别看看另外两台的<code>status</code>。是不是有一个变成了Leader了？</p>
 
 <blockquote>
 <p>几天前写这篇文章时没有问题，但今天继续编写Kafka部分时，因为之前重启过这几台虚拟机，IP变了，重启所有虚拟机之后发现虽然已经在本地启动了ZooKeeper服务，但执行<code>zkServer.sh status</code>时总是提示没有运行，而如果你再执行<code>start</code>指令，它又会提示说进程已经在运行了。根据<a href="http://stackoverflow.com/questions/29909191/zookeeper-it-is-probably-not-running">StackOverFlow的答案</a>，把<code>/root/packages/zookeeper-3.4.8/bin</code>添加至<code>$PATH</code>中即可。</p>
 
-<pre><code class="language-bash">$ vim /etc/profile.d/zookeeper.sh
+<pre><code>$ vim /etc/profile.d/zookeeper.sh
 export ZK_HOME=/root/packages/zookeeper-3.4.8
 export PATH=$PATH:$ZK_HOME/bin
 </code></pre>
@@ -393,19 +406,23 @@ export PATH=$PATH:$ZK_HOME/bin
 
 <p>通过动态的选举Leader节点，就解决了<strong>主从系统的单点故障问题</strong>。</p>
 
-<h3 id="api">API</h3>
+<h3 id="简单使用">简单使用</h3>
 
-<p>（略)</p>
+<p>前面说了启动服务，细心的你可能还发现在bin目录里面还有一个zkCli.sh（请自动无视zkCli.cmd，因为那明显是给Windows用的，而我觉得也没有人会在Windows上跑这些服务），这就是ZooKeeper的命令行客户端。</p>
 
-<h3 id="java-binding">Java Binding</h3>
+<p>而我要说的只有两个最简单的命令。</p>
 
-<p>（略)</p>
+<h4 id="1-ls">1. <code>ls</code></h4>
 
-<h3 id="scala-binding">Scala Binding</h3>
+<p><code>ls</code>顾名思义就是查看指定path下的数据，前面我已经演示过了，要注意的一点是<strong>如果<code>ls</code>后跟的是一个叶子节点，返回的结果是<code>[]</code></strong>，这时你应该很敏锐的意识到应该换用<code>get</code>来操作这个节点从而查看它的详细信息了。</p>
 
-<p>（略)</p>
+<h4 id="2-get">2. <code>get</code></h4>
 
-<p>本文并未覆盖ZooKeeper的API，因为作为写应用程序的我们来说，这对我们并不重要，我们并不直接和ZooKeeper的API打交道。</p>
+<p><code>get</code>当然就是用来查看指定节点的详细信息用的了。</p>
+
+<p>ZooKeeper提供的借口当然远远不止这两个，但起码到目前为止我还没有用到需要自行调用ZooKeeper接口的地方。因为实际上ZooKeeper是一个很底层的服务，它是用来为Storm和Kafka这类系统提供服务的，而我们通常不直接使用它们。在前两天一次查问题的过程中，发现数据一直在重复写入HDFS，查到了一个症状是ZooKeeper中的offset从一次重启发布之后一直没有更新过，导致系统一直反复读取该时间点之后的数据。这期间也就只用了这两个命令，至于对各种语言的binding，这里就不多说了，如果你要使用ZooKeeper给你的应用提供服务，那也不是看我的这篇文章就能搞明白的：）</p>
+
+<p>Happy Coding!</p>
 
 <blockquote>
 <p>本文大量参考了<a href="https://www.tutorialspoint.com//zookeeper/index.htm">https://www.tutorialspoint.com/</a></p>
@@ -418,13 +435,13 @@ export PATH=$PATH:$ZK_HOME/bin
                     <div class="section"><a href="http://unixera.com/tags/zookeeper/" class="tag">zookeeper</a> </div>
 
                     <div class="section share">
-                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2funixera.com%2fbigdata%2fzookeeper-simple-practice%2f&title=zookeeper%20simple%20practice" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2funixera.com%2fbigdata%2fzookeeper-simple-practice%2f&title=ZooKeeper%e5%8e%9f%e7%90%86%e7%ae%80%e4%bb%8b%e5%92%8c%e7%ae%80%e5%8d%95%e4%bd%bf%e7%94%a8" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
                     </div>
 
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="" data-title="zookeeper simple practice" data-url="http://unixera.com/bigdata/zookeeper-simple-practice/"></div>
+                        <div class="ds-thread" data-thread-key="" data-title="ZooKeeper原理简介和简单使用" data-url="http://unixera.com/bigdata/zookeeper-simple-practice/"></div>
                         
 
                         
@@ -461,7 +478,15 @@ export PATH=$PATH:$ZK_HOME/bin
     <div class="list-group">
       
       <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/bigdata/zookeeper-simple-practice/" >zookeeper simple practice</a>
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/linux/handle-with-bash-options/" >用Bash编写漂亮的命令行程序</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/virtualization/create-a-virtual-machine-with-vboxmanage/" >使用VBoxManage创建虚拟机</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/bigdata/zookeeper-simple-practice/" >ZooKeeper原理简介和简单使用</a>
       </div>
       
       <div class="list-group-item">
@@ -492,14 +517,6 @@ export PATH=$PATH:$ZK_HOME/bin
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/miscs/talk-about-transgene-foods/" >谈谈转基因食物</a>
       </div>
       
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/php/internals/create-skeleton-of-extension/" >PHP扩展实战——扩展的骨架</a>
-      </div>
-      
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/php/internals/class-prototype-in-php/" >PHP扩展实战——用PHP实现类的原型</a>
-      </div>
-      
     </div>
   </div>
 
@@ -526,11 +543,11 @@ export PATH=$PATH:$ZK_HOME/bin
         </div>
         
         <div class="list-group-item">
-        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/mac">Mac</a>
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/linux">Linux</a>
         </div>
         
         <div class="list-group-item">
-        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/linux">Linux</a>
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/mac">Mac</a>
         </div>
         
         <div class="list-group-item">
@@ -573,11 +590,11 @@ export PATH=$PATH:$ZK_HOME/bin
         </div>
         
         <div class="list-group-item">
-        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/php">php</a>
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/linux">linux</a>
         </div>
         
         <div class="list-group-item">
-        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/linux">linux</a>
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/php">php</a>
         </div>
         
         <div class="list-group-item">
