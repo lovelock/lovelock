@@ -65,15 +65,13 @@
 &lt;h4 id=&#34;配套服务&#34;&gt;配套服务&lt;/h4&gt;
 
 &lt;ol&gt;
-&lt;li&gt;ZooKeeper&lt;br /&gt;
-&lt;a href=&#34;http://zookeeper.apache.org/&#34;&gt;ZooKeeper&lt;/a&gt;是一个分布式的配置分发服务。Storm和Kafka都是无状态的，它们的工作需要外部服务为其维持状态，如Storm从Kafka中取数据时需要的partition编号和offset偏移量等诸如此类的信息。ZooKeeper会综合分析Spout和Bolt发送来的ack或者fail请求来决定是否更新offset。如下图所示&lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;&lt;p&gt;ZooKeeper&lt;br /&gt;
+&lt;a href=&#34;http://zookeeper.apache.org/&#34;&gt;ZooKeeper&lt;/a&gt;是一个分布式的配置分发服务。Storm和Kafka都是无状态的，它们的工作需要外部服务为其维持状态，如Storm从Kafka中取数据时需要的partition编号和offset偏移量等诸如此类的信息。ZooKeeper会综合分析Spout和Bolt发送来的ack或者fail请求来决定是否更新offset。如下图所示&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://ww3.sinaimg.cn/large/65e4f1e6jw1f8wd8tm94ij21kw097q5h.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ww3.sinaimg.cn/large/65e4f1e6jw1f8wd8tm94ij21kw097q5h.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;ol&gt;
-&lt;li&gt;Kafka&lt;br /&gt;
-&lt;a href=&#34;http://kafka.apache.org/&#34;&gt;Kafka&lt;/a&gt;是一个分布式的消息系统。支持&lt;strong&gt;点对点&lt;/strong&gt;和&lt;strong&gt;发布-订阅&lt;/strong&gt;两种消息模式。在和Storm配合中，充当&lt;strong&gt;数据来源&lt;/strong&gt;的角色。用&lt;a href=&#34;https://github.com/apache/storm/tree/master/external/storm-kafka&#34;&gt;KafkaSpout&lt;/a&gt;和Storm进行组合。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Kafka&lt;br /&gt;
+&lt;a href=&#34;http://kafka.apache.org/&#34;&gt;Kafka&lt;/a&gt;是一个分布式的消息系统。支持&lt;strong&gt;点对点&lt;/strong&gt;和&lt;strong&gt;发布-订阅&lt;/strong&gt;两种消息模式。在和Storm配合中，充当&lt;strong&gt;数据来源&lt;/strong&gt;的角色。用&lt;a href=&#34;https://github.com/apache/storm/tree/master/external/storm-kafka&#34;&gt;KafkaSpout&lt;/a&gt;和Storm进行组合。&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;blockquote&gt;
