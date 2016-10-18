@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bigdata on Me &amp; Web</title>
-    <link>http://unixera.com/categories/bigdata/</link>
-    <description>Recent content in Bigdata on Me &amp; Web</description>
+    <title>Me &amp; Web</title>
+    <link>http://unixera.com/categories/bigdata/index.xml</link>
+    <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 12 Oct 2016 23:36:09 +0800</lastBuildDate>
-    <atom:link href="http://unixera.com/categories/bigdata/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/bigdata/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>ZooKeeper原理简介和简单使用</title>
@@ -293,6 +292,267 @@ export PATH=$PATH:$ZK_HOME/bin
 &lt;blockquote&gt;
 &lt;p&gt;本文大量参考了&lt;a href=&#34;https://www.tutorialspoint.com//zookeeper/index.htm&#34;&gt;https://www.tutorialspoint.com/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>一个真实Storm应用源码解析</title>
+      <link>http://unixera.com/java/storm-demo-presentation/</link>
+      <pubDate>Tue, 11 Oct 2016 16:41:18 +0800</pubDate>
+      <author>frostwong@gmail.com (Frost Wong)</author>
+      <guid>http://unixera.com/java/storm-demo-presentation/</guid>
+      <description>
+
+&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;这里是Storm分享的内容。我自己也是初学者，这里抛砖引玉，希望大家多多指教。为简单起见，本应用用的是Java实现，没有用到Storm的多语言支持和更高层面的Trident Topology。源码详见&lt;a href=&#34;https://github.com/lovelock/storm-demo&#34;&gt;storm-demo&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&#34;理论&#34;&gt;理论&lt;/h2&gt;
+
+&lt;h3 id=&#34;概述&#34;&gt;概述&lt;/h3&gt;
+
+&lt;p&gt;Apache Storm是一个自由并且开源的&lt;strong&gt;分布式实时&lt;/strong&gt;计算系统.它使得像Hadoop做批处理一样做&lt;strong&gt;实时的&lt;/strong&gt;、&lt;strong&gt;无限量&lt;/strong&gt;的&lt;strong&gt;流数据&lt;/strong&gt;处理变得简单可靠.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://storm.apache.org/images/storm-flow.png&#34; alt=&#34;Apache Storm工作流程&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;概念解释&#34;&gt;概念解释&lt;/h3&gt;
+
+&lt;h4 id=&#34;工作原理&#34;&gt;工作原理&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.tutorialspoint.com/apache_storm/images/zookeeper_framework.jpg&#34; alt=&#34;Apache Storm组件间关系&#34; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Nimbus&lt;br /&gt;
+ Nimbus是Storm集群的&lt;strong&gt;主节点master node&lt;/strong&gt;。Storm集群中除Nimbus节点之外的所有节点叫做&lt;strong&gt;工作节点worker nodes&lt;/strong&gt;。&lt;br /&gt;
+ Nimbus负责三项工作：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;向worker nodes分发数据&lt;/li&gt;
+&lt;li&gt;向worker nodes分配tasks&lt;/li&gt;
+&lt;li&gt;监控失败&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Supervisor&lt;br /&gt;
+ 接受Nimbus的指令的节点叫做Supervisors（监工），它有&lt;strong&gt;多个worker process&lt;/strong&gt;，并控制worker process完成Nimbus分配的tasks&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Worker Process&lt;br /&gt;
+ Worker process执行指定Topology的tasks。&lt;strong&gt;worker process自己并不实际执行tasks，而是创建executors并由executors执行指定的task。&lt;/strong&gt;一个worker process可以由多个executor。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Executor&lt;br /&gt;
+ Executor是由worker process创建的线程。一个executor执行一个或多个tasks，但只为&lt;strong&gt;一个指定的Spout或者Bolt工作&lt;/strong&gt;。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Task&lt;br /&gt;
+ Task是实际的数据处理工作，所以它可能是一个Spout或者Bolt。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&#34;配套服务&#34;&gt;配套服务&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;ZooKeeper&lt;br /&gt;
+&lt;a href=&#34;http://zookeeper.apache.org/&#34;&gt;ZooKeeper&lt;/a&gt;是一个分布式的配置分发服务。Storm和Kafka都是无状态的，它们的工作需要外部服务为其维持状态，如Storm从Kafka中取数据时需要的partition编号和offset偏移量等诸如此类的信息。ZooKeeper会综合分析Spout和Bolt发送来的ack或者fail请求来决定是否更新offset。如下图所示&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://ww3.sinaimg.cn/large/65e4f1e6jw1f8wd8tm94ij21kw097q5h.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Kafka&lt;br /&gt;
+&lt;a href=&#34;http://kafka.apache.org/&#34;&gt;Kafka&lt;/a&gt;是一个分布式的消息系统。支持&lt;strong&gt;点对点&lt;/strong&gt;和&lt;strong&gt;发布-订阅&lt;/strong&gt;两种消息模式。在和Storm配合中，充当&lt;strong&gt;数据来源&lt;/strong&gt;的角色。用&lt;a href=&#34;https://github.com/apache/storm/tree/master/external/storm-kafka&#34;&gt;KafkaSpout&lt;/a&gt;和Storm进行组合。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;本文只关注Storm，有关ZooKeeper和Kafka的介绍，可以访问&lt;a href=&#34;http://apache.org/&#34;&gt;官网&lt;/a&gt;、&lt;a href=&#34;http://www.tutorialspoint.com/&#34;&gt;TutorialsPoint&lt;/a&gt;或本博客的其他相关文章。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;拓扑作业&#34;&gt;拓扑作业&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Tuple&lt;br /&gt;
+ Tuple是Topology中数据流的传输格式。它是&lt;strong&gt;不可变的键值对组&lt;/strong&gt;。既然是键值对，就需要设置键和值，典型的设置方式如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; // 设置键
+ outputFieldsDeclarer.declare(new Fields(&amp;quot;timestamp&amp;quot;, &amp;quot;fieldvalues&amp;quot;));
+ // 设置值
+ collector.emit(tuple, new Values(timestamp, stringBuilder.toString()));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样就会得到一个形如&lt;code&gt;(&amp;quot;timestamp&amp;quot;: timestamp, &amp;quot;fieldvalues&amp;quot;: xxxx&amp;quot;)&lt;/code&gt;这样的Tuple。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Spout&lt;br /&gt;
+ Spout是Topology的数据来源，输出的数据以Tuple的形式传入下一个Bolt。具体到本例中，KafkaSpout会把它接收到的数据以类似&lt;code&gt;(0: message)&lt;/code&gt;这样的形式发射(emit)出来。所以，在KafkaSpout下游的Bolt需要这样获取整条数据(其实这里是可配置的)：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt; String message = tuple.getString(0);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对KafkaSpout而言，它也实现了多个方法，但我们这里只需要了解两个&lt;code&gt;ack&lt;/code&gt;和&lt;code&gt;fail&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://ww3.sinaimg.cn/large/65e4f1e6jw1f8wdqv4tuqj218y0ji41l.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这两个是回调方法，分别在ack unit向其发送ack或fail请求时被触发，一般而言，ack方法由于通知Kafka发送下一条数据，fail方法用于通知Kafka重发上一条数据。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;关于ack unit，可以理解为Storm中处理bolt的ack或fail请求的总线，它接收到相应的请求后，做简单的异或处理，并把结果发送给Spout。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Bolt&lt;br /&gt;
+ Bolt是真正写处理逻辑的地方，比如在本例中，我们要做以下几件事：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;把message中的每个字段提取出来，&lt;/li&gt;
+&lt;li&gt;从message的domain字段中过滤出以&lt;code&gt;.api.ksyun.com&lt;/code&gt;结尾的，其他的舍弃&lt;/li&gt;
+&lt;li&gt;把domain字段的值以&lt;code&gt;.&lt;/code&gt;分割，取出index为0的部分，也就是第一段作为service字段&lt;/li&gt;
+&lt;li&gt;把service最终输出Tuple的一个field写入输出结果&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;一般情况下，要实现一个Bolt有几种方式&lt;/p&gt;
+
+&lt;p&gt;​&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;实现&lt;code&gt;IRichBolt&lt;/code&gt;接口&lt;br /&gt;
+  因为这个比较低级，要实现的方法有很多，而其中多数的方法不需要做特殊处理，所以一般会用第二种方式&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;集成&lt;code&gt;BaseRichBolt&lt;/code&gt;类&lt;br /&gt;
+  这个基类实现了&lt;code&gt;IRichBolt&lt;/code&gt;中定义的几个不常用的方法，让我们只需要关注重点的几个方法即可。在这种方式中，我们需要自己实现三个方法：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;public void prepare(Map map, TopologyContext topologyContext, OutputCollector outputCollector)&lt;/code&gt;&lt;br /&gt;
+  这个方法&lt;strong&gt;类似构造函数&lt;/strong&gt;，用来做一些准备工作，通常用于&lt;strong&gt;把上游传来的collector赋值给成员变量&lt;/strong&gt;。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;public void execute(Tuple tuple)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;这是最核心的方法。它负责：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;从上游传来的Tuple中读取感兴趣的字段&lt;/li&gt;
+&lt;li&gt;把这些字段做一些处理后产生一组新的字段&lt;/li&gt;
+&lt;li&gt;把这些值通过&lt;code&gt;OutputCollector::emit(new Values())&lt;/code&gt;方法发射出去&lt;/li&gt;
+&lt;li&gt;向上游发送&lt;code&gt;OutputCollector::ack(Tuple tuple)&lt;/code&gt;或&lt;code&gt;OutputCollector::fail(Tuple tuple)&lt;/code&gt;，以告知上游本次Tuple处理是否成功。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;前面已经说过，Tuple是数据交流的格式，这个方法就是用来定义发送到下游的Tuple的字段名的。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Topology&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://storm.apache.org/releases/0.10.0/images/topology.png&#34; alt=&#34;一个典型的Topology&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上面这张图中有4个Topology，说明了几个问题：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一个Spout就是一个Topology的入口，从Spout分出几条线就有几个Topology&lt;/li&gt;
+&lt;li&gt;一个Topology由一个Spout和若干个Bolt组成&lt;/li&gt;
+&lt;li&gt;Topology之间可以共享Spout或者Bolt&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;创建一个Topology的典型过程：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    TopologyBuilder topologyBuilder = new TopologyBuilder();
+    topologyBuilder.setSpout(KAFKA_SPOUT_ID, kafkaSpout, 10);
+    topologyBuilder.setBolt(CROP_BOLT_ID, new CropBolt(), 10).shuffleGrouping(KAFKA_SPOUT_ID);
+    topologyBuilder.setBolt(SPLIT_FIELDS_BOLT_ID, new SplitFieldsBolt(), 10).shuffleGrouping(CROP_BOLT_ID);
+    topologyBuilder.setBolt(STORM_HDFS_BOLT_ID, hdfsBolt, 10).fieldsGrouping(SPLIT_FIELDS_BOLT_ID, new Fields(&amp;quot;timestamp&amp;quot;, &amp;quot;fieldvalues&amp;quot;));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从上面的代码可以看到，&lt;code&gt;TopologyBuilder&lt;/code&gt;类通过&lt;code&gt;setSpout()&lt;/code&gt;和&lt;code&gt;setBolt()&lt;/code&gt;两个方法生动的反映了上图的工作流程。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;源码分析&#34;&gt;源码分析&lt;/h2&gt;
+
+&lt;h3 id=&#34;cropbolt-java&#34;&gt;&lt;code&gt;CropBolt.java&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;主要关注&lt;code&gt;execute&lt;/code&gt;方法，它首先从上游发射来的Tuple中取出第一个字段，也就是整条消息作为一个字符串。根据对字符串的分析，我们知道该字符串是以&lt;code&gt;\t\t&lt;/code&gt;作为字段间分隔符，以&lt;code&gt;:&lt;/code&gt;作为键值分隔符的字符串，所以可以写一个方法来用这种规则解析出消息中的所有字段，并把它放在一个HashMap里。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    private HashMap makeMapOfMessage(String message) {
+    String[] fields = message.split(ServerConfig.getFieldSeparator());
+    HashMap&amp;lt;String, String&amp;gt; map = new HashMap&amp;lt;&amp;gt;();
+
+    try {
+        for (String field : fields) {
+            String[] pair = field.split(ServerConfig.getPairSeparator(), 2);
+            map.put(pair[0], pair[1]);
+        }
+    } catch (ArrayIndexOutOfBoundsException e) {
+        LOG.warn(&amp;quot;makeMapOfMessage failed {}&amp;quot;, message);
+        e.printStackTrace();
+    }
+
+    return map;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中&lt;code&gt;ServerConfig&lt;/code&gt;是一个工具类，它提供了简单的API，把处理逻辑和配置信息分离。在本例中我用的分隔符和实际项目并不一样，这个差别只需要在相应的properties配置文件中做修改即可。还需要注意异常处理，这个方法的返回值有可能是null，在调用该方法的地方需要做相应的判断。&lt;/p&gt;
+
+&lt;p&gt;在&lt;code&gt;execute&lt;/code&gt;方法中，从上述方法的返回值取出关心的字段，并按需求解析出需要的&lt;code&gt;service&lt;/code&gt;字段，并通过&lt;code&gt;collector.emit&lt;/code&gt;发送给下游的Bolt。&lt;/p&gt;
+
+&lt;p&gt;这个方法中有三点需要注意：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;没有在&lt;code&gt;try&lt;/code&gt;子句中调用&lt;code&gt;ack&lt;/code&gt;方法&lt;/li&gt;
+&lt;li&gt;没有在&lt;code&gt;catch&lt;/code&gt;子句中调用&lt;code&gt;fail&lt;/code&gt;方法&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;finally&lt;/code&gt;子句中调用了&lt;code&gt;ack&lt;/code&gt;方法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;因为我们catch住的这种情况，是只有在输入的数据不满足我们约定要求的情况下才会发生的，比如某些必要的字段不存在等，而这种情况在当前的Topology中是不需要处理的，并且也不需要重试，因此，不需要调用&lt;code&gt;fail&lt;/code&gt;。同时，不管数据是否符合要求，我们都是需要通知Spout&lt;strong&gt;这里的处理已经完成&lt;/strong&gt;这个信息的，所以在&lt;code&gt;finally&lt;/code&gt;中调用&lt;code&gt;ack&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&#34;splitfieldsbolt-java&#34;&gt;&lt;code&gt;SplitFieldsBolt.java&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;这步的功能很简单，就是把前面传过来的所有字段用一个特定的分隔符连接起来，变成一行数据。只有一个特殊，也就是&lt;code&gt;service&lt;/code&gt;字段，它不是直接取出来的，而是前面的Bolt通过一些处理得到的，所以这是&lt;code&gt;stringBuilder&lt;/code&gt;需要处理的一种特殊情况。&lt;/p&gt;
+
+&lt;p&gt;最后把『时间戳』和『各个字段的值』发射给下游的&lt;code&gt;HdfsBolt&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&#34;hdfsbolt&#34;&gt;&lt;code&gt;HdfsBolt&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;HdfsBolt&lt;/code&gt;是Storm到HDFS的一个中转层，配置一些规则，把Storm输出的数据写入HDFS。其中比较重要的配置有：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;DelimitedRecordFormat&lt;/code&gt; 要写入的字段 在本例中，『时间戳』只是用来划分目录的，所以不需要写入HDFS中&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CountSyncPolicy&lt;/code&gt; 指定当内存中超过多少条数据时cache到磁盘中&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FileSizeRotationPolicy&lt;/code&gt; 指定cache的文件超过多大时将文件写入文件系统，如果该值设置的较大，而数据流量又不太大的情况下，文件通常不会达到设置的值，因为当等待写入的文件未达到限制大小而先达到超时时间时，也会创建一个新的文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DefaultFileNameFormat&lt;/code&gt; 指定文件写入HDFS中的根目录和文件后缀&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Partitioner&lt;/code&gt; 指定分块规则，在本例中，我们根据日志中&lt;code&gt;time_local&lt;/code&gt;字段划分相应的消息应该写入的HDFS目录，比如&lt;code&gt;31/Aug/2016:13:08:12 +0800&lt;/code&gt;，相应的记录就会写入&lt;code&gt;root/20160831/13&lt;/code&gt;目录中。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FsURL&lt;/code&gt; 当然需要指定正确的&lt;code&gt;HDFS&lt;/code&gt;服务。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;其实我们的KMR对应的Storm 0.10.0是不支持HDFS 的partition的，这里我是把Storm最新版的2.0.0-SNAPSHOT中相应的代码移植过来用的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;logstatisticstopology-java&#34;&gt;&lt;code&gt;LogStatisticsTopology.java&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;前面讲过，这是拓扑作业的入口，这里指定了一条消息要通过的路径。需要注意的有以下几点：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;setSpout&lt;/code&gt;和&lt;code&gt;setBolt&lt;/code&gt;方法中的parallelism_hint(并行度建议)，前面说了，Spout和Bolt在Storm中是以executor的形式存在的，而这个值就是指定executor的数量。但又没有那么绝对，比如在KafkaSpout中，如果指定的Topic在Kafka中有10个partition，但这里的KafkaSpout指定了15个并行度，实际还是只有10个executor有意义，因为剩余的5个在前面10个都正常工作的情况下是分配不到任何数据的，由于ZooKeeper做了中间人，它是知道每个Topic有多少个partition的，所以这里设置多于partition数量的并行度也是不起作用的。&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;grouping类型 Storm目前支持4种分组形式。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;随机分组 等量tuples随机分发给执行bolt的所有workers&lt;/li&gt;
+&lt;li&gt;字段分组 把指定字段值相同的分配给同一个task,在wordCount应用中比较重要&lt;/li&gt;
+&lt;li&gt;广播分组 给每个executor发送一个这个tuple的副本&lt;/li&gt;
+&lt;li&gt;全局分组 把所有数据分发给bolt的executor中id最小的&lt;strong&gt;一个&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;无分组   目前基本等同于随机分组，会把tuple交给和它上游同一个线程内的下游bolt，以减少数据传递的开销&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;根据我们的需求，其实是不需要太关心分组的事情。&lt;/p&gt;
+
+&lt;p&gt;关于优化，有几个方面可以考虑：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;考虑到后面需要用Hive分析数据，如果产生很多小的文件，就会产生过多的Map过程，影响性能，可以考虑同一小时的文件交给同一个executor来写，因为每个executor会打开一个hdfs文件，但这样可能会导致并发数过少&lt;/li&gt;
+&lt;li&gt;既然这样，可以减少executor的数量，比如现在是10个，可以改成5个，在不触发FileSizeRotationPolicy的情况下，把生成的文件数量减少了一半，也就把Hive查询时Map过程的数量减少了一半&lt;/li&gt;
+&lt;li&gt;分析需求，如果没有按照小时分组的需求，可以直接删除这个级别，直接用天作为区分，这样，在不触发FileSizeRotationPolicy的情况下产生的文件数量会变成1/24,相应的Hive查询中Map的过程也会变成1/24.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;本文主要介绍了Storm的工作流程，以及其与Kafka和HDFS的配合来进行日志分析的工作流程，并简单介绍了一些需要注意的点。&lt;/p&gt;
+
+&lt;p&gt;我也是Storm的初学者，并没有太多的实际经验，这里只是演示了一个可以工作的Storm作业的实例，大家有什么问题可以及时与我交流，也希望大家不吝赐教。&lt;/p&gt;
 </description>
     </item>
     

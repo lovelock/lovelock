@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pythons on Me &amp; Web</title>
-    <link>http://unixera.com/python/</link>
-    <description>Recent content in Pythons on Me &amp; Web</description>
+    <title>Python-rsses on Me &amp; Web</title>
+    <link>http://unixera.com/python/index.xml</link>
+    <description>Recent content in Python-rsses on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <lastBuildDate>Fri, 31 Jul 2015 11:26:37 +0000</lastBuildDate>
-    <atom:link href="http://unixera.com/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/python/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Python日志处理总结</title>

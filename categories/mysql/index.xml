@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mysql on Me &amp; Web</title>
-    <link>http://unixera.com/categories/mysql/</link>
-    <description>Recent content in Mysql on Me &amp; Web</description>
+    <title>Me &amp; Web</title>
+    <link>http://unixera.com/categories/mysql/index.xml</link>
+    <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 17 Oct 2015 16:59:58 +0000</lastBuildDate>
-    <atom:link href="http://unixera.com/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>MySQL真·UTF8后遇到的问题</title>

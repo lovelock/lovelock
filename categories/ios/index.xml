@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ios on Me &amp; Web</title>
-    <link>http://unixera.com/categories/ios/</link>
-    <description>Recent content in Ios on Me &amp; Web</description>
+    <title>Me &amp; Web</title>
+    <link>http://unixera.com/categories/ios/index.xml</link>
+    <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Mon, 13 Jul 2015 20:20:18 +0000</lastBuildDate>
-    <atom:link href="http://unixera.com/categories/ios/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/ios/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>iOS8及以下使用NSURLConnectionDelegate实现网络请求</title>

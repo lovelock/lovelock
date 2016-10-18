@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.17" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.7.0/styles/github.min.css">
+    <link rel="stylesheet" href="http://unixera.com/css/styles.css">
+    <link rel="stylesheet" href="http://unixera.com/css/custom.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://unixera.com//index.xml">
+
+    
+    <title>一个真实Storm应用源码解析 - Me &amp; Web</title>
+    <meta property='og:title' content="一个真实Storm应用源码解析 - Me &amp; Web">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://unixera.com/java/storm-demo-presentation/">
+    
+    
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://unixera.com/">Me &amp; Web&nbsp;&nbsp;致力于创作可操作性更好的文章</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="http://unixera.com/">首页</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/about">关于作者</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/categories/">分类</a></li>
+              
+              
+              
+              <li><a href="http://unixera.com/tags/">标签</a></li>
+              
+              
+            </ul>
+            
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="site">
+      <div class="container">
+
+
+
+<div class="single">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+                <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://unixera.com/"/>
+                <meta itemprop="dateModified" content="2016-10-11T16:41:18&#43;08:00">
+                <meta itemprop="headline" content="一个真实Storm应用源码解析">
+                <meta itemprop="description" content="前言 这里是Storm分享的内容。我自己也是初学者，这里抛砖引玉，希望大家多多指教。为简单起见，本应用用的是Java实现，没有用到Storm的">
+                <meta itemprop="url" content="http://unixera.com/java/storm-demo-presentation/">
+                <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="http://unixera.com/images/default.jpg" />
+                    <meta itemprop="width" content="800">
+                    <meta itemprop="height" content="800">
+                </div>
+                <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                        <meta itemprop="url" content="http://unixera.com/images/logo.jpg">
+                        <meta itemprop="width" content="100">
+                        <meta itemprop="height" content="100">
+                    </div>
+                    <meta itemprop="name" content="Me &amp; Web">
+                </div>
+                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <meta itemprop="name" content="Frost Wong">
+                </div>
+
+                <header class="article-header">
+                    <time itemprop="datePublished" pubdate="pubdate" datetime="2016-10-11T16:41:18&#43;08:00">Tue, Oct 11, 2016</time>
+                    <h1 class="article-title">一个真实Storm应用源码解析</h1>
+                </header>
+
+                
+                    <div class="article-body">
+                        <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#前言">前言</a></li>
+<li><a href="#理论">理论</a>
+<ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#概念解释">概念解释</a>
+<ul>
+<li><a href="#工作原理">工作原理</a></li>
+<li><a href="#配套服务">配套服务</a></li>
+<li><a href="#拓扑作业">拓扑作业</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#源码分析">源码分析</a>
+<ul>
+<li><a href="#cropbolt-java"><code>CropBolt.java</code></a></li>
+<li><a href="#splitfieldsbolt-java"><code>SplitFieldsBolt.java</code></a></li>
+<li><a href="#hdfsbolt"><code>HdfsBolt</code></a></li>
+<li><a href="#logstatisticstopology-java"><code>LogStatisticsTopology.java</code></a></li>
+</ul></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                
+
+                <div class="article-body" itemprop="articleBody">
+                    
+
+<h2 id="前言">前言</h2>
+
+<p>这里是Storm分享的内容。我自己也是初学者，这里抛砖引玉，希望大家多多指教。为简单起见，本应用用的是Java实现，没有用到Storm的多语言支持和更高层面的Trident Topology。源码详见<a href="https://github.com/lovelock/storm-demo">storm-demo</a>。</p>
+
+<h2 id="理论">理论</h2>
+
+<h3 id="概述">概述</h3>
+
+<p>Apache Storm是一个自由并且开源的<strong>分布式实时</strong>计算系统.它使得像Hadoop做批处理一样做<strong>实时的</strong>、<strong>无限量</strong>的<strong>流数据</strong>处理变得简单可靠.</p>
+
+<p><img src="http://storm.apache.org/images/storm-flow.png" alt="Apache Storm工作流程" /></p>
+
+<h3 id="概念解释">概念解释</h3>
+
+<h4 id="工作原理">工作原理</h4>
+
+<p><img src="https://www.tutorialspoint.com/apache_storm/images/zookeeper_framework.jpg" alt="Apache Storm组件间关系" /></p>
+
+<ol>
+<li><p>Nimbus<br />
+ Nimbus是Storm集群的<strong>主节点master node</strong>。Storm集群中除Nimbus节点之外的所有节点叫做<strong>工作节点worker nodes</strong>。<br />
+ Nimbus负责三项工作：</p>
+
+<ul>
+<li>向worker nodes分发数据</li>
+<li>向worker nodes分配tasks</li>
+<li>监控失败</li>
+</ul></li>
+
+<li><p>Supervisor<br />
+ 接受Nimbus的指令的节点叫做Supervisors（监工），它有<strong>多个worker process</strong>，并控制worker process完成Nimbus分配的tasks</p></li>
+
+<li><p>Worker Process<br />
+ Worker process执行指定Topology的tasks。<strong>worker process自己并不实际执行tasks，而是创建executors并由executors执行指定的task。</strong>一个worker process可以由多个executor。</p></li>
+
+<li><p>Executor<br />
+ Executor是由worker process创建的线程。一个executor执行一个或多个tasks，但只为<strong>一个指定的Spout或者Bolt工作</strong>。</p></li>
+
+<li><p>Task<br />
+ Task是实际的数据处理工作，所以它可能是一个Spout或者Bolt。</p></li>
+</ol>
+
+<h4 id="配套服务">配套服务</h4>
+
+<ol>
+<li>ZooKeeper<br />
+<a href="http://zookeeper.apache.org/">ZooKeeper</a>是一个分布式的配置分发服务。Storm和Kafka都是无状态的，它们的工作需要外部服务为其维持状态，如Storm从Kafka中取数据时需要的partition编号和offset偏移量等诸如此类的信息。ZooKeeper会综合分析Spout和Bolt发送来的ack或者fail请求来决定是否更新offset。如下图所示</li>
+</ol>
+
+<p><img src="http://ww3.sinaimg.cn/large/65e4f1e6jw1f8wd8tm94ij21kw097q5h.jpg" alt="" /></p>
+
+<ol>
+<li>Kafka<br />
+<a href="http://kafka.apache.org/">Kafka</a>是一个分布式的消息系统。支持<strong>点对点</strong>和<strong>发布-订阅</strong>两种消息模式。在和Storm配合中，充当<strong>数据来源</strong>的角色。用<a href="https://github.com/apache/storm/tree/master/external/storm-kafka">KafkaSpout</a>和Storm进行组合。</li>
+</ol>
+
+<blockquote>
+<p>本文只关注Storm，有关ZooKeeper和Kafka的介绍，可以访问<a href="http://apache.org/">官网</a>、<a href="http://www.tutorialspoint.com/">TutorialsPoint</a>或本博客的其他相关文章。</p>
+</blockquote>
+
+<h4 id="拓扑作业">拓扑作业</h4>
+
+<ol>
+<li><p>Tuple<br />
+ Tuple是Topology中数据流的传输格式。它是<strong>不可变的键值对组</strong>。既然是键值对，就需要设置键和值，典型的设置方式如下：</p>
+
+<pre><code class="language-java"> // 设置键
+ outputFieldsDeclarer.declare(new Fields(&quot;timestamp&quot;, &quot;fieldvalues&quot;));
+ // 设置值
+ collector.emit(tuple, new Values(timestamp, stringBuilder.toString()));
+</code></pre>
+
+<p>这样就会得到一个形如<code>(&quot;timestamp&quot;: timestamp, &quot;fieldvalues&quot;: xxxx&quot;)</code>这样的Tuple。</p></li>
+
+<li><p>Spout<br />
+ Spout是Topology的数据来源，输出的数据以Tuple的形式传入下一个Bolt。具体到本例中，KafkaSpout会把它接收到的数据以类似<code>(0: message)</code>这样的形式发射(emit)出来。所以，在KafkaSpout下游的Bolt需要这样获取整条数据(其实这里是可配置的)：</p>
+
+<pre><code class="language-java"> String message = tuple.getString(0);
+</code></pre>
+
+<p>对KafkaSpout而言，它也实现了多个方法，但我们这里只需要了解两个<code>ack</code>和<code>fail</code>。</p>
+
+<p><img src="http://ww3.sinaimg.cn/large/65e4f1e6jw1f8wdqv4tuqj218y0ji41l.jpg" alt="" /></p>
+
+<p>这两个是回调方法，分别在ack unit向其发送ack或fail请求时被触发，一般而言，ack方法由于通知Kafka发送下一条数据，fail方法用于通知Kafka重发上一条数据。</p>
+
+<blockquote>
+<p>关于ack unit，可以理解为Storm中处理bolt的ack或fail请求的总线，它接收到相应的请求后，做简单的异或处理，并把结果发送给Spout。</p>
+</blockquote></li>
+
+<li><p>Bolt<br />
+ Bolt是真正写处理逻辑的地方，比如在本例中，我们要做以下几件事：</p>
+
+<ol>
+<li>把message中的每个字段提取出来，</li>
+<li>从message的domain字段中过滤出以<code>.api.ksyun.com</code>结尾的，其他的舍弃</li>
+<li>把domain字段的值以<code>.</code>分割，取出index为0的部分，也就是第一段作为service字段</li>
+<li>把service最终输出Tuple的一个field写入输出结果</li>
+</ol>
+
+<p>一般情况下，要实现一个Bolt有几种方式</p>
+
+<p>​</p>
+
+<ul>
+<li>实现<code>IRichBolt</code>接口<br />
+  因为这个比较低级，要实现的方法有很多，而其中多数的方法不需要做特殊处理，所以一般会用第二种方式</li>
+
+<li><p>集成<code>BaseRichBolt</code>类<br />
+  这个基类实现了<code>IRichBolt</code>中定义的几个不常用的方法，让我们只需要关注重点的几个方法即可。在这种方式中，我们需要自己实现三个方法：</p>
+
+<ol>
+<li><p><code>public void prepare(Map map, TopologyContext topologyContext, OutputCollector outputCollector)</code><br />
+  这个方法<strong>类似构造函数</strong>，用来做一些准备工作，通常用于<strong>把上游传来的collector赋值给成员变量</strong>。</p></li>
+
+<li><p><code>public void execute(Tuple tuple)</code></p>
+
+<p>这是最核心的方法。它负责：</p>
+
+<ul>
+<li>从上游传来的Tuple中读取感兴趣的字段</li>
+<li>把这些字段做一些处理后产生一组新的字段</li>
+<li>把这些值通过<code>OutputCollector::emit(new Values())</code>方法发射出去</li>
+<li>向上游发送<code>OutputCollector::ack(Tuple tuple)</code>或<code>OutputCollector::fail(Tuple tuple)</code>，以告知上游本次Tuple处理是否成功。</li>
+</ul></li>
+
+<li><p><code>public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer)</code></p>
+
+<p>前面已经说过，Tuple是数据交流的格式，这个方法就是用来定义发送到下游的Tuple的字段名的。</p></li>
+</ol></li>
+</ul></li>
+
+<li><p>Topology</p>
+
+<p><img src="http://storm.apache.org/releases/0.10.0/images/topology.png" alt="一个典型的Topology" /></p>
+
+<p>上面这张图中有4个Topology，说明了几个问题：</p>
+
+<ul>
+<li>一个Spout就是一个Topology的入口，从Spout分出几条线就有几个Topology</li>
+<li>一个Topology由一个Spout和若干个Bolt组成</li>
+<li>Topology之间可以共享Spout或者Bolt</li>
+</ul>
+
+<p>创建一个Topology的典型过程：</p>
+
+<pre><code class="language-java">    TopologyBuilder topologyBuilder = new TopologyBuilder();
+    topologyBuilder.setSpout(KAFKA_SPOUT_ID, kafkaSpout, 10);
+    topologyBuilder.setBolt(CROP_BOLT_ID, new CropBolt(), 10).shuffleGrouping(KAFKA_SPOUT_ID);
+    topologyBuilder.setBolt(SPLIT_FIELDS_BOLT_ID, new SplitFieldsBolt(), 10).shuffleGrouping(CROP_BOLT_ID);
+    topologyBuilder.setBolt(STORM_HDFS_BOLT_ID, hdfsBolt, 10).fieldsGrouping(SPLIT_FIELDS_BOLT_ID, new Fields(&quot;timestamp&quot;, &quot;fieldvalues&quot;));
+</code></pre>
+
+<p>从上面的代码可以看到，<code>TopologyBuilder</code>类通过<code>setSpout()</code>和<code>setBolt()</code>两个方法生动的反映了上图的工作流程。</p></li>
+</ol>
+
+<h2 id="源码分析">源码分析</h2>
+
+<h3 id="cropbolt-java"><code>CropBolt.java</code></h3>
+
+<p>主要关注<code>execute</code>方法，它首先从上游发射来的Tuple中取出第一个字段，也就是整条消息作为一个字符串。根据对字符串的分析，我们知道该字符串是以<code>\t\t</code>作为字段间分隔符，以<code>:</code>作为键值分隔符的字符串，所以可以写一个方法来用这种规则解析出消息中的所有字段，并把它放在一个HashMap里。</p>
+
+<pre><code class="language-java">    private HashMap makeMapOfMessage(String message) {
+    String[] fields = message.split(ServerConfig.getFieldSeparator());
+    HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();
+
+    try {
+        for (String field : fields) {
+            String[] pair = field.split(ServerConfig.getPairSeparator(), 2);
+            map.put(pair[0], pair[1]);
+        }
+    } catch (ArrayIndexOutOfBoundsException e) {
+        LOG.warn(&quot;makeMapOfMessage failed {}&quot;, message);
+        e.printStackTrace();
+    }
+
+    return map;
+}
+</code></pre>
+
+<p>其中<code>ServerConfig</code>是一个工具类，它提供了简单的API，把处理逻辑和配置信息分离。在本例中我用的分隔符和实际项目并不一样，这个差别只需要在相应的properties配置文件中做修改即可。还需要注意异常处理，这个方法的返回值有可能是null，在调用该方法的地方需要做相应的判断。</p>
+
+<p>在<code>execute</code>方法中，从上述方法的返回值取出关心的字段，并按需求解析出需要的<code>service</code>字段，并通过<code>collector.emit</code>发送给下游的Bolt。</p>
+
+<p>这个方法中有三点需要注意：</p>
+
+<ol>
+<li>没有在<code>try</code>子句中调用<code>ack</code>方法</li>
+<li>没有在<code>catch</code>子句中调用<code>fail</code>方法</li>
+<li>在<code>finally</code>子句中调用了<code>ack</code>方法</li>
+</ol>
+
+<p>因为我们catch住的这种情况，是只有在输入的数据不满足我们约定要求的情况下才会发生的，比如某些必要的字段不存在等，而这种情况在当前的Topology中是不需要处理的，并且也不需要重试，因此，不需要调用<code>fail</code>。同时，不管数据是否符合要求，我们都是需要通知Spout<strong>这里的处理已经完成</strong>这个信息的，所以在<code>finally</code>中调用<code>ack</code>。</p>
+
+<h3 id="splitfieldsbolt-java"><code>SplitFieldsBolt.java</code></h3>
+
+<p>这步的功能很简单，就是把前面传过来的所有字段用一个特定的分隔符连接起来，变成一行数据。只有一个特殊，也就是<code>service</code>字段，它不是直接取出来的，而是前面的Bolt通过一些处理得到的，所以这是<code>stringBuilder</code>需要处理的一种特殊情况。</p>
+
+<p>最后把『时间戳』和『各个字段的值』发射给下游的<code>HdfsBolt</code>。</p>
+
+<h3 id="hdfsbolt"><code>HdfsBolt</code></h3>
+
+<p><code>HdfsBolt</code>是Storm到HDFS的一个中转层，配置一些规则，把Storm输出的数据写入HDFS。其中比较重要的配置有：</p>
+
+<ol>
+<li><code>DelimitedRecordFormat</code> 要写入的字段 在本例中，『时间戳』只是用来划分目录的，所以不需要写入HDFS中</li>
+<li><code>CountSyncPolicy</code> 指定当内存中超过多少条数据时cache到磁盘中</li>
+<li><code>FileSizeRotationPolicy</code> 指定cache的文件超过多大时将文件写入文件系统，如果该值设置的较大，而数据流量又不太大的情况下，文件通常不会达到设置的值，因为当等待写入的文件未达到限制大小而先达到超时时间时，也会创建一个新的文件。</li>
+<li><code>DefaultFileNameFormat</code> 指定文件写入HDFS中的根目录和文件后缀</li>
+<li><code>Partitioner</code> 指定分块规则，在本例中，我们根据日志中<code>time_local</code>字段划分相应的消息应该写入的HDFS目录，比如<code>31/Aug/2016:13:08:12 +0800</code>，相应的记录就会写入<code>root/20160831/13</code>目录中。</li>
+<li><code>FsURL</code> 当然需要指定正确的<code>HDFS</code>服务。</li>
+</ol>
+
+<blockquote>
+<p>其实我们的KMR对应的Storm 0.10.0是不支持HDFS 的partition的，这里我是把Storm最新版的2.0.0-SNAPSHOT中相应的代码移植过来用的。</p>
+</blockquote>
+
+<h3 id="logstatisticstopology-java"><code>LogStatisticsTopology.java</code></h3>
+
+<p>前面讲过，这是拓扑作业的入口，这里指定了一条消息要通过的路径。需要注意的有以下几点：</p>
+
+<ol>
+<li><code>setSpout</code>和<code>setBolt</code>方法中的parallelism_hint(并行度建议)，前面说了，Spout和Bolt在Storm中是以executor的形式存在的，而这个值就是指定executor的数量。但又没有那么绝对，比如在KafkaSpout中，如果指定的Topic在Kafka中有10个partition，但这里的KafkaSpout指定了15个并行度，实际还是只有10个executor有意义，因为剩余的5个在前面10个都正常工作的情况下是分配不到任何数据的，由于ZooKeeper做了中间人，它是知道每个Topic有多少个partition的，所以这里设置多于partition数量的并行度也是不起作用的。</li>
+
+<li><p>grouping类型 Storm目前支持4种分组形式。</p>
+
+<ul>
+<li>随机分组 等量tuples随机分发给执行bolt的所有workers</li>
+<li>字段分组 把指定字段值相同的分配给同一个task,在wordCount应用中比较重要</li>
+<li>广播分组 给每个executor发送一个这个tuple的副本</li>
+<li>全局分组 把所有数据分发给bolt的executor中id最小的<strong>一个</strong></li>
+<li>无分组   目前基本等同于随机分组，会把tuple交给和它上游同一个线程内的下游bolt，以减少数据传递的开销</li>
+</ul></li>
+</ol>
+
+<p>根据我们的需求，其实是不需要太关心分组的事情。</p>
+
+<p>关于优化，有几个方面可以考虑：</p>
+
+<ol>
+<li>考虑到后面需要用Hive分析数据，如果产生很多小的文件，就会产生过多的Map过程，影响性能，可以考虑同一小时的文件交给同一个executor来写，因为每个executor会打开一个hdfs文件，但这样可能会导致并发数过少</li>
+<li>既然这样，可以减少executor的数量，比如现在是10个，可以改成5个，在不触发FileSizeRotationPolicy的情况下，把生成的文件数量减少了一半，也就把Hive查询时Map过程的数量减少了一半</li>
+<li>分析需求，如果没有按照小时分组的需求，可以直接删除这个级别，直接用天作为区分，这样，在不触发FileSizeRotationPolicy的情况下产生的文件数量会变成1/24,相应的Hive查询中Map的过程也会变成1/24.</li>
+</ol>
+
+<h2 id="总结">总结</h2>
+
+<p>本文主要介绍了Storm的工作流程，以及其与Kafka和HDFS的配合来进行日志分析的工作流程，并简单介绍了一些需要注意的点。</p>
+
+<p>我也是Storm的初学者，并没有太多的实际经验，这里只是演示了一个可以工作的Storm作业的实例，大家有什么问题可以及时与我交流，也希望大家不吝赐教。</p>
+
+                </div>
+
+
+                <aside>
+                    <div class="section"><a href="http://unixera.com/tags/java/" class="tag">Java</a> <a href="http://unixera.com/tags/storm/" class="tag">Storm</a> </div>
+
+                    <div class="section share">
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2funixera.com%2fjava%2fstorm-demo-presentation%2f&title=%e4%b8%80%e4%b8%aa%e7%9c%9f%e5%ae%9eStorm%e5%ba%94%e7%94%a8%e6%ba%90%e7%a0%81%e8%a7%a3%e6%9e%90" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                    </div>
+
+                    
+                    <div class="section">
+                        
+                        <div class="ds-thread" data-thread-key="/java/storm-demo-presentation/" data-title="一个真实Storm应用源码解析" data-url="http://unixera.com/java/storm-demo-presentation/"></div>
+                        
+
+                        
+                        <script type="text/javascript">
+                            var duoshuoQuery = {short_name:"UnixAgain"};
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                        </script>
+                    </div>
+                    
+                    
+                </aside>
+
+            </article>
+
+        </div>
+        <div class="col-md-4">
+            
+<aside class="site">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <span class="fa fa-clock-o"></span><h4>最近文章</h4>
+      </div>
+    
+    </div>
+    <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/linux/handle-with-bash-options/" >用Bash编写漂亮的命令行程序</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/virtualization/create-a-virtual-machine-with-vboxmanage/" >使用VBoxManage创建虚拟机</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/bigdata/zookeeper-simple-practice/" >ZooKeeper原理简介和简单使用</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/storm-demo-presentation/" >一个真实Storm应用源码解析</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/" >在本地单机部署Hadoop/Storm运行环境</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/" >slf4j配合log4j来给你的应用打log</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/create-and-run-java-application-with-maven/" >使用maven创建和运行Java应用</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/linux/deepin-linux-experience/" >DeepinLinux 体验报告</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/mvn-tutorial-for-novice/" >给Java新手看的mvn指南</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/" >使用ssh-config提升你的生产力</a>
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+      <div class="panel panel-success">
+      <div class="panel-heading">
+        <div class="panel-title">
+        <i class="fa fa-bars" aria-hidden="true"></i><h4>Category</h4>
+        </div>
+      </div>
+      <div class="list-group">
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/javascript">Javascript</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/php">Php</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/miscs">Miscs</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/linux">Linux</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/mac">Mac</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/java">Java</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/blog">Blog</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/git">Git</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/python">Python</a>
+        </div>
+        
+        <div class="list-group-item">
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/bigdata">Bigdata</a>
+        </div>
+        
+      </div>
+    </div>
+    
+    
+  
+    
+    
+      <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="panel-title">
+        <i class="fa fa-tags" aria-hidden="true"></i></i><h4>Tag</h4>
+        </div>
+      </div>
+      <div class="list-group">
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/miscs">miscs</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/linux">linux</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/php">php</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/mac">mac</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/java">java</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/javascript">javascript</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/%E6%89%A9%E5%B1%95">扩展</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/git">git</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/bootstrap">bootstrap</a>
+        </div>
+        
+        <div class="list-group-item">
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/ios">ios</a>
+        </div>
+        
+      </div>
+    </div>
+    
+  
+
+</aside>
+
+
+        </div>
+    </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site">
+      <div class="container">
+        <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://unixera.com" target="_blank" rel="nofollow">Frost Wong</a></p>
+      </div>
+    </footer>
+
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+

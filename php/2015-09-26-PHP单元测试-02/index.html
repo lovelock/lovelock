@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.16" />
+    <meta name="generator" content="Hugo 0.17" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -83,7 +83,13 @@
                 <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://unixera.com/"/>
                 <meta itemprop="dateModified" content="2015-09-26T10:41:42&#43;00:00">
                 <meta itemprop="headline" content="PHP单元测试-02">
-                <meta itemprop="description" content="上一篇中讲了PHP单元测试的一些简单概念，这里详细说一下会用到的各种assert*函数。官方文档按照字母顺序逐一讲述了这些方法，但我觉得那很不合适，至少应该大概按照类别来分类。 数组相关 assertArrayHasKey($expected_key, $actual_array) 如果$expected_key是$actual_array中元素的一个键值，则通过，否则不通过。也即 foreach ($actual_array as $k =&gt; $v) { if ($k === $expected_key) { // 测试通过 return true; } // 测试不通过 return false; } assertArraySubset($subset_array, $actual_array) 如果$subset_array是$actual_array的一个子数组，则通过，否则不通过。也即前者是后者的子集，这点很重要，其实由于在PHP中数组是作为HashTable存储的，所以是一般并不存在顺序的问题。因此这里只要求前者是后者的子集，而至于顺序则不要求。 assertCount($count, $array) 如果count($array) === $count)则通过。注意这里$count的类型必须是整数。 类属性相关 assertClassHasAttribute($attributeName, $className) 如果类名为$className的类拥有一个名为$attributeName的属性，则通过，否则不通过。值得注意的是，这个测试通过与否与属性的值是否设置没有关系，即使是只声明了名为$attributeName的属性，这个测试也是通过的，但实例化该类之后var_dump(new ClassAttr()-&gt;attr)的结果却是false。 assetClassHasStaticAttribute($staticAttributeName, $className) 这个自不必多说，和上面类似。只是用来判断静态属性。 对象关系 assertObjectHasAttribute($attributeName, $object) 如果对象$object拥有属性$attributeName，则通过。 包含关系 assertContains($needle, $haystack) 如果$haystack中包含$needle，则通过，否则不通过。这个包含可以是数组的包含，也可以是字符串的包含，注意，默认是区分大小写的，即assertContains(&#39;foo&#39;, &#39;FooBar&#39;)是不能通过测试的。但assertContains(&#39;foo&#39;, &#39;FooBar&#39;, &#39;&#39;, true)则可以通过测试，也就是说第四个参数表示不区分大小写。至于第三个参数，其实是$message，也就是在测试不通过时报告 详细信息的，我个人理解和try/cache里面的Exception $e里面的getMessage()可能有点类似，没有深究。 assertContainsOnly($type, $array) 如果$array中只包含由$type指定的一种类型的变量，则通过，否则不通过。 assertContainsOnlyInstanceOf($className, $instance_array) 如果$instance_array中的所有元素都是名为$className的类的实例，则通过，否则不通过。 assertInstanceOf($className, $instance) 如果$instance是$className的实例，则通过。 相等相关 是非问题 assertTrue($actual) assertFalse($actual)">
+                <meta itemprop="description" content="上一篇中讲了PHP单元测试的一些简单概念，这里详细说一下会用到的各种assert*函数。官方文档按照字母顺序逐一讲述了这些方法，但我觉得那很不合适，至少应该大概按照类别来分类。
+数组相关  assertArrayHasKey($expected_key, $actual_array) 如果$expected_key是$actual_array中元素的一个键值，则通过，否则不通过。也即
+foreach ($actual_array as $k =&gt; $v) { if ($k === $expected_key) { // 测试通过 return true; } // 测试不通过 return false; }  assertArraySubset($subset_array, $actual_array) 如果$subset_array是$actual_array的一个子数组，则通过，否则不通过。也即前者是后者的子集，这点很重要，其实由于在PHP中数组是作为HashTable存储的，所以是一般并不存在顺序的问题。因此这里只要求前者是后者的子集，而至于顺序则不要求。
+ assertCount($count, $array) 如果count($array) === $count)则通过。注意这里$count的类型必须是整数。
+  类属性相关  assertClassHasAttribute($attributeName, $className) 如果类名为$className的类拥有一个名为$attributeName的属性，则通过，否则不通过。值得注意的是，这个测试通过与否与属性的值是否设置没有关系，即使是只声明了名为$attributeName的属性，这个测试也是通过的，但实例化该类之后var_dump(new ClassAttr()-&gt;attr)的结果却是false。
+ assetClassHasStaticAttribute($staticAttributeName, $className) 这个自不必多说，和上面类似。只是用来判断静态属性。
+  对象关系  assertObjectHasAttribute($attributeName, $object) 如果对象$object拥有属性$attributeName，则通过。  包含关系  assertContains($needle, $haystack) 如果$haystack中包含$needle，则通过，否则不通过。这个包含可以是数组的包含，也可以是字符串的包含，注意，默认是区分大小写的，即assertContains(&#39;foo&#39;, &#39;FooBar&#39;)是不能通过测试的。但assertContains(&#39;foo&#39;, &#39;FooBar&#39;, &#39;&#39;, true)则可以通过测试，也就是说第四个参数表示不区分大小写。至于第三个参数，其实是$message，也就是在测试不通过时报告 详细信息的，我个人理解和try/cache里面的Exception $e里面的getMessage()可能有点类似，没有深究。">
                 <meta itemprop="url" content="http://unixera.com/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                     <meta itemprop="url" content="http://unixera.com/images/default.jpg" />
@@ -299,7 +305,7 @@
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="" data-title="PHP单元测试-02" data-url="http://unixera.com/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/"></div>
+                        <div class="ds-thread" data-thread-key="/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/" data-title="PHP单元测试-02" data-url="http://unixera.com/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/"></div>
                         
 
                         
@@ -348,6 +354,10 @@
       </div>
       
       <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/storm-demo-presentation/" >一个真实Storm应用源码解析</a>
+      </div>
+      
+      <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/" >在本地单机部署Hadoop/Storm运行环境</a>
       </div>
       
@@ -369,10 +379,6 @@
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/" >使用ssh-config提升你的生产力</a>
-      </div>
-      
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://unixera.com/miscs/talk-about-transgene-foods/" >谈谈转基因食物</a>
       </div>
       
     </div>
@@ -425,7 +431,7 @@
         </div>
         
         <div class="list-group-item">
-        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/ios">Ios</a>
+        <i class="fa fa-folder-o" aria-hidden="true"></i> <a href="http://unixera.com/Categories/bigdata">Bigdata</a>
         </div>
         
       </div>
@@ -460,11 +466,11 @@
         </div>
         
         <div class="list-group-item">
-        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/javascript">javascript</a>
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/java">java</a>
         </div>
         
         <div class="list-group-item">
-        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/java">java</a>
+        <span aria-hidden="true">#</span><a href="http://unixera.com/Tags/javascript">javascript</a>
         </div>
         
         <div class="list-group-item">

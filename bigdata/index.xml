@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bigdata on Me &amp; Web</title>
-    <link>http://unixera.com/bigdata/</link>
-    <description>Recent content in Bigdata on Me &amp; Web</description>
+    <title>Bigdata-rsses on Me &amp; Web</title>
+    <link>http://unixera.com/bigdata/index.xml</link>
+    <description>Recent content in Bigdata-rsses on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
     <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <lastBuildDate>Wed, 12 Oct 2016 23:36:09 +0800</lastBuildDate>
-    <atom:link href="http://unixera.com/bigdata/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/bigdata/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>ZooKeeper原理简介和简单使用</title>
