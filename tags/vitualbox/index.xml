@@ -50,7 +50,7 @@
 &lt;p&gt;首先要创建一块磁盘。&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;code&gt;--name &amp;lt;name&amp;gt;&lt;/code&gt; 创建的设备的名字&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--filename &amp;lt;name&amp;gt;&lt;/code&gt; 创建的设备的名字&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--format VDI|VMDK|VHD&lt;/code&gt; 创建的设备的格式，默认是vdi，当年我做云主机运维的时候还测试过各种虚拟化磁盘格式的性能，vdi的性能是所有可选项里面最快的，值得信赖&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--size &amp;lt;megabytes&amp;gt;&lt;/code&gt; 创建的磁盘的大小，以M为单位&lt;/li&gt;
 &lt;/ol&gt;
