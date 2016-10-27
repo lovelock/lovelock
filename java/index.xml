@@ -726,29 +726,28 @@ java HelloWorld
 
 &lt;p&gt;所以我们知道了直接生成的jar包不能执行是因为Manifest中缺少了指定Main-Class的指令。那么既然我们使用了mvn，依赖了pom.xml，那mvn当然是能帮我们直接解决这个问题的，不然要自己每次解压、修改再压缩得累死了。&lt;/p&gt;
 
-&lt;p&gt;根据Maven官方文档&lt;a href=&#34;https://maven.apache.org/shared/maven-archiver/examples/classpath.html#Make&#34;&gt;4&lt;/a&gt;, 在&lt;code&gt;pom.xml&lt;/code&gt;中添加plugin配置即可&lt;/p&gt;
+&lt;p&gt;根据这个答案&lt;a href=&#34;http://stackoverflow.com/questions/574594/how-can-i-create-an-executable-jar-with-dependencies-using-maven&#34;&gt;4&lt;/a&gt;, 在&lt;code&gt;pom.xml&lt;/code&gt;中添加plugin配置即可&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;dependencies&amp;gt;
 ...
 &amp;lt;/dependencies&amp;gt;
 
-&amp;lt;build&amp;gt;
-  &amp;lt;plugins&amp;gt;
+ &amp;lt;build&amp;gt;
+    &amp;lt;plugins&amp;gt;
       &amp;lt;plugin&amp;gt;
-      &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;
-      &amp;lt;artifactId&amp;gt;maven-jar-plugin&amp;lt;/artifactId&amp;gt;
-      &amp;lt;version&amp;gt;2.6&amp;lt;/version&amp;gt;
-      &amp;lt;configuration&amp;gt;
-        &amp;lt;archive&amp;gt;
-          &amp;lt;manifest&amp;gt;
-            &amp;lt;mainClass&amp;gt;com.unixera.mvn.App&amp;lt;/mainClass&amp;gt;
-          &amp;lt;/manifest&amp;gt;
-        &amp;lt;/archive&amp;gt;
-      &amp;lt;/configuration&amp;gt;
-    &amp;lt;/plugin&amp;gt;
-  &amp;lt;/plugins&amp;gt;
-&amp;lt;/build&amp;gt;
-
+        &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;
+        &amp;lt;artifactId&amp;gt;maven-assembly-plugin&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;2.6&amp;lt;/version&amp;gt;
+        &amp;lt;configuration&amp;gt;
+          &amp;lt;archive&amp;gt;
+            &amp;lt;manifest&amp;gt;
+              &amp;lt;mainClass&amp;gt;com.unixera.mvn.App&amp;lt;/mainClass&amp;gt;
+            &amp;lt;/manifest&amp;gt;
+          &amp;lt;/archive&amp;gt;
+        &amp;lt;/configuration&amp;gt;
+      &amp;lt;/plugin&amp;gt;
+    &amp;lt;/plugins&amp;gt;
+  &amp;lt;/build&amp;gt;
 &amp;lt;/project&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -756,8 +755,9 @@ java HelloWorld
 
 &lt;h4 id=&#34;jar-with-dependencies&#34;&gt;jar-with-dependencies&lt;/h4&gt;
 
-&lt;p&gt;现在我们终于有了一个可以正常工作的类了，不妨给它添加一个依赖吧。比如我在另外一篇文章中提到的slf4j&lt;a href=&#34;http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/&#34;&gt;5&lt;/a&gt;。具体做法可以参考该文章。这里只谈打包的问题。现在我们的pom.xml主体部分应该是这样的：
-&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f88leultmzj30tm10k43x.jpg&#34; alt=&#34;&#34; /&gt;
+&lt;p&gt;现在我们终于有了一个可以正常工作的类了，不妨给它添加一个依赖吧。比如我在另外一篇文章中提到的slf4j&lt;a href=&#34;http://unixera.com/java/use-slf4j-and-log4j-to-log-your-applications/&#34;&gt;5&lt;/a&gt;。
+具体做法可以参考该文章。这里只谈打包的问题。现在我们的pom.xml文件中在dependencies段中应该包含这样一段：
+&lt;img src=&#34;http://ww2.sinaimg.cn/large/006y8lVajw1f96nuir9vnj30m405ygmi.jpg&#34; alt=&#34;&#34; /&gt;
 我在App.java中添加了slf4j的用例。按照之前的做法，仍然
 &lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f88lgk9cxxj31cs1787fv.jpg&#34; alt=&#34;&#34; /&gt;
 &lt;img src=&#34;http://ww4.sinaimg.cn/large/006y8lVajw1f88lgxno8yj311u090jv3.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
@@ -770,9 +770,13 @@ java HelloWorld
 &lt;strong&gt;其实就是动态加载&lt;/strong&gt;。和写C时用到的.so文件是一个道理。如果希望我们的程序能到处能运行的话，最好把它的依赖都打成.a文件，然后和项目代码打成一个完整的包，所有依赖的类库都在同一个包里就不存在这种问题了。
 所以需要引入一个新的打包方式&lt;code&gt;jar-with-dependencies&lt;/code&gt;。&lt;/p&gt;
 
-&lt;p&gt;根据mvn文档[6]，需要引入一个新的过程——Assembly。所以需要新的插件，在pom.xml中添加
-&lt;img src=&#34;http://ww3.sinaimg.cn/large/006y8lVajw1f88lybcex8j30xm0ditb1.jpg&#34; alt=&#34;&#34; /&gt;
+&lt;p&gt;根据同样根据上面那个答案,还需要添加如下的配置
+&lt;img src=&#34;http://ww2.sinaimg.cn/large/006y8lVajw1f96nstiz0qj30uy0ssn0y.jpg&#34; alt=&#34;&#34; /&gt;
 再重新执行上面的过程，可以运行了。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;本来在上面的文章中引用的是maven的官方文档，后来在实际使用中发现那种方式经常失效，对照自己试验成功后的文章也不奏效，于是找到了前面提到的答案，看来即使是官方文档，也还是需要民间的工程师们来发现最佳实践啊。&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&#34;3-执行应用&#34;&gt;3. 执行应用&lt;/h3&gt;
 
