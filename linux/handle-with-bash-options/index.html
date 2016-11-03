@@ -308,7 +308,7 @@ shift $((OPTIND-1))
 ls ${VERBOSE} *.${EXTENSION}
 </code></pre>
 
-<p>这种方式只能使用短参数不支持长参数，其中<code>${OPTARG}</code>表示对应的这条选项的值。</p>
+<p>这种方式只能使用短参数不支持长参数，其中<code>${OPTARG}</code>表示对应的这条选项的值。<strong>如果该选项后面会带参数，就要在其后面带<code>:</code></strong>，比如在本例中，<code>-e</code>选项后面需要带参数，那么<code>while getopts &quot;h?ve:&quot; opt; do</code>这行<code>e</code>的后面就有一个冒号了，不然你的在代码中是无法取到参数的。</p>
 
 <p>示例： <code>bash getopts.sh -v -e php</code>。</p>
 
