@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/flash/index.xml</link>
+    <link>http://lovelock.coding.me/tags/flash/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>检测浏览器是否安装了Flash</title>
-      <link>http://unixera.com/javascript/detect-flash/</link>
+      <link>http://lovelock.coding.me/javascript/detect-flash/</link>
       <pubDate>Wed, 30 Mar 2016 16:08:03 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/detect-flash/</guid>
+      <guid>http://lovelock.coding.me/javascript/detect-flash/</guid>
       <description>&lt;p&gt;现在国内竟然那么多的视频网站都还不支持HTML5的视频播放，无外乎几个原因：&lt;/p&gt;
 
 &lt;p&gt;现在我们的浏览器也只是对Safari开启了默认HTML5，而其他浏览器都是&lt;strong&gt;鼓励&lt;/strong&gt;用户使用Flash的，但我觉得这样不好。&lt;/p&gt;

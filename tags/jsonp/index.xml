@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/jsonp/index.xml</link>
+    <link>http://lovelock.coding.me/tags/jsonp/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>jsonp原理全解析</title>
-      <link>http://unixera.com/javascript/2015-08-11-jsonp%E5%8E%9F%E7%90%86%E5%85%A8%E8%A7%A3%E6%9E%90/</link>
+      <link>http://lovelock.coding.me/javascript/2015-08-11-jsonp%E5%8E%9F%E7%90%86%E5%85%A8%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Tue, 11 Aug 2015 23:40:32 +0000</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/2015-08-11-jsonp%E5%8E%9F%E7%90%86%E5%85%A8%E8%A7%A3%E6%9E%90/</guid>
+      <guid>http://lovelock.coding.me/javascript/2015-08-11-jsonp%E5%8E%9F%E7%90%86%E5%85%A8%E8%A7%A3%E6%9E%90/</guid>
       <description>
 
 &lt;p&gt;昨天写了一篇关于iframe间跨域通讯问题的总结，想着既然提到了jsonp这个长久以来曽令我困惑的技术，就再总结一篇吧。&lt;/p&gt;

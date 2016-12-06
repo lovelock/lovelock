@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/linux/index.xml</link>
+    <link>http://lovelock.coding.me/tags/linux/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>使用VBoxManage创建虚拟机</title>
-      <link>http://unixera.com/virtualization/create-a-virtual-machine-with-vboxmanage/</link>
+      <link>http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/</link>
       <pubDate>Thu, 13 Oct 2016 16:35:22 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/virtualization/create-a-virtual-machine-with-vboxmanage/</guid>
+      <guid>http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/</guid>
       <description>
 
 &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
@@ -174,10 +174,10 @@ $ VBoxManage startvm CentOS7 --type=headless
     
     <item>
       <title>DeepinLinux 体验报告</title>
-      <link>http://unixera.com/linux/deepin-linux-experience/</link>
+      <link>http://lovelock.coding.me/linux/deepin-linux-experience/</link>
       <pubDate>Sat, 03 Sep 2016 17:20:45 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/linux/deepin-linux-experience/</guid>
+      <guid>http://lovelock.coding.me/linux/deepin-linux-experience/</guid>
       <description>
 
 &lt;h2 id=&#34;为什么要写这篇文章&#34;&gt;为什么要写这篇文章&lt;/h2&gt;
@@ -269,10 +269,10 @@ $ VBoxManage startvm CentOS7 --type=headless
     
     <item>
       <title>修复因为过量卸载引起的Debian无法上网</title>
-      <link>http://unixera.com/linux/fix-Debian-network-problem/</link>
+      <link>http://lovelock.coding.me/linux/fix-Debian-network-problem/</link>
       <pubDate>Thu, 21 Jan 2016 16:21:46 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/linux/fix-Debian-network-problem/</guid>
+      <guid>http://lovelock.coding.me/linux/fix-Debian-network-problem/</guid>
       <description>&lt;p&gt;之前在公司的开发机上装了Debian + Gnome3，后来发了rMBP就基本用不上了，把桌面环境卸载了当服务器用吧，但卸载完之后发现无法上网了，忙的一直没有时间整它，今天抽个10分钟搞一搞。&lt;/p&gt;
 
 &lt;p&gt;我猜大概是这样的，某些服务——依赖Gnome3桌面环境，被卸载了，所以开机后不会自动启动网络了。&lt;/p&gt;
@@ -294,10 +294,10 @@ iface eth0 inet dhcp
     
     <item>
       <title>Shell脚本获取文件名</title>
-      <link>http://unixera.com/linux/bash-basename-ext/</link>
+      <link>http://lovelock.coding.me/linux/bash-basename-ext/</link>
       <pubDate>Sat, 09 Jan 2016 21:38:27 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/linux/bash-basename-ext/</guid>
+      <guid>http://lovelock.coding.me/linux/bash-basename-ext/</guid>
       <description>&lt;p&gt;我的需求是把一些原来后缀是markdown的文本重命名为md，这个需求很low了，但其实也很有技巧，你可以一个一个的重命名，没有问题，但作为一个对Unix大道甚为叹服的人，还是应该寻求更好的方法。&lt;/p&gt;
 
 &lt;p&gt;简单搜索了一下，发现了&lt;a href=&#34;https://stackoverflow.com/questions/2664740/extract-file-basename-without-path-and-extension-in-bash/2664746#2664746&#34;&gt;StackOverFlow&lt;/a&gt;上的答案。&lt;/p&gt;
@@ -318,10 +318,10 @@ foo
     
     <item>
       <title>Vagrant使用说明</title>
-      <link>http://unixera.com/linux/2015-11-03-Vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
+      <link>http://lovelock.coding.me/linux/2015-11-03-Vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
       <pubDate>Tue, 03 Nov 2015 15:43:55 +0000</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/linux/2015-11-03-Vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
+      <guid>http://lovelock.coding.me/linux/2015-11-03-Vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
       <description>
 
 &lt;h1 id=&#34;创建自己的box&#34;&gt;创建自己的box&lt;/h1&gt;
@@ -464,10 +464,10 @@ config.vm.box = &amp;quot;Debian&amp;quot;
     
     <item>
       <title>给Linux新手的一些建议</title>
-      <link>http://unixera.com/linux/2015-10-19-%E7%BB%99Linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/</link>
+      <link>http://lovelock.coding.me/linux/2015-10-19-%E7%BB%99Linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/</link>
       <pubDate>Mon, 19 Oct 2015 21:49:06 +0000</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/linux/2015-10-19-%E7%BB%99Linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/</guid>
+      <guid>http://lovelock.coding.me/linux/2015-10-19-%E7%BB%99Linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/</guid>
       <description>
 
 &lt;p&gt;由于关注了知乎上Linux相关的一些话题，总是断断续续的有人邀请我回答各种Linux的问题——开始看到这种邀请的时候其实我是拒绝的，因为我觉得这种问题网上大把大把的答案，怎么还会有人问呢？后来回想了一下自己当初的经历才明白，原来就是有了太多的教程，而很多写教程的人自己都不怎么明白，怎么能讲的清楚呢？&lt;/p&gt;
@@ -562,10 +562,10 @@ sudo systemctl enable iptables
     
     <item>
       <title>我的Linux之路</title>
-      <link>http://unixera.com/linux/2015-05-02-wo-de-linuxzhi-lu/</link>
+      <link>http://lovelock.coding.me/linux/2015-05-02-wo-de-linuxzhi-lu/</link>
       <pubDate>Sat, 02 May 2015 15:26:15 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/linux/2015-05-02-wo-de-linuxzhi-lu/</guid>
+      <guid>http://lovelock.coding.me/linux/2015-05-02-wo-de-linuxzhi-lu/</guid>
       <description>&lt;p&gt;说出来可能会让人笑话，但现在从事做软件开发的我，在大学之前我几乎没有接触过电脑。大一的时候同学陪我去买电脑，那是第一次“拥有”一台电脑，那是一台没有预装Windows的华硕A42，于是我们去沙河镇上买D版系统盘，买的是XP，但谁知道怎么装都没法用，后来我自己研究的过程中就知道了Windows 7, 然后就发现原来这个机器的双显卡配置是无法用XP的，这个过程中就不停的上网搜索操作系统相关的内容，我已经忘记了是哪天发现了Linux这个单词，然后了解了相关的Wiki之后，我知道了这是一个叫做Linus的牛人开发的，后来呢，原来还有一个叫做Debian的GNU Linux发行版，然后就Ubuntu，发现这个怎么看怎么别扭，哦，原来还有个RHEL，哇塞，这个好高端，企业采用的啊，可惜当时大二，沙河校区的图书馆馆藏有限，能看到的书基本上全部是关于Red Hat Linux 9.0的，这个让我很不明白，为什么现在没有这个9.0了呢？当我傻傻分不清楚的时候在自己的笔记本上装了当时刚刚发布的RHEL6.0，咔咔的把硬盘上的所有资料全部搞没了。：(
 后来就学乖了，在Windows 7里面装虚拟机尝试各种发行版，甚至FreeBSD/OpenBSD以致Darwin/Open Solaris都尝试过，这也算哥们儿最疯狂的时候吧。
 当觉得自己的水平可以了就把硬盘格了，装了个Fedora17，老老实实的用了半年，这期间确实发现了Linux的优点，可能现在总结不出来具体的条款了，但就一条——舒服的命令行已经可以让我毫不犹豫的放弃Windows了。当然，我不是计算机专业的，我们的专业需要写Word和各种乱七八糟的东西，反正就是越来越觉得Linux实际上并不适合没有毕业的我的日常使用，中间又回归了一段时间Windows。

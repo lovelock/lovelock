@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/datatables/index.xml</link>
+    <link>http://lovelock.coding.me/tags/datatables/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>Bootstrap插件DataTables实现服务器端分页</title>
-      <link>http://unixera.com/javascript/bootstrap-plugin-datatables/</link>
+      <link>http://lovelock.coding.me/javascript/bootstrap-plugin-datatables/</link>
       <pubDate>Sun, 28 Feb 2016 21:40:04 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/bootstrap-plugin-datatables/</guid>
+      <guid>http://lovelock.coding.me/javascript/bootstrap-plugin-datatables/</guid>
       <description>
 
 &lt;p&gt;我们知道，PHP和MySQL实现分页的基本思路是limit，页面上有个page(第几页）和count(每次取出几个），PHP把它传递给后端MySQL，查询时在条件查询的基础上加上&lt;code&gt;limit {($page - 1) * $count, $count}&lt;/code&gt;。&lt;/p&gt;

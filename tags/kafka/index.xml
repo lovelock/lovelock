@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/kafka/index.xml</link>
+    <link>http://lovelock.coding.me/tags/kafka/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>在本地单机部署Hadoop/Storm运行环境</title>
-      <link>http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/</link>
+      <link>http://lovelock.coding.me/java/deploy-pseudo-distributed-mode-hadoop/</link>
       <pubDate>Mon, 10 Oct 2016 17:53:14 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/java/deploy-pseudo-distributed-mode-hadoop/</guid>
+      <guid>http://lovelock.coding.me/java/deploy-pseudo-distributed-mode-hadoop/</guid>
       <description>
 
 &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;

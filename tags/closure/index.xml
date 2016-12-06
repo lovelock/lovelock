@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/closure/index.xml</link>
+    <link>http://lovelock.coding.me/tags/closure/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>JavaScript闭包深究</title>
-      <link>http://unixera.com/javascript/2015-12-02-JavaScript-closure-internals/</link>
+      <link>http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/</link>
       <pubDate>Wed, 02 Dec 2015 21:35:12 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/2015-12-02-JavaScript-closure-internals/</guid>
+      <guid>http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/</guid>
       <description>
 
 &lt;h2 id=&#34;问题来源&#34;&gt;问题来源&lt;/h2&gt;

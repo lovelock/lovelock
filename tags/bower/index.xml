@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/bower/index.xml</link>
+    <link>http://lovelock.coding.me/tags/bower/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>Bower使用简明教程</title>
-      <link>http://unixera.com/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</link>
+      <link>http://lovelock.coding.me/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</link>
       <pubDate>Thu, 08 Oct 2015 18:10:45 +0000</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</guid>
+      <guid>http://lovelock.coding.me/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</guid>
       <description>&lt;p&gt;最近接触到Node.js，于是摇身一变前后端全部用JavaScript实现，这样其实导致界限不清晰了——其实很清晰，但当你看一个.js文件的时候总是要想一下这是前端逻辑还是后端逻辑，感觉怪怪的。后端需要的模块可以用npm这个大杀器安装，虽然前端的依赖也可以用它解决，但其实有更专业的解决方案——&lt;a href=&#34;http://bower.io&#34;&gt;bower&lt;/a&gt;。官方简介里面其实并没有提到它是专门用来解决前端依赖的，看它的用例以及别的项目的使用情况也可以看到
 ，通常的用法就是&lt;code&gt;&amp;lt;script src=&amp;quot;bower_components/xxx_lib/xxxx.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;，这就已经很明显了，不是吗？&lt;/p&gt;
 

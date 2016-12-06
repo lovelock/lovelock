@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/categories/virtualization/index.xml</link>
+    <link>http://lovelock.coding.me/categories/virtualization/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>使用VBoxManage创建虚拟机</title>
-      <link>http://unixera.com/virtualization/create-a-virtual-machine-with-vboxmanage/</link>
+      <link>http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/</link>
       <pubDate>Thu, 13 Oct 2016 16:35:22 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/virtualization/create-a-virtual-machine-with-vboxmanage/</guid>
+      <guid>http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/</guid>
       <description>
 
 &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;

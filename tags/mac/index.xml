@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/mac/index.xml</link>
+    <link>http://lovelock.coding.me/tags/mac/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>使用ssh-config提升你的生产力</title>
-      <link>http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/</link>
+      <link>http://lovelock.coding.me/mac/use-ssh-config-to-tune-your-productivity-up/</link>
       <pubDate>Tue, 09 Aug 2016 14:57:11 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/mac/use-ssh-config-to-tune-your-productivity-up/</guid>
+      <guid>http://lovelock.coding.me/mac/use-ssh-config-to-tune-your-productivity-up/</guid>
       <description>
 
 &lt;p&gt;我们做服务端开发的，每天最烦心的事情可能就是登陆各种服务器了。在Windows上还好，有SecureCRT还有XShell这种很强大的工具可以用，但在Mac下面选择就很少了。SecureCRT我个人感觉远远不如Windows下的稳定，而渲染效果我当然还是最喜欢iTerm了。其实并没有用到它的很强大的那些功能，比如窗口分割、全局查找等等，最能打动我的其实是智能复制粘贴。不多说了，下面说一下怎样用ssh的config文件来记住登录账户。&lt;/p&gt;
@@ -114,10 +114,10 @@ ControlPath ~/.ssh/master-%r@%h:%p
     
     <item>
       <title>rMBP连接1080P显示器显示效果优化</title>
-      <link>http://unixera.com/mac/low-resolution-display-with-retina-macbookpro/</link>
+      <link>http://lovelock.coding.me/mac/low-resolution-display-with-retina-macbookpro/</link>
       <pubDate>Wed, 20 Jan 2016 14:03:19 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/mac/low-resolution-display-with-retina-macbookpro/</guid>
+      <guid>http://lovelock.coding.me/mac/low-resolution-display-with-retina-macbookpro/</guid>
       <description>&lt;p&gt;喜大普奔地，公司发了13寸MacBook Pro和Dell 24寸显示器。&lt;/p&gt;
 
 &lt;p&gt;然而，没有转接头，自己买。&lt;/p&gt;
@@ -139,10 +139,10 @@ defaults -currentHost read -globalDomain AppleFontSmoothing
     
     <item>
       <title>OS X完全卸载JDK的方法</title>
-      <link>http://unixera.com/mac/2015-12-04-uninstall-jdk-from-os-x/</link>
+      <link>http://lovelock.coding.me/mac/2015-12-04-uninstall-jdk-from-os-x/</link>
       <pubDate>Fri, 04 Dec 2015 23:04:43 +0000</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/mac/2015-12-04-uninstall-jdk-from-os-x/</guid>
+      <guid>http://lovelock.coding.me/mac/2015-12-04-uninstall-jdk-from-os-x/</guid>
       <description>&lt;p&gt;刚用OS X时想着可能会用到Java，毕竟Jetbrains的产品都要依赖Java。但新版本的这些IDE都自带java-bundle了，所以就没有必要留着了。&lt;/p&gt;
 
 &lt;p&gt;看了Java官网的指南，发现无法删干净，而在&lt;a href=&#34;https://stackoverflow.com/questions/19039752/removing-java-8-jdk-from-mac/23092014#23092014&#34;&gt;StackOverFlow&lt;/a&gt;上发现了这条，完美！&lt;/p&gt;
@@ -162,10 +162,10 @@ sudo rm -rf /Library/Preferences/com.oracle.java.Helper-Tool.plist
     
     <item>
       <title>Mac使用VMware Fusion安装Ubuntu</title>
-      <link>http://unixera.com/mac/2015-08-31-Mac%E4%BD%BF%E7%94%A8VMware-Fusion%E5%AE%89%E8%A3%85Ubuntu/</link>
+      <link>http://lovelock.coding.me/mac/2015-08-31-Mac%E4%BD%BF%E7%94%A8VMware-Fusion%E5%AE%89%E8%A3%85Ubuntu/</link>
       <pubDate>Mon, 31 Aug 2015 19:37:00 +0000</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/mac/2015-08-31-Mac%E4%BD%BF%E7%94%A8VMware-Fusion%E5%AE%89%E8%A3%85Ubuntu/</guid>
+      <guid>http://lovelock.coding.me/mac/2015-08-31-Mac%E4%BD%BF%E7%94%A8VMware-Fusion%E5%AE%89%E8%A3%85Ubuntu/</guid>
       <description>&lt;p&gt;越来越觉得我用Mac和Windows也没有什么区别。&lt;/p&gt;
 
 &lt;p&gt;用Windows的时候是因为没有类Unix环境，所以需要在虚拟机里面搭建一些Web环境，然后用SecureCRT或者XShell登录进行操作。当然主要是用VirtualBox比较多，因为它比较轻量，功能也没有什么缺陷。非要说缺陷，我觉得VMware的NAT功能比VirtualBox要好。前者是建立了一个192.168开头的虚拟网段，虚拟机使用这个网段的IP，虚拟机可以和宿主机相互通信，并且在类似学校的需要认证才能上网的环境下是可以直接上网的。但VirtualBox就不行了，它
@@ -185,10 +185,10 @@ sudo rm -rf /Library/Preferences/com.oracle.java.Helper-Tool.plist
     
     <item>
       <title>和接口调用方联调的经验教训</title>
-      <link>http://unixera.com/mac/2015-06-26-he-jie-kou-diao-yong-fang-lian-diao-de-jing-yan-jiao-xun/</link>
+      <link>http://lovelock.coding.me/mac/2015-06-26-he-jie-kou-diao-yong-fang-lian-diao-de-jing-yan-jiao-xun/</link>
       <pubDate>Fri, 26 Jun 2015 10:22:18 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/mac/2015-06-26-he-jie-kou-diao-yong-fang-lian-diao-de-jing-yan-jiao-xun/</guid>
+      <guid>http://lovelock.coding.me/mac/2015-06-26-he-jie-kou-diao-yong-fang-lian-diao-de-jing-yan-jiao-xun/</guid>
       <description>&lt;p&gt;一个同事做的接口，今天他请假没有来，就临时由我协助接口调用方联调。&lt;/p&gt;
 
 &lt;p&gt;这是一个很简单的接口。但浪费了近一天的时间。&lt;/p&gt;
@@ -238,10 +238,10 @@ sudo rm -rf /Library/Preferences/com.oracle.java.Helper-Tool.plist
     
     <item>
       <title>关于smcFanControl的一点感想</title>
-      <link>http://unixera.com/mac/2015-06-06-guan-yu-smcfancontrolde-yi-dian-gan-xiang/</link>
+      <link>http://lovelock.coding.me/mac/2015-06-06-guan-yu-smcfancontrolde-yi-dian-gan-xiang/</link>
       <pubDate>Sat, 06 Jun 2015 15:39:24 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/mac/2015-06-06-guan-yu-smcfancontrolde-yi-dian-gan-xiang/</guid>
+      <guid>http://lovelock.coding.me/mac/2015-06-06-guan-yu-smcfancontrolde-yi-dian-gan-xiang/</guid>
       <description>&lt;p&gt;前天晚上看了池建强先生的《MacTalk：人生元编程》，其中提到了很多关于Mac和OS X的东西，其中一点引起了我的注意，那就是关于夏天电脑发热严重，怎样避免呢？那么作者就提到了smcFanControl。&lt;/p&gt;
 
 &lt;p&gt;由于我是首次用Mac OS X，不太懂什么是smc等等，抱着好奇的心情就找来安装了，装上后很惊喜的发现它会让你手动调节风扇的转速——然而这个好奇没有坚持一分钟我就意识到这个软件不能用——因为它会让操作系统无法按需调节风扇的转速。也就是说，它通过修改底层的系统参数把风扇的控制由自动模式切换到了手动模式。&lt;/p&gt;

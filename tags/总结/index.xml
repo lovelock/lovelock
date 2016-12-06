@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/%E6%80%BB%E7%BB%93/index.xml</link>
+    <link>http://lovelock.coding.me/tags/%E6%80%BB%E7%BB%93/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>我的编程心得——第一篇章</title>
-      <link>http://unixera.com/miscs/2015-11-28-my-thoughts-about-programming/</link>
+      <link>http://lovelock.coding.me/miscs/2015-11-28-my-thoughts-about-programming/</link>
       <pubDate>Wed, 13 Jan 2016 23:32:28 +0000</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/miscs/2015-11-28-my-thoughts-about-programming/</guid>
+      <guid>http://lovelock.coding.me/miscs/2015-11-28-my-thoughts-about-programming/</guid>
       <description>
 
 &lt;h2 id=&#34;可见性-visibility&#34;&gt;可见性 Visibility&lt;/h2&gt;

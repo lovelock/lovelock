@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/jquery/index.xml</link>
+    <link>http://lovelock.coding.me/tags/jquery/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>Bootstrap Modal用法总结</title>
-      <link>http://unixera.com/javascript/2015-05-06-bootstrap-modalyong-fa-zong-jie/</link>
+      <link>http://lovelock.coding.me/javascript/2015-05-06-bootstrap-modalyong-fa-zong-jie/</link>
       <pubDate>Wed, 06 May 2015 23:15:41 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/2015-05-06-bootstrap-modalyong-fa-zong-jie/</guid>
+      <guid>http://lovelock.coding.me/javascript/2015-05-06-bootstrap-modalyong-fa-zong-jie/</guid>
       <description>
 
 &lt;p&gt;这段时间前端后端同时写，对jQuery和Bootstrap用的比较多，说实话我对Modal很感兴趣，单纯的就是因为它好看，并且看起来友好，不像alert那么暴力，FF的实现还好，而Chrome的alert直接忽视所有其他操作，只能选择不再弹出，但只要选择了这个不再弹出，在重启这个页面之前（刷新没用）就不会再弹出了，真不明白这是什么逻辑。当然最重要的一点是Modal可以交互。&lt;/p&gt;
@@ -133,10 +133,10 @@ $(&#39;#myModal&#39;).modal({
     
     <item>
       <title>jQuery动态生成元素</title>
-      <link>http://unixera.com/javascript/2015-05-05-jquerydong-tai-sheng-cheng-yuan-su/</link>
+      <link>http://lovelock.coding.me/javascript/2015-05-05-jquerydong-tai-sheng-cheng-yuan-su/</link>
       <pubDate>Tue, 05 May 2015 23:14:20 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/2015-05-05-jquerydong-tai-sheng-cheng-yuan-su/</guid>
+      <guid>http://lovelock.coding.me/javascript/2015-05-05-jquerydong-tai-sheng-cheng-yuan-su/</guid>
       <description>
 
 &lt;p&gt;这些天做的项目中频繁遇到类似的问题，比如根据ajax返回的结果动态生成一个table或者select的options。这里做一个简单的总结。&lt;/p&gt;

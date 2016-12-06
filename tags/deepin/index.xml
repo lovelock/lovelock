@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/deepin/index.xml</link>
+    <link>http://lovelock.coding.me/tags/deepin/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>DeepinLinux 体验报告</title>
-      <link>http://unixera.com/linux/deepin-linux-experience/</link>
+      <link>http://lovelock.coding.me/linux/deepin-linux-experience/</link>
       <pubDate>Sat, 03 Sep 2016 17:20:45 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/linux/deepin-linux-experience/</guid>
+      <guid>http://lovelock.coding.me/linux/deepin-linux-experience/</guid>
       <description>
 
 &lt;h2 id=&#34;为什么要写这篇文章&#34;&gt;为什么要写这篇文章&lt;/h2&gt;

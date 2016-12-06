@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python-rsses on Me &amp; Web</title>
-    <link>http://unixera.com/python/index.xml</link>
+    <link>http://lovelock.coding.me/python/index.xml</link>
     <description>Recent content in Python-rsses on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -14,10 +14,10 @@
     
     <item>
       <title>Python日志处理总结</title>
-      <link>http://unixera.com/python/2015-07-31-Python%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/</link>
+      <link>http://lovelock.coding.me/python/2015-07-31-Python%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/</link>
       <pubDate>Fri, 31 Jul 2015 11:26:37 +0000</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/python/2015-07-31-Python%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/</guid>
+      <guid>http://lovelock.coding.me/python/2015-07-31-Python%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%E6%80%BB%E7%BB%93/</guid>
       <description>
 
 &lt;p&gt;前段时间写了一篇比较简单的Python处理日志的笔记，现在又遇到了类似的问题，干脆我就把这中间会遇到的各种问题总结一下，大致可以得到一个简单的日志处理框架。&lt;/p&gt;
@@ -160,10 +160,10 @@ fp.close()
     
     <item>
       <title>日志处理的一些心得</title>
-      <link>http://unixera.com/python/2015-06-09-ri-zhi-chu-li-de-yi-xie-xin-de/</link>
+      <link>http://lovelock.coding.me/python/2015-06-09-ri-zhi-chu-li-de-yi-xie-xin-de/</link>
       <pubDate>Tue, 09 Jun 2015 19:32:40 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/python/2015-06-09-ri-zhi-chu-li-de-yi-xie-xin-de/</guid>
+      <guid>http://lovelock.coding.me/python/2015-06-09-ri-zhi-chu-li-de-yi-xie-xin-de/</guid>
       <description>&lt;p&gt;今天花了很长时间处理日志，然而并没有什么卵用。&lt;/p&gt;
 
 &lt;p&gt;发给我的日志是个压缩包，127M，解压后大概是430多M，在我之前的工作生涯中是没有见过那么大的日志的，果然在小公司待的时间长了是完全体会不到大公司的量级了。&lt;/p&gt;
@@ -245,10 +245,10 @@ echo &#39;|&#39;
     
     <item>
       <title>Python日志处理记</title>
-      <link>http://unixera.com/python/2015-06-06-pythonri-zhi-chu-li/</link>
+      <link>http://lovelock.coding.me/python/2015-06-06-pythonri-zhi-chu-li/</link>
       <pubDate>Sat, 06 Jun 2015 10:31:09 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/python/2015-06-06-pythonri-zhi-chu-li/</guid>
+      <guid>http://lovelock.coding.me/python/2015-06-06-pythonri-zhi-chu-li/</guid>
       <description>&lt;p&gt;事情是这样的，今天领导给了一个需求，处理日志。&lt;/p&gt;
 
 &lt;ol&gt;

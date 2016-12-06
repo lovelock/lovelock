@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/iframe/index.xml</link>
+    <link>http://lovelock.coding.me/tags/iframe/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>iframe间通信方法总结</title>
-      <link>http://unixera.com/javascript/2015-08-10-iframe%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</link>
+      <link>http://lovelock.coding.me/javascript/2015-08-10-iframe%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</link>
       <pubDate>Mon, 10 Aug 2015 10:15:56 +0000</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/2015-08-10-iframe%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</guid>
+      <guid>http://lovelock.coding.me/javascript/2015-08-10-iframe%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</guid>
       <description>
 
 &lt;p&gt;在对外提供Web组件时常常会遇到iframe间的通信问题，本文旨在总结目前主流的解决方案，并给出了详细的代码示例。&lt;/p&gt;

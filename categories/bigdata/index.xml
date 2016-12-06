@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/categories/bigdata/index.xml</link>
+    <link>http://lovelock.coding.me/categories/bigdata/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>ZooKeeper原理简介和简单使用</title>
-      <link>http://unixera.com/bigdata/zookeeper-simple-practice/</link>
+      <link>http://lovelock.coding.me/bigdata/zookeeper-simple-practice/</link>
       <pubDate>Wed, 12 Oct 2016 23:36:09 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/bigdata/zookeeper-simple-practice/</guid>
+      <guid>http://lovelock.coding.me/bigdata/zookeeper-simple-practice/</guid>
       <description>
 
 &lt;h2 id=&#34;什么是分布式应用&#34;&gt;什么是分布式应用&lt;/h2&gt;
@@ -297,10 +297,10 @@ export PATH=$PATH:$ZK_HOME/bin
     
     <item>
       <title>一个真实Storm应用源码解析</title>
-      <link>http://unixera.com/java/storm-demo-presentation/</link>
+      <link>http://lovelock.coding.me/java/storm-demo-presentation/</link>
       <pubDate>Tue, 11 Oct 2016 16:41:18 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/java/storm-demo-presentation/</guid>
+      <guid>http://lovelock.coding.me/java/storm-demo-presentation/</guid>
       <description>
 
 &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;

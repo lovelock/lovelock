@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/tags/index.xml</link>
+    <link>http://lovelock.coding.me/tags/tags/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>HTML中的input[type=radio]的一个小发现</title>
-      <link>http://unixera.com/javascript/2015-12-04-html-radio-issue/</link>
+      <link>http://lovelock.coding.me/javascript/2015-12-04-html-radio-issue/</link>
       <pubDate>Fri, 04 Dec 2015 23:12:52 +0000</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/javascript/2015-12-04-html-radio-issue/</guid>
+      <guid>http://lovelock.coding.me/javascript/2015-12-04-html-radio-issue/</guid>
       <description>&lt;p&gt;昨天在写一个表单时，一个无意的错误让我发现了HTML radio类型的input的一个特性。&lt;/p&gt;
 
 &lt;p&gt;在一个表单&lt;code&gt;&amp;lt;form&amp;gt;&amp;lt;/form&amp;gt;&lt;/code&gt; 中，相同name的input[type=radio]只有最后一个才会正常的渲染checked。&lt;/p&gt;

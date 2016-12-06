@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/octopress/index.xml</link>
+    <link>http://lovelock.coding.me/tags/octopress/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>octopress原理浅析</title>
-      <link>http://unixera.com/blog/2015-04-25-octopressyuan-li-qian-xi/</link>
+      <link>http://lovelock.coding.me/blog/2015-04-25-octopressyuan-li-qian-xi/</link>
       <pubDate>Sat, 25 Apr 2015 21:35:12 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/blog/2015-04-25-octopressyuan-li-qian-xi/</guid>
+      <guid>http://lovelock.coding.me/blog/2015-04-25-octopressyuan-li-qian-xi/</guid>
       <description>&lt;p&gt;在学习的过程中，总想把一些心得记录下来，也就想到写博客，首先想到的就是WordPress了，
 虽然也尝试了多个不同的云主机，但总是觉得用起来不够爽，程序员嘛，总归要像写代码一样
 写文章才够感觉，然后就找到了github pages。也就是这个github pages让我是又爱又恨，就

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/maven/index.xml</link>
+    <link>http://lovelock.coding.me/tags/maven/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>使用maven创建和运行Java应用</title>
-      <link>http://unixera.com/java/create-and-run-java-application-with-maven/</link>
+      <link>http://lovelock.coding.me/java/create-and-run-java-application-with-maven/</link>
       <pubDate>Thu, 22 Sep 2016 14:15:41 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/java/create-and-run-java-application-with-maven/</guid>
+      <guid>http://lovelock.coding.me/java/create-and-run-java-application-with-maven/</guid>
       <description>
 
 &lt;p&gt;最近这段时间在研究Storm，虽然不是研究源码而是研究使用，也让我这个自认为会写Java HelloWorld的菜鸟感到了深深的无力感。尤其是打开一本书，上面第一行代码就执行报错时我的心情可想而知了。&lt;/p&gt;

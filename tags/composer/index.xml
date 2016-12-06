@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/composer/index.xml</link>
+    <link>http://lovelock.coding.me/tags/composer/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>创建一个PSR-4规范的composer包</title>
-      <link>http://unixera.com/php/2016-01-14-create-a-composer-package/</link>
+      <link>http://lovelock.coding.me/php/2016-01-14-create-a-composer-package/</link>
       <pubDate>Sat, 09 Jan 2016 21:11:33 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/php/2016-01-14-create-a-composer-package/</guid>
+      <guid>http://lovelock.coding.me/php/2016-01-14-create-a-composer-package/</guid>
       <description>
 
 &lt;h3 id=&#34;下载安装composer&#34;&gt;下载安装Composer&lt;/h3&gt;

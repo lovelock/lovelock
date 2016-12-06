@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/homebrew/index.xml</link>
+    <link>http://lovelock.coding.me/tags/homebrew/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>使用homebrew提升使用Mac的幸福感</title>
-      <link>http://unixera.com/mac/2015-06-26-homebrewshi-yong-xin-de/</link>
+      <link>http://lovelock.coding.me/mac/2015-06-26-homebrewshi-yong-xin-de/</link>
       <pubDate>Fri, 26 Jun 2015 10:25:07 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/mac/2015-06-26-homebrewshi-yong-xin-de/</guid>
+      <guid>http://lovelock.coding.me/mac/2015-06-26-homebrewshi-yong-xin-de/</guid>
       <description>&lt;p&gt;作为Linux派系的程序员，我喜欢Linux的原因很大程度上是它的包管理工具，RedHat系的rpm/yum/dnf/zypper，Debian系的dpkg/apt-get/aptitude，还有小众点的pacman/emerge/port，这些东西最大的用途就是&lt;strong&gt;让用户可以方便的安装软件&lt;/strong&gt;。&lt;/p&gt;
 
 &lt;p&gt;Windows没有，Mac有AppStore，但在我大天朝，并没有什么卵用，经常连不上，连上下载慢。&lt;/p&gt;

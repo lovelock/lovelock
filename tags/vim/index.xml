@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/vim/index.xml</link>
+    <link>http://lovelock.coding.me/tags/vim/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>用vimdiff作为svn/git的diff工具</title>
-      <link>http://unixera.com/vim/vimdiff-as-subversion-diff/</link>
+      <link>http://lovelock.coding.me/vim/vimdiff-as-subversion-diff/</link>
       <pubDate>Mon, 07 Mar 2016 12:06:45 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/vim/vimdiff-as-subversion-diff/</guid>
+      <guid>http://lovelock.coding.me/vim/vimdiff-as-subversion-diff/</guid>
       <description>&lt;p&gt;前后两家公司都是用Subversion做版本控制，虽说程序员自己有喜好，但仍然需要遵守公司的规定。我个人是比较偏好直接登录服务器进行开发的，所以得配置好各种好用的命令行工具。比如svn提交之前需要diff一下所做的修改，默认的diff工具简直没用什么卵用。屏幕那么短，上下显示不直观。&lt;/p&gt;
 
 &lt;p&gt;发现gist.github.com一直上不去，干脆就把它集成到我自己维护的&lt;a href=&#34;https://github.com/lovelock/hackvim&#34;&gt;hackvim&lt;/a&gt;里了，这里先加一个svn的配置，稍后回家把git的也加上。&lt;/p&gt;

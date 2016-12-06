@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me &amp; Web</title>
-    <link>http://unixera.com/tags/iterator/index.xml</link>
+    <link>http://lovelock.coding.me/tags/iterator/index.xml</link>
     <description>Recent content on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>使用PHP生成器和迭代器</title>
-      <link>http://unixera.com/php/php-generator-and-iterator/</link>
+      <link>http://lovelock.coding.me/php/php-generator-and-iterator/</link>
       <pubDate>Tue, 05 Apr 2016 12:05:46 +0800</pubDate>
       <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://unixera.com/php/php-generator-and-iterator/</guid>
+      <guid>http://lovelock.coding.me/php/php-generator-and-iterator/</guid>
       <description>
 
 &lt;p&gt;从开始写PHP就知道迭代器这个东西，当时师傅告诉我用的挺少的，需要的时候再看也不晚，于是就没有放在意上。但他还说这其实也是区分高手和菜鸟的一个标志，那我还是研究一下好了：）&lt;/p&gt;
