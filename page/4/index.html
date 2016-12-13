@@ -79,6 +79,30 @@
       
       <article class="li">
   <header>
+    <div class="date">Sat, Jan 9, 2016</div>
+    <div class="title"><a href="http://lovelock.coding.me/miscs/static-dynamic-strong-weak-types-of-language/">谈谈动/静态类型和强/弱类型</a></div>
+  </header>
+  <div class="body">作为一个PHP程序员，这个问题本来不应该是我考虑的。 我需要知道仅仅是如果我的程序需要接受一个integer作为输入，拿到输入后最好能intval($var)一下，保证输入的是integer。而让我感到不理解的是，为什么PHP的强制类型转换会做成(int)$var这种方式，按照正常人的理解，不管int/string是关键字还是函数，要么作为int $var，这样具有迷惑性，因为在别的语言里这都是用来声明变量的，要么int($var)，这都很容易理解，然而。。。
+好了，想到这个问题是因为这两天算是深入的用了Python的一些功能，当然主要还是用来处理日志，当我发现当我将两个从dict中取出的值相加，然后和一个数字的值对比时，并没有出现我要的结果。于是就查了下Python的类型。原来Python是动态类型，同时是强类型。
+我看到网上很多人对这个问题还挺迷惑。刚看了PHP对于类型的解释，其实很能说明问题。
+ PHP 在变量定义中不需要（或不支持）明确的类型定义；变量类型是根据使用该变量的上下文所决定的。也就是说，如果把一个 string 值赋给变量 $var，$var 就成了一个 string。如果又把一个integer 赋给 $var，那它就成了一个integer。
+ 这，就是标准的动态类型了。相应的，var a = 20 :Int，声明了变量a=20，同时指定该变量的类型是Int，如果var a = '20': Int在编译时就会报错，没错这就是静态类型（这是Swift的语法）。有人可能就会拿这个举例说C也是静态类型——的确，我也会认为它是静态类型，因为它也需要指定类型才可以定义——然而，判断是否是静态类型的根据并不在此，而是像知乎@姚培森的答案中说的，是根据它是否所有程序都是well behaved。这个就太深了，我就不深究了，毕竟对C的研究也不深，说错了还不如不说。
+那再来看看让我误解的Python，无疑，Python和PHP一样在定义变量时也是不需要指定的，但对PHP来说，
+$a = 1; $b = '2'; echo $a + $b;  这样的代码完全没有问题。但到了Python这里
+a = 1 b = '2' print(a + b) # 没错，我选择Python3  结果呢:
+Trt recent call last): File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt; TypeError: unsupported operand type(s) for +: 'int' and 'str'  这就是强类型和弱类型的区别了。强类型不允许出现forbidden behaviors。</div>
+
+  
+  <footer>
+    <a href="http://lovelock.coding.me/miscs/static-dynamic-strong-weak-types-of-language/" class="btn btn-default">Read More…</a>
+  </footer>
+  
+</article>
+<hr>
+
+      
+      <article class="li">
+  <header>
     <div class="date">Wed, Jan 6, 2016</div>
     <div class="title"><a href="http://lovelock.coding.me/about/">关于博主</a></div>
   </header>
@@ -226,22 +250,6 @@
 <hr>
 
       
-      <article class="li">
-  <header>
-    <div class="date">Sat, Oct 17, 2015</div>
-    <div class="title"><a href="http://lovelock.coding.me/mysql/2015-10-17-MySQL%E7%9C%9F%C2%B7UTF8%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">MySQL真·UTF8后遇到的问题</a></div>
-  </header>
-  <div class="body">昨天写了一篇MySQL/MariaDB将字符集从utf8迁移到utf8mb4的总结，今天继续我的最佳实践，想到在设计数据库时要考虑到用户的e</div>
-
-  
-  <footer>
-    <a href="http://lovelock.coding.me/mysql/2015-10-17-MySQL%E7%9C%9F%C2%B7UTF8%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="btn btn-default">Read More…</a>
-  </footer>
-  
-</article>
-<hr>
-
-      
       
 <nav>
   <ul class="pager">
@@ -272,6 +280,10 @@
     
     </div>
     <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/fxxkmyphone/change-dpi-of-oneplus3/" >不用root修改一加三的DPI</a>
+      </div>
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/handle-with-bash-options/" >用Bash编写漂亮的命令行程序</a>
@@ -307,10 +319,6 @@
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/mvn-tutorial-for-novice/" >给Java新手看的mvn指南</a>
-      </div>
-      
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/mac/use-ssh-config-to-tune-your-productivity-up/" >使用ssh-config提升你的生产力</a>
       </div>
       
     </div>

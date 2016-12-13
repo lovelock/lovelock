@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.17" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.7.0/styles/github.min.css">
+    <link rel="stylesheet" href="http://lovelock.coding.me/css/styles.css">
+    <link rel="stylesheet" href="http://lovelock.coding.me/css/custom.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://lovelock.coding.me//index.xml">
+
+    
+    <title>不用root修改一加三的DPI - Me &amp; Web</title>
+    <meta property='og:title' content="不用root修改一加三的DPI - Me &amp; Web">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://lovelock.coding.me/fxxkmyphone/change-dpi-of-oneplus3/">
+    
+    
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://lovelock.coding.me/">Me &amp; Web&nbsp;&nbsp;致力于创作可操作性更好的文章</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/categories/">分类</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+            </ul>
+            
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="site">
+      <div class="container">
+
+
+
+<div class="single">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+                <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://lovelock.coding.me/"/>
+                <meta itemprop="dateModified" content="2016-12-13T15:25:03&#43;08:00">
+                <meta itemprop="headline" content="不用root修改一加三的DPI">
+                <meta itemprop="description" content="之前也听说过有修改DPI的，但不知道修改了会有什么变化。后来直接升级了7.0（官方的OxygenOS OpenBeta version 4.0)，稳定性不行，耗电也非常大。">
+                <meta itemprop="url" content="http://lovelock.coding.me/fxxkmyphone/change-dpi-of-oneplus3/">
+                <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
+                    <meta itemprop="width" content="800">
+                    <meta itemprop="height" content="800">
+                </div>
+                <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                        <meta itemprop="url" content="http://lovelock.coding.me/images/logo.jpg">
+                        <meta itemprop="width" content="100">
+                        <meta itemprop="height" content="100">
+                    </div>
+                    <meta itemprop="name" content="Me &amp; Web">
+                </div>
+                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <meta itemprop="name" content="Frost Wong">
+                </div>
+
+                <header class="article-header">
+                    <time itemprop="datePublished" pubdate="pubdate" datetime="2016-12-13T15:25:03&#43;08:00">Tue, Dec 13, 2016</time>
+                    <h1 class="article-title">不用root修改一加三的DPI</h1>
+                </header>
+
+                
+                    <div class="article-body">
+                        
+                    </div>
+                
+
+                <div class="article-body" itemprop="articleBody">
+                    <p>之前也听说过有修改DPI的，但不知道修改了会有什么变化。后来直接升级了7.0（官方的OxygenOS OpenBeta version 4.0)，稳定性不行，耗电也非常大。忍了几天实在忍不了，于是乎就刷回目前使用最稳定的稳定版3.2.8了。</p>
+
+<p>但在用7.0期间，最吸引我的一个特性还是让我怀念不已，就是修改“显示大小”，这就是包装过的修改DPI功能了。但那是7.0及以上才标配的功能，为了解决厂商调整的DPI不符合用户习惯的问题。当然现在这个问题在审美不是一般差劲的一加ROM上是很大的问题了，我简直没有见过字体那么大的手机，但直接修改字体大小其实没什么用的，因为包括列表在内的一些组件的高度和宽度是没有变的，修改字体大小只是让字体在屏幕上显得更小了。而且我还不想解锁，不想root。于是就找到了下面的方法。</p>
+
+<p>首先开启“开发者选项”。
+执行 <code>adb shell wm density 400 &amp;&amp; adb reboot</code> 其实就够了，不过如果你想直到默认的是多少，我可以告诉你是480，简直太大了。我觉得400是一个比较合理的大小。具体多少你可以自己调整，200-600之间都是可以的，不过200太小了。</p>
+
+<p>好久没有更新博客了，发现自己好啰嗦啊。</p>
+
+                </div>
+
+
+                <aside>
+                    <div class="section"><a href="http://lovelock.coding.me/tags/oneplus3/" class="tag">oneplus3</a> </div>
+
+                    <div class="section share">
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2ffxxkmyphone%2fchange-dpi-of-oneplus3%2f&title=%e4%b8%8d%e7%94%a8root%e4%bf%ae%e6%94%b9%e4%b8%80%e5%8a%a0%e4%b8%89%e7%9a%84DPI" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                    </div>
+
+                    
+                    <div class="section">
+                        
+                        <div class="ds-thread" data-thread-key="/fxxkmyphone/change-dpi-of-oneplus3/" data-title="不用root修改一加三的DPI" data-url="http://lovelock.coding.me/fxxkmyphone/change-dpi-of-oneplus3/"></div>
+                        
+
+                        
+                        <script type="text/javascript">
+                            var duoshuoQuery = {short_name:"UnixAgain"};
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                        </script>
+                    </div>
+                    
+                    
+                </aside>
+
+            </article>
+
+        </div>
+        <div class="col-md-4">
+            
+<aside class="site">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <span class="fa fa-clock-o"></span><h4>最近文章</h4>
+      </div>
+    
+    </div>
+    <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/fxxkmyphone/change-dpi-of-oneplus3/" >不用root修改一加三的DPI</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/handle-with-bash-options/" >用Bash编写漂亮的命令行程序</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/" >使用VBoxManage创建虚拟机</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/bigdata/zookeeper-simple-practice/" >ZooKeeper原理简介和简单使用</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/storm-demo-presentation/" >一个真实Storm应用源码解析</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/deploy-pseudo-distributed-mode-hadoop/" >在本地单机部署Hadoop/Storm运行环境</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/use-slf4j-and-log4j-to-log-your-applications/" >slf4j配合log4j来给你的应用打log</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/create-and-run-java-application-with-maven/" >使用maven创建和运行Java应用</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/deepin-linux-experience/" >DeepinLinux 体验报告</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/mvn-tutorial-for-novice/" >给Java新手看的mvn指南</a>
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+    
+  
+    
+    
+  
+
+</aside>
+
+
+        </div>
+    </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site">
+      <div class="container">
+        <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://unixera.com" target="_blank" rel="nofollow">Frost Wong</a></p>
+      </div>
+    </footer>
+
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+
