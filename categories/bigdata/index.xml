@@ -38,7 +38,7 @@
 
 &lt;p&gt;的结果，从中可以很详细的看到每条message的offset，结合管道和less就可以根据时间找到出现脏数据的offset，然后确定一个时间点，比如下午2点，在每个partition中分别找到2点之前的最后一个offset，找个地方记下来。&lt;/p&gt;
 
-&lt;h3 id=&#34;2-到zookeeper中找到每个对应的partiton-用步骤1的结果覆盖partiton中的offset字段&#34;&gt;2. 到ZooKeeper中找到每个对应的Partiton，用步骤1的结果覆盖Partiton中的offset字段&lt;/h3&gt;
+&lt;h3 id=&#34;2-到zookeeper中找到每个对应的partiton-用步骤1的offset结果覆盖partiton中的offset字段&#34;&gt;2. 到ZooKeeper中找到每个对应的Partiton，用步骤1的offset结果覆盖Partiton中的offset字段&lt;/h3&gt;
 
 &lt;p&gt;因为我的KafkaSpout是这么写的&lt;code&gt;SpoutConfig kafkaSpoutConfig = new SpoutConfig(brokerHosts, topic, &amp;quot;/&amp;quot; + topic, client_id);&lt;/code&gt;，所以在我的ZooKeeper中我应该去&lt;code&gt;/mytopic/mytopologyname/&lt;/code&gt;中找到所有的partiton，这个需要根据你自己的代码来确定。&lt;/p&gt;
 
@@ -77,7 +77,7 @@ numChildren = 0
 
 &lt;p&gt;把其中的offset的值替换成在步骤1中拿到的partiton 9的offset值。&lt;/p&gt;
 
-&lt;h3 id=&#34;3-写脚本删除hdfs中对应topology2点以后的所有数据&#34;&gt;3. 写脚本删除HDFS中对应Topology2点以后的所有数据&lt;/h3&gt;
+&lt;h3 id=&#34;3-写脚本删除hdfs中对应topology出现脏数据以后的所有数据&#34;&gt;3. 写脚本删除HDFS中对应Topology出现脏数据以后的所有数据&lt;/h3&gt;
 
 &lt;p&gt;我的设计是每天分成24个partition，类似(yyyymmddhh=2017011010)这种，所以就可以写个类似这样的脚本：&lt;/p&gt;
 
@@ -93,7 +93,7 @@ done
 
 &lt;p&gt;这个脚本可以删除前一天的所有24个partiton的数据。&lt;/p&gt;
 
-&lt;h3 id=&#34;4-因为新的topology对应的hive-table也有变化-所以需要先修改hive的表结构&#34;&gt;4. 因为新的Topology对应的Hive table也有变化，所以需要先修改Hive的表结构&lt;/h3&gt;
+&lt;h3 id=&#34;4-如果新的topology对应的hive-table也有变化-需要先修改hive的表结构&#34;&gt;4. 如果新的Topology对应的Hive table也有变化，需要先修改Hive的表结构&lt;/h3&gt;
 
 &lt;p&gt;Hive表结构的修改和MySQL的差不多，不过还是有些差别：比如新添加的列只能放在所有真实列的最后，partiton伪列的前面。&lt;/p&gt;
 
