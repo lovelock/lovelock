@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Rime on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/rime/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Rime on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/rime/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>Rime输入法在Mac上的应用</title>
       <link>http://lovelock.coding.me/mac/2015-08-12-Rime%E8%BE%93%E5%85%A5%E6%B3%95%E5%9C%A8Mac%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8/</link>
       <pubDate>Wed, 12 Aug 2015 17:22:29 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/mac/2015-08-12-Rime%E8%BE%93%E5%85%A5%E6%B3%95%E5%9C%A8Mac%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;天啊，过几天要回家陪老婆生孩子，现在在赶项目，我竟然还在这里瞎写，真是罪过。&lt;/p&gt;

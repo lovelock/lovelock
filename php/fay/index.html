@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.18" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.7.0/styles/github.min.css">
+    <link rel="stylesheet" href="http://lovelock.coding.me/css/styles.css">
+    <link rel="stylesheet" href="http://lovelock.coding.me/css/custom.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://lovelock.coding.me//index.xml">
+
+    
+    <title> - Me &amp; Web</title>
+    <meta property='og:title' content=" - Me &amp; Web">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://lovelock.coding.me/php/fay/">
+    
+    
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://lovelock.coding.me/">Me &amp; Web&nbsp;&nbsp;致力于创作可操作性更好的文章</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/categories/">分类</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+            </ul>
+            
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="site">
+      <div class="container">
+
+
+
+<div class="single">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+                <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://lovelock.coding.me/"/>
+                <meta itemprop="dateModified" content="0001-01-01T00:00:00&#43;00:00">
+                <meta itemprop="headline" content="">
+                <meta itemprop="description" content="其实在很早之前就已经想基于Yaf封装一个开箱即用的框架，虽然Yaf本身很稳定，但它太『精简』了，很多需要用的东西都需要自己集成，而大家的集成方式和选用的方案都不同，导致可能虽然两家公司都用了Yaf，但实际上还是有相当的学习成本的。
+经过一段时间的积累，我现在终于可以用自己写的一套东西建立这套框架了。所谓一个开箱即用，就是要提供我们再实际的工作中可能遇到的各种需求，但又不能一味求全，极端的例子就像Laravel这种，所有事情都想帮你做了，但实际上可控性不太强，一旦入了Laravel的坑，想跳出来可就难了。所以，基本的需求有以下几个方面：
+ 路由和分发（Yaf主体完成） 配置管理（yaf做底层，yafconf做封装） 部署环境隔离（spe） 数据库操作(spw) http请求/rpc调用（未完成） apiview封装  现在（2016年底）来说，前后端的分离已经做得相当极端了，所以『模板引擎』这种东西可以说已经被时代抛弃了，所以我也就不在这上面花费心思了。
+本文的基础是yaf的master分支，CentOS7.3，PHP7.0.14">
+                <meta itemprop="url" content="http://lovelock.coding.me/php/fay/">
+                <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
+                    <meta itemprop="width" content="800">
+                    <meta itemprop="height" content="800">
+                </div>
+                <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                        <meta itemprop="url" content="http://lovelock.coding.me/images/logo.jpg">
+                        <meta itemprop="width" content="100">
+                        <meta itemprop="height" content="100">
+                    </div>
+                    <meta itemprop="name" content="Me &amp; Web">
+                </div>
+                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <meta itemprop="name" content="Frost Wong">
+                </div>
+
+                <header class="article-header">
+                    <time itemprop="datePublished" pubdate="pubdate" datetime="0001-01-01T00:00:00&#43;00:00">Mon, Jan 1, 0001</time>
+                    <h1 class="article-title"></h1>
+                </header>
+
+                
+                    <div class="article-body">
+                        
+                    </div>
+                
+
+                <div class="article-body" itemprop="articleBody">
+                    <p>其实在很早之前就已经想基于Yaf封装一个开箱即用的框架，虽然Yaf本身很稳定，但它太『精简』了，很多需要用的东西都需要自己集成，而大家的集成方式和选用的方案都不同，导致可能虽然两家公司都用了Yaf，但实际上还是有相当的学习成本的。</p>
+
+<p>经过一段时间的积累，我现在终于可以用自己写的一套东西建立这套框架了。所谓一个开箱即用，就是要提供我们再实际的工作中可能遇到的各种需求，但又不能一味求全，极端的例子就像Laravel这种，所有事情都想帮你做了，但实际上可控性不太强，一旦入了Laravel的坑，想跳出来可就难了。所以，基本的需求有以下几个方面：</p>
+
+<ol>
+<li>路由和分发（Yaf主体完成）</li>
+<li>配置管理（yaf做底层，yafconf做封装）</li>
+<li>部署环境隔离（spe）</li>
+<li>数据库操作(spw)</li>
+<li>http请求/rpc调用（未完成）</li>
+<li>apiview封装</li>
+</ol>
+
+<p>现在（2016年底）来说，前后端的分离已经做得相当极端了，所以『模板引擎』这种东西可以说已经被时代抛弃了，所以我也就不在这上面花费心思了。</p>
+
+<p>本文的基础是yaf的master分支，CentOS7.3，PHP7.0.14</p>
+
+                </div>
+
+
+                <aside>
+                    
+
+                    <div class="section share">
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fphp%2ffay%2f&title=" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                    </div>
+
+                    
+                    <div class="section">
+                        
+                        <div class="ds-thread" data-thread-key="/php/fay/" data-title="" data-url="http://lovelock.coding.me/php/fay/"></div>
+                        
+
+                        
+                        <script type="text/javascript">
+                            var duoshuoQuery = {short_name:"UnixAgain"};
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                        </script>
+                    </div>
+                    
+                    
+                </aside>
+
+            </article>
+
+        </div>
+        <div class="col-md-4">
+            
+<aside class="site">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <span class="fa fa-clock-o"></span><h4>最近文章</h4>
+      </div>
+    
+    </div>
+    <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/bigdata/cleanup-dirty-data-in-hdfs/" >清理HDFS的脏数据</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/fxxkmyphone/change-dpi-of-oneplus3/" >不用root修改一加三的DPI</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/handle-with-bash-options/" >用Bash编写漂亮的命令行程序</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/" >使用VBoxManage创建虚拟机</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/bigdata/zookeeper-simple-practice/" >ZooKeeper原理简介和简单使用</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/storm-demo-presentation/" >一个真实Storm应用源码解析</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/deploy-pseudo-distributed-mode-hadoop/" >在本地单机部署Hadoop/Storm运行环境</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/use-slf4j-and-log4j-to-log-your-applications/" >slf4j配合log4j来给你的应用打log</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/create-and-run-java-application-with-maven/" >使用maven创建和运行Java应用</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/deepin-linux-experience/" >DeepinLinux 体验报告</a>
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+    
+  
+    
+    
+  
+
+</aside>
+
+
+        </div>
+    </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site">
+      <div class="container">
+        <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://unixera.com" target="_blank" rel="nofollow">Frost Wong</a></p>
+      </div>
+    </footer>
+
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+

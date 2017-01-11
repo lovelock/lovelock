@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Php on Me &amp; Web</title>
     <link>http://lovelock.coding.me/categories/php/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Php on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/categories/php/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>使用PHP生成器和迭代器</title>
       <link>http://lovelock.coding.me/php/php-generator-and-iterator/</link>
       <pubDate>Tue, 05 Apr 2016 12:05:46 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/php-generator-and-iterator/</guid>
       <description>
 
@@ -167,7 +165,7 @@ foreach ($file-&amp;gt;current() as $line) {
       <title>seaslog 和 error_log性能大比拼</title>
       <link>http://lovelock.coding.me/php/log-bench/</link>
       <pubDate>Fri, 01 Apr 2016 16:33:19 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/log-bench/</guid>
       <description>
 
@@ -360,7 +358,7 @@ SeasLog::debug(&amp;quot;I am testing performance of seaslog&amp;quot;);
       <title>又一份Yaf文档——写给正在迷惑的你</title>
       <link>http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/</link>
       <pubDate>Mon, 01 Feb 2016 11:55:20 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/</guid>
       <description>
 
@@ -699,7 +697,7 @@ foo.bar.better = &#39;best foo&#39;
       <title>创建一个PSR-4规范的composer包</title>
       <link>http://lovelock.coding.me/php/2016-01-14-create-a-composer-package/</link>
       <pubDate>Sat, 09 Jan 2016 21:11:33 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2016-01-14-create-a-composer-package/</guid>
       <description>
 
@@ -805,7 +803,7 @@ $loader-&amp;gt;add(&#39;Acme\\Test\\&#39;, __DIR__);
       <title>xhprof方便的插入要检测的代码</title>
       <link>http://lovelock.coding.me/php/2015-11-25-xhprof-usage/</link>
       <pubDate>Wed, 25 Nov 2015 22:10:51 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2015-11-25-xhprof-usage/</guid>
       <description>&lt;p&gt;本文只是给自己搞的一个小封装做个入口。&lt;/p&gt;
 
@@ -821,7 +819,7 @@ $loader-&amp;gt;add(&#39;Acme\\Test\\&#39;, __DIR__);
       <title>PHP单元测试-02</title>
       <link>http://lovelock.coding.me/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/</link>
       <pubDate>Sat, 26 Sep 2015 10:41:42 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/</guid>
       <description>
 
@@ -979,7 +977,7 @@ $loader-&amp;gt;add(&#39;Acme\\Test\\&#39;, __DIR__);
       <title>PHP单元测试-01</title>
       <link>http://lovelock.coding.me/php/2015-09-22-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/</link>
       <pubDate>Tue, 22 Sep 2015 15:49:52 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2015-09-22-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/</guid>
       <description>
 
@@ -1095,7 +1093,7 @@ class FrostWongTest extends PHPUnit_Framework_TestCase
       <title>缓存使用小记</title>
       <link>http://lovelock.coding.me/php/2015-06-26-huan-cun-shi-yong-xiao-ji/</link>
       <pubDate>Fri, 26 Jun 2015 10:24:03 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2015-06-26-huan-cun-shi-yong-xiao-ji/</guid>
       <description>&lt;p&gt;在请求次数多的业务系统中，通常会加入缓存系统。这里用的较多的就是Memcached和Redis。我写这篇笔记不是要说这两个缓存的使用细节，而是缓存使用的注意事项。&lt;/p&gt;
 
@@ -1123,7 +1121,7 @@ class FrostWongTest extends PHPUnit_Framework_TestCase
       <title>PHP设置cookie</title>
       <link>http://lovelock.coding.me/php/2015-06-19-phpshe-zhi-cookie/</link>
       <pubDate>Fri, 19 Jun 2015 12:30:13 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2015-06-19-phpshe-zhi-cookie/</guid>
       <description>&lt;p&gt;之前一直没有处理过cookie，刚才小小的看了一下，貌似很简单，大概记一下。&lt;/p&gt;
 
@@ -1163,7 +1161,7 @@ echo &amp;quot;username: &amp;quot; . $username;
       <title>PHP延迟绑定</title>
       <link>http://lovelock.coding.me/php/2015-06-17-phpyan-chi-bang-ding/</link>
       <pubDate>Wed, 17 Jun 2015 23:37:38 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2015-06-17-phpyan-chi-bang-ding/</guid>
       <description>&lt;p&gt;在公司的代码里看到很多重复代码，每张表对应的类都有一个一样的静态方法，作用是获得数据库的连接。但显然这并不是一个好的解决方案，而应该充分利用面向对象的思想，利用继承的方式来更优雅的解决。&lt;/p&gt;
 
@@ -1227,7 +1225,7 @@ echo &amp;quot;username: &amp;quot; . $username;
       <title>PHP系统调用</title>
       <link>http://lovelock.coding.me/php/2015-04-28-phpxi-tong-diao-yong/</link>
       <pubDate>Tue, 28 Apr 2015 23:30:54 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2015-04-28-phpxi-tong-diao-yong/</guid>
       <description>&lt;p&gt;通常认为PHP的系统调用有以下几种方式：&lt;/p&gt;
 
@@ -1282,7 +1280,7 @@ shell_exec(&amp;quot;/usr/bin/env php &amp;quot; . $file . &amp;quot; &amp;quot;
       <title>PHP单入口模式</title>
       <link>http://lovelock.coding.me/php/2015-04-25-phpdan-ru-kou-mo-shi/</link>
       <pubDate>Sat, 25 Apr 2015 17:07:18 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2015-04-25-phpdan-ru-kou-mo-shi/</guid>
       <description>
 

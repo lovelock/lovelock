@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Log on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/log/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Log on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/log/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>slf4j配合log4j来给你的应用打log</title>
       <link>http://lovelock.coding.me/java/use-slf4j-and-log4j-to-log-your-applications/</link>
       <pubDate>Thu, 22 Sep 2016 14:16:06 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/java/use-slf4j-and-log4j-to-log-your-applications/</guid>
       <description>&lt;p&gt;最近刚开始接触Java，被折腾的很难受。因为PHP随便找个环境都能执行，只需要把代码传上去就OK，而Java还需要编译、打包，用mvn执行命令，本来不多的功能就高出一下上百兆的包，然后传到服务器上。后来在运维同学的配合下整了一套只需要我把代码提交到Git仓库，系统自动打包并上传到需要执行的机器上的工作流，虽然比之前好了很多，但还是没有PHP开发的过程流畅。&lt;/p&gt;
 
@@ -101,7 +99,7 @@ log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p::
       <title>seaslog 和 error_log性能大比拼</title>
       <link>http://lovelock.coding.me/php/log-bench/</link>
       <pubDate>Fri, 01 Apr 2016 16:33:19 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/log-bench/</guid>
       <description>
 

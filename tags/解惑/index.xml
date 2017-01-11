@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>解惑 on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/%E8%A7%A3%E6%83%91/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in 解惑 on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/%E8%A7%A3%E6%83%91/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>又一份Yaf文档——写给正在迷惑的你</title>
       <link>http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/</link>
       <pubDate>Mon, 01 Feb 2016 11:55:20 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/</guid>
       <description>
 

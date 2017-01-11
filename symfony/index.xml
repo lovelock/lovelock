@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Symfony-rsses on Me &amp; Web</title>
+    <title>Symfonies on Me &amp; Web</title>
     <link>http://lovelock.coding.me/symfony/index.xml</link>
-    <description>Recent content in Symfony-rsses on Me &amp; Web</description>
+    <description>Recent content in Symfonies on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <lastBuildDate>Sun, 10 Jan 2016 22:02:07 +0800</lastBuildDate>
     <atom:link href="/symfony/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +14,7 @@
       <title>Symfony3 In Action——Routing</title>
       <link>http://lovelock.coding.me/symfony/Symfony3-03-Routing/</link>
       <pubDate>Sun, 10 Jan 2016 22:02:07 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/symfony/Symfony3-03-Routing/</guid>
       <description>
 
@@ -379,7 +377,7 @@ $this-&amp;gt;generateUrl(&#39;/show&#39;);
       <title>Symfony一对多关系的YAML配置</title>
       <link>http://lovelock.coding.me/symfony/2015-11-01-Symfony%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%85%B3%E7%B3%BB%E7%9A%84YAML%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sun, 01 Nov 2015 16:11:21 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/symfony/2015-11-01-Symfony%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%85%B3%E7%B3%BB%E7%9A%84YAML%E9%85%8D%E7%BD%AE/</guid>
       <description>
 

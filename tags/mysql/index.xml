@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Mysql on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/mysql/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Mysql on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>MySQL迁移到真·UTF8全过程</title>
       <link>http://lovelock.coding.me/mysql/2015-10-17-MySQL%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9F%C2%B7UTF8%E5%85%A8%E8%BF%87%E7%A8%8B/</link>
       <pubDate>Sat, 17 Oct 2015 01:06:29 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/mysql/2015-10-17-MySQL%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9F%C2%B7UTF8%E5%85%A8%E8%BF%87%E7%A8%8B/</guid>
       <description>
 

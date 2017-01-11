@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Mysql on Me &amp; Web</title>
     <link>http://lovelock.coding.me/categories/mysql/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Mysql on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>MySQL真·UTF8后遇到的问题</title>
       <link>http://lovelock.coding.me/mysql/2015-10-17-MySQL%E7%9C%9F%C2%B7UTF8%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link>
       <pubDate>Sat, 17 Oct 2015 16:59:58 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/mysql/2015-10-17-MySQL%E7%9C%9F%C2%B7UTF8%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       <description>&lt;p&gt;昨天写了一篇MySQL/MariaDB将字符集从utf8迁移到utf8mb4的总结，今天继续我的最佳实践，想到在设计数据库时要考虑到用户的email是不能重复的，所以想给它加上一个&lt;code&gt;UNI&lt;/code&gt;标记，然后遇到了这样一个问题：
 &lt;img src=&#34;http://7xn2pe.com1.z0.glb.clouddn.com/b_Screen%20Shot%202015-10-17%20at%205.03.08%20PM.png&#34; alt=&#34;MySQL设计UNI报错&#34; /&gt;&lt;/p&gt;
@@ -42,7 +40,7 @@
       <title>MySQL迁移到真·UTF8全过程</title>
       <link>http://lovelock.coding.me/mysql/2015-10-17-MySQL%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9F%C2%B7UTF8%E5%85%A8%E8%BF%87%E7%A8%8B/</link>
       <pubDate>Sat, 17 Oct 2015 01:06:29 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/mysql/2015-10-17-MySQL%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9F%C2%B7UTF8%E5%85%A8%E8%BF%87%E7%A8%8B/</guid>
       <description>
 

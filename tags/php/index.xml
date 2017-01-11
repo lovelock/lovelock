@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Php on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/php/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Php on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/php/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>PHP扩展实战——扩展的骨架</title>
       <link>http://lovelock.coding.me/php/internals/create-skeleton-of-extension/</link>
       <pubDate>Sat, 09 Apr 2016 22:04:18 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/internals/create-skeleton-of-extension/</guid>
       <description>
 
@@ -318,7 +316,7 @@ sudo make install
       <title>PHP扩展实战——用PHP实现类的原型</title>
       <link>http://lovelock.coding.me/php/internals/class-prototype-in-php/</link>
       <pubDate>Sat, 09 Apr 2016 21:55:00 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/internals/class-prototype-in-php/</guid>
       <description>&lt;p&gt;在编写之前先用PHP实现这个类的原型吧。&lt;/p&gt;
 
@@ -490,7 +488,7 @@ class Hylog
       <title>PHP扩展实战——目标和计划</title>
       <link>http://lovelock.coding.me/php/internals/schedules/</link>
       <pubDate>Sat, 09 Apr 2016 21:13:28 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/internals/schedules/</guid>
       <description>
 
@@ -544,7 +542,7 @@ class Hylog
       <title>PHP扩展实战——背景介绍</title>
       <link>http://lovelock.coding.me/php/internals/introduction/</link>
       <pubDate>Mon, 04 Apr 2016 22:37:18 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/internals/introduction/</guid>
       <description>
 
@@ -573,7 +571,7 @@ class Hylog
       <title>seaslog 和 error_log性能大比拼</title>
       <link>http://lovelock.coding.me/php/log-bench/</link>
       <pubDate>Fri, 01 Apr 2016 16:33:19 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/log-bench/</guid>
       <description>
 
@@ -766,7 +764,7 @@ SeasLog::debug(&amp;quot;I am testing performance of seaslog&amp;quot;);
       <title>谈谈动/静态类型和强/弱类型</title>
       <link>http://lovelock.coding.me/miscs/static-dynamic-strong-weak-types-of-language/</link>
       <pubDate>Sat, 09 Jan 2016 21:11:33 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/miscs/static-dynamic-strong-weak-types-of-language/</guid>
       <description>&lt;p&gt;作为一个PHP程序员，这个问题本来不应该是我考虑的。
 我需要知道仅仅是如果我的程序需要接受一个integer作为输入，拿到输入后最好能&lt;code&gt;intval($var)&lt;/code&gt;一下，保证输入的是integer。而让我感到不理解的是，为什么PHP的强制类型转换会做成&lt;code&gt;(int)$var&lt;/code&gt;这种方式，按照正常人的理解，不管&lt;code&gt;int/string&lt;/code&gt;是关键字还是函数，要么作为&lt;code&gt;int $var&lt;/code&gt;，这样具有迷惑性，因为在别的语言里这都是用来&lt;strong&gt;声明变量&lt;/strong&gt;的，要么&lt;code&gt;int($var)&lt;/code&gt;，这都很容易理解，然而。。。&lt;/p&gt;
@@ -814,7 +812,7 @@ TypeError: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;
       <title>PHP单元测试-01</title>
       <link>http://lovelock.coding.me/php/2015-09-22-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/</link>
       <pubDate>Tue, 22 Sep 2015 15:49:52 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2015-09-22-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/</guid>
       <description>
 

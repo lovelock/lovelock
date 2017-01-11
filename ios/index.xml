@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ios-rsses on Me &amp; Web</title>
+    <title>Ios on Me &amp; Web</title>
     <link>http://lovelock.coding.me/ios/index.xml</link>
-    <description>Recent content in Ios-rsses on Me &amp; Web</description>
+    <description>Recent content in Ios on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <lastBuildDate>Mon, 13 Jul 2015 20:20:18 +0000</lastBuildDate>
     <atom:link href="/ios/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +14,7 @@
       <title>iOS8及以下使用NSURLConnectionDelegate实现网络请求</title>
       <link>http://lovelock.coding.me/ios/iOS-Network-Request-with-NSURLConnectionDelegate/</link>
       <pubDate>Mon, 13 Jul 2015 20:20:18 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/ios/iOS-Network-Request-with-NSURLConnectionDelegate/</guid>
       <description>&lt;p&gt;花了点时间把iOS的网络请求算是有了一点肤浅的认识，在这个夜深人静的晚上记录以下。&lt;/p&gt;
 
@@ -69,7 +67,7 @@ NSLog(@&amp;quot;%@&amp;quot;, strData);
       <title>UIImagePickerControllerUsage</title>
       <link>http://lovelock.coding.me/ios/UIImagePickerControllerUsage/</link>
       <pubDate>Sun, 12 Jul 2015 16:27:05 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/ios/UIImagePickerControllerUsage/</guid>
       <description>&lt;p&gt;周末两天完全没闲着，研究iOS研究的头都要裂了。&lt;/p&gt;
 

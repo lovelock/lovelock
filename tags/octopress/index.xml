@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Octopress on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/octopress/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Octopress on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/octopress/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>octopress原理浅析</title>
       <link>http://lovelock.coding.me/blog/2015-04-25-octopressyuan-li-qian-xi/</link>
       <pubDate>Sat, 25 Apr 2015 21:35:12 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/blog/2015-04-25-octopressyuan-li-qian-xi/</guid>
       <description>&lt;p&gt;在学习的过程中，总想把一些心得记录下来，也就想到写博客，首先想到的就是WordPress了，
 虽然也尝试了多个不同的云主机，但总是觉得用起来不够爽，程序员嘛，总归要像写代码一样

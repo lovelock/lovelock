@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Psr 4 on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/psr-4/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Psr 4 on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/psr-4/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>创建一个PSR-4规范的composer包</title>
       <link>http://lovelock.coding.me/php/2016-01-14-create-a-composer-package/</link>
       <pubDate>Sat, 09 Jan 2016 21:11:33 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/php/2016-01-14-create-a-composer-package/</guid>
       <description>
 

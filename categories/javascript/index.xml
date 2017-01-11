@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Javascript on Me &amp; Web</title>
     <link>http://lovelock.coding.me/categories/javascript/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Javascript on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>检测浏览器是否安装了Flash</title>
       <link>http://lovelock.coding.me/javascript/detect-flash/</link>
       <pubDate>Wed, 30 Mar 2016 16:08:03 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/detect-flash/</guid>
       <description>&lt;p&gt;现在国内竟然那么多的视频网站都还不支持HTML5的视频播放，无外乎几个原因：&lt;/p&gt;
 
@@ -46,7 +44,7 @@ function detectFlash() {
       <title>Bootstrap插件DataTables实现服务器端分页</title>
       <link>http://lovelock.coding.me/javascript/bootstrap-plugin-datatables/</link>
       <pubDate>Sun, 28 Feb 2016 21:40:04 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/bootstrap-plugin-datatables/</guid>
       <description>
 
@@ -239,10 +237,10 @@ function detectFlash() {
     
     <item>
       <title>Firefox Date.parse()方法行为不一致的兼容方案</title>
-      <link>http://lovelock.coding.me/javascript/Firefox-Date/</link>
+      <link>http://lovelock.coding.me/javascript/Firefox-Date.parse-exception/</link>
       <pubDate>Mon, 25 Jan 2016 12:14:35 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
-      <guid>http://lovelock.coding.me/javascript/Firefox-Date/</guid>
+      
+      <guid>http://lovelock.coding.me/javascript/Firefox-Date.parse-exception/</guid>
       <description>
 
 &lt;p&gt;事情是这样的，我有两个输入框，用Wdatepicker自定义了日期格式，格式当然是我们中国人最喜欢的Y-M-d H:i:s，然后需要确定后者（结束时间）不能小于前者（开始时间）&lt;/p&gt;
@@ -296,7 +294,7 @@ retrun Date.parse(end) - Date.parse(start) &amp;gt; 0 ? true : false;
       <title>HTML中的input[type=radio]的一个小发现</title>
       <link>http://lovelock.coding.me/javascript/2015-12-04-html-radio-issue/</link>
       <pubDate>Fri, 04 Dec 2015 23:12:52 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-12-04-html-radio-issue/</guid>
       <description>&lt;p&gt;昨天在写一个表单时，一个无意的错误让我发现了HTML radio类型的input的一个特性。&lt;/p&gt;
 
@@ -314,7 +312,7 @@ retrun Date.parse(end) - Date.parse(start) &amp;gt; 0 ? true : false;
       <title>JavaScript闭包深究</title>
       <link>http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/</link>
       <pubDate>Wed, 02 Dec 2015 21:35:12 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/</guid>
       <description>
 
@@ -670,7 +668,7 @@ foo();
       <title>Bower使用简明教程</title>
       <link>http://lovelock.coding.me/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</link>
       <pubDate>Thu, 08 Oct 2015 18:10:45 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</guid>
       <description>&lt;p&gt;最近接触到Node.js，于是摇身一变前后端全部用JavaScript实现，这样其实导致界限不清晰了——其实很清晰，但当你看一个.js文件的时候总是要想一下这是前端逻辑还是后端逻辑，感觉怪怪的。后端需要的模块可以用npm这个大杀器安装，虽然前端的依赖也可以用它解决，但其实有更专业的解决方案——&lt;a href=&#34;http://bower.io&#34;&gt;bower&lt;/a&gt;。官方简介里面其实并没有提到它是专门用来解决前端依赖的，看它的用例以及别的项目的使用情况也可以看到
 ，通常的用法就是&lt;code&gt;&amp;lt;script src=&amp;quot;bower_components/xxx_lib/xxxx.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;，这就已经很明显了，不是吗？&lt;/p&gt;
@@ -733,7 +731,7 @@ bower_components
       <title>jsonp原理全解析</title>
       <link>http://lovelock.coding.me/javascript/2015-08-11-jsonp%E5%8E%9F%E7%90%86%E5%85%A8%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Tue, 11 Aug 2015 23:40:32 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-08-11-jsonp%E5%8E%9F%E7%90%86%E5%85%A8%E8%A7%A3%E6%9E%90/</guid>
       <description>
 
@@ -856,7 +854,7 @@ function preResult($encodedResult) {
       <title>iframe间通信方法总结</title>
       <link>http://lovelock.coding.me/javascript/2015-08-10-iframe%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</link>
       <pubDate>Mon, 10 Aug 2015 10:15:56 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-08-10-iframe%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</guid>
       <description>
 
@@ -1076,7 +1074,7 @@ parent.a_function(arg);
       <title>Bootstrap Modal用法总结</title>
       <link>http://lovelock.coding.me/javascript/2015-05-06-bootstrap-modalyong-fa-zong-jie/</link>
       <pubDate>Wed, 06 May 2015 23:15:41 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-05-06-bootstrap-modalyong-fa-zong-jie/</guid>
       <description>
 
@@ -1196,7 +1194,7 @@ $(&#39;#myModal&#39;).modal({
       <title>jQuery动态生成元素</title>
       <link>http://lovelock.coding.me/javascript/2015-05-05-jquerydong-tai-sheng-cheng-yuan-su/</link>
       <pubDate>Tue, 05 May 2015 23:14:20 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-05-05-jquerydong-tai-sheng-cheng-yuan-su/</guid>
       <description>
 
@@ -1230,7 +1228,7 @@ $(&#39;#myModal&#39;).modal({
       <title>JavaScript代码约定</title>
       <link>http://lovelock.coding.me/javascript/2015-05-02-javascriptdai-ma-yue-ding/</link>
       <pubDate>Sat, 02 May 2015 21:08:49 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-05-02-javascriptdai-ma-yue-ding/</guid>
       <description>
 
@@ -1302,7 +1300,7 @@ JavaScript不应该嵌入在HTML文件中，除非代码是针对一个特定的
       <title>JavaScript执行总结</title>
       <link>http://lovelock.coding.me/javascript/2015-04-28-javascriptzhi-xing-zong-jie/</link>
       <pubDate>Tue, 28 Apr 2015 22:03:47 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-04-28-javascriptzhi-xing-zong-jie/</guid>
       <description>&lt;p&gt;在所有的场景下，都有一个&lt;strong&gt;将来某个时刻&lt;/strong&gt;会执行的回调函数，这&lt;strong&gt;将来某个时刻&lt;/strong&gt;就是我们所说的&lt;strong&gt;异步流&lt;/strong&gt;。&lt;/p&gt;
 

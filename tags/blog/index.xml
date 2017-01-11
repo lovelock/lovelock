@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Blog on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/blog/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Blog on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/blog/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>静态博客工具使用体验</title>
       <link>http://lovelock.coding.me/blog/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Fri, 03 Jul 2015 15:04:01 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/blog/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid>
       <description>&lt;p&gt;我这体验了两个博客工具之后发现，果然这种技术不是很复杂的东西还是后来者更有优势。&lt;/p&gt;
 

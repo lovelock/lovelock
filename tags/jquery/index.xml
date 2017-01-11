@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Jquery on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/jquery/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Jquery on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/jquery/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>Bootstrap Modal用法总结</title>
       <link>http://lovelock.coding.me/javascript/2015-05-06-bootstrap-modalyong-fa-zong-jie/</link>
       <pubDate>Wed, 06 May 2015 23:15:41 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-05-06-bootstrap-modalyong-fa-zong-jie/</guid>
       <description>
 
@@ -135,7 +133,7 @@ $(&#39;#myModal&#39;).modal({
       <title>jQuery动态生成元素</title>
       <link>http://lovelock.coding.me/javascript/2015-05-05-jquerydong-tai-sheng-cheng-yuan-su/</link>
       <pubDate>Tue, 05 May 2015 23:14:20 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-05-05-jquerydong-tai-sheng-cheng-yuan-su/</guid>
       <description>
 

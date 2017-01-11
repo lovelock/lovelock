@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Fxxkmyphone-rsses on Me &amp; Web</title>
+    <title>Fxxkmyphones on Me &amp; Web</title>
     <link>http://lovelock.coding.me/fxxkmyphone/index.xml</link>
-    <description>Recent content in Fxxkmyphone-rsses on Me &amp; Web</description>
+    <description>Recent content in Fxxkmyphones on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <lastBuildDate>Tue, 13 Dec 2016 15:25:03 +0800</lastBuildDate>
     <atom:link href="/fxxkmyphone/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +14,7 @@
       <title>不用root修改一加三的DPI</title>
       <link>http://lovelock.coding.me/fxxkmyphone/change-dpi-of-oneplus3/</link>
       <pubDate>Tue, 13 Dec 2016 15:25:03 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/fxxkmyphone/change-dpi-of-oneplus3/</guid>
       <description>&lt;p&gt;之前也听说过有修改DPI的，但不知道修改了会有什么变化。后来直接升级了7.0（官方的OxygenOS OpenBeta version 4.0)，稳定性不行，耗电也非常大。忍了几天实在忍不了，于是乎就刷回目前使用最稳定的稳定版3.2.8了。&lt;/p&gt;
 
@@ -26,6 +24,10 @@
 执行 &lt;code&gt;adb shell wm density 400 &amp;amp;&amp;amp; adb reboot&lt;/code&gt; 其实就够了，不过如果你想直到默认的是多少，我可以告诉你是480，简直太大了。我觉得400是一个比较合理的大小。具体多少你可以自己调整，200-600之间都是可以的，不过200太小了。&lt;/p&gt;
 
 &lt;p&gt;好久没有更新博客了，发现自己好啰嗦啊。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;更新：现在升级了官方的氢3.0 测试版，用了原生的修改DPI功能，相当稳定了，已经快一个月没有刷机了。&lt;/p&gt;
 </description>
     </item>
     

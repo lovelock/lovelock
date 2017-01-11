@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Mac on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/mac/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Mac on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/mac/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>使用ssh-config提升你的生产力</title>
       <link>http://lovelock.coding.me/mac/use-ssh-config-to-tune-your-productivity-up/</link>
       <pubDate>Tue, 09 Aug 2016 14:57:11 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/mac/use-ssh-config-to-tune-your-productivity-up/</guid>
       <description>
 
@@ -116,7 +114,7 @@ ControlPath ~/.ssh/master-%r@%h:%p
       <title>rMBP连接1080P显示器显示效果优化</title>
       <link>http://lovelock.coding.me/mac/low-resolution-display-with-retina-macbookpro/</link>
       <pubDate>Wed, 20 Jan 2016 14:03:19 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/mac/low-resolution-display-with-retina-macbookpro/</guid>
       <description>&lt;p&gt;喜大普奔地，公司发了13寸MacBook Pro和Dell 24寸显示器。&lt;/p&gt;
 
@@ -141,7 +139,7 @@ defaults -currentHost read -globalDomain AppleFontSmoothing
       <title>OS X完全卸载JDK的方法</title>
       <link>http://lovelock.coding.me/mac/2015-12-04-uninstall-jdk-from-os-x/</link>
       <pubDate>Fri, 04 Dec 2015 23:04:43 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/mac/2015-12-04-uninstall-jdk-from-os-x/</guid>
       <description>&lt;p&gt;刚用OS X时想着可能会用到Java，毕竟Jetbrains的产品都要依赖Java。但新版本的这些IDE都自带java-bundle了，所以就没有必要留着了。&lt;/p&gt;
 
@@ -164,7 +162,7 @@ sudo rm -rf /Library/Preferences/com.oracle.java.Helper-Tool.plist
       <title>Mac使用VMware Fusion安装Ubuntu</title>
       <link>http://lovelock.coding.me/mac/2015-08-31-Mac%E4%BD%BF%E7%94%A8VMware-Fusion%E5%AE%89%E8%A3%85Ubuntu/</link>
       <pubDate>Mon, 31 Aug 2015 19:37:00 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/mac/2015-08-31-Mac%E4%BD%BF%E7%94%A8VMware-Fusion%E5%AE%89%E8%A3%85Ubuntu/</guid>
       <description>&lt;p&gt;越来越觉得我用Mac和Windows也没有什么区别。&lt;/p&gt;
 
@@ -187,7 +185,7 @@ sudo rm -rf /Library/Preferences/com.oracle.java.Helper-Tool.plist
       <title>和接口调用方联调的经验教训</title>
       <link>http://lovelock.coding.me/mac/2015-06-26-he-jie-kou-diao-yong-fang-lian-diao-de-jing-yan-jiao-xun/</link>
       <pubDate>Fri, 26 Jun 2015 10:22:18 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/mac/2015-06-26-he-jie-kou-diao-yong-fang-lian-diao-de-jing-yan-jiao-xun/</guid>
       <description>&lt;p&gt;一个同事做的接口，今天他请假没有来，就临时由我协助接口调用方联调。&lt;/p&gt;
 
@@ -240,7 +238,7 @@ sudo rm -rf /Library/Preferences/com.oracle.java.Helper-Tool.plist
       <title>关于smcFanControl的一点感想</title>
       <link>http://lovelock.coding.me/mac/2015-06-06-guan-yu-smcfancontrolde-yi-dian-gan-xiang/</link>
       <pubDate>Sat, 06 Jun 2015 15:39:24 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/mac/2015-06-06-guan-yu-smcfancontrolde-yi-dian-gan-xiang/</guid>
       <description>&lt;p&gt;前天晚上看了池建强先生的《MacTalk：人生元编程》，其中提到了很多关于Mac和OS X的东西，其中一点引起了我的注意，那就是关于夏天电脑发热严重，怎样避免呢？那么作者就提到了smcFanControl。&lt;/p&gt;
 

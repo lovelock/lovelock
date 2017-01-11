@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Git on Me &amp; Web</title>
     <link>http://lovelock.coding.me/categories/git/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Git on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/categories/git/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>使用Git钩子自动部署代码</title>
       <link>http://lovelock.coding.me/git/git-deploy-hook/</link>
       <pubDate>Sun, 21 Feb 2016 15:37:20 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/git/git-deploy-hook/</guid>
       <description>
 
@@ -87,7 +85,7 @@ ls -l
       <title>git取消证书校验</title>
       <link>http://lovelock.coding.me/git/2015-06-08-gitqu-xiao-zheng-shu-xiao-yan/</link>
       <pubDate>Mon, 08 Jun 2015 12:32:44 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/git/2015-06-08-gitqu-xiao-zheng-shu-xiao-yan/</guid>
       <description>&lt;p&gt;在一些较老版本的Linux服务器上如果用Git的话可能会出现证书错误的问题，这是因为Curl自带的证书版本较老。但好像要更新证书bundle挺麻烦，刚刚看到一个很简单的解决方案，直接取消git的证书校验。&lt;/p&gt;
 
@@ -102,7 +100,7 @@ ls -l
       <title>github学习记录</title>
       <link>http://lovelock.coding.me/git/2015-04-29-githubxue-xi-ji-lu/</link>
       <pubDate>Wed, 29 Apr 2015 00:31:18 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/git/2015-04-29-githubxue-xi-ji-lu/</guid>
       <description>
 

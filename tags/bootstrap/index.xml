@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Bootstrap on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/bootstrap/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Bootstrap on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/bootstrap/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>Bootstrap插件DataTables实现服务器端分页</title>
       <link>http://lovelock.coding.me/javascript/bootstrap-plugin-datatables/</link>
       <pubDate>Sun, 28 Feb 2016 21:40:04 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/bootstrap-plugin-datatables/</guid>
       <description>
 
@@ -210,7 +208,7 @@
       <title>Bootstrap Modal用法总结</title>
       <link>http://lovelock.coding.me/javascript/2015-05-06-bootstrap-modalyong-fa-zong-jie/</link>
       <pubDate>Wed, 06 May 2015 23:15:41 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-05-06-bootstrap-modalyong-fa-zong-jie/</guid>
       <description>
 

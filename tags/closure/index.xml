@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Closure on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/closure/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Closure on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/closure/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>JavaScript闭包深究</title>
       <link>http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/</link>
       <pubDate>Wed, 02 Dec 2015 21:35:12 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/</guid>
       <description>
 

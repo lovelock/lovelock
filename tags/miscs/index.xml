@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Me &amp; Web</title>
+    <title>Miscs on Me &amp; Web</title>
     <link>http://lovelock.coding.me/tags/miscs/index.xml</link>
-    <description>Recent content on Me &amp; Web</description>
+    <description>Recent content in Miscs on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>frostwong@gmail.com (Frost Wong)</managingEditor>
-    <webMaster>frostwong@gmail.com (Frost Wong)</webMaster>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <atom:link href="/tags/miscs/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +13,7 @@
       <title>Facebook的用户体验</title>
       <link>http://lovelock.coding.me/miscs/2015-11-22-Facebook%E7%9A%84%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Sun, 22 Nov 2015 13:56:28 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/miscs/2015-11-22-Facebook%E7%9A%84%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/</guid>
       <description>&lt;p&gt;上个星期登录Gmail突然发现多了好多Facebook的动态，仔细一看，原来我的头像都已经被别人换了。好吧，这还是我人生第一次帐号被盗的经历。&lt;/p&gt;
 
@@ -45,7 +43,7 @@
       <title>也谈封杀</title>
       <link>http://lovelock.coding.me/miscs/2015-10-09-%E4%B9%9F%E8%B0%88%E5%B0%81%E6%9D%80/</link>
       <pubDate>Fri, 09 Oct 2015 18:47:29 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/miscs/2015-10-09-%E4%B9%9F%E8%B0%88%E5%B0%81%E6%9D%80/</guid>
       <description>&lt;p&gt;看到&lt;a href=&#34;https://blog.coding.net/blog/art-of-block&#34;&gt;读《robbin 谈社区运营：封杀的艺术》有感&lt;/a&gt;提到了社区之间的封杀，因为我用社区比较少，最近才接触到&lt;a href=&#34;https://coding.net&#34;&gt;Coding.net&lt;/a&gt;这个优秀的工具，所以并没有感受到社区之间的屏蔽、封杀。&lt;/p&gt;
 
@@ -83,7 +81,7 @@
       <title>这一天，就这样过去了</title>
       <link>http://lovelock.coding.me/miscs/2015-10-08-%E8%BF%99%E4%B8%80%E5%A4%A9%EF%BC%8C%E5%B0%B1%E8%BF%99%E6%A0%B7%E8%BF%87%E5%8E%BB%E4%BA%86/</link>
       <pubDate>Thu, 08 Oct 2015 15:47:46 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/miscs/2015-10-08-%E8%BF%99%E4%B8%80%E5%A4%A9%EF%BC%8C%E5%B0%B1%E8%BF%99%E6%A0%B7%E8%BF%87%E5%8E%BB%E4%BA%86/</guid>
       <description>&lt;p&gt;我是来自中国大陆的一名开发者。&lt;/p&gt;
 
@@ -111,7 +109,7 @@ CDN吗？真是不理解。诶，算了，不纠结这个了，我现在终于�
       <title>打破矛盾</title>
       <link>http://lovelock.coding.me/miscs/2015-09-20-%E7%89%A2%E9%AA%9A/</link>
       <pubDate>Sun, 20 Sep 2015 17:09:10 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/miscs/2015-09-20-%E7%89%A2%E9%AA%9A/</guid>
       <description>&lt;p&gt;感觉这段时间自己处在一个很郁闷的时期，能意识到却又跳不出来。就像夜里做梦，有时会知道自己是在做梦，在梦里大喊大叫却听不到任何声音——那种无助感，终于在现实中出现了。&lt;/p&gt;
 
@@ -147,7 +145,7 @@ CDN吗？真是不理解。诶，算了，不纠结这个了，我现在终于�
       <title>也谈创业</title>
       <link>http://lovelock.coding.me/miscs/%E4%B9%9F%E8%B0%88%E5%88%9B%E4%B8%9A/</link>
       <pubDate>Fri, 10 Jul 2015 00:17:38 +0000</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/miscs/%E4%B9%9F%E8%B0%88%E5%88%9B%E4%B8%9A/</guid>
       <description>&lt;p&gt;我竟然在标签里写了“情怀”两个字。&lt;/p&gt;
 
@@ -179,7 +177,7 @@ CDN吗？真是不理解。诶，算了，不纠结这个了，我现在终于�
       <title>一位老人在地铁上摔倒想到的</title>
       <link>http://lovelock.coding.me/miscs/2015-06-12-wei-lao-ren-zai-di-tie-shang-shuai-dao-xiang-dao-de/</link>
       <pubDate>Fri, 12 Jun 2015 10:29:55 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/miscs/2015-06-12-wei-lao-ren-zai-di-tie-shang-shuai-dao-xiang-dao-de/</guid>
       <description>&lt;p&gt;今天地铁上还是像往常一样那么多人，我终于在站了近半小时之后有了一个座位。&lt;/p&gt;
 
@@ -199,7 +197,7 @@ CDN吗？真是不理解。诶，算了，不纠结这个了，我现在终于�
       <title>ActiveX控件在浏览器中使用的注意事项</title>
       <link>http://lovelock.coding.me/miscs/2015-05-08-activexkong-jian-zai-liu-lan-qi-zhong-shi-yong-de-zhu-yi-shi-xiang/</link>
       <pubDate>Fri, 08 May 2015 22:17:04 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/miscs/2015-05-08-activexkong-jian-zai-liu-lan-qi-zhong-shi-yong-de-zhu-yi-shi-xiang/</guid>
       <description>&lt;p&gt;好吧，我承认这段事件做的工作是和前端的关系比较大，但其实最主要的功能是我们的合作方提供的一个ActiveX控件完成的，而我需要让我的用户在浏览器中调用这个控件。&lt;/p&gt;
 
@@ -239,7 +237,7 @@ CDN吗？真是不理解。诶，算了，不纠结这个了，我现在终于�
       <title>函数默认参数比较</title>
       <link>http://lovelock.coding.me/miscs/2015-05-02-han-shu-mo-ren-can-shu-bi-jiao/</link>
       <pubDate>Sat, 02 May 2015 18:21:24 +0800</pubDate>
-      <author>frostwong@gmail.com (Frost Wong)</author>
+      
       <guid>http://lovelock.coding.me/miscs/2015-05-02-han-shu-mo-ren-can-shu-bi-jiao/</guid>
       <description>&lt;p&gt;当一个函数的参数很多，而有很多需要传输的数据都具有相同的属性值，那么我们可能希望可以不传入某些默认的参数，这就导致了函数默认参数这个需求的诞生。&lt;/p&gt;
 
