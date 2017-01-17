@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18" />
+    <meta name="generator" content="Hugo 0.18.1" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -77,6 +77,22 @@
   <div class="row">
     <div class="col-md-8">
       <header class="page-title">Phps</header>
+
+      
+      <article class="li">
+  <header>
+    <div class="date">Tue, Jan 17, 2017</div>
+    <div class="title"><a href="http://lovelock.coding.me/php/internals/a-function-without-arguments/">没有参数的函数（区别于类的方法）</a></div>
+  </header>
+  <div class="body">距离上一次写PHP扩展相关的内容已经很久很久了，这两天又想着写一个真正意义上的扩展了，所以又要重新学习了。 先从写一个最简单的函数说起，从我现</div>
+
+  
+  <footer>
+    <a href="http://lovelock.coding.me/php/internals/a-function-without-arguments/" class="btn btn-default">Read More…</a>
+  </footer>
+  
+</article>
+<hr>
 
       
       <article class="li">
@@ -257,28 +273,6 @@ $log = new Monolog\Logger('name'); $log-&gt;pushHandler(new Monolog\Handler\Stre
 <hr>
 
       
-      <article class="li">
-  <header>
-    <div class="date">Sat, Sep 26, 2015</div>
-    <div class="title"><a href="http://lovelock.coding.me/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/">PHP单元测试-02</a></div>
-  </header>
-  <div class="body">上一篇中讲了PHP单元测试的一些简单概念，这里详细说一下会用到的各种assert*函数。官方文档按照字母顺序逐一讲述了这些方法，但我觉得那很不合适，至少应该大概按照类别来分类。
-数组相关  assertArrayHasKey($expected_key, $actual_array) 如果$expected_key是$actual_array中元素的一个键值，则通过，否则不通过。也即
-foreach ($actual_array as $k =&gt; $v) { if ($k === $expected_key) { // 测试通过 return true; } // 测试不通过 return false; }  assertArraySubset($subset_array, $actual_array) 如果$subset_array是$actual_array的一个子数组，则通过，否则不通过。也即前者是后者的子集，这点很重要，其实由于在PHP中数组是作为HashTable存储的，所以是一般并不存在顺序的问题。因此这里只要求前者是后者的子集，而至于顺序则不要求。
- assertCount($count, $array) 如果count($array) === $count)则通过。注意这里$count的类型必须是整数。
-  类属性相关  assertClassHasAttribute($attributeName, $className) 如果类名为$className的类拥有一个名为$attributeName的属性，则通过，否则不通过。值得注意的是，这个测试通过与否与属性的值是否设置没有关系，即使是只声明了名为$attributeName的属性，这个测试也是通过的，但实例化该类之后var_dump(new ClassAttr()-&gt;attr)的结果却是false。
- assetClassHasStaticAttribute($staticAttributeName, $className) 这个自不必多说，和上面类似。只是用来判断静态属性。
-  对象关系  assertObjectHasAttribute($attributeName, $object) 如果对象$object拥有属性$attributeName，则通过。  包含关系  assertContains($needle, $haystack) 如果$haystack中包含$needle，则通过，否则不通过。这个包含可以是数组的包含，也可以是字符串的包含，注意，默认是区分大小写的，即assertContains('foo', 'FooBar')是不能通过测试的。但assertContains('foo', 'FooBar', '', true)则可以通过测试，也就是说第四个参数表示不区分大小写。至于第三个参数，其实是$message，也就是在测试不通过时报告 详细信息的，我个人理解和try/cache里面的Exception $e里面的getMessage()可能有点类似，没有深究。</div>
-
-  
-  <footer>
-    <a href="http://lovelock.coding.me/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/" class="btn btn-default">Read More…</a>
-  </footer>
-  
-</article>
-<hr>
-
-      
       
 <nav>
   <ul class="pager">
@@ -309,6 +303,10 @@ foreach ($actual_array as $k =&gt; $v) { if ($k === $expected_key) { // 测试�
     
     </div>
     <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/php/internals/a-function-without-arguments/" >没有参数的函数（区别于类的方法）</a>
+      </div>
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/bigdata/cleanup-dirty-data-in-hdfs/" >清理HDFS的脏数据</a>
@@ -344,10 +342,6 @@ foreach ($actual_array as $k =&gt; $v) { if ($k === $expected_key) { // 测试�
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/create-and-run-java-application-with-maven/" >使用maven创建和运行Java应用</a>
-      </div>
-      
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/deepin-linux-experience/" >DeepinLinux 体验报告</a>
       </div>
       
     </div>

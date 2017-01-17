@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18" />
+    <meta name="generator" content="Hugo 0.18.1" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -77,6 +77,73 @@
   <div class="row">
     <div class="col-md-8">
       <header class="page-title">Php</header>
+
+      
+      <article class="li">
+  <header>
+    <div class="date">Wed, Jun 17, 2015</div>
+    <div class="title"><a href="http://lovelock.coding.me/php/2015-06-17-phpyan-chi-bang-ding/">PHP延迟绑定</a></div>
+  </header>
+  <div class="body"><p>在公司的代码里看到很多重复代码，每张表对应的类都有一个一样的静态方法，作用是获得数据库的连接。但显然这并不是一个好的解决方案，而应该充分利用面向对象的思想，利用继承的方式来更优雅的解决。</p>
+
+<p>我想，当初作者在写这部分代码的时候可能也已经考虑到了这个问题，但很可能是对PHP的延后绑定（LSB）不了解，因此没有实施。</p>
+
+<p>得到数据库连接的实例有多种方式，这里我们假设有一个方法<code>DB::mysqlConn($tableName);</code></p>
+
+<p>举个例子来说，假设我们设计一个基类<code>BaseConn</code>：</p>
+
+<pre><code class="language-php">class BaseConn
+{
+    protected static $conn;
+    protected static $tableName;
+    
+    public function getInstance()
+    {
+        self::$conn = DB::mysqlConn($tableName);
+        return self::$conn;
+    }
+}
+</code></pre>
+
+<p>按照计划，我们就可以写子类了：</p>
+
+<pre><code class="language-php">class ATableConn extends BaseConn
+{
+    protected static $tableName = 'atable';
+    
+    public static findById($id)
+    {
+        $query = &quot;select * from &quot; . self::$tableName . &quot; where id = {$id}&quot;;
+        return $this-&gt;getInstance()-&gt;exec($sql);
+    }
+}
+</code></pre>
+
+<p>这时一般都会认为没有什么问题了，因为我们已经在子类里设定了<code>$tableName</code>的值，这样在创建数据库连接的时候一定就是<code>atable</code>的连接了。</p>
+
+<p>错！</p>
+
+<p>因为用<code>self</code>关键字绑定到了编译时引用的属性或方法。<code>self</code>关键字指向的是父类，而且不会意识到子类，基本上，编译器会用所绑定的名称替换<code>self</code>关键字。</p>
+
+<p>那么怎么解决呢？PHP5.3为一个本来就存在的关键字赋予了新的含义——<code>static</code>，它会在可能的最近时刻强迫PHP绑定到实现代码。<sup class="footnote-ref" id="fnref:static"><a rel="footnote" href="#fn:static">1</a></sup></p>
+
+<p>因此，把上面代码中<code>getInstance</code>方法中的<code>self</code>替换成<code>static</code>就可以了。</p>
+
+<p>这个特性也就可以实现ActiveRecord了，不过这就是另外一个话题了。</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:static"><a href="http://www.ibm.com/developerworks/cn/opensource/os-php-53static/">PHP V5.3 用延后静态绑定搞活面向对象编程</a>
+ <a class="footnote-return" href="#fnref:static"><sup>[return]</sup></a></li>
+</ol>
+</div>
+</div>
+
+  
+</article>
+<hr>
 
       
       <article class="li">
@@ -188,6 +255,10 @@ shell_exec(&quot;/usr/bin/env php &quot; . $file . &quot; &quot; . $id . &quot;&
     <div class="list-group">
       
       <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/php/internals/a-function-without-arguments/" >没有参数的函数（区别于类的方法）</a>
+      </div>
+      
+      <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/bigdata/cleanup-dirty-data-in-hdfs/" >清理HDFS的脏数据</a>
       </div>
       
@@ -221,10 +292,6 @@ shell_exec(&quot;/usr/bin/env php &quot; . $file . &quot; &quot; . $id . &quot;&
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/create-and-run-java-application-with-maven/" >使用maven创建和运行Java应用</a>
-      </div>
-      
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/deepin-linux-experience/" >DeepinLinux 体验报告</a>
       </div>
       
     </div>

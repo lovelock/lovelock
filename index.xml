@@ -7,8 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 11 Jan 2017 14:27:46 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Jan 2017 15:48:42 +0800</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>没有参数的函数（区别于类的方法）</title>
+      <link>http://lovelock.coding.me/php/internals/a-function-without-arguments/</link>
+      <pubDate>Tue, 17 Jan 2017 15:48:42 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/php/internals/a-function-without-arguments/</guid>
+      <description>&lt;p&gt;距离上一次写PHP扩展相关的内容已经很久很久了，这两天又想着写一个真正意义上的扩展了，所以又要重新学习了。&lt;/p&gt;
+
+&lt;p&gt;先从写一个最简单的函数说起，从我现在的理解来说这个函数是全局的。比如我要实现一个最简单的&lt;code&gt;helloworld&lt;/code&gt;函数。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这里说一个小插曲，最后不要用dash(-)作为扩展名字的一部分，会出现乱七八糟的麻烦。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如图所示，&lt;img src=&#34;https://ww4.sinaimg.cn/large/006tNc79ly1fbtoytl1g7j31ks0jswjf.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;需要注意的是&lt;code&gt;PHP_FUNCTION(helloworld)&lt;/code&gt;这段需要放在&lt;code&gt;const&lt;/code&gt;这段前面，因为相当于前面是定义了&lt;code&gt;helloworld&lt;/code&gt;这个函数名，后面是把它注册到『可用函数列表』中，如果都没有定义，怎么注册呢，对吧？&lt;/p&gt;
+
+&lt;p&gt;至于编译的细节，请看我之前的文章。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>清理HDFS的脏数据</title>
@@ -2300,178 +2322,6 @@ sudo make install
 &lt;p&gt;最好把它加入到&lt;code&gt;git&lt;/code&gt;工作目录中。&lt;/p&gt;
 
 &lt;p&gt;扩展的安装就这些，下一节介绍PHP变量的基本类型。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PHP扩展实战——用PHP实现类的原型</title>
-      <link>http://lovelock.coding.me/php/internals/class-prototype-in-php/</link>
-      <pubDate>Sat, 09 Apr 2016 21:55:00 +0800</pubDate>
-      
-      <guid>http://lovelock.coding.me/php/internals/class-prototype-in-php/</guid>
-      <description>&lt;p&gt;在编写之前先用PHP实现这个类的原型吧。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php
-
-namespace Hylog;
-
-use \DateTime;
-
-class Hylog
-{
-    const HYLOG_VERSION = &amp;quot;0.1.0&amp;quot;;
-
-    const EMERGENCY = &#39;EMERGENCY&#39;;
-    const ALERT     = &#39;ALERT&#39;;
-    const CRITICAL  = &#39;CRITICAL&#39;;
-    const ERROR     = &#39;ERROR&#39;;
-    const WARNING   = &#39;WARNING&#39;;
-    const NOTICE    = &#39;NOTICE&#39;;
-    const INFO      = &#39;INFO&#39;;
-    const DEBUG     = &#39;DEBUG&#39;;
-
-    private static $_instance;
-
-    private $_basePath;
-    private $_sliceLogByHour;
-
-    public function log($level, $message, $context = array())
-    {
-        $line = $this-&amp;gt;interpolate($message, $context);
-
-        $datetime         = new DateTime();
-        $timestamp        = $datetime-&amp;gt;getTimestamp();
-        $formatedDatetime = $datetime-&amp;gt;format(DateTime::ATOM);
-
-        $line = $timestamp . &amp;quot;\t|\t&amp;quot; . $formatedDatetime . &amp;quot;\t|\t&amp;quot; . $line;
-
-        $this-&amp;gt;output($level, $line);
-    }
-
-    public function emergency($message, $context = array())
-    {
-        $this-&amp;gt;log(self::EMERGENCY, $message, $context);
-    }
-
-    public function alert($message, $context = array())
-    {
-        $this-&amp;gt;log(self::ALERT, $message, $context);
-    }
-
-    public function critical($message, $context = array())
-    {
-        $this-&amp;gt;log(self::CRITICAL, $message, $context);
-    }
-
-    public function error($message, $context = array())
-    {
-        $this-&amp;gt;log(self::ERROR, $message, $context);
-    }
-
-    public function warning($message, $context = array())
-    {
-        $this-&amp;gt;log(self::WARING, $message, $context);
-    }
-
-    public function notice($message, $context = array())
-    {
-        $this-&amp;gt;log(self::NOTICE, $message, $context);
-    }
-
-    public function info($message, $context = array())
-    {
-        $this-&amp;gt;log(self::INFO, $message, $context);
-    }
-
-    public function debug($message, $context = array())
-    {
-        $this-&amp;gt;log(self::DEBUG, $message, $context);
-    }
-
-    public static function getInstance() : object
-    {
-        if (!isset(self::$_instance)) {
-            self::$_instance = new static();
-        }
-
-        return self::$_instance;
-    }
-
-    public function getVersion()
-    {
-        return self::HYLOG_VERSION;
-    }
-
-    public function setBasePath($path)
-    {
-        $this-&amp;gt;_basePath = $path;
-    }
-
-    public function getBasePath() : string
-    {
-        return $this-&amp;gt;_basePath;
-    }
-
-    public function setSliceByHour($bool)
-    {
-        $this-&amp;gt;_sliceLogByHour = $bool;
-    }
-
-    public function getSliceByHour() : bool
-    {
-        return $this-&amp;gt;_sliceLogByHour;
-    }
-
-    private function output($level, $message)
-    {
-        $logFile = $this-&amp;gt;getLogFile($level);
-
-        error_log($message . PHP_EOL, 3, $logFile);
-    }
-
-    private function getLogFile($level) : string
-    {
-        $cHour = date(&#39;ymdH&#39;);
-        $cDay  = date(&#39;ymd&#39;);
-
-        if ($this-&amp;gt;_sliceLogByHour) {
-            return $this-&amp;gt;_basePath . &#39;/&#39; . $level . &#39;.&#39; . $cHour . &#39;.log&#39;;
-        } else {
-            return $this-&amp;gt;_basePath . &#39;/&#39; . $level . &#39;.&#39; . $cDay . &#39;.log&#39;;
-        }
-    }
-
-    private function interpolate($message, $context = array())
-    {
-        foreach ($context as $key =&amp;gt; $val) {
-            $replace[&#39;{&#39; . $key . &#39;}&#39;] = $val;
-        }
-
-        return strtr($message, $replace);
-    }
-
-    private function __construct()
-    {
-        $this-&amp;gt;_basePath = &#39;/tmp/log&#39;;
-
-        if (!is_dir($this-&amp;gt;_basePath)) {
-            mkdir($this-&amp;gt;_basePath, 0700, true);
-        } else {
-            chmod($this-&amp;gt;_basePath, 0700);
-        }
-
-        $this-&amp;gt;_sliceLogByHour = true;
-    }
-
-    private function __clone()
-    {
-    }
-
-    private function __wakeup()
-    {
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

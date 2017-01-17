@@ -7,8 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 09 Apr 2016 22:04:18 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Jan 2017 15:48:42 +0800</lastBuildDate>
     <atom:link href="/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>没有参数的函数（区别于类的方法）</title>
+      <link>http://lovelock.coding.me/php/internals/a-function-without-arguments/</link>
+      <pubDate>Tue, 17 Jan 2017 15:48:42 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/php/internals/a-function-without-arguments/</guid>
+      <description>&lt;p&gt;距离上一次写PHP扩展相关的内容已经很久很久了，这两天又想着写一个真正意义上的扩展了，所以又要重新学习了。&lt;/p&gt;
+
+&lt;p&gt;先从写一个最简单的函数说起，从我现在的理解来说这个函数是全局的。比如我要实现一个最简单的&lt;code&gt;helloworld&lt;/code&gt;函数。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这里说一个小插曲，最后不要用dash(-)作为扩展名字的一部分，会出现乱七八糟的麻烦。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如图所示，&lt;img src=&#34;https://ww4.sinaimg.cn/large/006tNc79ly1fbtoytl1g7j31ks0jswjf.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;需要注意的是&lt;code&gt;PHP_FUNCTION(helloworld)&lt;/code&gt;这段需要放在&lt;code&gt;const&lt;/code&gt;这段前面，因为相当于前面是定义了&lt;code&gt;helloworld&lt;/code&gt;这个函数名，后面是把它注册到『可用函数列表』中，如果都没有定义，怎么注册呢，对吧？&lt;/p&gt;
+
+&lt;p&gt;至于编译的细节，请看我之前的文章。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>PHP扩展实战——扩展的骨架</title>
@@ -1777,61 +1799,6 @@ echo &amp;quot;username: &amp;quot; . $username;
  &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:static&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PHP系统调用</title>
-      <link>http://lovelock.coding.me/php/2015-04-28-phpxi-tong-diao-yong/</link>
-      <pubDate>Tue, 28 Apr 2015 23:30:54 +0800</pubDate>
-      
-      <guid>http://lovelock.coding.me/php/2015-04-28-phpxi-tong-diao-yong/</guid>
-      <description>&lt;p&gt;通常认为PHP的系统调用有以下几种方式：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;system()&lt;/code&gt;输出并返回最后一行Shell结果。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;exec()&lt;/code&gt;不输出结果，返回最后一行Shell结果，所有结果可以保存到一个返回的数组。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;passthru()&lt;/code&gt;只调用命令，把命令的运行结果原样的标准输出到标准输出设备上。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;上面三种我目前还没有用到过，下面简单介绍一下另外一种方式&lt;code&gt;shell_exec&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;应用背景：有大量数据需要处理，对一个大数组中的所有元素进行复杂的操作，这个任务其实是不适合交给PHP来做的。这也是我第一次意识到带垃圾回收机制的语言和C语言的差别。
-由于对这种特性的不了解，刚开始尝试在进行完一次任务之后将生成的变量&lt;code&gt;unset&lt;/code&gt;掉，但发现其实不起作用，仍然会引起内存不足从而退出的错误信息。查看了&lt;a href=&#34;http://www.laruence.com&#34;&gt;风雪之隅&lt;/a&gt;的
-文章&lt;a href=&#34;http://www.laruence.com/2011/03/04/1894.html&#34;&gt;深入理解PHP内存管理之谁动了我的内存&lt;/a&gt;之后知道了原来&lt;code&gt;unset&lt;/code&gt;确实会释放内存，但释放的内存并没有像C语言那样交回给操作系统，而是用PHP
-自己的内存管理API进行的。PHP并不是简单的向操作系统要内存，而是会要一个大块的内存，然后把其中一块分配给申请者，这样当再有逻辑来申请内存的时候就不需要再向操作系统申请了，避免了频繁
-的系统调用。当然带来的问题就是占用的内存总量只会增加不会减少，因此&lt;code&gt;unset&lt;/code&gt;在此没有实际的意义。
-理想的情况是这样的，对数组的一个元素执行完所有操作，将与该元素相关的内存释放，再进行下一个操作，由于所有的元素的操作是几乎一样的，所以占有的内存应该不会有大的增加，问题是前面已经
-说了，PHP不会真正意义上释放内存，那么就没有解决办法了吗？
-当然有。
-大致的思路是这样的，先处理第一个元素，然后用&lt;code&gt;shell_exec&lt;/code&gt;执行这个文件本身。结果就是&lt;code&gt;shell_exec&lt;/code&gt;这个命令已经发出，已经成功的fork了一个进程，脚本执行退出之后将会反复进行这步操作，直
-至数组中的最后一个元素。这样的好处就是将处理过程串联起来，只有上一个任务结束之后才会触发下一个任务执行，不会造成CPU和内存占用过高的情况，完美的解决了我的问题。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;中间遇到了一个另外一个问题，那就是怎样将参数传进去。比如要处理的数组是&lt;code&gt;$array = array($elem1, $elem2, $elem3)&lt;/code&gt;，第一次执行时难道要将数组的元素作为命令行参数传进去？这样做显得也
-太没有水平了，经过深入思考，解决方案应该是这样的（如果有更好的方法，也期待您能提出）&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-PHP&#34;&gt;&amp;lt;?php
-$file = __FILE__;
-$array = array($elem1, $elem2, $elem3);
-
-if (!isset($argv[1])) {
-    $id = $array[1];
-} else {
-    $id = /* 数组中$argv[1]元素之后的第一个元素 */
-}
-
-/* 对$id进行操作的代码 */
-
-shell_exec(&amp;quot;/usr/bin/env php &amp;quot; . $file . &amp;quot; &amp;quot; . $id . &amp;quot;&amp;gt;&amp;gt; /dev/null &amp;amp;&amp;quot;);
-?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最后一步很关键，一定要把执行操作的代码放在执行文件的语句前面，这样只有在上一次操作完成之后才会继续执行该文件，进入下一个周期。&lt;/p&gt;
-
-&lt;p&gt;看来语言功底真是不行啊，组织的不够清晰。而且在实际项目的代码里由于用到的是数据库中查出的值，根据当前的输入查找比当前值大的下一个值是很方便的，所以用数组不是很容易表达。这也引出的另外
-一个问题，就我实际项目而言，如果采用这种方法会增加很多查询数据库的次数，但由此增加的每次执行任务的开销相比完全无法完成而言，还是很值得的。&lt;/p&gt;
 </description>
     </item>
     
