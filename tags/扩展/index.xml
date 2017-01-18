@@ -10,6 +10,52 @@
     <atom:link href="/tags/%E6%89%A9%E5%B1%95/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>创建变量</title>
+      <link>http://lovelock.coding.me/php/internals/create-variables/</link>
+      <pubDate>Wed, 18 Jan 2017 18:08:53 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/php/internals/create-variables/</guid>
+      <description>
+
+&lt;p&gt;这里记录一下如何在PHP5的扩展中创建变量，包括局部变量和全局变量。&lt;/p&gt;
+
+&lt;h2 id=&#34;必备知识&#34;&gt;必备知识&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;PHP内部有符号表的概念，其中局部变量存放在指针&lt;code&gt;active_symbol_table&lt;/code&gt;中，而全局变量存放在非指针（真实值）&lt;code&gt;symbol_table&lt;/code&gt;中。&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;MAKE_STD_ZVAL&lt;/code&gt;宏创建变量。&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;ZVAL_xxxx&lt;/code&gt;宏为创建的变量赋值，当然也可以不赋值，而只是声明。&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;ZEND_SET_SYMBOL&lt;/code&gt;宏设置变量设置成全局还是局部。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;1-局部变量&#34;&gt;1. 局部变量&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;zval *new_var;
+MAKE_STD_ZVAL(new_var);
+ZVAL_LONG(new_var, 2000);
+ZEND_SET_SYMBOL(EG(active_symbol_table), &amp;quot;aVar&amp;quot;, new_var);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的代码会创建一个名为&lt;code&gt;$aVar&lt;/code&gt;的&lt;strong&gt;局部变量&lt;/strong&gt;，它的值是2000。&lt;/p&gt;
+
+&lt;h3 id=&#34;2-全局变量&#34;&gt;2. 全局变量&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;zval *new_var;
+MAKE_STD_ZVAL(new_var);
+ZVAL_LONG(new_var, 2000);
+ZEND_SET_SYMBOL(&amp;amp;EG(symbol_table), &amp;quot;aVar&amp;quot;, new_var);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的代码会创建一个名为&lt;code&gt;$aVar&lt;/code&gt;的全局变量，它的值是2000。在PHP中没有什么是一个宏实现不了的，如果有，那就两个————所以，你看创建一个全局变量要那么多字符，干脆再包装一个宏算了，于是就可以把最后一行替换成&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;ZEND_SET_GLOBAL_VAR(&amp;quot;aVar&amp;quot;, new_var);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ww3.sinaimg.cn/large/006tNbRwly1fbuyfmvy90j30z403q0tk.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>没有参数的函数（区别于类的方法）</title>
       <link>http://lovelock.coding.me/php/internals/a-function-without-arguments/</link>
       <pubDate>Tue, 17 Jan 2017 15:48:42 +0800</pubDate>

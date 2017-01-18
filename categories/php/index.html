@@ -81,6 +81,22 @@
       
       <article class="li">
   <header>
+    <div class="date">Wed, Jan 18, 2017</div>
+    <div class="title"><a href="http://lovelock.coding.me/php/internals/create-variables/">创建变量</a></div>
+  </header>
+  <div class="body">这里记录一下如何在PHP5的扩展中创建变量，包括局部变量和全局变量。 必备知识 PHP内部有符号表的概念，其中局部变量存放在指针active_s</div>
+
+  
+  <footer>
+    <a href="http://lovelock.coding.me/php/internals/create-variables/" class="btn btn-default">Read More…</a>
+  </footer>
+  
+</article>
+<hr>
+
+      
+      <article class="li">
+  <header>
     <div class="date">Tue, Jan 17, 2017</div>
     <div class="title"><a href="http://lovelock.coding.me/php/internals/a-function-without-arguments/">没有参数的函数（区别于类的方法）</a></div>
   </header>
@@ -263,49 +279,6 @@ foreach ($actual_array as $k =&gt; $v) { if ($k === $expected_key) { // 测试�
 <hr>
 
       
-      <article class="li">
-  <header>
-    <div class="date">Fri, Jun 19, 2015</div>
-    <div class="title"><a href="http://lovelock.coding.me/php/2015-06-19-phpshe-zhi-cookie/">PHP设置cookie</a></div>
-  </header>
-  <div class="body"><p>之前一直没有处理过cookie，刚才小小的看了一下，貌似很简单，大概记一下。</p>
-
-<p>首先，客户端要向服务端发送一个请求，服务端接收到请求之后做一下身份校验什么的，然后就可以给客户端种cookie了。</p>
-
-<pre><code class="language-php">setcookie(&quot;key&quot;, &quot;value&quot;, time()+expire);
-</code></pre>
-
-<p><code>expire</code>是cookie的过期时间，上面的例子用了两部分来说明它，time()获取当前的时间戳，那么<code>expire</code>就是你希望这个cookie在当前时刻之后再存活的时间长短。</p>
-
-<p>那么如何手动删除cookie呢？答案是无法直接删除cookie。但可以设置其过期，这样就间接的把它删除了。那怎样设置过期呢？<code>setcookie</code>的第三个参数设置的小于当前时间就可以了。</p>
-
-<p>那怎么用cookie呢？</p>
-
-<p>当你把cookie种到了客户端的机器上，它会保存在默认的域下，当客户端访问这个域下的资源时，发送的请求中会带着所有的cookie，然后在服务端用超全局变量<code>$_COOKIE['key']</code>就可以直接访问它了。</p>
-
-<p>demo代码如下：</p>
-
-<pre><code class="language-php">&lt;?php
-$username = $_GET['username'];
-$passwd = $_GET['passwd'];
-
-if (/* 身份校验成功 */) {
-    setcookie(&quot;username&quot;, $username, time() + 3600);
-    echo &quot;cookie set&quot;;
-}
-</code></pre>
-
-<pre><code class="language-php">&lt;?php
-$username = $_COOKIE[&quot;username&quot;];
-echo &quot;username: &quot; . $username;
-</code></pre>
-</div>
-
-  
-</article>
-<hr>
-
-      
       
 <nav>
   <ul class="pager">
@@ -336,6 +309,10 @@ echo &quot;username: &quot; . $username;
     
     </div>
     <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/php/internals/create-variables/" >创建变量</a>
+      </div>
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/php/internals/a-function-without-arguments/" >没有参数的函数（区别于类的方法）</a>
@@ -371,10 +348,6 @@ echo &quot;username: &quot; . $username;
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/use-slf4j-and-log4j-to-log-your-applications/" >slf4j配合log4j来给你的应用打log</a>
-      </div>
-      
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/java/create-and-run-java-application-with-maven/" >使用maven创建和运行Java应用</a>
       </div>
       
     </div>

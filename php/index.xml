@@ -7,8 +7,54 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 17 Jan 2017 15:48:42 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 18 Jan 2017 18:08:53 +0800</lastBuildDate>
     <atom:link href="/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>创建变量</title>
+      <link>http://lovelock.coding.me/php/internals/create-variables/</link>
+      <pubDate>Wed, 18 Jan 2017 18:08:53 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/php/internals/create-variables/</guid>
+      <description>
+
+&lt;p&gt;这里记录一下如何在PHP5的扩展中创建变量，包括局部变量和全局变量。&lt;/p&gt;
+
+&lt;h2 id=&#34;必备知识&#34;&gt;必备知识&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;PHP内部有符号表的概念，其中局部变量存放在指针&lt;code&gt;active_symbol_table&lt;/code&gt;中，而全局变量存放在非指针（真实值）&lt;code&gt;symbol_table&lt;/code&gt;中。&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;MAKE_STD_ZVAL&lt;/code&gt;宏创建变量。&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;ZVAL_xxxx&lt;/code&gt;宏为创建的变量赋值，当然也可以不赋值，而只是声明。&lt;/li&gt;
+&lt;li&gt;使用&lt;code&gt;ZEND_SET_SYMBOL&lt;/code&gt;宏设置变量设置成全局还是局部。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;1-局部变量&#34;&gt;1. 局部变量&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;zval *new_var;
+MAKE_STD_ZVAL(new_var);
+ZVAL_LONG(new_var, 2000);
+ZEND_SET_SYMBOL(EG(active_symbol_table), &amp;quot;aVar&amp;quot;, new_var);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的代码会创建一个名为&lt;code&gt;$aVar&lt;/code&gt;的&lt;strong&gt;局部变量&lt;/strong&gt;，它的值是2000。&lt;/p&gt;
+
+&lt;h3 id=&#34;2-全局变量&#34;&gt;2. 全局变量&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;zval *new_var;
+MAKE_STD_ZVAL(new_var);
+ZVAL_LONG(new_var, 2000);
+ZEND_SET_SYMBOL(&amp;amp;EG(symbol_table), &amp;quot;aVar&amp;quot;, new_var);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的代码会创建一个名为&lt;code&gt;$aVar&lt;/code&gt;的全局变量，它的值是2000。在PHP中没有什么是一个宏实现不了的，如果有，那就两个————所以，你看创建一个全局变量要那么多字符，干脆再包装一个宏算了，于是就可以把最后一行替换成&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;ZEND_SET_GLOBAL_VAR(&amp;quot;aVar&amp;quot;, new_var);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ww3.sinaimg.cn/large/006tNbRwly1fbuyfmvy90j30z403q0tk.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>没有参数的函数（区别于类的方法）</title>
@@ -1735,70 +1781,6 @@ if (/* 身份校验成功 */) {
 $username = $_COOKIE[&amp;quot;username&amp;quot;];
 echo &amp;quot;username: &amp;quot; . $username;
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PHP延迟绑定</title>
-      <link>http://lovelock.coding.me/php/2015-06-17-phpyan-chi-bang-ding/</link>
-      <pubDate>Wed, 17 Jun 2015 23:37:38 +0800</pubDate>
-      
-      <guid>http://lovelock.coding.me/php/2015-06-17-phpyan-chi-bang-ding/</guid>
-      <description>&lt;p&gt;在公司的代码里看到很多重复代码，每张表对应的类都有一个一样的静态方法，作用是获得数据库的连接。但显然这并不是一个好的解决方案，而应该充分利用面向对象的思想，利用继承的方式来更优雅的解决。&lt;/p&gt;
-
-&lt;p&gt;我想，当初作者在写这部分代码的时候可能也已经考虑到了这个问题，但很可能是对PHP的延后绑定（LSB）不了解，因此没有实施。&lt;/p&gt;
-
-&lt;p&gt;得到数据库连接的实例有多种方式，这里我们假设有一个方法&lt;code&gt;DB::mysqlConn($tableName);&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;举个例子来说，假设我们设计一个基类&lt;code&gt;BaseConn&lt;/code&gt;：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;class BaseConn
-{
-    protected static $conn;
-    protected static $tableName;
-    
-    public function getInstance()
-    {
-        self::$conn = DB::mysqlConn($tableName);
-        return self::$conn;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;按照计划，我们就可以写子类了：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;class ATableConn extends BaseConn
-{
-    protected static $tableName = &#39;atable&#39;;
-    
-    public static findById($id)
-    {
-        $query = &amp;quot;select * from &amp;quot; . self::$tableName . &amp;quot; where id = {$id}&amp;quot;;
-        return $this-&amp;gt;getInstance()-&amp;gt;exec($sql);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这时一般都会认为没有什么问题了，因为我们已经在子类里设定了&lt;code&gt;$tableName&lt;/code&gt;的值，这样在创建数据库连接的时候一定就是&lt;code&gt;atable&lt;/code&gt;的连接了。&lt;/p&gt;
-
-&lt;p&gt;错！&lt;/p&gt;
-
-&lt;p&gt;因为用&lt;code&gt;self&lt;/code&gt;关键字绑定到了编译时引用的属性或方法。&lt;code&gt;self&lt;/code&gt;关键字指向的是父类，而且不会意识到子类，基本上，编译器会用所绑定的名称替换&lt;code&gt;self&lt;/code&gt;关键字。&lt;/p&gt;
-
-&lt;p&gt;那么怎么解决呢？PHP5.3为一个本来就存在的关键字赋予了新的含义——&lt;code&gt;static&lt;/code&gt;，它会在可能的最近时刻强迫PHP绑定到实现代码。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:static&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:static&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;因此，把上面代码中&lt;code&gt;getInstance&lt;/code&gt;方法中的&lt;code&gt;self&lt;/code&gt;替换成&lt;code&gt;static&lt;/code&gt;就可以了。&lt;/p&gt;
-
-&lt;p&gt;这个特性也就可以实现ActiveRecord了，不过这就是另外一个话题了。&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:static&#34;&gt;&lt;a href=&#34;http://www.ibm.com/developerworks/cn/opensource/os-php-53static/&#34;&gt;PHP V5.3 用延后静态绑定搞活面向对象编程&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:static&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     
