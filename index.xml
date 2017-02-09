@@ -11,7 +11,7 @@
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>set docker image mirror</title>
+      <title>为Docker配置国内加速镜像</title>
       <link>http://lovelock.coding.me/linux/set-docker-image-mirror/</link>
       <pubDate>Thu, 09 Feb 2017 10:31:45 +0800</pubDate>
       
