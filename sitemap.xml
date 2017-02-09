@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://lovelock.coding.me/linux/proxy-and-reverse-proxy/</loc>
+    <lastmod>2017-02-09T14:39:09+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://lovelock.coding.me/linux/set-docker-image-mirror/</loc>
     <lastmod>2017-02-09T10:31:45+08:00</lastmod>
   </url>
@@ -468,14 +473,14 @@
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/categories/blog/</loc>
-    <lastmod>2015-09-26T21:17:35+00:00</lastmod>
+    <loc>http://lovelock.coding.me/tags/blog/</loc>
+    <lastmod>2015-07-03T15:04:01+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/tags/blog/</loc>
-    <lastmod>2015-07-03T15:04:01+00:00</lastmod>
+    <loc>http://lovelock.coding.me/categories/blog/</loc>
+    <lastmod>2015-09-26T21:17:35+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -569,13 +574,13 @@
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/categories/git/</loc>
+    <loc>http://lovelock.coding.me/tags/git/</loc>
     <lastmod>2016-02-21T15:37:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/tags/git/</loc>
+    <loc>http://lovelock.coding.me/categories/git/</loc>
     <lastmod>2016-02-21T15:37:20+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -623,13 +628,13 @@
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/categories/ios/</loc>
+    <loc>http://lovelock.coding.me/tags/ios/</loc>
     <lastmod>2015-07-13T20:20:18+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/tags/ios/</loc>
+    <loc>http://lovelock.coding.me/categories/ios/</loc>
     <lastmod>2015-07-13T20:20:18+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -659,14 +664,14 @@
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/categories/java/</loc>
-    <lastmod>2016-10-10T17:53:14+08:00</lastmod>
+    <loc>http://lovelock.coding.me/tags/java/</loc>
+    <lastmod>2016-10-11T16:41:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/tags/java/</loc>
-    <lastmod>2016-10-11T16:41:18+08:00</lastmod>
+    <loc>http://lovelock.coding.me/categories/java/</loc>
+    <lastmod>2016-10-10T17:53:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -677,13 +682,13 @@
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/categories/javascript/</loc>
+    <loc>http://lovelock.coding.me/tags/javascript/</loc>
     <lastmod>2016-03-30T16:08:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/tags/javascript/</loc>
+    <loc>http://lovelock.coding.me/categories/javascript/</loc>
     <lastmod>2016-03-30T16:08:03+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -713,20 +718,20 @@
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/categories/linux/</loc>
-    <lastmod>2017-02-09T10:31:45+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://lovelock.coding.me/tags/linux/</loc>
     <lastmod>2016-10-13T16:35:22+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>http://lovelock.coding.me/categories/linux/</loc>
+    <lastmod>2017-02-09T14:39:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://lovelock.coding.me/linux/</loc>
-    <lastmod>2017-02-09T10:31:45+08:00</lastmod>
+    <lastmod>2017-02-09T14:39:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -737,13 +742,13 @@
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/categories/mac/</loc>
+    <loc>http://lovelock.coding.me/tags/mac/</loc>
     <lastmod>2016-08-09T14:57:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/tags/mac/</loc>
+    <loc>http://lovelock.coding.me/categories/mac/</loc>
     <lastmod>2016-08-09T14:57:11+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -762,13 +767,7 @@
   
   <url>
     <loc>http://lovelock.coding.me/</loc>
-    <lastmod>2017-02-09T10:31:45+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://lovelock.coding.me/categories/miscs/</loc>
-    <lastmod>2016-07-17T22:53:33+08:00</lastmod>
+    <lastmod>2017-02-09T14:39:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -779,20 +778,26 @@
   </url>
   
   <url>
+    <loc>http://lovelock.coding.me/categories/miscs/</loc>
+    <lastmod>2016-07-17T22:53:33+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://lovelock.coding.me/miscs/</loc>
     <lastmod>2016-07-17T22:53:33+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/categories/mysql/</loc>
-    <lastmod>2015-10-17T16:59:58+00:00</lastmod>
+    <loc>http://lovelock.coding.me/tags/mysql/</loc>
+    <lastmod>2015-10-17T01:06:29+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/tags/mysql/</loc>
-    <lastmod>2015-10-17T01:06:29+00:00</lastmod>
+    <loc>http://lovelock.coding.me/categories/mysql/</loc>
+    <lastmod>2015-10-17T16:59:58+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -815,13 +820,13 @@
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/categories/php/</loc>
+    <loc>http://lovelock.coding.me/tags/php/</loc>
     <lastmod>2017-01-19T15:21:43+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/tags/php/</loc>
+    <loc>http://lovelock.coding.me/categories/php/</loc>
     <lastmod>2017-01-19T15:21:43+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -835,6 +840,12 @@
   <url>
     <loc>http://lovelock.coding.me/tags/php%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2016-01-10T22:02:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lovelock.coding.me/tags/proxy/</loc>
+    <lastmod>2017-02-09T14:39:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -853,6 +864,12 @@
   <url>
     <loc>http://lovelock.coding.me/python/</loc>
     <lastmod>2015-07-31T11:26:37+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lovelock.coding.me/tags/reverse-proxy/</loc>
+    <lastmod>2017-02-09T14:39:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -910,13 +927,13 @@
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/categories/vim/</loc>
+    <loc>http://lovelock.coding.me/tags/vim/</loc>
     <lastmod>2016-03-07T12:06:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://lovelock.coding.me/tags/vim/</loc>
+    <loc>http://lovelock.coding.me/categories/vim/</loc>
     <lastmod>2016-03-07T12:06:45+08:00</lastmod>
     <priority>0</priority>
   </url>
