@@ -10,6 +10,68 @@
     <atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Nginx负载均衡分配策略详解</title>
+      <link>http://lovelock.coding.me/linux/config-of-nginx-load-balancing/</link>
+      <pubDate>Thu, 09 Feb 2017 18:00:47 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/linux/config-of-nginx-load-balancing/</guid>
+      <description>
+
+&lt;p&gt;上篇文章配置的负载均衡是『轮询模式』，所以两台后端机器分到的请求数总是一样的。这里就其他分配策略做个详解。&lt;/p&gt;
+
+&lt;h2 id=&#34;分配策略&#34;&gt;分配策略&lt;/h2&gt;
+
+&lt;h3 id=&#34;1-weight&#34;&gt;1. &lt;code&gt;weight&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ww1.sinaimg.cn/large/006tKfTcly1fcl7d8xu4fj30d503aaa9.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;把前面的配置改成这样，意思是8086端口的这个server被hit的几率会是8085的2倍，实际测试结果如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ww1.sinaimg.cn/large/006tKfTcly1fcl7ee0sglj308802sjrf.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;因为这里面包含前面没有配置weight的数据，所以不太准确，但能说明问题。&lt;/p&gt;
+
+&lt;h3 id=&#34;2-ip-hash&#34;&gt;2. &lt;code&gt;ip_hash&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;这个的作用是把用户的IP映射到固定的一台后端服务器上，可以解决session的问题。这个看起来很不错，但还是无法解决灰度测试的问题。我理解的灰度测试最好是针对一批用户，因为你不能让用户在移动App已经购买的东西到了Web登录后发现没有了吧。所以最好还是根据用户的ID进行Hash。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ww4.sinaimg.cn/large/006tKfTcly1fcld8wy07zj30e10460sw.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;3-least-conn&#34;&gt;3. &lt;code&gt;least_conn&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;这个功能可以让在有需要长时间才能完成的请求时让请求的分配更公平。简言之就是它可以控制不让单独的一台服务器负载太高，而是会根据其负载动态的分配请求。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ww4.sinaimg.cn/large/006tKfTcly1fcldjacqwtj30bs03fdg0.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;4-consistent-hash&#34;&gt;4. &lt;code&gt;consistent hash&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;可以根据请求的URL进行Hash，也就是当用户请求同一个URL时永远都会分配到同一台后端服务器，如果后端服务器提供缓存服务这个功能就很有用了。详细用户见&lt;a href=&#34;https://www.nginx.com/resources/wiki/modules/consistent_hash/&#34;&gt;Nginx Wiki&lt;/a&gt;，默认是没有编译这个模块的，可以自行编译安装。&lt;/p&gt;
+
+&lt;h3 id=&#34;5-down&#34;&gt;5. &lt;code&gt;down&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;标记某台应用服务器暂时不参与负载均衡。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ww2.sinaimg.cn/large/006tKfTcly1fcleinzabwj30dp0370sv.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;6-backup&#34;&gt;6. &lt;code&gt;backup&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;这个标记和&lt;code&gt;down&lt;/code&gt;正好相反，它是在其他所有应用服务器全部繁忙或者处于&lt;code&gt;down&lt;/code&gt;状态时才会被启用，所以这台机器的压力会最轻。&lt;/p&gt;
+
+&lt;h2 id=&#34;健康状态检查&#34;&gt;健康状态检查&lt;/h2&gt;
+
+&lt;p&gt;Nginx会自动把返回报错信息的应用服务器标记为『故障』，然后就不再把新的请求分配给它了，这个相关的配置有:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;max_fails&lt;/code&gt; 报错多少次会被标记为&lt;strong&gt;failed&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;fail_timeout&lt;/code&gt; 超时多少次会被标记成&lt;strong&gt;failed&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;​&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
       <title>认识正向代理和反向代理</title>
       <link>http://lovelock.coding.me/linux/proxy-and-reverse-proxy/</link>
       <pubDate>Thu, 09 Feb 2017 14:39:09 +0800</pubDate>
