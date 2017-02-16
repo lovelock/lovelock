@@ -79,6 +79,22 @@
       
       <article class="li">
   <header>
+    <div class="date">Tue, Aug 11, 2015</div>
+    <div class="title"><a href="http://lovelock.coding.me/javascript/2015-08-11-jsonp%E5%8E%9F%E7%90%86%E5%85%A8%E8%A7%A3%E6%9E%90/">jsonp原理全解析</a></div>
+  </header>
+  <div class="body">昨天写了一篇关于iframe间跨域通讯问题的总结，想着既然提到了jsonp这个长久以来曽令我困惑的技术，就再总结一篇吧。 主要参考了这篇文章。</div>
+
+  
+  <footer>
+    <a href="http://lovelock.coding.me/javascript/2015-08-11-jsonp%E5%8E%9F%E7%90%86%E5%85%A8%E8%A7%A3%E6%9E%90/" class="btn btn-default">Read More…</a>
+  </footer>
+  
+</article>
+<hr>
+
+      
+      <article class="li">
+  <header>
     <div class="date">Mon, Aug 10, 2015</div>
     <div class="title"><a href="http://lovelock.coding.me/javascript/2015-08-10-iframe%E9%97%B4%E9%80%9A%E4%BF%A1%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/">iframe间通信方法总结</a></div>
   </header>
@@ -221,22 +237,6 @@
 <hr>
 
       
-      <article class="li">
-  <header>
-    <div class="date">Fri, Jun 26, 2015</div>
-    <div class="title"><a href="http://lovelock.coding.me/php/2015-06-26-huan-cun-shi-yong-xiao-ji/">缓存使用小记</a></div>
-  </header>
-  <div class="body">在请求次数多的业务系统中，通常会加入缓存系统。这里用的较多的就是Memcached和Redis。我写这篇笔记不是要说这两个缓存的使用细节，而</div>
-
-  
-  <footer>
-    <a href="http://lovelock.coding.me/php/2015-06-26-huan-cun-shi-yong-xiao-ji/" class="btn btn-default">Read More…</a>
-  </footer>
-  
-</article>
-<hr>
-
-      
       
 <nav>
   <ul class="pager">
@@ -267,6 +267,10 @@
     
     </div>
     <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/algo/sorting-algorithms/" >排序算法 &lt;一&gt;</a>
+      </div>
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/config-of-nginx-load-balancing/" >Nginx负载均衡分配策略详解</a>
@@ -304,10 +308,6 @@
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/handle-with-bash-options/" >用Bash编写漂亮的命令行程序</a>
       </div>
       
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/" >使用VBoxManage创建虚拟机</a>
-      </div>
-      
     </div>
   </div>
 
@@ -332,13 +332,39 @@
     <footer class="site">
       <div class="container">
         <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
-        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://unixera.com" target="_blank" rel="nofollow">Frost Wong</a></p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://lovelock.coding.me" target="_blank" rel="nofollow">Frost Wong</a></p>
       </div>
     </footer>
 
     <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$', '$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\[','\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     

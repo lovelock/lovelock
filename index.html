@@ -79,6 +79,22 @@
       
       <article class="li">
   <header>
+    <div class="date">Mon, Feb 13, 2017</div>
+    <div class="title"><a href="http://lovelock.coding.me/algo/sorting-algorithms/">排序算法 &lt;一&gt;</a></div>
+  </header>
+  <div class="body">就让我再啃一下一直以来最头疼的问题吧。 冒泡排序(bubble sorting) 刚才突然想通了，之前竟然不知道为什么大家都说冒泡是最简单的。。。难道是我智商不</div>
+
+  
+  <footer>
+    <a href="http://lovelock.coding.me/algo/sorting-algorithms/" class="btn btn-default">Read More…</a>
+  </footer>
+  
+</article>
+<hr>
+
+      
+      <article class="li">
+  <header>
     <div class="date">Thu, Feb 9, 2017</div>
     <div class="title"><a href="http://lovelock.coding.me/linux/config-of-nginx-load-balancing/">Nginx负载均衡分配策略详解</a></div>
   </header>
@@ -221,22 +237,6 @@
 <hr>
 
       
-      <article class="li">
-  <header>
-    <div class="date">Thu, Oct 13, 2016</div>
-    <div class="title"><a href="http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/">使用VBoxManage创建虚拟机</a></div>
-  </header>
-  <div class="body">前言 最近没有产品需求，就深入的研究一下大数据吧，第一步先要搭建一个集群，前面已经写了一篇关于搭建“伪集群”的文章，还是希望更完整的理解这套东</div>
-
-  
-  <footer>
-    <a href="http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/" class="btn btn-default">Read More…</a>
-  </footer>
-  
-</article>
-<hr>
-
-      
       
 <nav>
   <ul class="pager">
@@ -267,6 +267,10 @@
     
     </div>
     <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/algo/sorting-algorithms/" >排序算法 &lt;一&gt;</a>
+      </div>
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/config-of-nginx-load-balancing/" >Nginx负载均衡分配策略详解</a>
@@ -304,10 +308,6 @@
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/handle-with-bash-options/" >用Bash编写漂亮的命令行程序</a>
       </div>
       
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/" >使用VBoxManage创建虚拟机</a>
-      </div>
-      
     </div>
   </div>
 
@@ -332,13 +332,39 @@
     <footer class="site">
       <div class="container">
         <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
-        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://unixera.com" target="_blank" rel="nofollow">Frost Wong</a></p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://lovelock.coding.me" target="_blank" rel="nofollow">Frost Wong</a></p>
       </div>
     </footer>
 
     <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$', '$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\[','\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     

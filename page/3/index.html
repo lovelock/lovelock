@@ -80,6 +80,22 @@
       <article class="li">
   <header>
     <div class="date">Sat, Apr 9, 2016</div>
+    <div class="title"><a href="http://lovelock.coding.me/php/internals/create-skeleton-of-extension/">PHP扩展实战——扩展的骨架</a></div>
+  </header>
+  <div class="body">前面啰嗦了这么多读者都要没有兴趣了。从现在起要真正开始PHP扩展开发阶段了。 首先来生成扩展的骨架。所谓骨架就是一个扩展需要的基本文件了。 获取</div>
+
+  
+  <footer>
+    <a href="http://lovelock.coding.me/php/internals/create-skeleton-of-extension/" class="btn btn-default">Read More…</a>
+  </footer>
+  
+</article>
+<hr>
+
+      
+      <article class="li">
+  <header>
+    <div class="date">Sat, Apr 9, 2016</div>
     <div class="title"><a href="http://lovelock.coding.me/php/internals/class-prototype-in-php/">PHP扩展实战——用PHP实现类的原型</a></div>
   </header>
   <div class="body">在编写之前先用PHP实现这个类的原型吧。 &lt;?php namespace Hylog; use \DateTime; class Hylog { const HYLOG_VERSION = &quot;0.1.0&quot;; const EMERGENCY = 'EMERGENCY'; const ALERT = 'ALERT'; const CRITICAL = 'CRITICAL'; const ERROR = 'ERROR'; const WARNING = 'WARNING'; const NOTICE = 'NOTICE'; const INFO = 'INFO'; const DEBUG = 'DEBUG'; private static $_instance; private $_basePath; private</div>
@@ -225,37 +241,6 @@
 <hr>
 
       
-      <article class="li">
-  <header>
-    <div class="date">Mon, Feb 1, 2016</div>
-    <div class="title"><a href="http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/">又一份Yaf文档——写给正在迷惑的你</a></div>
-  </header>
-  <div class="body">终于把困扰我很久的问题搞定了，好开心。趁着记忆还热乎，一定要把它记下来。
-前几天还和同事抱怨，用Yaf框架的人那么多，但我们身边竟然没有一个人对它的用法很清楚的。真是有些悲哀。几个同事都说鸟哥写的Yaf文档看不明白。
-言归正传，就我自己的学习过程来看，如果你要自己搭建一个Yaf环境，遇到的问题可能主要有以下这些：
- 配置Nginx的rewrite规则 命名空间怎么用 目录结构设置 插件的使用 单Controller多Action配置 多模块配置 更多配置文件  下面就这些问题一一给出解答。
-配置Nginx的rewrite规则 让我们直接忽略Apache和Lighttpd吧，默认大家都用Nginx。
-Yaf路由规则 如果你看过官方文档，那4种路由规则我就不说了，只说最简单也是默认的Yaf_Route_Static。
-读了Yaf源码的同学会发现，其实这个规则就是解析request_uri，用/把它分开，然后用每一部分去匹配Module/Controller/Action/Param。举个例子吧，假设PATH=/foo/bar/doge，更通俗一点，如果你的域名是http://yaf.dev，那么这个例子中的完整URL就是http://yaf.dev/foo/bar/doge。
-路由规则做了以下动作：
- 解析URL，得到PATH部分 认为foo是Module，去application.modules配置中找Foo（不区分大小写） 如果找到了modules/Foo，则继续认为bar是Controller，查找modules/Foo/BarController；没找到则会认为foo是Controller，下面同4 如果找到了modules/Foo/BarController，则继续认为doge是Action，查找modules/Foo/BarController/dogeAction  这样是不是很清晰了？
-不要这样配 老湿老湿，你不是要说Nginx的rewrite规则怎么配吗，怎么在这讲起了路由规则？
-我是要告诉你不要听那些自作聪明的人(没错就是我)把rewrite规则配错!!!
-也就是说
-rewrite ^/(.*) /index.php/$1 last;  是绝对正确的，不要看谁谁谁说这不对而写成
-rewrite ^/(.*) /index.php?$1 last;  这才是错误的。
-我的配置:
-server { listen 80; root /var/www/yaf.ubuntu.com/public; index index.php index.html; server_name yaf.ubuntu.com; location = /favicon.ico { access_log off; error_log off; log_not_found off; } if (!-e $request_filename) { rewrite ^/(.</div>
-
-  
-  <footer>
-    <a href="http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/" class="btn btn-default">Read More…</a>
-  </footer>
-  
-</article>
-<hr>
-
-      
       
 <nav>
   <ul class="pager">
@@ -286,6 +271,10 @@ server { listen 80; root /var/www/yaf.ubuntu.com/public; index index.php index.h
     
     </div>
     <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/algo/sorting-algorithms/" >排序算法 &lt;一&gt;</a>
+      </div>
       
       <div class="list-group-item">
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/config-of-nginx-load-balancing/" >Nginx负载均衡分配策略详解</a>
@@ -323,10 +312,6 @@ server { listen 80; root /var/www/yaf.ubuntu.com/public; index index.php index.h
       <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/handle-with-bash-options/" >用Bash编写漂亮的命令行程序</a>
       </div>
       
-      <div class="list-group-item">
-      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/virtualization/create-a-virtual-machine-with-vboxmanage/" >使用VBoxManage创建虚拟机</a>
-      </div>
-      
     </div>
   </div>
 
@@ -351,13 +336,39 @@ server { listen 80; root /var/www/yaf.ubuntu.com/public; index index.php index.h
     <footer class="site">
       <div class="container">
         <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
-        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://unixera.com" target="_blank" rel="nofollow">Frost Wong</a></p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://lovelock.coding.me" target="_blank" rel="nofollow">Frost Wong</a></p>
       </div>
     </footer>
 
     <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$', '$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\[','\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     
