@@ -10,6 +10,16 @@
     <atom:link href="/tags/php/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Slim 获取Postman发送的PUT请求的body</title>
+      <link>http://lovelock.coding.me/http/slim-put-with-postman/</link>
+      <pubDate>Tue, 28 Feb 2017 14:59:40 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/http/slim-put-with-postman/</guid>
+      <description>&lt;p&gt;刚才用Postman测试一个接口发现用&lt;strong&gt;form-data&lt;/strong&gt;格式发送PUT请求给Slim应用时，在应用中用&lt;code&gt;$request-&amp;gt;getParsedBody()&lt;/code&gt;获取不到请求的body，搜索到了&lt;a href=&#34;StackOverFlow页面&#34;&gt;http://stackoverflow.com/questions/23761425/get-put-params-with-slim-php&lt;/a&gt;，  简单说就是一般&lt;code&gt;form-data&lt;/code&gt;格式用来上传文件，而一般情况下应该用&lt;code&gt;x-www-form-urlencoded&lt;/code&gt;，改一下这里的发送body的格式就可以了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>关于PHP接口特性的一个发现</title>
       <link>http://lovelock.coding.me/php/about-php-interface/</link>
       <pubDate>Thu, 19 Jan 2017 15:21:43 +0800</pubDate>

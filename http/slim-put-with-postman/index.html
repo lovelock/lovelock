@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.18.1" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.7.0/styles/github.min.css">
+    <link rel="stylesheet" href="http://lovelock.coding.me/css/styles.css">
+    <link rel="stylesheet" href="http://lovelock.coding.me/css/custom.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://lovelock.coding.me//index.xml">
+
+    
+    <title>Slim 获取Postman发送的PUT请求的body - Me &amp; Web</title>
+    <meta property='og:title' content="Slim 获取Postman发送的PUT请求的body - Me &amp; Web">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://lovelock.coding.me/http/slim-put-with-postman/">
+    
+    
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://lovelock.coding.me/">Me &amp; Web&nbsp;&nbsp;致力于创作可操作性更好的文章</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/categories/">分类</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+            </ul>
+            
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="site">
+      <div class="container">
+
+
+
+<div class="single">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+                <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://lovelock.coding.me/"/>
+                <meta itemprop="dateModified" content="2017-02-28T14:59:40&#43;08:00">
+                <meta itemprop="headline" content="Slim 获取Postman发送的PUT请求的body">
+                <meta itemprop="description" content="刚才用Postman测试一个接口发现用form-data格式发送PUT请求给Slim应用时，在应用中用$request-&gt;getPar">
+                <meta itemprop="url" content="http://lovelock.coding.me/http/slim-put-with-postman/">
+                <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
+                    <meta itemprop="width" content="800">
+                    <meta itemprop="height" content="800">
+                </div>
+                <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                        <meta itemprop="url" content="http://lovelock.coding.me/images/logo.jpg">
+                        <meta itemprop="width" content="100">
+                        <meta itemprop="height" content="100">
+                    </div>
+                    <meta itemprop="name" content="Me &amp; Web">
+                </div>
+                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <meta itemprop="name" content="Frost Wong">
+                </div>
+
+                <header class="article-header">
+                    <time itemprop="datePublished" pubdate="pubdate" datetime="2017-02-28T14:59:40&#43;08:00">Tue, Feb 28, 2017</time>
+                    <h1 class="article-title">Slim 获取Postman发送的PUT请求的body</h1>
+                </header>
+
+                
+                    <div class="article-body">
+                        
+                    </div>
+                
+
+                <div class="article-body" itemprop="articleBody">
+                    <p>刚才用Postman测试一个接口发现用<strong>form-data</strong>格式发送PUT请求给Slim应用时，在应用中用<code>$request-&gt;getParsedBody()</code>获取不到请求的body，搜索到了<a href="StackOverFlow页面">http://stackoverflow.com/questions/23761425/get-put-params-with-slim-php</a>，  简单说就是一般<code>form-data</code>格式用来上传文件，而一般情况下应该用<code>x-www-form-urlencoded</code>，改一下这里的发送body的格式就可以了。</p>
+
+                </div>
+
+
+                <aside>
+                    <div class="section"><a href="http://lovelock.coding.me/tags/slim/" class="tag">slim</a> <a href="http://lovelock.coding.me/tags/php/" class="tag">php</a> <a href="http://lovelock.coding.me/tags/postman/" class="tag">postman</a> </div>
+
+                    <div class="section share">
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fhttp%2fslim-put-with-postman%2f&title=Slim%20%e8%8e%b7%e5%8f%96Postman%e5%8f%91%e9%80%81%e7%9a%84PUT%e8%af%b7%e6%b1%82%e7%9a%84body" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                    </div>
+
+                    
+                    <div class="section">
+                        
+                        <div class="ds-thread" data-thread-key="/http/slim-put-with-postman/" data-title="Slim 获取Postman发送的PUT请求的body" data-url="http://lovelock.coding.me/http/slim-put-with-postman/"></div>
+                        
+
+                        
+                        <script type="text/javascript">
+                            var duoshuoQuery = {short_name:"UnixAgain"};
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                        </script>
+                    </div>
+                    
+                    
+                </aside>
+
+            </article>
+
+        </div>
+        <div class="col-md-4">
+            
+<aside class="site">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <span class="fa fa-clock-o"></span><h4>最近文章</h4>
+      </div>
+    
+    </div>
+    <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/http/slim-put-with-postman/" >Slim 获取Postman发送的PUT请求的body</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/algo/sorting-algorithms/" >排序算法 &lt;一&gt;</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/config-of-nginx-load-balancing/" >Nginx负载均衡分配策略详解</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/proxy-and-reverse-proxy/" >认识正向代理和反向代理</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/set-docker-image-mirror/" >为Docker配置国内加速镜像</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/php/about-php-interface/" >关于PHP接口特性的一个发现</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/php/internals/create-variables/" >创建变量(PHP5.x扩展)</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/php/internals/a-function-without-arguments/" >没有参数的函数（区别于类的方法）</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/bigdata/cleanup-dirty-data-in-hdfs/" >清理HDFS的脏数据</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/fxxkmyphone/change-dpi-of-oneplus3/" >不用root修改一加三的DPI</a>
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+    
+  
+    
+    
+  
+
+</aside>
+
+
+        </div>
+    </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site">
+      <div class="container">
+        <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://lovelock.coding.me" target="_blank" rel="nofollow">Frost Wong</a></p>
+      </div>
+    </footer>
+
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$', '$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\[','\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+
