@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>小技巧 on Me &amp; Web</title>
+    <link>http://lovelock.coding.me/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/index.xml</link>
+    <description>Recent content in 小技巧 on Me &amp; Web</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
+    <atom:link href="/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>查看MySQL数据库大小</title>
+      <link>http://lovelock.coding.me/mysql/show-content-length-of-database/</link>
+      <pubDate>Mon, 20 Mar 2017 10:53:05 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/mysql/show-content-length-of-database/</guid>
+      <description>&lt;p&gt;这两天要从另外一个部门迁移一部分数据过来，在考察迁移方案的时候注意到不知道对方的数据量有多少，这里查了一下资料，记录一下。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;首先进入&lt;code&gt;information_schema&lt;/code&gt;库，这里存放了其他库的基本信息&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;use information_schema;&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;查看所有数据库的&lt;strong&gt;总大小&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;select concat(round(sum(data_length/1024/1024),2),&#39;MB&#39;) as data from tables;&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;查看指定数据库的大小&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;select concat(round(sum(data_length/1024/1024),2),&#39;MB&#39;) as data from tables where table_schema=&#39;home&#39;;&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;查看指定数据库中指定表的大小&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;select concat(round(sum(data_length/1024/1024),2),&#39;MB&#39;) as data from tables where table_schema=&#39;home&#39; and table_name=&#39;members&#39;;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;知道了数据库大小了，才好选择相应的数据库迁移方案。&lt;/p&gt;
+
+&lt;p&gt;参考: &lt;a href=&#34;http://www.frostsky.com/2011/08/mysql-query-size/&#34;&gt;用SQL命令查看Mysql数据库大小&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

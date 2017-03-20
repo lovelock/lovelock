@@ -7,8 +7,46 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 28 Feb 2017 14:59:40 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Mar 2017 10:53:05 +0800</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>查看MySQL数据库大小</title>
+      <link>http://lovelock.coding.me/mysql/show-content-length-of-database/</link>
+      <pubDate>Mon, 20 Mar 2017 10:53:05 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/mysql/show-content-length-of-database/</guid>
+      <description>&lt;p&gt;这两天要从另外一个部门迁移一部分数据过来，在考察迁移方案的时候注意到不知道对方的数据量有多少，这里查了一下资料，记录一下。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;首先进入&lt;code&gt;information_schema&lt;/code&gt;库，这里存放了其他库的基本信息&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;use information_schema;&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;查看所有数据库的&lt;strong&gt;总大小&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;select concat(round(sum(data_length/1024/1024),2),&#39;MB&#39;) as data from tables;&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;查看指定数据库的大小&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;select concat(round(sum(data_length/1024/1024),2),&#39;MB&#39;) as data from tables where table_schema=&#39;home&#39;;&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;查看指定数据库中指定表的大小&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code&gt;select concat(round(sum(data_length/1024/1024),2),&#39;MB&#39;) as data from tables where table_schema=&#39;home&#39; and table_name=&#39;members&#39;;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;知道了数据库大小了，才好选择相应的数据库迁移方案。&lt;/p&gt;
+
+&lt;p&gt;参考: &lt;a href=&#34;http://www.frostsky.com/2011/08/mysql-query-size/&#34;&gt;用SQL命令查看Mysql数据库大小&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Slim 获取Postman发送的PUT请求的body</title>
@@ -2173,282 +2211,6 @@ export PATH=$PATH:$ZK_HOME/bin
 &lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
 
 &lt;p&gt;本文主要介绍了Storm的工作流程，以及其与Kafka和HDFS的配合来进行日志分析的工作流程，并简单介绍了一些需要注意的点。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>在本地单机部署Hadoop/Storm运行环境</title>
-      <link>http://lovelock.coding.me/java/deploy-pseudo-distributed-mode-hadoop/</link>
-      <pubDate>Mon, 10 Oct 2016 17:53:14 +0800</pubDate>
-      
-      <guid>http://lovelock.coding.me/java/deploy-pseudo-distributed-mode-hadoop/</guid>
-      <description>
-
-&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-
-&lt;p&gt;由于要在小组内做一个关于Storm的分享，涉及到我负责开发的大数据项目，本着开放的原则，把我做的准备工作记录下来，提前发给可能参会的同事。&lt;br /&gt;
-要演示的项目目前为止用到了Apache的多个项目，包括Kafka, Storm, Hadoop(HDFS, Hive), ZooKeeper等，项目刚刚起步，很多基础设施还不完善，比如现在是在本地开发完成之后直接部署到线上环境的，这次演示可不能直接在线上环境做了，故而在本地的台式机上部署了一下&lt;strong&gt;伪集群&lt;/strong&gt;，用来作为演示和以后开发测试用的环境。&lt;/p&gt;
-
-&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
-
-&lt;p&gt;说明：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;以下工作全部基于Ubuntu 16.04。用其他的发行版或版本理论上应该都是可行的，可能有些命令需要微调。&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;所有需要执行的命令前面都有一个&lt;code&gt;$&lt;/code&gt;，表示的是Bash的命令提示符。&lt;/li&gt;
-&lt;li&gt;下载安装包时我使用了速度相对较快的国内镜像，如果你对此有任何异议，可以自行去中心镜像站点下载。&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;默认情况下文中提到的所有如StormUI等控制后台访问的路径都是localhost，如果你需要从Linux主机外部访问，需要iptables放行相应的端口。在本文中，用的Web端口有三个，具体如下表：&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;服务描述&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;端口号&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;Storm UI&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;8080&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;Hadoop UI&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;50070&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;Hadoop Applications&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;8088&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;以Ubuntu为例，需要执行以下命令&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo ufw allow 8080/tcp
-$ sudo ufw allow 50070/tcp
-$ sudo ufw allow 8088/tcp
-$ sudo ufw reload
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;CentOS/RHEL 7.0以下可能需要直接操作iptables，7.0以上可以使用&lt;code&gt;firewall-cmd&lt;/code&gt;进行类似的操作。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;1-创建独立的用户并赋予合适的权限&#34;&gt;1. 创建独立的用户并赋予合适的权限&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo useradd hadoop
-$ sudo passwd hadoop
-$ sudo chsh hadoop
-$ sudo mkdir /home/hadoop
-$ sudo chown -R hadoop:hadoop /opt/apache
-$ sudo chown -R hadoop:hadoop /home/hadoop
-$ su - hadoop
-$ ssh-keygen
-$ cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
-$ chmod 0600 ~/.ssh/authorized_keys
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;FAQ：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;为什么需要chsh并且手动为用户创建家目录？&lt;br /&gt;
-不知道为什么在 Ubuntu 环境中执行&lt;code&gt;useradd&lt;/code&gt;命令之后并不会给新建的用户创建家目录和设置shell，可能是为了安全吧，要稍微麻烦一些。&lt;/li&gt;
-&lt;li&gt;为什么不给新用户赋予root权限？&lt;br /&gt;
-这里是测试环境倒还好，如果你需要搭建生产环境，记住千万不要给hadoop用户赋予root权限，它需要哪些目录的权限就单独赋予即可，它需要运行的端口都是1024以上的，都不需要root权限。如果需要，执行&lt;code&gt;sudo gpasswd -a hadoop sudo&lt;/code&gt;即可。&lt;/li&gt;
-&lt;li&gt;为什么要做一个密钥认证？&lt;br /&gt;
-这是因为在后续的步骤中会有&lt;strong&gt;从本地用户登录本地用户&lt;/strong&gt;的需求，也就是执行了&lt;code&gt;ssh hadoop@localhost&lt;/code&gt;这个命令，如果不做密钥信任，会需要多次输入密码。&lt;/li&gt;
-&lt;li&gt;为什么会有一个&lt;code&gt;/opt/apache&lt;/code&gt;目录？&lt;br /&gt;
-往下看。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;1-下载所需安装包&#34;&gt;1. 下载所需安装包&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;下载Java&lt;br /&gt;
-到&lt;a href=&#34;http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&#34;&gt;Java官网&lt;/a&gt;下载适用于Linux的Java安装包（这里下载了jdk-8u101-linux-x64.tar.gz）。&lt;/li&gt;
-&lt;li&gt;下载maven&lt;br /&gt;
-点击&lt;a href=&#34;http://mirrors.aliyun.com/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip&#34;&gt;阿里云镜像站&lt;/a&gt;下载最新版Maven。&lt;/li&gt;
-&lt;li&gt;下载Apache的Storm Hadoop Kafka ZooKeeper&lt;br /&gt;
-&lt;a href=&#34;http://mirrors.aliyun.com/apache/storm/apache-storm-0.10.2/apache-storm-0.10.2.tar.gz&#34;&gt;点击下载Storm-0.10.2&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://mirrors.aliyun.com/apache/hadoop/core/hadoop-2.6.4/hadoop-2.6.4.tar.gz&#34;&gt;点击下载Hadoop-2.6.4&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://mirrors.aliyun.com/apache/kafka/0.8.2.2/kafka_2.10-0.8.2.2.tgz&#34;&gt;点击下载Kafka_2.10-0.8.2.2&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&#34;http://mirrors.aliyun.com/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz&#34;&gt;点击下载ZooKeeper-3.4.6&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;2-创建所需目录&#34;&gt;2. 创建所需目录&lt;/h3&gt;
-
-&lt;p&gt;把所有和此项目相关的文件都放在统一的位置。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;$ sudo mkdir -p /opt/apache/{jdk, storm,hadoop,kafka,zookeeper}&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;3-解压所有安装包-将相应的安装包放在对应的位置&#34;&gt;3. 解压所有安装包，将相应的安装包放在对应的位置&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo mv jdk1.8.0_101/* /opt/jdk/.
-$ sudo mv apache-storm-0.10.0/* /opt/apache/storm/.
-$ sudo mv hadoop-2.6.4/* /opt/apache/hadoop/.
-$ sudo mv kafka_2.10-0.8.2.2/* /opt/apache/kafka/.
-$ sudo mv zookeeper-3.4.6/* /opt/apache/zookeeper
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;4-配置环境变量&#34;&gt;4. 配置环境变量&lt;/h3&gt;
-
-&lt;p&gt;在~/.bashrc中添加下面的片段&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export JAVA_HOME=/opt/jdk
-export APACHE_HOME=/opt/apache
-export STORM_HOME=$APACHE_HOME/storm
-export ZK_HOME=$APACHE_HOME/zookeeper
-export KAFKA_HOME=$APACHE_HOME/kafka
-
-export HADOOP_HOME=$APACHE_HOME/hadoop
-export HADOOP_MAPRED_HOME=$HADOOP_HOME
-export HADOOP_COMMON_HOME=$HADOOP_HOME
-export HADOOP_HDFS_HOME=$HADOOP_HOME
-export YARN_HOME=$HADOOP_HOME
-export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-export HADOOP_INSTALL=$HADOOP_HOME
-
-export PATH=$PATH:$JAVA_HOME/bin
-export PATH=$PATH:$STORM_HOME/bin
-export PATH=$PATH:$HADOOP_HOME/bin
-export PATH=$PATH:$HADOOP_HOME/sbin
-export PATH=$PATH:$ZK_HOME/bin
-export PATH=$PATH:$KAFKA_HOME/bin
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;之后执行&lt;code&gt;$ source ~/.bashrc&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;5-安装java&#34;&gt;5. 安装Java&lt;/h4&gt;
-
-&lt;p&gt;Apache的这些东西都是直接放在对的地方就可以运行的，但Java需要稍微的配置一下，因为可能你的机器上已经装了OpenJDK。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;$ sudo update-alternatives --install /usr/local/bin/java java /opt/jdk/bin/java 10000&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;这时再执行&lt;code&gt;$ java -version&lt;/code&gt;验证一下是否使用的时最新安装的JDK。&lt;/p&gt;
-
-&lt;h2 id=&#34;2-启动服务&#34;&gt;2. 启动服务&lt;/h2&gt;
-
-&lt;h3 id=&#34;1-启动zookeeper&#34;&gt;1. 启动ZooKeeper&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cp $ZK_HOME/conf/zoo_sample.cfg $ZK_HOME/conf/zoo.cfg
-$ zkServer.sh start
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;2-启动storm&#34;&gt;2. 启动Storm&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;$ storm nimbus
-$ storm supervisor
-$ storm ui
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;现在可以访问&lt;a href=&#34;http://localhost:8080&#34;&gt;Storm UI&lt;/a&gt;了。&lt;/p&gt;
-
-&lt;h3 id=&#34;3-启动kafka-broker&#34;&gt;3. 启动Kafka Broker&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cd $KAFKA_HOME
-$ bin/kafka-server-start.sh -daemon config/server.properties
-$ bin/kafka-topics.sh --list --zookeeper localhost:2181
-$ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 10 --topic storm-demo-topic
-Created topic &amp;quot;storm-demo-topic&amp;quot;.
-$ bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic storm-demo-topic
-Topic:storm-demo-topic  PartitionCount:10       ReplicationFactor:1     Configs:
-        Topic: storm-demo-topic Partition: 0    Leader: 0       Replicas: 0     Isr: 0
-        Topic: storm-demo-topic Partition: 1    Leader: 0       Replicas: 0     Isr: 0
-        Topic: storm-demo-topic Partition: 2    Leader: 0       Replicas: 0     Isr: 0
-        Topic: storm-demo-topic Partition: 3    Leader: 0       Replicas: 0     Isr: 0
-        Topic: storm-demo-topic Partition: 4    Leader: 0       Replicas: 0     Isr: 0
-        Topic: storm-demo-topic Partition: 5    Leader: 0       Replicas: 0     Isr: 0
-        Topic: storm-demo-topic Partition: 6    Leader: 0       Replicas: 0     Isr: 0
-        Topic: storm-demo-topic Partition: 7    Leader: 0       Replicas: 0     Isr: 0
-        Topic: storm-demo-topic Partition: 8    Leader: 0       Replicas: 0     Isr: 0
-        Topic: storm-demo-topic Partition: 9    Leader: 0       Replicas: 0     Isr: 0
-$ kafka-console-producer.sh --broker-list localhost:9092 --topic storm-demo-topic
-$ kafka-console-consumer.sh --zookeeper localhost:2181 --topic storm-demo-topic --from-beginning
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;注意前面有些命令仅仅是为了测试kafka broker运行的情况。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;4-启动hadoop-hdfs&#34;&gt;4. 启动Hadoop(HDFS)&lt;/h3&gt;
-
-&lt;h4 id=&#34;1-修改hadoop的配置文件&#34;&gt;1. 修改Hadoop的配置文件&lt;/h4&gt;
-
-&lt;p&gt;在&lt;code&gt;$HADOOP_HOME/etc/hadoop&lt;/code&gt;目录下有5个文件需要修改:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;core-site.xml&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;configuration&amp;gt;
-    &amp;lt;property&amp;gt;
-        &amp;lt;name&amp;gt;fs.default.name&amp;lt;/name&amp;gt;
-        &amp;lt;value&amp;gt;hdfs://localhost:9000&amp;lt;/value&amp;gt;
-    &amp;lt;/property&amp;gt;
-&amp;lt;/configuration&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;hdfs-site.xml&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;configuration&amp;gt;
-
-    &amp;lt;property&amp;gt;
-        &amp;lt;name&amp;gt;dfs.replication&amp;lt;/name&amp;gt;
-        &amp;lt;value&amp;gt;1&amp;lt;/value&amp;gt;
-    &amp;lt;/property&amp;gt;
-
-    &amp;lt;property&amp;gt;
-        &amp;lt;name&amp;gt;dfs.name.dir&amp;lt;/name&amp;gt;
-        &amp;lt;value&amp;gt;file:///home/hadoop/hadoopinfra/hdfs/namenode&amp;lt;/value&amp;gt;
-    &amp;lt;/property&amp;gt;
-
-    &amp;lt;property&amp;gt;
-        &amp;lt;name&amp;gt;dfs.data.dir&amp;lt;/name&amp;gt;
-        &amp;lt;value&amp;gt;file:///home/hadoop/hadoopinfra/hdfs/datanode&amp;lt;/value&amp;gt;
-    &amp;lt;/property&amp;gt;
-
-&amp;lt;/configuration&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;yarn-site.xml&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;configuration&amp;gt;
-    &amp;lt;property&amp;gt;
-        &amp;lt;name&amp;gt;yarn.nodemanager.aux-services&amp;lt;/name&amp;gt;
-        &amp;lt;value&amp;gt;mapreduce_shuffle&amp;lt;/value&amp;gt;
-    &amp;lt;/property&amp;gt;
-&amp;lt;/configuration&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;mapred-site.xml&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;configuration&amp;gt;
-    &amp;lt;property&amp;gt;
-        &amp;lt;name&amp;gt;mapreduce.framework.name&amp;lt;/name&amp;gt;
-        &amp;lt;value&amp;gt;yarn&amp;lt;/value&amp;gt;
-    &amp;lt;/property&amp;gt;
-&amp;lt;/configuration&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;hadoop-env.sh&lt;/code&gt;
-把hadoop-env.sh中的${JAVA_HOME}替换成路径,这里是&lt;code&gt;/opt/jdk&lt;/code&gt;，因为貌似会找不到正确的&lt;code&gt;JAVA_HOME&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&#34;2-验证是否安装成功&#34;&gt;2. 验证是否安装成功&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ hadoop namenode -format
-$ start-dfs.sh
-$ start-yarn.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;执行上面三行语句，观察有没有明显的报错信息。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://localhost:50070&#34;&gt;检查HadoopUI&lt;/a&gt;运行是否正常。&lt;br /&gt;
-&lt;a href=&#34;http://localhost:8088&#34;&gt;检查Hadoop Applications&lt;/a&gt;(我自己取的名字)运行是否正常。&lt;/p&gt;
-
-&lt;p&gt;至此已经搭建了一个可以运行的hadoop环境，可以移步这里查看关于Storm入门分享详情。&lt;/p&gt;
 </description>
     </item>
     
