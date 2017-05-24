@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -19,7 +19,7 @@
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="http://lovelock.coding.me/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">
+    <meta property="og:url" content="http://lovelock.coding.me/javascript/2015-10-08-bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">
     
     
 
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -84,7 +84,7 @@
                 <meta itemprop="dateModified" content="2015-10-08T18:10:45&#43;00:00">
                 <meta itemprop="headline" content="Bower使用简明教程">
                 <meta itemprop="description" content="最近接触到Node.js，于是摇身一变前后端全部用JavaScript实现，这样其实导致界限不清晰了——其实很清晰，但当你看一个.js文件的">
-                <meta itemprop="url" content="http://lovelock.coding.me/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">
+                <meta itemprop="url" content="http://lovelock.coding.me/javascript/2015-10-08-bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                     <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
                     <meta itemprop="width" content="800">
@@ -176,13 +176,13 @@ bower_components
                     <div class="section"><a href="http://lovelock.coding.me/tags/bower/" class="tag">Bower</a> </div>
 
                     <div class="section share">
-                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fjavascript%2f2015-10-08-Bower%25E4%25BD%25BF%25E7%2594%25A8%25E7%25AE%2580%25E6%2598%258E%25E6%2595%2599%25E7%25A8%258B%2f&title=Bower%e4%bd%bf%e7%94%a8%e7%ae%80%e6%98%8e%e6%95%99%e7%a8%8b" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fjavascript%2f2015-10-08-bower%25E4%25BD%25BF%25E7%2594%25A8%25E7%25AE%2580%25E6%2598%258E%25E6%2595%2599%25E7%25A8%258B%2f&title=Bower%e4%bd%bf%e7%94%a8%e7%ae%80%e6%98%8e%e6%95%99%e7%a8%8b" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
                     </div>
 
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" data-title="Bower使用简明教程" data-url="http://lovelock.coding.me/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/"></div>
+                        <div class="ds-thread" data-thread-key="/javascript/2015-10-08-bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" data-title="Bower使用简明教程" data-url="http://lovelock.coding.me/javascript/2015-10-08-bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/"></div>
                         
 
                         
@@ -307,11 +307,11 @@ bower_components
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

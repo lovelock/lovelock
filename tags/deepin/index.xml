@@ -2,12 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Deepin on Me &amp; Web</title>
-    <link>http://lovelock.coding.me/tags/deepin/index.xml</link>
+    <link>http://lovelock.coding.me/tags/deepin/</link>
     <description>Recent content in Deepin on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <atom:link href="/tags/deepin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Sep 2016 17:20:45 +0800</lastBuildDate>
+    <atom:link href="/tags/deepin/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>DeepinLinux 体验报告</title>

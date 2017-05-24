@@ -2,19 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Utf8 on Me &amp; Web</title>
-    <link>http://lovelock.coding.me/tags/utf8/index.xml</link>
+    <link>http://lovelock.coding.me/tags/utf8/</link>
     <description>Recent content in Utf8 on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <atom:link href="/tags/utf8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Oct 2015 16:59:58 +0000</lastBuildDate>
+    <atom:link href="/tags/utf8/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>MySQL真·UTF8后遇到的问题</title>
-      <link>http://lovelock.coding.me/mysql/2015-10-17-MySQL%E7%9C%9F%C2%B7UTF8%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <link>http://lovelock.coding.me/mysql/2015-10-17-mysql%E7%9C%9Futf8%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</link>
       <pubDate>Sat, 17 Oct 2015 16:59:58 +0000</pubDate>
       
-      <guid>http://lovelock.coding.me/mysql/2015-10-17-MySQL%E7%9C%9F%C2%B7UTF8%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://lovelock.coding.me/mysql/2015-10-17-mysql%E7%9C%9Futf8%E5%90%8E%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       <description>&lt;p&gt;昨天写了一篇MySQL/MariaDB将字符集从utf8迁移到utf8mb4的总结，今天继续我的最佳实践，想到在设计数据库时要考虑到用户的email是不能重复的，所以想给它加上一个&lt;code&gt;UNI&lt;/code&gt;标记，然后遇到了这样一个问题：
 &lt;img src=&#34;http://7xn2pe.com1.z0.glb.clouddn.com/b_Screen%20Shot%202015-10-17%20at%205.03.08%20PM.png&#34; alt=&#34;MySQL设计UNI报错&#34; /&gt;&lt;/p&gt;
 

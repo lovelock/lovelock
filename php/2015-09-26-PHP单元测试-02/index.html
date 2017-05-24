@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -19,7 +19,7 @@
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="http://lovelock.coding.me/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/">
+    <meta property="og:url" content="http://lovelock.coding.me/php/2015-09-26-php%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/">
     
     
 
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -90,7 +90,7 @@ foreach ($actual_array as $k =&gt; $v) { if ($k === $expected_key) { // 测试�
   类属性相关  assertClassHasAttribute($attributeName, $className) 如果类名为$className的类拥有一个名为$attributeName的属性，则通过，否则不通过。值得注意的是，这个测试通过与否与属性的值是否设置没有关系，即使是只声明了名为$attributeName的属性，这个测试也是通过的，但实例化该类之后var_dump(new ClassAttr()-&gt;attr)的结果却是false。
  assetClassHasStaticAttribute($staticAttributeName, $className) 这个自不必多说，和上面类似。只是用来判断静态属性。
   对象关系  assertObjectHasAttribute($attributeName, $object) 如果对象$object拥有属性$attributeName，则通过。  包含关系  assertContains($needle, $haystack) 如果$haystack中包含$needle，则通过，否则不通过。这个包含可以是数组的包含，也可以是字符串的包含，注意，默认是区分大小写的，即assertContains(&#39;foo&#39;, &#39;FooBar&#39;)是不能通过测试的。但assertContains(&#39;foo&#39;, &#39;FooBar&#39;, &#39;&#39;, true)则可以通过测试，也就是说第四个参数表示不区分大小写。至于第三个参数，其实是$message，也就是在测试不通过时报告 详细信息的，我个人理解和try/cache里面的Exception $e里面的getMessage()可能有点类似，没有深究。">
-                <meta itemprop="url" content="http://lovelock.coding.me/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/">
+                <meta itemprop="url" content="http://lovelock.coding.me/php/2015-09-26-php%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                     <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
                     <meta itemprop="width" content="800">
@@ -299,13 +299,13 @@ foreach ($actual_array as $k =&gt; $v) { if ($k === $expected_key) { // 测试�
                     
 
                     <div class="section share">
-                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fphp%2f2015-09-26-PHP%25E5%258D%2595%25E5%2585%2583%25E6%25B5%258B%25E8%25AF%2595-02%2f&title=PHP%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95-02" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fphp%2f2015-09-26-php%25E5%258D%2595%25E5%2585%2583%25E6%25B5%258B%25E8%25AF%2595-02%2f&title=PHP%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95-02" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
                     </div>
 
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/" data-title="PHP单元测试-02" data-url="http://lovelock.coding.me/php/2015-09-26-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/"></div>
+                        <div class="ds-thread" data-thread-key="/php/2015-09-26-php%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/" data-title="PHP单元测试-02" data-url="http://lovelock.coding.me/php/2015-09-26-php%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-02/"></div>
                         
 
                         
@@ -430,11 +430,11 @@ foreach ($actual_array as $k =&gt; $v) { if ($k === $expected_key) { // 测试�
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -19,7 +19,7 @@
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="http://lovelock.coding.me/symfony/Symfony3-03-Routing/">
+    <meta property="og:url" content="http://lovelock.coding.me/symfony/symfony3-03-routing/">
     <meta name="description" content="Symfony3 框架">
     
 
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -84,7 +84,7 @@
                 <meta itemprop="dateModified" content="2016-01-10T22:02:07&#43;08:00">
                 <meta itemprop="headline" content="Symfony3 In Action——Routing">
                 <meta itemprop="description" content="实际上前面我们已经看到了一个正常的页面了。是这样的 这个默认的页面属于AppBundle/Controller/DefaultControll">
-                <meta itemprop="url" content="http://lovelock.coding.me/symfony/Symfony3-03-Routing/">
+                <meta itemprop="url" content="http://lovelock.coding.me/symfony/symfony3-03-routing/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                     <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
                     <meta itemprop="width" content="800">
@@ -494,13 +494,13 @@ $this-&gt;generateUrl('/show');
                     <div class="section"><a href="http://lovelock.coding.me/tags/symfony3/" class="tag">Symfony3</a> <a href="http://lovelock.coding.me/tags/php%E6%A1%86%E6%9E%B6/" class="tag">PHP框架</a> </div>
 
                     <div class="section share">
-                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fsymfony%2fSymfony3-03-Routing%2f&title=Symfony3%20In%20Action%e2%80%94%e2%80%94Routing" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fsymfony%2fsymfony3-03-routing%2f&title=Symfony3%20In%20Action%e2%80%94%e2%80%94Routing" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
                     </div>
 
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="/symfony/Symfony3-03-Routing/" data-title="Symfony3 In Action——Routing" data-url="http://lovelock.coding.me/symfony/Symfony3-03-Routing/"></div>
+                        <div class="ds-thread" data-thread-key="/symfony/symfony3-03-routing/" data-title="Symfony3 In Action——Routing" data-url="http://lovelock.coding.me/symfony/symfony3-03-routing/"></div>
                         
 
                         
@@ -625,11 +625,11 @@ $this-&gt;generateUrl('/show');
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

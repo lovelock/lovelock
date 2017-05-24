@@ -2,12 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Oneplus3 on Me &amp; Web</title>
-    <link>http://lovelock.coding.me/tags/oneplus3/index.xml</link>
+    <link>http://lovelock.coding.me/tags/oneplus3/</link>
     <description>Recent content in Oneplus3 on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <atom:link href="/tags/oneplus3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2016 15:25:03 +0800</lastBuildDate>
+    <atom:link href="/tags/oneplus3/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>不用root修改一加三的DPI</title>

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -114,13 +114,13 @@
       <article class="li">
   <header>
     <div class="date">Thu, Jan 21, 2016</div>
-    <div class="title"><a href="http://lovelock.coding.me/linux/fix-Debian-network-problem/">修复因为过量卸载引起的Debian无法上网</a></div>
+    <div class="title"><a href="http://lovelock.coding.me/linux/fix-debian-network-problem/">修复因为过量卸载引起的Debian无法上网</a></div>
   </header>
   <div class="body">之前在公司的开发机上装了Debian + Gnome3，后来发了rMBP就基本用不上了，把桌面环境卸载了当服务器用吧，但卸载完之后发现无法上网了</div>
 
   
   <footer>
-    <a href="http://lovelock.coding.me/linux/fix-Debian-network-problem/" class="btn btn-default">Read More…</a>
+    <a href="http://lovelock.coding.me/linux/fix-debian-network-problem/" class="btn btn-default">Read More…</a>
   </footer>
   
 </article>
@@ -146,13 +146,13 @@
       <article class="li">
   <header>
     <div class="date">Tue, Nov 3, 2015</div>
-    <div class="title"><a href="http://lovelock.coding.me/linux/2015-11-03-Vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">Vagrant使用说明</a></div>
+    <div class="title"><a href="http://lovelock.coding.me/linux/2015-11-03-vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">Vagrant使用说明</a></div>
   </header>
   <div class="body">创建自己的box 安装 最小化安装 用户vagrant，密码vagrant 这个安装的时候设置就好了，如果是CentOS会让你选择是否让这个用户做管</div>
 
   
   <footer>
-    <a href="http://lovelock.coding.me/linux/2015-11-03-Vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="btn btn-default">Read More…</a>
+    <a href="http://lovelock.coding.me/linux/2015-11-03-vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="btn btn-default">Read More…</a>
   </footer>
   
 </article>
@@ -162,13 +162,13 @@
       <article class="li">
   <header>
     <div class="date">Mon, Oct 19, 2015</div>
-    <div class="title"><a href="http://lovelock.coding.me/linux/2015-10-19-%E7%BB%99Linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/">给Linux新手的一些建议</a></div>
+    <div class="title"><a href="http://lovelock.coding.me/linux/2015-10-19-%E7%BB%99linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/">给Linux新手的一些建议</a></div>
   </header>
   <div class="body">由于关注了知乎上Linux相关的一些话题，总是断断续续的有人邀请我回答各种Linux的问题——开始看到这种邀请的时候其实我是拒绝的，因为我觉</div>
 
   
   <footer>
-    <a href="http://lovelock.coding.me/linux/2015-10-19-%E7%BB%99Linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/" class="btn btn-default">Read More…</a>
+    <a href="http://lovelock.coding.me/linux/2015-10-19-%E7%BB%99linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/" class="btn btn-default">Read More…</a>
   </footer>
   
 </article>
@@ -296,11 +296,11 @@
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

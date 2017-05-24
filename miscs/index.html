@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -138,13 +138,13 @@ Trt recent call last): File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
       <article class="li">
   <header>
     <div class="date">Sun, Nov 22, 2015</div>
-    <div class="title"><a href="http://lovelock.coding.me/miscs/2015-11-22-Facebook%E7%9A%84%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/">Facebook的用户体验</a></div>
+    <div class="title"><a href="http://lovelock.coding.me/miscs/2015-11-22-facebook%E7%9A%84%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/">Facebook的用户体验</a></div>
   </header>
   <div class="body">上个星期登录Gmail突然发现多了好多Facebook的动态，仔细一看，原来我的头像都已经被别人换了。好吧，这还是我人生第一次帐号被盗的经历</div>
 
   
   <footer>
-    <a href="http://lovelock.coding.me/miscs/2015-11-22-Facebook%E7%9A%84%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/" class="btn btn-default">Read More…</a>
+    <a href="http://lovelock.coding.me/miscs/2015-11-22-facebook%E7%9A%84%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C/" class="btn btn-default">Read More…</a>
   </footer>
   
 </article>
@@ -170,13 +170,13 @@ Trt recent call last): File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
       <article class="li">
   <header>
     <div class="date">Thu, Oct 8, 2015</div>
-    <div class="title"><a href="http://lovelock.coding.me/miscs/2015-10-08-%E8%BF%99%E4%B8%80%E5%A4%A9%EF%BC%8C%E5%B0%B1%E8%BF%99%E6%A0%B7%E8%BF%87%E5%8E%BB%E4%BA%86/">这一天，就这样过去了</a></div>
+    <div class="title"><a href="http://lovelock.coding.me/miscs/2015-10-08-%E8%BF%99%E4%B8%80%E5%A4%A9%E5%B0%B1%E8%BF%99%E6%A0%B7%E8%BF%87%E5%8E%BB%E4%BA%86/">这一天，就这样过去了</a></div>
   </header>
   <div class="body">我是来自中国大陆的一名开发者。 最近的项目需要用到WebRTC相关的技术，通过搜索引擎找到了http://www.html5rocks.com</div>
 
   
   <footer>
-    <a href="http://lovelock.coding.me/miscs/2015-10-08-%E8%BF%99%E4%B8%80%E5%A4%A9%EF%BC%8C%E5%B0%B1%E8%BF%99%E6%A0%B7%E8%BF%87%E5%8E%BB%E4%BA%86/" class="btn btn-default">Read More…</a>
+    <a href="http://lovelock.coding.me/miscs/2015-10-08-%E8%BF%99%E4%B8%80%E5%A4%A9%E5%B0%B1%E8%BF%99%E6%A0%B7%E8%BF%87%E5%8E%BB%E4%BA%86/" class="btn btn-default">Read More…</a>
   </footer>
   
 </article>
@@ -366,11 +366,11 @@ Trt recent call last): File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

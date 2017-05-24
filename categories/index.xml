@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Me &amp; Web</title>
+    <link>http://lovelock.coding.me/categories/</link>
+    <description>Recent content in Categories on Me &amp; Web</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
+    <lastBuildDate>Wed, 11 Jan 2017 14:27:46 +0800</lastBuildDate>
+    <atom:link href="/categories/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Bigdata</title>
+      <link>http://lovelock.coding.me/categories/bigdata/</link>
+      <pubDate>Wed, 11 Jan 2017 14:27:46 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/bigdata/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Blog</title>
+      <link>http://lovelock.coding.me/categories/blog/</link>
+      <pubDate>Sat, 26 Sep 2015 21:17:35 +0000</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fxxkmyphone</title>
+      <link>http://lovelock.coding.me/categories/fxxkmyphone/</link>
+      <pubDate>Tue, 13 Dec 2016 15:25:03 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/fxxkmyphone/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>http://lovelock.coding.me/categories/git/</link>
+      <pubDate>Sun, 21 Feb 2016 15:37:20 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Http</title>
+      <link>http://lovelock.coding.me/categories/http/</link>
+      <pubDate>Tue, 28 Feb 2017 14:59:40 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ios</title>
+      <link>http://lovelock.coding.me/categories/ios/</link>
+      <pubDate>Mon, 13 Jul 2015 20:20:18 +0000</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/ios/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>http://lovelock.coding.me/categories/java/</link>
+      <pubDate>Mon, 10 Oct 2016 17:53:14 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Javascript</title>
+      <link>http://lovelock.coding.me/categories/javascript/</link>
+      <pubDate>Wed, 30 Mar 2016 16:08:03 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://lovelock.coding.me/categories/linux/</link>
+      <pubDate>Thu, 09 Feb 2017 18:00:47 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mac</title>
+      <link>http://lovelock.coding.me/categories/mac/</link>
+      <pubDate>Tue, 09 Aug 2016 14:57:11 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Miscs</title>
+      <link>http://lovelock.coding.me/categories/miscs/</link>
+      <pubDate>Sun, 17 Jul 2016 22:53:33 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/miscs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mysql</title>
+      <link>http://lovelock.coding.me/categories/mysql/</link>
+      <pubDate>Mon, 20 Mar 2017 10:53:05 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Php</title>
+      <link>http://lovelock.coding.me/categories/php/</link>
+      <pubDate>Thu, 19 Jan 2017 15:21:43 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>http://lovelock.coding.me/categories/python/</link>
+      <pubDate>Fri, 31 Jul 2015 11:26:37 +0000</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Symfony</title>
+      <link>http://lovelock.coding.me/categories/symfony/</link>
+      <pubDate>Sun, 10 Jan 2016 22:02:07 +0800</pubDate>
+      
+      <guid>http://lovelock.coding.me/categories/symfony/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

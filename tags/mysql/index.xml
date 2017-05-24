@@ -2,12 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mysql on Me &amp; Web</title>
-    <link>http://lovelock.coding.me/tags/mysql/index.xml</link>
+    <link>http://lovelock.coding.me/tags/mysql/</link>
     <description>Recent content in Mysql on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <atom:link href="/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Mar 2017 10:53:05 +0800</lastBuildDate>
+    <atom:link href="/tags/mysql/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>查看MySQL数据库大小</title>
@@ -49,10 +50,10 @@
     
     <item>
       <title>MySQL迁移到真·UTF8全过程</title>
-      <link>http://lovelock.coding.me/mysql/2015-10-17-MySQL%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9F%C2%B7UTF8%E5%85%A8%E8%BF%87%E7%A8%8B/</link>
+      <link>http://lovelock.coding.me/mysql/2015-10-17-mysql%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9Futf8%E5%85%A8%E8%BF%87%E7%A8%8B/</link>
       <pubDate>Sat, 17 Oct 2015 01:06:29 +0000</pubDate>
       
-      <guid>http://lovelock.coding.me/mysql/2015-10-17-MySQL%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9F%C2%B7UTF8%E5%85%A8%E8%BF%87%E7%A8%8B/</guid>
+      <guid>http://lovelock.coding.me/mysql/2015-10-17-mysql%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9Futf8%E5%85%A8%E8%BF%87%E7%A8%8B/</guid>
       <description>
 
 &lt;h1 id=&#34;为什么要做&#34;&gt;为什么要做？&lt;/h1&gt;

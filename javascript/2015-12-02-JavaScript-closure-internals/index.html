@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -19,7 +19,7 @@
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/">
+    <meta property="og:url" content="http://lovelock.coding.me/javascript/2015-12-02-javascript-closure-internals/">
     
     
 
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -84,7 +84,7 @@
                 <meta itemprop="dateModified" content="2015-12-02T21:35:12&#43;08:00">
                 <meta itemprop="headline" content="JavaScript闭包深究">
                 <meta itemprop="description" content="问题来源 刚刚看到微信公众号推送的一篇文章, 大部分人都会做错的经典JS闭包面试题,里面出现了一道很有意思的题目，让我有兴趣自己尝试一下。 题目是">
-                <meta itemprop="url" content="http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/">
+                <meta itemprop="url" content="http://lovelock.coding.me/javascript/2015-12-02-javascript-closure-internals/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                     <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
                     <meta itemprop="width" content="800">
@@ -509,13 +509,13 @@ foo();
                     <div class="section"><a href="http://lovelock.coding.me/tags/javascript/" class="tag">JavaScript</a> <a href="http://lovelock.coding.me/tags/closure/" class="tag">Closure</a> </div>
 
                     <div class="section share">
-                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fjavascript%2f2015-12-02-JavaScript-closure-internals%2f&title=JavaScript%e9%97%ad%e5%8c%85%e6%b7%b1%e7%a9%b6" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fjavascript%2f2015-12-02-javascript-closure-internals%2f&title=JavaScript%e9%97%ad%e5%8c%85%e6%b7%b1%e7%a9%b6" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
                     </div>
 
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="/javascript/2015-12-02-JavaScript-closure-internals/" data-title="JavaScript闭包深究" data-url="http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/"></div>
+                        <div class="ds-thread" data-thread-key="/javascript/2015-12-02-javascript-closure-internals/" data-title="JavaScript闭包深究" data-url="http://lovelock.coding.me/javascript/2015-12-02-javascript-closure-internals/"></div>
                         
 
                         
@@ -640,11 +640,11 @@ foo();
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

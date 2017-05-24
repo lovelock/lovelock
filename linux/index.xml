@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linuxes on Me &amp; Web</title>
-    <link>http://lovelock.coding.me/linux/index.xml</link>
+    <link>http://lovelock.coding.me/linux/</link>
     <description>Recent content in Linuxes on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <lastBuildDate>Thu, 09 Feb 2017 18:00:47 +0800</lastBuildDate>
-    <atom:link href="/linux/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/linux/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Nginx负载均衡分配策略详解</title>
@@ -712,10 +712,10 @@ ls ${VERBOSE} *.${EXTENSION}
     
     <item>
       <title>修复因为过量卸载引起的Debian无法上网</title>
-      <link>http://lovelock.coding.me/linux/fix-Debian-network-problem/</link>
+      <link>http://lovelock.coding.me/linux/fix-debian-network-problem/</link>
       <pubDate>Thu, 21 Jan 2016 16:21:46 +0800</pubDate>
       
-      <guid>http://lovelock.coding.me/linux/fix-Debian-network-problem/</guid>
+      <guid>http://lovelock.coding.me/linux/fix-debian-network-problem/</guid>
       <description>&lt;p&gt;之前在公司的开发机上装了Debian + Gnome3，后来发了rMBP就基本用不上了，把桌面环境卸载了当服务器用吧，但卸载完之后发现无法上网了，忙的一直没有时间整它，今天抽个10分钟搞一搞。&lt;/p&gt;
 
 &lt;p&gt;我猜大概是这样的，某些服务——依赖Gnome3桌面环境，被卸载了，所以开机后不会自动启动网络了。&lt;/p&gt;
@@ -761,10 +761,10 @@ foo
     
     <item>
       <title>Vagrant使用说明</title>
-      <link>http://lovelock.coding.me/linux/2015-11-03-Vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
+      <link>http://lovelock.coding.me/linux/2015-11-03-vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
       <pubDate>Tue, 03 Nov 2015 15:43:55 +0000</pubDate>
       
-      <guid>http://lovelock.coding.me/linux/2015-11-03-Vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
+      <guid>http://lovelock.coding.me/linux/2015-11-03-vagrant%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
       <description>
 
 &lt;h1 id=&#34;创建自己的box&#34;&gt;创建自己的box&lt;/h1&gt;
@@ -907,10 +907,10 @@ config.vm.box = &amp;quot;Debian&amp;quot;
     
     <item>
       <title>给Linux新手的一些建议</title>
-      <link>http://lovelock.coding.me/linux/2015-10-19-%E7%BB%99Linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/</link>
+      <link>http://lovelock.coding.me/linux/2015-10-19-%E7%BB%99linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/</link>
       <pubDate>Mon, 19 Oct 2015 21:49:06 +0000</pubDate>
       
-      <guid>http://lovelock.coding.me/linux/2015-10-19-%E7%BB%99Linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/</guid>
+      <guid>http://lovelock.coding.me/linux/2015-10-19-%E7%BB%99linux%E6%96%B0%E6%89%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/</guid>
       <description>
 
 &lt;p&gt;由于关注了知乎上Linux相关的一些话题，总是断断续续的有人邀请我回答各种Linux的问题——开始看到这种邀请的时候其实我是拒绝的，因为我觉得这种问题网上大把大把的答案，怎么还会有人问呢？后来回想了一下自己当初的经历才明白，原来就是有了太多的教程，而很多写教程的人自己都不怎么明白，怎么能讲的清楚呢？&lt;/p&gt;
@@ -1005,10 +1005,10 @@ sudo systemctl enable iptables
     
     <item>
       <title>CentOS7防火墙简单配置</title>
-      <link>http://lovelock.coding.me/linux/CentOS7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/</link>
+      <link>http://lovelock.coding.me/linux/centos7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sun, 12 Jul 2015 17:46:00 +0000</pubDate>
       
-      <guid>http://lovelock.coding.me/linux/CentOS7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://lovelock.coding.me/linux/centos7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;p&gt;防火墙这么个复杂的东西没有一个标准的配置方式真是太烦了，iptables的命令太繁琐，时间长了不用就忘记了，忘记可以记下来，可到了RHEL7竟然又加了个wrapper，叫什么firewall-cmd，我的天，你看看你取了个什么名字吧，不得不说红帽的人真是没有品位。&lt;/p&gt;
 
 &lt;p&gt;言归正传，通常我们的工作环境其实也打不到这个7，也不会接触这个东西。&lt;/p&gt;

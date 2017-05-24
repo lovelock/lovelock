@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -19,7 +19,7 @@
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="http://lovelock.coding.me/linux/fix-Debian-network-problem/">
+    <meta property="og:url" content="http://lovelock.coding.me/linux/fix-debian-network-problem/">
     <meta name="description" content="Debian删除了所有桌面相关的包之后无法上网了">
     
 
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -84,7 +84,7 @@
                 <meta itemprop="dateModified" content="2016-01-21T16:21:46&#43;08:00">
                 <meta itemprop="headline" content="修复因为过量卸载引起的Debian无法上网">
                 <meta itemprop="description" content="之前在公司的开发机上装了Debian &#43; Gnome3，后来发了rMBP就基本用不上了，把桌面环境卸载了当服务器用吧，但卸载完之后发现无法上网了">
-                <meta itemprop="url" content="http://lovelock.coding.me/linux/fix-Debian-network-problem/">
+                <meta itemprop="url" content="http://lovelock.coding.me/linux/fix-debian-network-problem/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                     <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
                     <meta itemprop="width" content="800">
@@ -138,13 +138,13 @@ iface eth0 inet dhcp
                     <div class="section"><a href="http://lovelock.coding.me/tags/linux/" class="tag">Linux</a> </div>
 
                     <div class="section share">
-                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2flinux%2ffix-Debian-network-problem%2f&title=%e4%bf%ae%e5%a4%8d%e5%9b%a0%e4%b8%ba%e8%bf%87%e9%87%8f%e5%8d%b8%e8%bd%bd%e5%bc%95%e8%b5%b7%e7%9a%84Debian%e6%97%a0%e6%b3%95%e4%b8%8a%e7%bd%91" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2flinux%2ffix-debian-network-problem%2f&title=%e4%bf%ae%e5%a4%8d%e5%9b%a0%e4%b8%ba%e8%bf%87%e9%87%8f%e5%8d%b8%e8%bd%bd%e5%bc%95%e8%b5%b7%e7%9a%84Debian%e6%97%a0%e6%b3%95%e4%b8%8a%e7%bd%91" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
                     </div>
 
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="/linux/fix-Debian-network-problem/" data-title="修复因为过量卸载引起的Debian无法上网" data-url="http://lovelock.coding.me/linux/fix-Debian-network-problem/"></div>
+                        <div class="ds-thread" data-thread-key="/linux/fix-debian-network-problem/" data-title="修复因为过量卸载引起的Debian无法上网" data-url="http://lovelock.coding.me/linux/fix-debian-network-problem/"></div>
                         
 
                         
@@ -269,11 +269,11 @@ iface eth0 inet dhcp
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

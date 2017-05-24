@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.20.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.7.0/styles/github.min.css">
+    <link rel="stylesheet" href="http://lovelock.coding.me/css/styles.css">
+    <link rel="stylesheet" href="http://lovelock.coding.me/css/custom.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://lovelock.coding.me//index.xml">
+
+    
+    <title>MySQL迁移到真·UTF8全过程 - Me &amp; Web</title>
+    <meta property='og:title' content="MySQL迁移到真·UTF8全过程 - Me &amp; Web">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://lovelock.coding.me/mysql/2015-10-17-mysql%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9Futf8%E5%85%A8%E8%BF%87%E7%A8%8B/">
+    
+    
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://lovelock.coding.me/">Me &amp; Web&nbsp;&nbsp;致力于创作可操作性更好的文章</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/categories/">分类</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
+              
+              
+            </ul>
+            
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="site">
+      <div class="container">
+
+
+
+<div class="single">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+                <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://lovelock.coding.me/"/>
+                <meta itemprop="dateModified" content="2015-10-17T01:06:29&#43;00:00">
+                <meta itemprop="headline" content="MySQL迁移到真·UTF8全过程">
+                <meta itemprop="description" content="为什么要做？ 写这篇总结的起因是我觉得应该深入的学习一下PHP了，结果找到了PHP最佳实践中文版，其中关于PHP和UTF8一节引起了我的兴趣。">
+                <meta itemprop="url" content="http://lovelock.coding.me/mysql/2015-10-17-mysql%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9Futf8%E5%85%A8%E8%BF%87%E7%A8%8B/">
+                <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
+                    <meta itemprop="width" content="800">
+                    <meta itemprop="height" content="800">
+                </div>
+                <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                        <meta itemprop="url" content="http://lovelock.coding.me/images/logo.jpg">
+                        <meta itemprop="width" content="100">
+                        <meta itemprop="height" content="100">
+                    </div>
+                    <meta itemprop="name" content="Me &amp; Web">
+                </div>
+                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <meta itemprop="name" content="Frost Wong">
+                </div>
+
+                <header class="article-header">
+                    <time itemprop="datePublished" pubdate="pubdate" datetime="2015-10-17T01:06:29&#43;00:00">Sat, Oct 17, 2015</time>
+                    <h1 class="article-title">MySQL迁移到真·UTF8全过程</h1>
+                </header>
+
+                
+                    <div class="article-body">
+                        <nav id="TableOfContents">
+<ul>
+<li><a href="#为什么要做">为什么要做？</a>
+<ul>
+<li><a href="#备份">备份</a></li>
+<li><a href="#升级mysql服务器">升级MySQL服务器</a></li>
+<li><a href="#修改数据库-数据表和列">修改数据库、数据表和列</a></li>
+<li><a href="#检查列和索引键的长度">检查列和索引键的长度</a></li>
+<li><a href="#修改连接-客户端-服务端字符集">修改连接、客户端、服务端字符集</a></li>
+<li><a href="#修复和优化所有表">修复和优化所有表</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                
+
+                <div class="article-body" itemprop="articleBody">
+                    
+
+<h1 id="为什么要做">为什么要做？</h1>
+
+<p>写这篇总结的起因是我觉得应该深入的学习一下PHP了，结果找到了<a href="http://phpbestpractices.justjavac.com">PHP最佳实践中文版</a>，其中关于PHP和UTF8一节引起了我的兴趣。我之前还一直以为我们的数据库用的是完整的UTF8，看完之后我惊呆了。</p>
+
+<p>原来我们的以为的utf8并不是真正意义上的UTF-8，或者说不是完整的，因为它只包含了<a href="https://mariadb.com/kb/en/mariadb/unicode/">不大于3个8位字节组成的字符</a>，而4个字节组成的字符则未能包含，如𝌆、💩等常用字符。</p>
+
+<p>随着现在网络用语的发达，越来越多的表情符号层出不穷，真是为这种符号的存储发愁啊，所以保险起见，以后接触到的项目中，如果我的意见可以被接受，那么我将遵守这个规则——使用utf8mb4而不是utf8。</p>
+
+<p>那如果已经使用了utf8了，怎么更新呢？下面是操作步骤。</p>
+
+<h2 id="备份">备份</h2>
+
+<p>对数据库的修改操作毕竟是危险的，如果你的数据很重要，最好还是备份一下数据库。</p>
+
+<h2 id="升级mysql服务器">升级MySQL服务器</h2>
+
+<p>utf8mb4是从MySQL5.5.3版本引入的（对应相同版本的MariaDB)，因此如果想使用utf8mb4，至少应升级到5.5.3版本。</p>
+
+<h2 id="修改数据库-数据表和列">修改数据库、数据表和列</h2>
+
+<pre><code class="language-sql"># 每个数据库
+ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+# 每张数据表
+ALTER TABLE table_name CONVERT TO CHARACTER SET utf8 COLLATE utf8mb4_unicode_ci;
+# 每列数据
+ALTER TABLE table_name CHANGE column_name column_name VARCHAR(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+</code></pre>
+
+<blockquote>
+<p>注意，不要直接复制粘贴上面的代码，根据实际的数据进行操作。</p>
+</blockquote>
+
+<h2 id="检查列和索引键的长度">检查列和索引键的长度</h2>
+
+<p>这一步很不容易想到，当我们从utf8更新到utf8mb4时，字节的长度并没有发生变化，但字符长度却变化了。
+<code>TINYTEXT</code>类型可以容纳255个字节，在utf8编码时，可以包含255/3=85个unicode字符，而在utf8mb4时，只可以包含255/4=63.75=63个字符。因此，当这个字段的长度有可能超过63个字符时，就需要把<code>TINYTEXT</code>修改成<code>TEXT</code>从而容纳更多的字符。</p>
+
+<h2 id="修改连接-客户端-服务端字符集">修改连接、客户端、服务端字符集</h2>
+
+<p>这一步就是修改my.conf（在不同的操作系统中有不同的命名）。</p>
+
+<pre><code class="language-ini">[client]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-client-handshake = FALSE
+character-set-server = utf8mb4
+collation-server = utf8mb4-unicode-ci
+</code></pre>
+
+<p>这时就可以查看更新的结果了
+<img src="http://7xn2pe.com1.z0.glb.clouddn.com/b_Screen%20Shot%202015-10-17%20at%201.43.38%20AM.png" alt="更新结果" /></p>
+
+<h2 id="修复和优化所有表">修复和优化所有表</h2>
+
+<pre><code class="language-sql">PREPARE TABLE table_name;
+OPTIMIZE TABLE table_name;
+</code></pre>
+
+<p>如果不执行这两步可能出现数据无法更新的情况。好在用一条指令就能修复和优化所有数据库</p>
+
+<pre><code>mysqlcheck -uroot -p --auto-repaire --optimize --all-databases
+</code></pre>
+
+<p>这会弹出密码输入提示，然后对所有数据库执行修复和优化操作。</p>
+
+                </div>
+
+
+                <aside>
+                    <div class="section"><a href="http://lovelock.coding.me/tags/mysql/" class="tag">MySQL</a> </div>
+
+                    <div class="section share">
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fmysql%2f2015-10-17-mysql%25E8%25BF%2581%25E7%25A7%25BB%25E5%2588%25B0%25E7%259C%259Futf8%25E5%2585%25A8%25E8%25BF%2587%25E7%25A8%258B%2f&title=MySQL%e8%bf%81%e7%a7%bb%e5%88%b0%e7%9c%9f%c2%b7UTF8%e5%85%a8%e8%bf%87%e7%a8%8b" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                    </div>
+
+                    
+                    <div class="section">
+                        
+                        <div class="ds-thread" data-thread-key="/mysql/2015-10-17-mysql%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9Futf8%E5%85%A8%E8%BF%87%E7%A8%8B/" data-title="MySQL迁移到真·UTF8全过程" data-url="http://lovelock.coding.me/mysql/2015-10-17-mysql%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9C%9Futf8%E5%85%A8%E8%BF%87%E7%A8%8B/"></div>
+                        
+
+                        
+                        <script type="text/javascript">
+                            var duoshuoQuery = {short_name:"UnixAgain"};
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                        </script>
+                    </div>
+                    
+                    
+                </aside>
+
+            </article>
+
+        </div>
+        <div class="col-md-4">
+            
+<aside class="site">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <span class="fa fa-clock-o"></span><h4>最近文章</h4>
+      </div>
+    
+    </div>
+    <div class="list-group">
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/mysql/show-content-length-of-database/" >查看MySQL数据库大小</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/http/slim-put-with-postman/" >Slim 获取Postman发送的PUT请求的body</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/algo/sorting-algorithms/" >排序算法 &lt;一&gt;</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/config-of-nginx-load-balancing/" >Nginx负载均衡分配策略详解</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/proxy-and-reverse-proxy/" >认识正向代理和反向代理</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/linux/set-docker-image-mirror/" >为Docker配置国内加速镜像</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/php/about-php-interface/" >关于PHP接口特性的一个发现</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/php/internals/create-variables/" >创建变量(PHP5.x扩展)</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/php/internals/a-function-without-arguments/" >没有参数的函数（区别于类的方法）</a>
+      </div>
+      
+      <div class="list-group-item">
+      <i class="fa fa-file-o" aria-hidden="true"></i> <a href="http://lovelock.coding.me/bigdata/cleanup-dirty-data-in-hdfs/" >清理HDFS的脏数据</a>
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+    
+  
+    
+    
+  
+
+</aside>
+
+
+        </div>
+    </div>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site">
+      <div class="container">
+        <p>(c) 2013-2016 Frost Wong. All rights reserved.</p>
+        <p>Powered by <a href="http://gohugo.io" target="_blank" rel="nofollow">Hugo</a>, Theme <a href="https://github.com/lovelock/hugo_theme_tech" target="_blank" rel="nofollow">tech</a> designed by <a href="http://lovelock.coding.me" target="_blank" rel="nofollow">Frost Wong</a></p>
+      </div>
+    </footer>
+
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/highlight.js/9.7.0/highlight.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$', '$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\[','\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i &lt; all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+

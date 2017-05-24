@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Javascripts on Me &amp; Web</title>
-    <link>http://lovelock.coding.me/javascript/index.xml</link>
+    <link>http://lovelock.coding.me/javascript/</link>
     <description>Recent content in Javascripts on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <lastBuildDate>Wed, 30 Mar 2016 16:08:03 +0800</lastBuildDate>
-    <atom:link href="/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/javascript/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>检测浏览器是否安装了Flash</title>
@@ -238,10 +238,10 @@ function detectFlash() {
     
     <item>
       <title>Firefox Date.parse()方法行为不一致的兼容方案</title>
-      <link>http://lovelock.coding.me/javascript/Firefox-Date.parse-exception/</link>
+      <link>http://lovelock.coding.me/javascript/firefox-date.parse-exception/</link>
       <pubDate>Mon, 25 Jan 2016 12:14:35 +0800</pubDate>
       
-      <guid>http://lovelock.coding.me/javascript/Firefox-Date.parse-exception/</guid>
+      <guid>http://lovelock.coding.me/javascript/firefox-date.parse-exception/</guid>
       <description>
 
 &lt;p&gt;事情是这样的，我有两个输入框，用Wdatepicker自定义了日期格式，格式当然是我们中国人最喜欢的Y-M-d H:i:s，然后需要确定后者（结束时间）不能小于前者（开始时间）&lt;/p&gt;
@@ -311,10 +311,10 @@ retrun Date.parse(end) - Date.parse(start) &amp;gt; 0 ? true : false;
     
     <item>
       <title>JavaScript闭包深究</title>
-      <link>http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/</link>
+      <link>http://lovelock.coding.me/javascript/2015-12-02-javascript-closure-internals/</link>
       <pubDate>Wed, 02 Dec 2015 21:35:12 +0800</pubDate>
       
-      <guid>http://lovelock.coding.me/javascript/2015-12-02-JavaScript-closure-internals/</guid>
+      <guid>http://lovelock.coding.me/javascript/2015-12-02-javascript-closure-internals/</guid>
       <description>
 
 &lt;h2 id=&#34;问题来源&#34;&gt;问题来源&lt;/h2&gt;
@@ -667,10 +667,10 @@ foo();
     
     <item>
       <title>Bower使用简明教程</title>
-      <link>http://lovelock.coding.me/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</link>
+      <link>http://lovelock.coding.me/javascript/2015-10-08-bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</link>
       <pubDate>Thu, 08 Oct 2015 18:10:45 +0000</pubDate>
       
-      <guid>http://lovelock.coding.me/javascript/2015-10-08-Bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</guid>
+      <guid>http://lovelock.coding.me/javascript/2015-10-08-bower%E4%BD%BF%E7%94%A8%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</guid>
       <description>&lt;p&gt;最近接触到Node.js，于是摇身一变前后端全部用JavaScript实现，这样其实导致界限不清晰了——其实很清晰，但当你看一个.js文件的时候总是要想一下这是前端逻辑还是后端逻辑，感觉怪怪的。后端需要的模块可以用npm这个大杀器安装，虽然前端的依赖也可以用它解决，但其实有更专业的解决方案——&lt;a href=&#34;http://bower.io&#34;&gt;bower&lt;/a&gt;。官方简介里面其实并没有提到它是专门用来解决前端依赖的，看它的用例以及别的项目的使用情况也可以看到
 ，通常的用法就是&lt;code&gt;&amp;lt;script src=&amp;quot;bower_components/xxx_lib/xxxx.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;，这就已经很明显了，不是吗？&lt;/p&gt;
 

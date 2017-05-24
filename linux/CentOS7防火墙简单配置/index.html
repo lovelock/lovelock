@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -19,7 +19,7 @@
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="http://lovelock.coding.me/linux/CentOS7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/">
+    <meta property="og:url" content="http://lovelock.coding.me/linux/centos7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/">
     
     
 
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -84,7 +84,7 @@
                 <meta itemprop="dateModified" content="2015-07-12T17:46:00&#43;00:00">
                 <meta itemprop="headline" content="CentOS7防火墙简单配置">
                 <meta itemprop="description" content="防火墙这么个复杂的东西没有一个标准的配置方式真是太烦了，iptables的命令太繁琐，时间长了不用就忘记了，忘记可以记下来，可到了RHEL7">
-                <meta itemprop="url" content="http://lovelock.coding.me/linux/CentOS7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/">
+                <meta itemprop="url" content="http://lovelock.coding.me/linux/centos7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                     <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
                     <meta itemprop="width" content="800">
@@ -141,13 +141,13 @@
                     <div class="section"><a href="http://lovelock.coding.me/tags/firewall/" class="tag">firewall</a> <a href="http://lovelock.coding.me/tags/iptables/" class="tag">iptables</a> </div>
 
                     <div class="section share">
-                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2flinux%2fCentOS7%25E9%2598%25B2%25E7%2581%25AB%25E5%25A2%2599%25E7%25AE%2580%25E5%258D%2595%25E9%2585%258D%25E7%25BD%25AE%2f&title=CentOS7%e9%98%b2%e7%81%ab%e5%a2%99%e7%ae%80%e5%8d%95%e9%85%8d%e7%bd%ae" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2flinux%2fcentos7%25E9%2598%25B2%25E7%2581%25AB%25E5%25A2%2599%25E7%25AE%2580%25E5%258D%2595%25E9%2585%258D%25E7%25BD%25AE%2f&title=CentOS7%e9%98%b2%e7%81%ab%e5%a2%99%e7%ae%80%e5%8d%95%e9%85%8d%e7%bd%ae" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
                     </div>
 
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="/linux/CentOS7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/" data-title="CentOS7防火墙简单配置" data-url="http://lovelock.coding.me/linux/CentOS7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/"></div>
+                        <div class="ds-thread" data-thread-key="/linux/centos7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/" data-title="CentOS7防火墙简单配置" data-url="http://lovelock.coding.me/linux/centos7%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE/"></div>
                         
 
                         
@@ -272,11 +272,11 @@
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

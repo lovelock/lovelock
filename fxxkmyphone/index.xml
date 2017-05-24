@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fxxkmyphones on Me &amp; Web</title>
-    <link>http://lovelock.coding.me/fxxkmyphone/index.xml</link>
+    <link>http://lovelock.coding.me/fxxkmyphone/</link>
     <description>Recent content in Fxxkmyphones on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
     <lastBuildDate>Tue, 13 Dec 2016 15:25:03 +0800</lastBuildDate>
-    <atom:link href="/fxxkmyphone/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/fxxkmyphone/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>不用root修改一加三的DPI</title>
@@ -28,6 +28,17 @@
 &lt;hr /&gt;
 
 &lt;p&gt;更新：现在升级了官方的氢3.0 测试版，用了原生的修改DPI功能，相当稳定了，已经快一个月没有刷机了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://lovelock.coding.me/fxxkmyphone/tencent-ignore-game-bugs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://lovelock.coding.me/fxxkmyphone/tencent-ignore-game-bugs/</guid>
+      <description>&lt;p&gt;王者荣耀断流的问题也被大家说烂了，多数人都觉得是『自己的』手机的问题。其实如果你眼界放大一点，在Google搜索一下就会发现每个手机品牌都有这个问题，覆盖了几乎每家手机的大部分机型。唯独翻了好几页都没有发现当事人对此事的回应。&lt;img src=&#34;http://ww2.sinaimg.cn/large/006tNc79ly1feqtfi6c30j30iq0rnn3d.jpg&#34; alt=&#34;img&#34; /&gt;
+这还不够说明这是游戏本身的问题？这还不能说明腾讯并不想解决？所以不要再骂手机厂商了。&lt;/p&gt;
 </description>
     </item>
     

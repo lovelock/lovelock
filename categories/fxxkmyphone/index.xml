@@ -2,12 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fxxkmyphone on Me &amp; Web</title>
-    <link>http://lovelock.coding.me/categories/fxxkmyphone/index.xml</link>
+    <link>http://lovelock.coding.me/categories/fxxkmyphone/</link>
     <description>Recent content in Fxxkmyphone on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <atom:link href="/categories/fxxkmyphone/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Dec 2016 15:25:03 +0800</lastBuildDate>
+    <atom:link href="/categories/fxxkmyphone/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>不用root修改一加三的DPI</title>

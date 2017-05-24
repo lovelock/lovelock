@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -19,7 +19,7 @@
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="http://lovelock.coding.me/php/2015-09-22-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/">
+    <meta property="og:url" content="http://lovelock.coding.me/php/2015-09-22-php%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/">
     <meta name="description" content="PHP单元测试基础">
     
 
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -84,7 +84,7 @@
                 <meta itemprop="dateModified" content="2015-09-22T15:49:52&#43;08:00">
                 <meta itemprop="headline" content="PHP单元测试-01">
                 <meta itemprop="description" content="我自认对这种比较系统的知识总是比较欠缺，所以还是花点时间补充上比较好。 这里说一下PHP的单元测试。 首先是搭建可以进行单元测试的环境，这里我首">
-                <meta itemprop="url" content="http://lovelock.coding.me/php/2015-09-22-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/">
+                <meta itemprop="url" content="http://lovelock.coding.me/php/2015-09-22-php%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                     <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
                     <meta itemprop="width" content="800">
@@ -237,13 +237,13 @@ class FrostWongTest extends PHPUnit_Framework_TestCase
                     <div class="section"><a href="http://lovelock.coding.me/tags/php/" class="tag">PHP</a> </div>
 
                     <div class="section share">
-                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fphp%2f2015-09-22-PHP%25E5%258D%2595%25E5%2585%2583%25E6%25B5%258B%25E8%25AF%2595-01%2f&title=PHP%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95-01" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fphp%2f2015-09-22-php%25E5%258D%2595%25E5%2585%2583%25E6%25B5%258B%25E8%25AF%2595-01%2f&title=PHP%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95-01" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
                     </div>
 
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="/php/2015-09-22-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/" data-title="PHP单元测试-01" data-url="http://lovelock.coding.me/php/2015-09-22-PHP%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/"></div>
+                        <div class="ds-thread" data-thread-key="/php/2015-09-22-php%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/" data-title="PHP单元测试-01" data-url="http://lovelock.coding.me/php/2015-09-22-php%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-01/"></div>
                         
 
                         
@@ -368,11 +368,11 @@ class FrostWongTest extends PHPUnit_Framework_TestCase
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -19,7 +19,7 @@
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="http://lovelock.coding.me/ios/iOS-Network-Request-with-NSURLConnectionDelegate/">
+    <meta property="og:url" content="http://lovelock.coding.me/ios/ios-network-request-with-nsurlconnectiondelegate/">
     
     
 
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -84,7 +84,7 @@
                 <meta itemprop="dateModified" content="2015-07-13T20:20:18&#43;00:00">
                 <meta itemprop="headline" content="iOS8及以下使用NSURLConnectionDelegate实现网络请求">
                 <meta itemprop="description" content="花了点时间把iOS的网络请求算是有了一点肤浅的认识，在这个夜深人静的晚上记录以下。 首先，用到的类有NSURLRequest和NSURLCon">
-                <meta itemprop="url" content="http://lovelock.coding.me/ios/iOS-Network-Request-with-NSURLConnectionDelegate/">
+                <meta itemprop="url" content="http://lovelock.coding.me/ios/ios-network-request-with-nsurlconnectiondelegate/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                     <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
                     <meta itemprop="width" content="800">
@@ -166,13 +166,13 @@ NSLog(@&quot;%@&quot;, strData);
                     <div class="section"><a href="http://lovelock.coding.me/tags/ios/" class="tag">iOS</a> </div>
 
                     <div class="section share">
-                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fios%2fiOS-Network-Request-with-NSURLConnectionDelegate%2f&title=iOS8%e5%8f%8a%e4%bb%a5%e4%b8%8b%e4%bd%bf%e7%94%a8NSURLConnectionDelegate%e5%ae%9e%e7%8e%b0%e7%bd%91%e7%bb%9c%e8%af%b7%e6%b1%82" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fios%2fios-network-request-with-nsurlconnectiondelegate%2f&title=iOS8%e5%8f%8a%e4%bb%a5%e4%b8%8b%e4%bd%bf%e7%94%a8NSURLConnectionDelegate%e5%ae%9e%e7%8e%b0%e7%bd%91%e7%bb%9c%e8%af%b7%e6%b1%82" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
                     </div>
 
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="/ios/iOS-Network-Request-with-NSURLConnectionDelegate/" data-title="iOS8及以下使用NSURLConnectionDelegate实现网络请求" data-url="http://lovelock.coding.me/ios/iOS-Network-Request-with-NSURLConnectionDelegate/"></div>
+                        <div class="ds-thread" data-thread-key="/ios/ios-network-request-with-nsurlconnectiondelegate/" data-title="iOS8及以下使用NSURLConnectionDelegate实现网络请求" data-url="http://lovelock.coding.me/ios/ios-network-request-with-nsurlconnectiondelegate/"></div>
                         
 
                         
@@ -297,11 +297,11 @@ NSLog(@&quot;%@&quot;, strData);
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

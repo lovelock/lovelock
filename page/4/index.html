@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -112,7 +112,7 @@
       <article class="li">
   <header>
     <div class="date">Mon, Feb 1, 2016</div>
-    <div class="title"><a href="http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/">又一份Yaf文档——写给正在迷惑的你</a></div>
+    <div class="title"><a href="http://lovelock.coding.me/php/yaf-yet-another-manual-for-human/">又一份Yaf文档——写给正在迷惑的你</a></div>
   </header>
   <div class="body">终于把困扰我很久的问题搞定了，好开心。趁着记忆还热乎，一定要把它记下来。
 前几天还和同事抱怨，用Yaf框架的人那么多，但我们身边竟然没有一个人对它的用法很清楚的。真是有些悲哀。几个同事都说鸟哥写的Yaf文档看不明白。
@@ -133,7 +133,7 @@ server { listen 80; root /var/www/yaf.ubuntu.com/public; index index.php index.h
 
   
   <footer>
-    <a href="http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/" class="btn btn-default">Read More…</a>
+    <a href="http://lovelock.coding.me/php/yaf-yet-another-manual-for-human/" class="btn btn-default">Read More…</a>
   </footer>
   
 </article>
@@ -143,13 +143,13 @@ server { listen 80; root /var/www/yaf.ubuntu.com/public; index index.php index.h
       <article class="li">
   <header>
     <div class="date">Mon, Jan 25, 2016</div>
-    <div class="title"><a href="http://lovelock.coding.me/javascript/Firefox-Date.parse-exception/">Firefox Date.parse()方法行为不一致的兼容方案</a></div>
+    <div class="title"><a href="http://lovelock.coding.me/javascript/firefox-date.parse-exception/">Firefox Date.parse()方法行为不一致的兼容方案</a></div>
   </header>
   <div class="body">事情是这样的，我有两个输入框，用Wdatepicker自定义了日期格式，格式当然是我们中国人最喜欢的Y-M-d H:i:s，然后需要确定后者（</div>
 
   
   <footer>
-    <a href="http://lovelock.coding.me/javascript/Firefox-Date.parse-exception/" class="btn btn-default">Read More…</a>
+    <a href="http://lovelock.coding.me/javascript/firefox-date.parse-exception/" class="btn btn-default">Read More…</a>
   </footer>
   
 </article>
@@ -159,13 +159,13 @@ server { listen 80; root /var/www/yaf.ubuntu.com/public; index index.php index.h
       <article class="li">
   <header>
     <div class="date">Thu, Jan 21, 2016</div>
-    <div class="title"><a href="http://lovelock.coding.me/linux/fix-Debian-network-problem/">修复因为过量卸载引起的Debian无法上网</a></div>
+    <div class="title"><a href="http://lovelock.coding.me/linux/fix-debian-network-problem/">修复因为过量卸载引起的Debian无法上网</a></div>
   </header>
   <div class="body">之前在公司的开发机上装了Debian + Gnome3，后来发了rMBP就基本用不上了，把桌面环境卸载了当服务器用吧，但卸载完之后发现无法上网了</div>
 
   
   <footer>
-    <a href="http://lovelock.coding.me/linux/fix-Debian-network-problem/" class="btn btn-default">Read More…</a>
+    <a href="http://lovelock.coding.me/linux/fix-debian-network-problem/" class="btn btn-default">Read More…</a>
   </footer>
   
 </article>
@@ -207,13 +207,13 @@ server { listen 80; root /var/www/yaf.ubuntu.com/public; index index.php index.h
       <article class="li">
   <header>
     <div class="date">Sun, Jan 10, 2016</div>
-    <div class="title"><a href="http://lovelock.coding.me/symfony/Symfony3-03-Routing/">Symfony3 In Action——Routing</a></div>
+    <div class="title"><a href="http://lovelock.coding.me/symfony/symfony3-03-routing/">Symfony3 In Action——Routing</a></div>
   </header>
   <div class="body">实际上前面我们已经看到了一个正常的页面了。是这样的 这个默认的页面属于AppBundle/Controller/DefaultControll</div>
 
   
   <footer>
-    <a href="http://lovelock.coding.me/symfony/Symfony3-03-Routing/" class="btn btn-default">Read More…</a>
+    <a href="http://lovelock.coding.me/symfony/symfony3-03-routing/" class="btn btn-default">Read More…</a>
   </footer>
   
 </article>
@@ -386,11 +386,11 @@ $log = new Monolog\Logger('name'); $log-&gt;pushHandler(new Monolog\Handler\Stre
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

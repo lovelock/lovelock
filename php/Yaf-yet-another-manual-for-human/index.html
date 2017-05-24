@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Hugo 0.18.1" />
+    <meta name="generator" content="Hugo 0.20.2" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link rel='stylesheet' href='//fonts.proxy.ustclug.org/css?family=Open+Sans|Marcellus+SC'>
@@ -19,7 +19,7 @@
     <meta property="og:type" content="article">
     
 
-    <meta property="og:url" content="http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/">
+    <meta property="og:url" content="http://lovelock.coding.me/php/yaf-yet-another-manual-for-human/">
     <meta name="description" content="如果你对Yaf的用法迷迷糊糊，请点击">
     
 
@@ -45,10 +45,6 @@
             <ul class="nav navbar-nav navbar-right">
               
               
-              <li><a href="http://lovelock.coding.me/">首页</a></li>
-              
-              
-              
               <li><a href="http://lovelock.coding.me/about">关于作者</a></li>
               
               
@@ -58,6 +54,10 @@
               
               
               <li><a href="http://lovelock.coding.me/tags/">标签</a></li>
+              
+              
+              
+              <li><a href="http://lovelock.coding.me/">首页</a></li>
               
               
             </ul>
@@ -99,7 +99,7 @@ rewrite ^/(.*) /index.php/$1 last;  是绝对正确的，不要看谁谁谁说�
 rewrite ^/(.*) /index.php?$1 last;  这才是错误的。
 我的配置:
 server { listen 80; root /var/www/yaf.ubuntu.com/public; index index.php index.html; server_name yaf.ubuntu.com; location = /favicon.ico { access_log off; error_log off; log_not_found off; } if (!-e $request_filename) { rewrite ^/(.">
-                <meta itemprop="url" content="http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/">
+                <meta itemprop="url" content="http://lovelock.coding.me/php/yaf-yet-another-manual-for-human/">
                 <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                     <meta itemprop="url" content="http://lovelock.coding.me/images/default.jpg" />
                     <meta itemprop="width" content="800">
@@ -497,13 +497,13 @@ foo.bar.better = 'best foo'
                     <div class="section"><a href="http://lovelock.coding.me/tags/yaf/" class="tag">Yaf</a> <a href="http://lovelock.coding.me/tags/%E8%A7%A3%E6%83%91/" class="tag">解惑</a> </div>
 
                     <div class="section share">
-                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fphp%2fYaf-yet-another-manual-for-human%2f&title=%e5%8f%88%e4%b8%80%e4%bb%bdYaf%e6%96%87%e6%a1%a3%e2%80%94%e2%80%94%e5%86%99%e7%bb%99%e6%ad%a3%e5%9c%a8%e8%bf%b7%e6%83%91%e7%9a%84%e4%bd%a0" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
+                        <a href="http://v.t.sina.com.cn/share/share.php?src=bm&url=http%3a%2f%2flovelock.coding.me%2fphp%2fyaf-yet-another-manual-for-human%2f&title=%e5%8f%88%e4%b8%80%e4%bb%bdYaf%e6%96%87%e6%a1%a3%e2%80%94%e2%80%94%e5%86%99%e7%bb%99%e6%ad%a3%e5%9c%a8%e8%bf%b7%e6%83%91%e7%9a%84%e4%bd%a0" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-weibo"></i></a>
                     </div>
 
                     
                     <div class="section">
                         
-                        <div class="ds-thread" data-thread-key="/php/Yaf-yet-another-manual-for-human/" data-title="又一份Yaf文档——写给正在迷惑的你" data-url="http://lovelock.coding.me/php/Yaf-yet-another-manual-for-human/"></div>
+                        <div class="ds-thread" data-thread-key="/php/yaf-yet-another-manual-for-human/" data-title="又一份Yaf文档——写给正在迷惑的你" data-url="http://lovelock.coding.me/php/yaf-yet-another-manual-for-human/"></div>
                         
 
                         
@@ -628,11 +628,11 @@ foo.bar.better = 'best foo'
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
-        
-        
-        
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+        // https://github.com/mojombo/jekyll/issues/199
         var all = MathJax.Hub.getAllJax(), i;
-        for(i = 0; i < all.length; i += 1) {
+        for(i = 0; i &lt; all.length; i += 1) {
             all[i].SourceElement().parentNode.className += ' has-jax';
         }
     });

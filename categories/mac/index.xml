@@ -2,12 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mac on Me &amp; Web</title>
-    <link>http://lovelock.coding.me/categories/mac/index.xml</link>
+    <link>http://lovelock.coding.me/categories/mac/</link>
     <description>Recent content in Mac on Me &amp; Web</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>(c) 2013-2016 Frost Wong. All rights reserved.</copyright>
-    <atom:link href="/categories/mac/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Aug 2016 14:57:11 +0800</lastBuildDate>
+    <atom:link href="/categories/mac/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>使用ssh-config提升你的生产力</title>
@@ -160,10 +161,10 @@ sudo rm -rf /Library/Preferences/com.oracle.java.Helper-Tool.plist
     
     <item>
       <title>批量删除iTerm2的主题配置</title>
-      <link>http://lovelock.coding.me/mac/2015-09-20-%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4iTerm2%E7%9A%84%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</link>
+      <link>http://lovelock.coding.me/mac/2015-09-20-%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4iterm2%E7%9A%84%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sun, 20 Sep 2015 22:03:35 +0000</pubDate>
       
-      <guid>http://lovelock.coding.me/mac/2015-09-20-%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4iTerm2%E7%9A%84%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://lovelock.coding.me/mac/2015-09-20-%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4iterm2%E7%9A%84%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;p&gt;今天手欠把一堆大概有50个的colorscheme导入了iTerm2，最后发现也没有几个好看的，还是我的最爱Solarized最好，于是就想把那些新导入的都删掉，但死活找不到这些文件的路径。上网找了一番之后发现原来它并没有把这些主题文件放在自己的目录里，而是用plist的方式做了配置。那么就要找到这个配置文件了。它在&lt;code&gt;~/Library/Preferences/com.googlecode.iterm2.plist&lt;/code&gt;。&lt;/p&gt;
 
 &lt;p&gt;这时我激动万分，用我最爱的Vim打开它一看——竟然是二进制的。这时我们就有两种方法对它做修改了。&lt;/p&gt;
@@ -190,10 +191,10 @@ sudo rm -rf /Library/Preferences/com.oracle.java.Helper-Tool.plist
     
     <item>
       <title>Mac使用VMware Fusion安装Ubuntu</title>
-      <link>http://lovelock.coding.me/mac/2015-08-31-Mac%E4%BD%BF%E7%94%A8VMware-Fusion%E5%AE%89%E8%A3%85Ubuntu/</link>
+      <link>http://lovelock.coding.me/mac/2015-08-31-mac%E4%BD%BF%E7%94%A8vmware-fusion%E5%AE%89%E8%A3%85ubuntu/</link>
       <pubDate>Mon, 31 Aug 2015 19:37:00 +0000</pubDate>
       
-      <guid>http://lovelock.coding.me/mac/2015-08-31-Mac%E4%BD%BF%E7%94%A8VMware-Fusion%E5%AE%89%E8%A3%85Ubuntu/</guid>
+      <guid>http://lovelock.coding.me/mac/2015-08-31-mac%E4%BD%BF%E7%94%A8vmware-fusion%E5%AE%89%E8%A3%85ubuntu/</guid>
       <description>&lt;p&gt;越来越觉得我用Mac和Windows也没有什么区别。&lt;/p&gt;
 
 &lt;p&gt;用Windows的时候是因为没有类Unix环境，所以需要在虚拟机里面搭建一些Web环境，然后用SecureCRT或者XShell登录进行操作。当然主要是用VirtualBox比较多，因为它比较轻量，功能也没有什么缺陷。非要说缺陷，我觉得VMware的NAT功能比VirtualBox要好。前者是建立了一个192.168开头的虚拟网段，虚拟机使用这个网段的IP，虚拟机可以和宿主机相互通信，并且在类似学校的需要认证才能上网的环境下是可以直接上网的。但VirtualBox就不行了，它
@@ -213,10 +214,10 @@ sudo rm -rf /Library/Preferences/com.oracle.java.Helper-Tool.plist
     
     <item>
       <title>Rime输入法在Mac上的应用</title>
-      <link>http://lovelock.coding.me/mac/2015-08-12-Rime%E8%BE%93%E5%85%A5%E6%B3%95%E5%9C%A8Mac%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8/</link>
+      <link>http://lovelock.coding.me/mac/2015-08-12-rime%E8%BE%93%E5%85%A5%E6%B3%95%E5%9C%A8mac%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8/</link>
       <pubDate>Wed, 12 Aug 2015 17:22:29 +0000</pubDate>
       
-      <guid>http://lovelock.coding.me/mac/2015-08-12-Rime%E8%BE%93%E5%85%A5%E6%B3%95%E5%9C%A8Mac%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
+      <guid>http://lovelock.coding.me/mac/2015-08-12-rime%E8%BE%93%E5%85%A5%E6%B3%95%E5%9C%A8mac%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;天啊，过几天要回家陪老婆生孩子，现在在赶项目，我竟然还在这里瞎写，真是罪过。&lt;/p&gt;
 &lt;/blockquote&gt;
